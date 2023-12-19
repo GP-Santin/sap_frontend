@@ -4,7 +4,6 @@ import dark from "./styles/themes/dark";
 import light from "./styles/themes/light";
 import { ResetStyles } from "./styles/resetStyles";
 import { GlobalStyles } from "./styles/globalStyles";
-import { UserProvider } from "./providers/UserContext";
 import RoutesMain from "./routes/RoutesMain";
 
 function App() {
