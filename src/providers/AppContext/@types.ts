@@ -8,7 +8,7 @@ export interface ILoading {
 }
 
 export interface IAppContext {
-  loading : ILoading | boolean ;
+  loading: ILoading | boolean;
   isOpen: boolean;
-  setIsOpen : React.Dispatch<React.SetStateAction<boolean>>
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }

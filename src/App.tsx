@@ -1,25 +1,39 @@
-import { ThemeProvider } from "styled-components";
 import { useState } from "react";
-import dark from "./styles/themes/dark";
-import light from "./styles/themes/light";
-import { ResetStyles } from "./styles/resetStyles";
-import { GlobalStyles } from "./styles/globalStyles";
+import { ThemeProvider } from "styled-components";
+import { ToastContainer } from "react-toastify";
 import RoutesMain from "./routes/RoutesMain";
+import { GlobalStyles } from "./styles/globalStyles";
+import { ResetStyles } from "./styles/resetStyles";
+import darkTheme from "./styles/themes/dark";
+import lightTheme from "./styles/themes/light";
 
 function App() {
-  const [currentTheme] = useState(localStorage.getItem("@theme"));
-  const theme = currentTheme === "Escuro" ? dark : light;
+  const [theme, setTheme] = useState("light");
+  const themeToggler = () => {
+    theme === "light" ? setTheme("dark") : setTheme("light");
+    console.log("mudou");
+  };
 
   return (
-    <>
-      <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      <>
         <ResetStyles />
         <GlobalStyles />
-        {/* <UserProvider> */}
-          <RoutesMain />
-        {/* </UserProvider> */}
-      </ThemeProvider>
-    </>
+        <RoutesMain theme={theme} themeToggler={themeToggler} />
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
+      </>
+    </ThemeProvider>
   );
 }
 

@@ -12,7 +12,7 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
       value={{
         isOpen,
         setIsOpen,
-        loading
+        loading,
       }}
     >
       {children}
