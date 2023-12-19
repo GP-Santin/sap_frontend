@@ -1,106 +1,106 @@
-import { createContext, useEffect } from "react";
+// import { createContext, useEffect } from "react";
 
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { AxiosError } from "axios";
-import { api } from "../services/api";
+// import { useNavigate } from "react-router-dom";
+// import { toast } from "react-toastify";
+// import { AxiosError } from "axios";
+// import { api } from "../services/api";
 
-export const UserContext = createContext({} as IUserContext);
+// export const UserContext = createContext({} as IUserContext);
 
-export const UserProvider = ({ children }: IUserProviderProps) => {
+// export const UserProvider = ({ children }: IUserProviderProps) => {
 
 
-  const navigate = useNavigate();
+//   const navigate = useNavigate();
 
-  const userLogin = async (formData: TLoginForm) => {
-    try {
-      setLoading(true);
+//   const userLogin = async (formData: TLoginForm) => {
+//     try {
+//       setLoading(true);
 
-      const { data } = await api.post<IUserLoginResponse>("/login", formData);
+//       const { data } = await api.post<IUserLoginResponse>("/login", formData);
 
-      setUser(data.user);
+//       setUser(data.user);
 
-      localStorage.setItem("@TOKEN", data.accessToken);
-      localStorage.setItem("@USERID", JSON.stringify(data.user.id));
+//       localStorage.setItem("@TOKEN", data.accessToken);
+//       localStorage.setItem("@USERID", JSON.stringify(data.user.id));
 
-      toast.success("Usuário logado com sucesso.");
+//       toast.success("Usuário logado com sucesso.");
 
-      navigate("/dashboard");
-    } catch (error: AxiosError | any) {
-      toast.error("Senha ou e-mail inválidos.");
+//       navigate("/dashboard");
+//     } catch (error: AxiosError | any) {
+//       toast.error("Senha ou e-mail inválidos.");
 
-      console.error(error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+//       console.error(error.message);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
 
-  const userRegister = async (formData: TRegisterForm) => {
-    try {
-      setLoading(true);
+//   const userRegister = async (formData: TRegisterForm) => {
+//     try {
+//       setLoading(true);
 
-      await api.post("/users", formData);
+//       await api.post("/users", formData);
 
-      toast.success("Usuário criado com sucesso.");
+//       toast.success("Usuário criado com sucesso.");
 
-      navigate("/login");
-    } catch (error: AxiosError | any) {
-      toast.error("E-mail já existente.");
+//       navigate("/login");
+//     } catch (error: AxiosError | any) {
+//       toast.error("E-mail já existente.");
 
-      console.error(error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+//       console.error(error.message);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
 
-  const userLogout = () => {
-    setUser(null);
+//   const userLogout = () => {
+//     setUser(null);
 
-    localStorage.removeItem("@TOKEN");
-    localStorage.removeItem("@USERID");
+//     localStorage.removeItem("@TOKEN");
+//     localStorage.removeItem("@USERID");
 
-    toast.success("Usuário deslogado com sucesso!");
+//     toast.success("Usuário deslogado com sucesso!");
 
-    navigate("/");
-  };
+//     navigate("/");
+//   };
 
-  useEffect(() => {
-    const getUser = async () => {
-      const token = localStorage.getItem("@TOKEN");
-      const userId = JSON.parse(localStorage.getItem("@USERID")!);
+//   useEffect(() => {
+//     const getUser = async () => {
+//       const token = localStorage.getItem("@TOKEN");
+//       const userId = JSON.parse(localStorage.getItem("@USERID")!);
 
-      if (token && userId) {
-        try {
-          setLoading(true);
+//       if (token && userId) {
+//         try {
+//           setLoading(true);
 
-          const response = await api.get(`/users/${userId}`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
+//           const response = await api.get(`/users/${userId}`, {
+//             headers: {
+//               Authorization: `Bearer ${token}`,
+//             },
+//           });
 
-          const userData = response.data;
+//           const userData = response.data;
 
-          setUser(userData);
-        } catch (error: AxiosError | any) {
-          console.error(error.message);
-        } finally {
-          setLoading(false);
-        }
-      }
-    };
-    getUser();
-  }, []);
+//           setUser(userData);
+//         } catch (error: AxiosError | any) {
+//           console.error(error.message);
+//         } finally {
+//           setLoading(false);
+//         }
+//       }
+//     };
+//     getUser();
+//   }, []);
 
-  return (
-    <UserContext.Provider
-      value={{
-        userRegister,
-        userLogin,
-        userLogout,
-      }}
-    >
-      {children}
-    </UserContext.Provider>
-  );
-};
+//   return (
+//     <UserContext.Provider
+//       value={{
+//         userRegister,
+//         userLogin,
+//         userLogout,
+//       }}
+//     >
+//       {children}
+//     </UserContext.Provider>
+//   );
+// };

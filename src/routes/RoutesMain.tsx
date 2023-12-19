@@ -8,7 +8,7 @@ function RoutesMain() {
   return (
     <Routes>
       <Route element={<PublicRoutes />}>
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/" element={<LoginPage />} />
       </Route>
       <Route element={<PrivatesRoutes />}>
         <Route path="/home" element={<HomePage />} />
