@@ -3,7 +3,7 @@ import moonIcon from "../../icons/moon.svg";
 import { useContext, useState } from "react";
 import { useMsal } from "@azure/msal-react";
 import { UserContext } from "../../providers/UserContext/UserContext";
-function Dashboard({ theme, themeToggler }: DashboardProps) {
+function Dashboard({ theme, toggleTheme }: DashboardProps) {
   const [icon, setIcon] = useState(theme === "light" ? moonIcon : sunIcon);
   const { instance, accounts } = useMsal();
   const activeAccount = accounts[0];
@@ -11,7 +11,7 @@ function Dashboard({ theme, themeToggler }: DashboardProps) {
   const toggleIcon = () => {
     const newIcon = icon === sunIcon ? moonIcon : sunIcon;
     setIcon(newIcon);
-    themeToggler();
+    toggleTheme();
   };
   return (
     <div>

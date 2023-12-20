@@ -1,6 +1,6 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_SAP_BASE_URL,
+  baseURL: "https://saphagpsantinhom.skyinone.net:50000/b1s/v1",
   timeout: 8000,
 });

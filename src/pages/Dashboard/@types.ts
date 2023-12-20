@@ -1,4 +1,4 @@
 type DashboardProps = {
   theme: string;
-  themeToggler: () => void;
+  toggleTheme: () => void;
 };

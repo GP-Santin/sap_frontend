@@ -6,16 +6,15 @@ import { Icon } from "../Login/styles";
 import { useState } from "react";
 import { StyledSAPLogin } from "./styles";
 
-function SAPLogin({ theme, themeToggler }: SAPLoginProps) {
+function SAPLogin({ theme, toggleTheme }: SAPLoginProps) {
   const [icon, setIcon] = useState(theme === "light" ? moonIcon : sunIcon);
   const { accounts } = useMsal();
   const activeAccount = accounts[0];
-  // const { theme } = useTheme();
 
   const toggleIcon = () => {
     const newIcon = icon === sunIcon ? moonIcon : sunIcon;
     setIcon(newIcon);
-    themeToggler();
+    toggleTheme();
   };
 
   return (
@@ -25,7 +24,7 @@ function SAPLogin({ theme, themeToggler }: SAPLoginProps) {
       </Icon>
       <h2>Olá, {activeAccount ? activeAccount.name : "Usuário"}</h2>
       <h3>Faça login no SAP utilizando suas credenciais.</h3>
-      <LoginForm theme={theme} themeToggler={themeToggler}/>
+      <LoginForm theme={theme} toggleTheme={toggleTheme} />
     </StyledSAPLogin>
   );
 }

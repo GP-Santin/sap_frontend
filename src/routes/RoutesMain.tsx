@@ -4,32 +4,31 @@ import PublicRoutes from "./PublicRoutes";
 import LoginPage from "../pages/Login/LoginPage";
 import HomePage from "../pages/SAPLogin/SAPLogin";
 import Dashboard from "../pages/Dashboard/Dashboard";
-
 function RoutesMain({
   theme,
-  themeToggler,
+  toggleTheme,
 }: {
   theme: string;
-  themeToggler: () => void;
+  toggleTheme: () => void;
 }) {
   return (
     <Routes>
       <Route element={<PublicRoutes />}>
         <Route
           path="/"
-          element={<LoginPage theme={theme} themeToggler={themeToggler} />}
+          element={<LoginPage theme={theme} toggleTheme={toggleTheme} />}
         />
       </Route>
       <Route element={<PrivatesRoutes />}>
         <Route
           path="/login"
-          element={<HomePage theme={theme} themeToggler={themeToggler} />}
-        />
-        <Route
-          path="/dashboard"
-          element={<Dashboard theme={theme} themeToggler={themeToggler} />}
+          element={<HomePage theme={theme} toggleTheme={toggleTheme} />}
         />
       </Route>
+      <Route
+        path="/dashboard"
+        element={<Dashboard theme={theme} toggleTheme={toggleTheme} />}
+      />
     </Routes>
   );
 }

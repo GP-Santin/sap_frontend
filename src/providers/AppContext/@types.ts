@@ -13,5 +13,5 @@ export interface IAppContext {
   loading: ILoading | boolean;
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  userLogin: (formData: TLoginForm) => Promise<void>;
+  appLogin: (formData: TLoginForm) => Promise<void>;
 }

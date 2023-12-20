@@ -4,14 +4,14 @@ import sunIcon from "../../icons/sun.svg";
 import moonIcon from "../../icons/moon.svg";
 import { useState } from "react";
 
-function LoginPage({ theme, themeToggler }: LoginPageProps) {
+function LoginPage({ theme, toggleTheme }: LoginPageProps) {
   const { instance } = useMsal();
   const [icon, setIcon] = useState(theme === "light" ? moonIcon : sunIcon);
 
   const toggleIcon = () => {
     const newIcon = icon === sunIcon ? moonIcon : sunIcon;
     setIcon(newIcon);
-    themeToggler();
+    toggleTheme();
   };
 
   return (

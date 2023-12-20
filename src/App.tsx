@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -11,11 +11,21 @@ import { AppProvider } from "./providers/AppContext/AppProviders";
 import { UserProvider } from "./providers/UserContext/UserContext";
 
 function App() {
-  const [theme, setTheme] = useState("light");
-  const themeToggler = () => {
-    theme === "light" ? setTheme("dark") : setTheme("light");
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = localStorage.getItem("theme");
+    return savedTheme || "dark";
+  });
+  const isDarkTheme = theme === "dark";
+
+  const toggleTheme = () => {
+    const newTheme = isDarkTheme ? "light" : "dark";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
   };
 
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   return (
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
@@ -24,7 +34,7 @@ function App() {
         <GlobalStyles />
         <AppProvider>
           <UserProvider>
-            <RoutesMain theme={theme} themeToggler={themeToggler} />
+            <RoutesMain theme={theme} toggleTheme={toggleTheme} />
           </UserProvider>
         </AppProvider>
         <ToastContainer

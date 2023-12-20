@@ -1,35 +1,38 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useState } from "react";
 import { IAppContext, IAppProviderProps, ILoading } from "./@types";
 import { TLoginForm } from "../../pages/SAPLogin/components/LoginForm/schema";
 import { AxiosError } from "axios";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../UserContext/UserContext";
 
 export const AppContext = createContext({} as IAppContext);
 
 export const AppProvider = ({ children }: IAppProviderProps) => {
-  const { setUser } = useContext(UserContext);
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState<ILoading | boolean>(false);
 
   const navigate = useNavigate();
 
-  const userLogin = async (formData: TLoginForm) => {
+  const appLogin = async (formData: TLoginForm) => {
     try {
       setLoading(true);
 
       const { data } = await api.post("/Login", formData);
 
-      setUser(data);
+      console.log(data);
+
+      localStorage.setItem("sessionSAPId", data.SessionId);
 
       toast.success("Login feito com sucesso");
 
       navigate("/dashboard");
     } catch (error: AxiosError | any) {
-      toast.error("Dados incorretos, verifique e tente novamente");
-      console.error(error);
+      if (error.response?.status === 401) {
+        toast.error("Usuário sem acesso a base solicitada.");
+      } else {
+        toast.error("Usuário ou senha inválidos.");
+      }
     } finally {
       setLoading(false);
     }
@@ -41,7 +44,7 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
         isOpen,
         setIsOpen,
         loading,
-        userLogin,
+        appLogin,
       }}
     >
       {children}

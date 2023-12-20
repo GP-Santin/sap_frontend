@@ -13,7 +13,7 @@ import { useContext } from "react";
 import { AppContext } from "../../../../providers/AppContext/AppProviders";
 
 export const LoginForm = ({ theme }: LoginPageProps) => {
-  const { userLogin } = useContext(AppContext);
+  const { appLogin, loading } = useContext(AppContext);
   const {
     reset,
     register,
@@ -22,7 +22,7 @@ export const LoginForm = ({ theme }: LoginPageProps) => {
   } = useForm<TLoginForm>({});
 
   const submit: SubmitHandler<TLoginForm> = async (formData) => {
-    userLogin(formData);
+    appLogin(formData);
     reset();
   };
 
@@ -104,7 +104,7 @@ export const LoginForm = ({ theme }: LoginPageProps) => {
         </StyledContainerFields>
         <Button
           type="submit"
-          name="cadastre-se"
+          name={loading ? "Entrando..." : "Entrar"}
           color="outline-black"
           widthsize="med2"
           onClick={() => submit}

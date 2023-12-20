@@ -1,4 +1,4 @@
 type LoginPageProps = {
   theme: string;
-  themeToggler: () => void;
+  toggleTheme: () => void;
 };
