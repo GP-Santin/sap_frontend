@@ -2,7 +2,8 @@ import { Route, Routes } from "react-router-dom";
 import PrivatesRoutes from "./PrivatesRoutes";
 import PublicRoutes from "./PublicRoutes";
 import LoginPage from "../pages/Login/LoginPage";
-import HomePage from "../pages/Home/HomePage";
+import HomePage from "../pages/SAPLogin/SAPLogin";
+import Dashboard from "../pages/Dashboard/Dashboard";
 
 function RoutesMain({
   theme,
@@ -21,8 +22,12 @@ function RoutesMain({
       </Route>
       <Route element={<PrivatesRoutes />}>
         <Route
-          path="/home"
+          path="/login"
           element={<HomePage theme={theme} themeToggler={themeToggler} />}
+        />
+        <Route
+          path="/dashboard"
+          element={<Dashboard theme={theme} themeToggler={themeToggler} />}
         />
       </Route>
     </Routes>

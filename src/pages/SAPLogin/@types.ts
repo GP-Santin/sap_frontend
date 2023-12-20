@@ -1,4 +1,4 @@
-type HomePageProps = {
+type SAPLoginProps = {
   theme: string;
   themeToggler: () => void;
 };

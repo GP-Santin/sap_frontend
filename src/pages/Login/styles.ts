@@ -30,4 +30,6 @@ export const Icon = styled.button`
   position: absolute;
   top: 1%;
   right: 1%;
+  width: 20px;
+  height: 20px;
 `;
