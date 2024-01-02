@@ -11,6 +11,7 @@ export interface ILoading {
 
 export interface IAppContext {
   loading: ILoading | boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean | ILoading>>;
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   appLogin: (formData: TLoginForm) => Promise<void>;

@@ -7,6 +7,6 @@ export interface IFormResponse {
 }
 
 export interface IUserContext {
-  user: IFormResponse | null;
-  setUser: React.Dispatch<React.SetStateAction<null>>;
+  user: string;
+  setUser: React.Dispatch<React.SetStateAction<string>>;
 }

@@ -1,10 +1,14 @@
 import { useState } from "react";
 import "./styles.css";
+import { useMsal } from "@azure/msal-react";
 
 function NavBar() {
   const [burguerClass, setBurguerClass] = useState("burguer-bar unclicked");
-  const [menuClass, setMenuClass] = useState("menu");
+  const [menuClass, setMenuClass] = useState("menu hidden");
   const [isMenuClicked, setIsMenuClicked] = useState(false);
+
+  const { instance } = useMsal();
+
 
   const updateMenu = () => {
     if (!isMenuClicked) {
@@ -27,7 +31,10 @@ function NavBar() {
         </div>
       </nav>
       <div className={`menu ${menuClass}`}>
-        <ul>Módulos</ul>
+        <ul>
+          <a href="#">Solicitação de Compras</a>
+          <a href="#">Regularização de Notas</a>
+        </ul>
       </div>
     </div>
   );

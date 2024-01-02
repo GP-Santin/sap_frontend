@@ -6,6 +6,6 @@ export const apiSAP = axios.create({
 });
 
 export const apiSantin = axios.create({
-  baseURL: "http://localhost:3000/v1/",
+  baseURL: "http://localhost:3000/v1",
   timeout: 8000,
 });
