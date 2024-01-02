@@ -10,6 +10,13 @@ export const StyledLogin = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
+
+  img {
+    position: absolute;
+    top: 1rem;
+    right: 2rem;
+    cursor: pointer;
+  }
 `;
 
 export const Button = styled.button`
@@ -26,10 +33,9 @@ export const ButtonContainer = styled.div`
   gap: 1rem;
 `;
 
-export const Icon = styled.button`
+export const Icon = styled.img`
+  cursor: pointer;
   position: absolute;
-  top: 1%;
-  right: 1%;
-  width: 20px;
-  height: 20px;
+  top: 1rem;
+  right: 1rem;
 `;

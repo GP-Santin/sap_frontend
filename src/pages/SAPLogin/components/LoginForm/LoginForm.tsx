@@ -7,23 +7,29 @@ import {
   StyledForm,
   StyledSelect,
 } from "./styles";
-import { Button } from "../../../../components/Button";
+import { Button } from "../../../../components/Button/Button";
 import { ContainerInputSyled } from "../../../../components/Input/styles";
 import { useContext } from "react";
 import { AppContext } from "../../../../providers/AppContext/AppProviders";
 
-export const LoginForm = ({ theme }: LoginPageProps) => {
-  const { appLogin, loading } = useContext(AppContext);
+export const LoginForm = () => {
+  const { appLogin, loading, setGroup } = useContext(AppContext);
   const {
     reset,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<TLoginForm>({});
+  const { theme } = useContext(AppContext);
 
   const submit: SubmitHandler<TLoginForm> = async (formData) => {
     appLogin(formData);
     reset();
+  };
+
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    console.log(e.target.value);
+    setGroup(e.target.value);
   };
 
   return (
@@ -32,7 +38,10 @@ export const LoginForm = ({ theme }: LoginPageProps) => {
         <StyledContainerFields>
           <ContainerInputSyled>
             <label htmlFor="companyDB">Base</label>
-            <StyledSelect {...register("CompanyDB")}>
+            <StyledSelect
+              {...register("CompanyDB")}
+              onChange={handleSelectChange}
+            >
               <option
                 style={{
                   background: theme === "light" ? "#FFFFFF" : "#101119",

@@ -1,37 +1,21 @@
 import { useMsal } from "@azure/msal-react";
-import { Button, ButtonContainer, Icon, StyledLogin } from "./styles";
-import sunIcon from "../../icons/sun.svg";
-import moonIcon from "../../icons/moon.svg";
-import { useState } from "react";
-
-function LoginPage({ theme, toggleTheme }: LoginPageProps) {
+import { Button, ButtonContainer, StyledLogin } from "./styles";
+function LoginPage() {
   const { instance } = useMsal();
-  const [icon, setIcon] = useState(theme === "light" ? moonIcon : sunIcon);
-
-  const toggleIcon = () => {
-    const newIcon = icon === sunIcon ? moonIcon : sunIcon;
-    setIcon(newIcon);
-    toggleTheme();
-  };
 
   return (
-    <>
-      <Icon onClick={toggleIcon}>
-        <img src={icon} alt="Trocar Tema" width="30" height="30" />
-      </Icon>
-      <StyledLogin>
-        <h1>Login</h1>
-        <ButtonContainer>
-          <Button
-            onClick={() => {
-              instance.loginPopup();
-            }}
-          >
-            Fazer Login
-          </Button>
-        </ButtonContainer>
-      </StyledLogin>
-    </>
+    <StyledLogin>
+      <h1>Login</h1>
+      <ButtonContainer>
+        <Button
+          onClick={() => {
+            instance.loginPopup();
+          }}
+        >
+          Fazer Login
+        </Button>
+      </ButtonContainer>
+    </StyledLogin>
   );
 }
 

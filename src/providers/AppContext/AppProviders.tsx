@@ -1,28 +1,38 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { IAppContext, IAppProviderProps, ILoading } from "./@types";
 import { TLoginForm } from "../../pages/SAPLogin/components/LoginForm/schema";
 import { AxiosError } from "axios";
-import { api } from "../../services/api";
+import { apiSAP } from "../../services/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 export const AppContext = createContext({} as IAppContext);
 
 export const AppProvider = ({ children }: IAppProviderProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<ILoading | boolean>(false);
+  const [group, setGroup] = useState<string>("");
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = localStorage.getItem("theme");
+    return savedTheme || "dark";
+  });
+  const isDarkTheme = theme === "dark";
 
+  const toggleTheme = () => {
+    const newTheme = isDarkTheme ? "light" : "dark";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+  };
+  
   const navigate = useNavigate();
 
   const appLogin = async (formData: TLoginForm) => {
     try {
       setLoading(true);
 
-      const { data } = await api.post("/Login", formData);
+      await apiSAP.post("/Login", formData);
 
-      console.log(data);
-
-      localStorage.setItem("sessionSAPId", data.SessionId);
+      localStorage.setItem("sessionId", true.toString());
 
       toast.success("Login feito com sucesso");
 
@@ -45,6 +55,11 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
         setIsOpen,
         loading,
         appLogin,
+        group,
+        setGroup,
+        theme,
+        setTheme,
+        toggleTheme,
       }}
     >
       {children}

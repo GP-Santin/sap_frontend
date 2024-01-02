@@ -4,7 +4,8 @@ const darkTheme = {
     background: "#101119",
     text: "#FFFFFF",
     buttonBackground: "#333333",
-    buttonText: "#EFEFEF", 
+    buttonText: "#EFEFEF",
+    primary: "#00B9F2",
   },
 };
 

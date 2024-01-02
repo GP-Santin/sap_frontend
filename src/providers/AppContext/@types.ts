@@ -14,4 +14,9 @@ export interface IAppContext {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   appLogin: (formData: TLoginForm) => Promise<void>;
+  group: string;
+  setGroup: React.Dispatch<React.SetStateAction<string>>;
+  theme: string;
+  setTheme: React.Dispatch<React.SetStateAction<string>>;
+  toggleTheme: () => void;
 }

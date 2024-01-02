@@ -7,6 +7,7 @@ declare module "styled-components" {
       text: string;
       buttonBackground: string;
       buttonText: string;
+      primary: string;
     };
   }
 }
