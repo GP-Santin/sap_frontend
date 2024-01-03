@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { IAppContext, IAppProviderProps, ILoading } from "./@types";
 import { TLoginForm } from "../../pages/SAPLogin/components/LoginForm/schema";
 import { AxiosError } from "axios";
@@ -12,18 +12,7 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<ILoading | boolean>(false);
   const [group, setGroup] = useState<string>("");
-  const [theme, setTheme] = useState(() => {
-    const savedTheme = localStorage.getItem("theme");
-    return savedTheme || "dark";
-  });
-  const isDarkTheme = theme === "dark";
 
-  const toggleTheme = () => {
-    const newTheme = isDarkTheme ? "light" : "dark";
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-  };
-  
   const navigate = useNavigate();
 
   const appLogin = async (formData: TLoginForm) => {

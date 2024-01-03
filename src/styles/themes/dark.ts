@@ -1,4 +1,4 @@
-const darkTheme = {
+export const darkTheme = {
   title: "dark",
   colors: {
     background: "#101119",
@@ -9,4 +9,3 @@ const darkTheme = {
   },
 };
 
-export default darkTheme;

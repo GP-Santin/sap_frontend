@@ -46,4 +46,3 @@ export const StyledSelect = styled.select`
   color: var(--color-text);
   background-color: var(--background-color);
 `;
-

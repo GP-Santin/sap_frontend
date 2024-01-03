@@ -1,14 +1,8 @@
 import sunIcon from "../../icons/sun.svg";
 import moonIcon from "../../icons/moon.svg";
-import { useContext } from "react";
-import { AppContext } from "../../providers/AppContext/AppProviders";
 import { Icon } from "./styles";
 
-function Theme() {
-  const { theme, toggleTheme } = useContext(AppContext);
-
-  if (!theme) return null;
-
+function Theme({ toggleTheme, theme }: any) {
   return (
     <Icon
       src={theme === "light" ? moonIcon : sunIcon}

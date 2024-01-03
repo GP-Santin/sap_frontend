@@ -1,19 +1,19 @@
 import { useMsal } from "@azure/msal-react";
 import { LoginForm } from "./components/LoginForm/LoginForm";
 import { StyledSAPLogin } from "./styles";
-import sapLogo from "../../assets/sap_logo.svg";
+import santinLogo from "../../assets/logo_santin.png";
 import Theme from "../../components/Theme/Theme";
 
-function SAPLogin() {
+function SAPLogin({ toggleTheme, theme }: any) {
   const { accounts } = useMsal();
   const activeAccount = accounts[0];
 
   return (
     <StyledSAPLogin>
-      <Theme />
-      <img src={sapLogo} alt="SAP" width={200} />
+      <Theme toggleTheme={toggleTheme} theme={theme} />
+      <img src={santinLogo} alt="SAP" width={200} />
       <h2>Olá, {activeAccount ? activeAccount.name : "Usuário"}</h2>
-      <h3>Faça login no SAP utilizando suas credenciais.</h3>
+      <h3>Selecione a base que deseja conectar.</h3>
       <LoginForm />
     </StyledSAPLogin>
   );

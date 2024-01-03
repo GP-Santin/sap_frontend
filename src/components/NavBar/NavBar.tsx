@@ -1,14 +1,22 @@
 import { useState } from "react";
 import "./styles.css";
-import { useMsal } from "@azure/msal-react";
+import Theme from "../Theme/Theme";
+import {
+  BurguerStyled,
+  Container,
+  StyledList,
+  StyledListTitle,
+  StyledMenu,
+  StyledNav,
+} from "./styles";
+import { FaAngleDown } from "react-icons/fa";
 
-function NavBar() {
+function NavBar({ toggleTheme, theme }: any) {
   const [burguerClass, setBurguerClass] = useState("burguer-bar unclicked");
   const [menuClass, setMenuClass] = useState("menu hidden");
   const [isMenuClicked, setIsMenuClicked] = useState(false);
-
-  const { instance } = useMsal();
-
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("section deactivated");
 
   const updateMenu = () => {
     if (!isMenuClicked) {
@@ -21,22 +29,54 @@ function NavBar() {
     setIsMenuClicked(!isMenuClicked);
   };
 
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const toggleSection = () => {
+    setActiveSection(
+      activeSection === "section deactivated"
+        ? "section active"
+        : "section deactivated"
+    );
+  };
+
   return (
-    <div style={{ width: "100%", height: "100vh" }}>
-      <nav>
+    <Container>
+      <Theme toggleTheme={toggleTheme} theme={theme} />
+      <StyledNav>
         <div className="burguer-menu" onClick={updateMenu}>
-          <div className={burguerClass}></div>
-          <div className={burguerClass}></div>
-          <div className={burguerClass}></div>
+          <BurguerStyled className={burguerClass}></BurguerStyled>
+          <BurguerStyled className={burguerClass}></BurguerStyled>
+          <BurguerStyled className={burguerClass}></BurguerStyled>
         </div>
-      </nav>
-      <div className={`menu ${menuClass}`}>
+      </StyledNav>
+      <StyledMenu className={`menu ${menuClass}`}>
         <ul>
-          <a href="#">Solicitação de Compras</a>
-          <a href="#">Regularização de Notas</a>
+          <StyledList onClick={toggleDropdown}>
+            <StyledListTitle onClick={toggleSection} className={activeSection}>
+              Compras{" "}
+              <FaAngleDown
+                style={{
+                  transform: isDropdownOpen ? "rotate(180deg)" : "rotate(0deg)",
+                  transition: "ease-out 0.4s",
+                }}
+              />
+            </StyledListTitle>
+            {isDropdownOpen && (
+              <ul>
+                <li>
+                  <a href="#">Solicitação de Compras</a>
+                </li>
+                <li>
+                  <a href="#">Regularização de Notas</a>
+                </li>
+              </ul>
+            )}
+          </StyledList>
         </ul>
-      </div>
-    </div>
+      </StyledMenu>
+    </Container>
   );
 }
 

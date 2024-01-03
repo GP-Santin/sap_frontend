@@ -1,4 +1,4 @@
-const lightTheme = {
+export const lightTheme = {
   title: "light",
   colors: {
     background: "#FFFFFF",
@@ -9,4 +9,4 @@ const lightTheme = {
   },
 };
 
-export default lightTheme;
+

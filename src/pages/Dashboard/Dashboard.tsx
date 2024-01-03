@@ -1,9 +1,9 @@
 import NavBar from "../../components/NavBar/NavBar";
 import { DashboardContainer } from "./styles";
-function Dashboard() {
+function Dashboard({ toggleTheme, theme }: any) {
   return (
     <DashboardContainer>
-      <NavBar />
+      <NavBar toggleTheme={toggleTheme} theme={theme} />
     </DashboardContainer>
   );
 }

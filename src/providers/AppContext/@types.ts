@@ -17,7 +17,4 @@ export interface IAppContext {
   appLogin: (formData: TLoginForm) => Promise<void>;
   group: string;
   setGroup: React.Dispatch<React.SetStateAction<string>>;
-  theme: string;
-  setTheme: React.Dispatch<React.SetStateAction<string>>;
-  toggleTheme: () => void;
 }

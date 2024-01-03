@@ -1,6 +1,5 @@
-import { SubmitHandler, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { TLoginForm } from "./schema";
-import { Input } from "../../../../components/Input/Input";
 import {
   StyledContainer,
   StyledContainerFields,
@@ -9,27 +8,33 @@ import {
 } from "./styles";
 import { Button } from "../../../../components/Button/Button";
 import { ContainerInputSyled } from "../../../../components/Input/styles";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "../../../../providers/AppContext/AppProviders";
 
 export const LoginForm = () => {
-  const { appLogin, loading, setGroup } = useContext(AppContext);
+  const { appLogin, loading } = useContext(AppContext);
+  const theme = localStorage.getItem("theme");
   const {
     reset,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<TLoginForm>({});
-  const { theme } = useContext(AppContext);
+  const [selectedOption, setSelectedOption] = useState("");
 
-  const submit: SubmitHandler<TLoginForm> = async (formData) => {
-    appLogin(formData);
+  const submit: SubmitHandler<FieldValues> = async (formData) => {
+    const loginFormData: TLoginForm = {
+      UserName: import.meta.env.VITE_SAP_LOGIN,
+      Password: import.meta.env.VITE_SAP_PASSWORD,
+      CompanyDB: formData.CompanyDB || selectedOption,
+    };
+
+    appLogin(loginFormData);
     reset();
   };
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.target.value);
-    setGroup(e.target.value);
+    setSelectedOption(e.target.value);
   };
 
   return (
@@ -93,32 +98,17 @@ export const LoginForm = () => {
             </StyledSelect>
           </ContainerInputSyled>
           {errors.CompanyDB ? <span>{errors.CompanyDB.message}</span> : null}
-          <Input
-            type="text"
-            placeholder="Login"
-            {...register("UserName")}
-            label="Usuário"
-            onChange={(e) => {
-              e.target.value = e.target.value.toUpperCase();
-            }}
-          />
-          {errors.UserName ? <span>{errors.UserName.message}</span> : null}
-          <Input
-            type="password"
-            placeholder="Senha"
-            {...register("Password")}
-            label="Senha"
-          />
-          {errors.Password ? <span>{errors.Password.message}</span> : null}
+          {/* Other form fields */}
         </StyledContainerFields>
         <Button
           type="submit"
           name={loading ? "Entrando..." : "Entrar"}
           color="outline-black"
           widthsize="med2"
-          onClick={() => submit}
         />
       </StyledForm>
     </StyledContainer>
   );
 };
+
+export default LoginForm;
