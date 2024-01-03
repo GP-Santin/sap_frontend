@@ -47,9 +47,6 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
         appLogin,
         group,
         setGroup,
-        theme,
-        setTheme,
-        toggleTheme,
       }}
     >
       {children}
