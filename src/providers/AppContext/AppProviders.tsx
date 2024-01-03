@@ -15,13 +15,20 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
 
   const navigate = useNavigate();
 
+  const setSessionCookie = (sessionId: string) => {
+    document.cookie = `B1SESSION=${sessionId}; path=/; HttpOnly`;
+    document.cookie = "ROUTEID=.node0; path=/b1s";
+  };
+
   const appLogin = async (formData: TLoginForm) => {
     try {
       setLoading(true);
 
-      await apiSAP.post("/Login", formData);
+      const response = await apiSAP.post("/ssob1s", formData);
 
-      localStorage.setItem("sessionId", true.toString());
+      const sessionId = response.data.SessionId;
+      localStorage.setItem("@session", sessionId);
+      setSessionCookie(sessionId);
 
       toast.success("Login feito com sucesso");
 

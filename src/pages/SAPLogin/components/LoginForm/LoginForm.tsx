@@ -15,7 +15,6 @@ export const LoginForm = () => {
   const { appLogin, loading } = useContext(AppContext);
   const theme = localStorage.getItem("theme");
   const {
-    reset,
     register,
     handleSubmit,
     formState: { errors },
@@ -30,7 +29,6 @@ export const LoginForm = () => {
     };
 
     appLogin(loginFormData);
-    reset();
   };
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
