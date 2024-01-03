@@ -9,6 +9,7 @@ export interface IFormResponse {
 export interface IUserContext {
   user: string;
   setUser: React.Dispatch<React.SetStateAction<string>>;
-  getActiveUserSAP: () => Promise<void>;
+  getActiveUserSAP: (email: string) => Promise<void>;
   apiLogin: () => Promise<void>;
+  getItems: () => Promise<void>;
 }

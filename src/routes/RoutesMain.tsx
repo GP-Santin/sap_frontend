@@ -4,6 +4,7 @@ import PublicRoutes from "./PublicRoutes";
 import LoginPage from "../pages/Login/LoginPage";
 import HomePage from "../pages/SAPLogin/SAPLogin";
 import Dashboard from "../pages/Dashboard/Dashboard";
+import PurchaseRequests from "../pages/Dashboard/pages/PurchaseRequests/PurchaseRequests";
 function RoutesMain({ toggleTheme, theme }: any) {
   return (
     <Routes>
@@ -11,10 +12,8 @@ function RoutesMain({ toggleTheme, theme }: any) {
         <Route path="/" element={<LoginPage />} />
       </Route>
       <Route element={<PrivatesRoutes />}>
-        <Route
-          path="/login"
-          element={<HomePage toggleTheme={toggleTheme} theme={theme} />}
-        />
+        <Route path="/login" element={<HomePage />} />
+        <Route path="/dashboard/purchase-requests" element={<PurchaseRequests />} />
       </Route>
       <Route
         path="/dashboard"

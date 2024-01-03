@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./styles.css";
-import Theme from "../Theme/Theme";
 import {
   BurguerStyled,
   Container,
@@ -10,6 +9,9 @@ import {
   StyledNav,
 } from "./styles";
 import { FaAngleDown } from "react-icons/fa";
+import sunIcon from "../../icons/sun.svg";
+import moonIcon from "../../icons/moon.svg";
+import { Icon } from "./styles";
 
 function NavBar({ toggleTheme, theme }: any) {
   const [burguerClass, setBurguerClass] = useState("burguer-bar unclicked");
@@ -43,7 +45,12 @@ function NavBar({ toggleTheme, theme }: any) {
 
   return (
     <Container>
-      <Theme toggleTheme={toggleTheme} theme={theme} />
+      <Icon
+        src={theme === "light" ? moonIcon : sunIcon}
+        alt=""
+        onClick={toggleTheme}
+        width={25}
+      />
       <StyledNav>
         <div className="burguer-menu" onClick={updateMenu}>
           <BurguerStyled className={burguerClass}></BurguerStyled>
@@ -51,6 +58,15 @@ function NavBar({ toggleTheme, theme }: any) {
           <BurguerStyled className={burguerClass}></BurguerStyled>
         </div>
       </StyledNav>
+      <div
+        style={{
+          marginLeft: "30vw",
+          display: "flex",
+          justifyContent: "flex-start",
+        }}
+      >
+        OLÁ
+      </div>
       <StyledMenu className={`menu ${menuClass}`}>
         <ul>
           <StyledList onClick={toggleDropdown}>
@@ -66,7 +82,9 @@ function NavBar({ toggleTheme, theme }: any) {
             {isDropdownOpen && (
               <ul>
                 <li>
-                  <a href="#">Solicitação de Compras</a>
+                  <a href="/dashboard/purchase-requests">
+                    Solicitação de Compras
+                  </a>
                 </li>
                 <li>
                   <a href="#">Regularização de Notas</a>

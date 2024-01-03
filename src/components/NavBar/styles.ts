@@ -3,6 +3,8 @@ import styled from "styled-components";
 export const Container = styled.div`
   width: 100vw;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const BurguerStyled = styled.div`
@@ -41,3 +43,11 @@ export const StyledListTitle = styled.div`
     transition: all 0.25s;
   }
 `;
+
+export const Icon = styled.img`
+  cursor: pointer;
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+`;
+
