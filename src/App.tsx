@@ -24,6 +24,7 @@ function App() {
   };
 
   useEffect(() => {}, [theme]);
+
   return (
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
       <ResetStyles />

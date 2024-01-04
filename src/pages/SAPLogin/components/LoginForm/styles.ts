@@ -1,10 +1,6 @@
 import styled from "styled-components";
 
 export const StyledContainerFields = styled.div`
-  gap: 1rem;
-  display: flex;
-  flex-direction: column;
-
   span {
     color: red;
 
@@ -14,18 +10,25 @@ export const StyledContainerFields = styled.div`
   }
 `;
 
-export const StyledContainer = styled.div`
-  width: clamp(60%, 80vw, 1024px);
-`;
-
 export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1rem;
+  width: 100%;
+
+  max-width: 50rem;
 
   input {
     color: var(--color-text);
   }
+`;
+
+export const StyledContainerSelect = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  width: 100%;
 `;
 
 export const StyledSelect = styled.select`

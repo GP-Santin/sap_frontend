@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./styles.css";
 import {
   BurguerStyled,
-  Container,
+  StyledIconContainer,
   StyledList,
   StyledListTitle,
   StyledMenu,
@@ -12,6 +12,7 @@ import { FaAngleDown } from "react-icons/fa";
 import sunIcon from "../../icons/sun.svg";
 import moonIcon from "../../icons/moon.svg";
 import { Icon } from "./styles";
+import { UserContext } from "../../providers/UserContext/UserContext";
 
 function NavBar({ toggleTheme, theme }: any) {
   const [burguerClass, setBurguerClass] = useState("burguer-bar unclicked");
@@ -19,6 +20,7 @@ function NavBar({ toggleTheme, theme }: any) {
   const [isMenuClicked, setIsMenuClicked] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("section deactivated");
+  const { user } = useContext(UserContext);
 
   const updateMenu = () => {
     if (!isMenuClicked) {
@@ -44,29 +46,23 @@ function NavBar({ toggleTheme, theme }: any) {
   };
 
   return (
-    <Container>
-      <Icon
-        src={theme === "light" ? moonIcon : sunIcon}
-        alt=""
-        onClick={toggleTheme}
-        width={25}
-      />
+    <>
       <StyledNav>
         <div className="burguer-menu" onClick={updateMenu}>
           <BurguerStyled className={burguerClass}></BurguerStyled>
           <BurguerStyled className={burguerClass}></BurguerStyled>
           <BurguerStyled className={burguerClass}></BurguerStyled>
         </div>
+        <StyledIconContainer>
+          <h3>{user?.name}</h3>
+          <Icon
+            src={theme === "light" ? moonIcon : sunIcon}
+            alt=""
+            width={25}
+            onClick={toggleTheme}
+          />
+        </StyledIconContainer>
       </StyledNav>
-      <div
-        style={{
-          marginLeft: "30vw",
-          display: "flex",
-          justifyContent: "flex-start",
-        }}
-      >
-        OLÁ
-      </div>
       <StyledMenu className={`menu ${menuClass}`}>
         <ul>
           <StyledList onClick={toggleDropdown}>
@@ -87,14 +83,14 @@ function NavBar({ toggleTheme, theme }: any) {
                   </a>
                 </li>
                 <li>
-                  <a href="#">Regularização de Notas</a>
+                  <a href="#">Regularização</a>
                 </li>
               </ul>
             )}
           </StyledList>
         </ul>
       </StyledMenu>
-    </Container>
+    </>
   );
 }
 

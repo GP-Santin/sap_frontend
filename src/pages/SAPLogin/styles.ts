@@ -9,5 +9,9 @@ export const StyledSAPLogin = styled.div`
   gap: 2rem;
   justify-content: center;
   align-items: center;
-  padding: 0 2rem;
+  padding: 0 10rem;
+
+  @media (max-width: 768px) {
+    padding: 0 2rem;
+  }
 `;

@@ -1,15 +1,9 @@
-import { ForwardedRef, forwardRef, InputHTMLAttributes } from "react";
-import { FieldError } from "react-hook-form";
-import { ContainerInputSyled, InputStyled } from "../Input/styles";
-
-interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
-  error?: FieldError;
-}
+import { ForwardedRef, forwardRef } from "react";
+import { ContainerInputSyled, IInputProps, InputStyled } from "../Input/styles";
 
 export const Input = forwardRef(
   (
-    { label, error, ...rest }: IInputProps,
+    { widthsize, label, error, ...rest }: IInputProps,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     return (
@@ -17,6 +11,7 @@ export const Input = forwardRef(
         {label ? <label htmlFor={rest.name}>{label}</label> : null}
         <InputStyled
           id={rest.name}
+          widthsize={widthsize}
           name={rest.name}
           ref={ref}
           type="text"

@@ -1,6 +1,15 @@
-import { styled } from "styled-components";
+import { InputHTMLAttributes } from "react";
+import { FieldError } from "react-hook-form";
+import styled, { css } from "styled-components";
+import { widthsizeType } from "../Button/styles";
 
-export const InputStyled = styled.input`
+export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
+  widthsize: widthsizeType;
+  label?: string;
+  error?: FieldError;
+}
+
+export const InputStyled = styled.input<IInputProps>`
   width: 100%;
   height: 3rem;
 
@@ -15,11 +24,49 @@ export const InputStyled = styled.input`
   font-weight: var(--font-weight-1);
   font-size: var(--font-size-1);
 
-  color: var(--color-black-text);
+  color: ${(props) => props.theme.colors.text};
+
+  ${({ widthsize }) => {
+    switch (widthsize) {
+      case "small":
+        return css`
+          width: 5.3125rem;
+        `;
+      case "small2":
+        return css`
+          width: 8.4375rem;
+        `;
+      case "med":
+        return css`
+          width: 9.6875rem;
+        `;
+      case "med2":
+        return css`
+          width: 11.5625rem;
+        `;
+      case "large1":
+        return css`
+          width: 13.125rem;
+          height: 2.8125rem;
+        `;
+      case "large2":
+        return css`
+          width: 15rem;
+        `;
+      default:
+        return css`
+          width: 100%;
+        `;
+    }
+  }}
 `;
 
 export const ContainerInputSyled = styled.div`
   display: flex;
   flex-direction: column;
-  gap: .5rem;
+  gap: 0.5rem;
+
+  label {
+    width: auto;
+  }
 `;
