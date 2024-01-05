@@ -21,7 +21,6 @@ export const LoginForm = () => {
       Password: import.meta.env.VITE_SAP_PASSWORD,
       CompanyDB: formData.CompanyDB || selectedOption,
     };
-
     appLogin(loginFormData);
   };
 
