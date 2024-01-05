@@ -5,6 +5,7 @@ import {
   IItem,
   IItemsResponse,
   ISalesPerson,
+  ISalesPersonResponse,
   IUserContext,
   IUserProviderProps,
 } from "./@types";
@@ -12,12 +13,14 @@ import { AxiosError } from "axios";
 import { apiSAP, apiSantin } from "../../services/api";
 import { useMsal } from "@azure/msal-react";
 import { AccountInfo } from "@azure/msal-browser";
+import { set } from "react-hook-form";
 
 export const UserContext = createContext({} as IUserContext);
 
 export const UserProvider = ({ children }: IUserProviderProps) => {
   const [user, setUser] = useState<AccountInfo | null>(null);
   const [items, setItems] = useState<IItem[]>([]);
+  const [newPurchaseNumber, setNewPurchaseNumber] = useState<number>();
   const [salesPerson, setSalesPerson] = useState<ISalesPerson>(
     {} as ISalesPerson
   );
@@ -71,6 +74,13 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     return response.data;
   };
 
+  const fetchSalesPersons = async (
+    link: string
+  ): Promise<ISalesPersonResponse> => {
+    const response = await apiSAP.get<ISalesPersonResponse>(link);
+    return response.data;
+  };
+
   const getItems = async () => {
     const allItems: IItem[] = [];
     let nextLink: string | undefined =
@@ -113,6 +123,37 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     }
   };
 
+  const getSalesPersons = async () => {
+    const allSalesPerson: ISalesPerson[] = [];
+    let nextLink: string | undefined =
+      "SalesPersons?$select=SalesEmployeeCode, SalesEmployeeName&$filter = Active eq 'tYES'";
+    try {
+      while (nextLink) {
+        const response = await fetchSalesPersons(nextLink);
+        const { value } = response;
+        nextLink = response["odata.nextLink"];
+
+        allSalesPerson.push(...value);
+      }
+
+      localStorage.setItem("@salespersons", JSON.stringify(allSalesPerson));
+    } catch (error: AxiosError | any) {
+      console.error(error);
+    }
+  };
+
+  const getLastPurchaseRequest = async () => {
+    try {
+      const response = await apiSAP.get(
+        `/PurchaseRequests?$select=DocNum &$orderby=DocNum desc&$top=1`
+      );
+      const newPurchaseRequest = response.data.value[0].DocNum + 1;
+      setNewPurchaseNumber(newPurchaseRequest);
+    } catch (error: AxiosError | any) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     if (accounts && accounts.length > 0) {
       setActiveUser();
@@ -124,6 +165,12 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       if (!businessPartner) {
         getBusinessPartner();
       }
+      const salesPerson = localStorage.getItem("@salespersons");
+      if (!salesPerson) {
+        getSalesPersons();
+      }
+      getLastPurchaseRequest();
+      console.log(newPurchaseNumber);
     }
   }, [accounts]);
 
@@ -137,6 +184,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         getItems,
         salesPerson,
         items,
+        newPurchaseNumber,
       }}
     >
       {children}

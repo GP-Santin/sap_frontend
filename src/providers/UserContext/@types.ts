@@ -43,6 +43,11 @@ export interface ISalesPerson {
   Email: null;
 }
 
+export interface ISalesPersonResponse {
+  value: ISalesPerson[];
+  "odata.nextLink": string;
+}
+
 export interface IUserContext {
   user: AccountInfo | null;
   setUser: React.Dispatch<React.SetStateAction<AccountInfo | null>>;
@@ -51,4 +56,5 @@ export interface IUserContext {
   getItems: () => Promise<void>;
   items: IItem[];
   salesPerson: ISalesPerson;
+  newPurchaseNumber: number | undefined;
 }
