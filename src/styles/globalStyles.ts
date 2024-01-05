@@ -7,8 +7,8 @@ export const GlobalStyles = createGlobalStyle`
     --color-terciary: #0C7ECF;
     --color-denim: #1661BE;
     --color-black: #101119;
-		--color-black-2: #0f1411;
-		--color-black-text: #00000080;
+	--color-black-2: #0f1411;
+	--color-black-text: #00000080;
     --color-white: #FFFFFF;
     --color-light-gray: #F5F5F5;
 
