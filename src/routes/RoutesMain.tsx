@@ -13,7 +13,10 @@ function RoutesMain({ toggleTheme, theme }: any) {
       </Route>
       <Route element={<PrivatesRoutes />}>
         <Route path="/login" element={<HomePage />} />
-        <Route path="/dashboard/purchase-requests" element={<PurchaseRequests />} />
+        <Route
+          path="/dashboard/purchase-requests"
+          element={<PurchaseRequests />}
+        />
       </Route>
       <Route
         path="/dashboard"

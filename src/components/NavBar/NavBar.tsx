@@ -12,7 +12,7 @@ import { FaAngleDown } from "react-icons/fa";
 import sunIcon from "../../icons/sun.svg";
 import moonIcon from "../../icons/moon.svg";
 import { Icon } from "./styles";
-import { UserContext } from "../../providers/UserContext/UserContext";
+import { AppContext } from "../../providers/AppContext/AppProviders";
 
 function NavBar({ toggleTheme, theme }: any) {
   const [burguerClass, setBurguerClass] = useState("burguer-bar unclicked");
@@ -20,7 +20,7 @@ function NavBar({ toggleTheme, theme }: any) {
   const [isMenuClicked, setIsMenuClicked] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("section deactivated");
-  const { user } = useContext(UserContext);
+  const { user } = useContext(AppContext);
 
   const updateMenu = () => {
     if (!isMenuClicked) {
