@@ -155,22 +155,26 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   };
 
   useEffect(() => {
-    if (accounts && accounts.length > 0) {
-      setActiveUser();
-      const items = localStorage.getItem("@items");
-      if (!items) {
-        getItems();
+    const sessionId = localStorage.getItem("@session");
+    if (sessionId) {
+      if (accounts && accounts.length > 0) {
+        setActiveUser();
+        const items = localStorage.getItem("@items");
+        if (!items) {
+          getItems();
+        }
+        const businessPartner = localStorage.getItem("@businesspartners");
+        if (!businessPartner) {
+          getBusinessPartner();
+        }
+        const salesPerson = localStorage.getItem("@salespersons");
+        if (!salesPerson) {
+          getSalesPersons();
+        }
+        getLastPurchaseRequest();
       }
-      const businessPartner = localStorage.getItem("@businesspartners");
-      if (!businessPartner) {
-        getBusinessPartner();
-      }
-      const salesPerson = localStorage.getItem("@salespersons");
-      if (!salesPerson) {
-        getSalesPersons();
-      }
-      getLastPurchaseRequest();
     }
+    return;
   }, [accounts]);
 
   return (
