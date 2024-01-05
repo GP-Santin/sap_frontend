@@ -170,7 +170,6 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         getSalesPersons();
       }
       getLastPurchaseRequest();
-      console.log(newPurchaseNumber);
     }
   }, [accounts]);
 
