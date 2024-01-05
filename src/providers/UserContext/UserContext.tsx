@@ -1,14 +1,11 @@
-import { createContext, useEffect } from "react";
+import { createContext } from "react";
 import { IUserContext, IUserProviderProps } from "./@types";
 import { AxiosError } from "axios";
 import { apiSantin } from "../../services/api";
-import { useMsal } from "@azure/msal-react";
 
 export const UserContext = createContext({} as IUserContext);
 
 export const UserProvider = ({ children }: IUserProviderProps) => {
-  const { accounts } = useMsal();
-
   const apiLogin = async () => {
     try {
       const response = await apiSantin.post("/auth", {
@@ -20,7 +17,6 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       console.error("Erro ao fazer login:", error);
     }
   };
-
 
   return <UserContext.Provider value={{}}>{children}</UserContext.Provider>;
 };

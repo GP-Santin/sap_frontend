@@ -6,14 +6,7 @@ import { apiSAP } from "../../services/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useMsal } from "@azure/msal-react";
-import {
-  IBusinessPartner,
-  IBusinessResponse,
-  IItem,
-  IItemsResponse,
-  ISalesPerson,
-  ISalesPersonResponse,
-} from "../AppContext/@types";
+import { IBusinessPartner, IItem, ISalesPerson } from "../AppContext/@types";
 import { AccountInfo } from "@azure/msal-browser";
 import {
   fetchBusinessPartners,
@@ -127,52 +120,71 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
       const response = await apiSAP.get(
         `/EmployeesInfo?$filter= eMail eq '${email}'`
       );
-      console.log(response.data.value[0]);
+      console.log(response);
     } catch (error) {
       console.error("Erro ao consultar empregado:", error);
     }
   };
+
+  const checkAndFetchData = async (
+    key: string,
+    fetchDataFunc: () => Promise<void>
+  ) => {
+    const data = localStorage.getItem(key);
+    if (!data) {
+      await fetchDataFunc();
+    }
+  };
+
+  // ... (seu código existente)
 
   const appLogin = async (formData: TLoginForm) => {
     try {
       setLoading(true);
 
       const response = await apiSAP.post("/Login", formData);
-
       const sessionId = response.data.SessionId;
       localStorage.setItem("@session", sessionId);
       setSessionCookie(sessionId);
 
-      toast.success("Login feito com sucesso");
-
       if (sessionId && accounts && accounts.length > 0) {
         setActiveUser();
 
-        const checkAndFetchData = async (
-          key: string,
-          fetchDataFunc: () => Promise<void>
-        ) => {
-          const data = localStorage.getItem(key);
-          if (!data) {
-            await fetchDataFunc();
-          }
-        };
+        await toast.promise(checkAndFetchData("@items", getItems), {
+          pending: "Carregando itens...",
+          success: "Itens carregados com sucesso!",
+          error: "Erro ao carregar itens.",
+        });
 
-        await checkAndFetchData("@items", getItems);
-        await checkAndFetchData("@businesspartners", getBusinessPartner);
-        await checkAndFetchData("@salespersons", getSalesPersons);
+        await toast.promise(
+          checkAndFetchData("@businesspartners", getBusinessPartner),
+          {
+            pending: "Carregando parceiros de negócios...",
+            success: "Parceiros de negócios carregados com sucesso!",
+            error: "Erro ao carregar parceiros de negócios.",
+          }
+        );
+
+        await toast.promise(
+          checkAndFetchData("@salespersons", getSalesPersons),
+          {
+            pending: "Carregando vendedores...",
+            success: "Vendedores carregados com sucesso!",
+            error: "Erro ao carregar vendedores.",
+          }
+        );
 
         await getLastPurchaseRequest();
       }
     } catch (error: AxiosError | any) {
       if (error.response?.status === 401) {
-        toast.error("Usuário sem acesso a base solicitada.");
+        toast.error("Usuário sem acesso à base solicitada.");
       } else {
         toast.error("Usuário ou senha inválidos.");
       }
     } finally {
+      toast.success("Login feito com sucesso");
       navigate("/dashboard");
-      setLoading(false);
     }
   };
 
