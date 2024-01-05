@@ -63,4 +63,5 @@ export interface IAppContext {
   setUser: React.Dispatch<React.SetStateAction<AccountInfo | null>>;
   items: IItem[];
   salesPerson: ISalesPerson;
+  appLogin: (formData: TLoginForm) => Promise<void>;
 }

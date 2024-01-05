@@ -189,6 +189,7 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
         user,
         setUser,
         salesPerson,
+        appLogin,
       }}
     >
       {children}
