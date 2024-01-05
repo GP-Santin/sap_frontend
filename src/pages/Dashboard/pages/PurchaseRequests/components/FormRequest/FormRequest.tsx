@@ -48,6 +48,8 @@ function FormRequest() {
             value={newPurchaseNumber}
             disabled={true}
           />
+          <Input label="Data necessária" widthsize="med2" {...register("datanecessaria")} />
+          {errors.datanecessaria ? <span>{errors.message}</span>} : null}
         </div>
       </StyledForm>
       <Button
