@@ -15,6 +15,11 @@ import {
   ISalesPersonResponse,
 } from "../AppContext/@types";
 import { AccountInfo } from "@azure/msal-browser";
+import {
+  fetchBusinessPartners,
+  fetchItems,
+  fetchSalesPersons,
+} from "./fetchDatas";
 
 export const AppContext = createContext({} as IAppContext);
 
@@ -34,25 +39,6 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
   const setSessionCookie = (sessionId: string) => {
     document.cookie = `B1SESSION=${sessionId}; path=/; HttpOnly`;
     document.cookie = "ROUTEID=.node0; path=/b1s";
-  };
-
-  const fetchItems = async (link: string): Promise<IItemsResponse> => {
-    const response = await apiSAP.get<IItemsResponse>(link);
-    return response.data;
-  };
-
-  const fetchBusinessPartners = async (
-    link: string
-  ): Promise<IBusinessResponse> => {
-    const response = await apiSAP.get<IBusinessResponse>(link);
-    return response.data;
-  };
-
-  const fetchSalesPersons = async (
-    link: string
-  ): Promise<ISalesPersonResponse> => {
-    const response = await apiSAP.get<ISalesPersonResponse>(link);
-    return response.data;
   };
 
   const getItems = async () => {
@@ -135,6 +121,18 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
     }
   };
 
+  const getActiveUserSAP = async (email: string) => {
+    try {
+      const result = await apiSAP.get(`/EmployeesInfo`);
+      const response = await apiSAP.get(
+        `/EmployeesInfo?$filter= eMail eq '${email}'`
+      );
+      console.log(response.data.value[0]);
+    } catch (error) {
+      console.error("Erro ao consultar empregado:", error);
+    }
+  };
+
   const appLogin = async (formData: TLoginForm) => {
     try {
       setLoading(true);
@@ -190,6 +188,7 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
         setUser,
         salesPerson,
         appLogin,
+        getActiveUserSAP,
       }}
     >
       {children}

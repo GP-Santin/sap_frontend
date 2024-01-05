@@ -21,7 +21,6 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     }
   };
 
-  useEffect(() => {}, [accounts]);
 
   return <UserContext.Provider value={{}}>{children}</UserContext.Provider>;
 };
