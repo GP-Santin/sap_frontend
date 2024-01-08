@@ -11,7 +11,7 @@ interface DatePickerProps {
   setValue: UseFormSetValue<any>;
 }
 
-const DatePickerComponent: React.FC<DatePickerProps> = ({ setValue }) => {
+function DatePickerComponent({ setValue }: DatePickerProps) {
   const [startDate, setStartDate] = useState(new Date());
 
   const handleDateChange = (date: Date) => {
@@ -30,10 +30,9 @@ const DatePickerComponent: React.FC<DatePickerProps> = ({ setValue }) => {
         dateFormat="dd/MM/yyyy"
         locale={ptBr}
         customInput={<Input widthsize="med2" />}
-        
       />
     </StyledContainerData>
   );
-};
+}
 
 export default DatePickerComponent;
