@@ -12,6 +12,8 @@ export const GlobalStyles = createGlobalStyle`
     --color-white: #FFFFFF;
     --color-light-gray: #F5F5F5;
 
+		--color-alert: #FF0000;
+
     --font-family-primary: "Montserrat", sans-serif;
     --font-family-secondary: "Roboto", sans-serif;
 

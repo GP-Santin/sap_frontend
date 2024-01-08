@@ -31,27 +31,38 @@ export const InputStyled = styled.input<IInputProps>`
       case "small":
         return css`
           width: 5.3125rem;
+          height: 3rem;
         `;
       case "small2":
         return css`
           width: 8.4375rem;
+          height: 3rem;
         `;
       case "med":
         return css`
           width: 9.6875rem;
+          height: 3rem;
         `;
       case "med2":
         return css`
           width: 11.5625rem;
+          height: 3rem;
         `;
       case "large1":
         return css`
           width: 13.125rem;
           height: 2.8125rem;
+          height: 3rem;
         `;
       case "large2":
         return css`
           width: 15rem;
+          height: 3rem;
+        `;
+      case "large3":
+        return css`
+          width: 100%;
+          max-width: 1024px;
         `;
       default:
         return css`

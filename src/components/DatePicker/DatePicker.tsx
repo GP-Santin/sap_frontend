@@ -18,12 +18,12 @@ const DatePickerComponent: React.FC<DatePickerProps> = ({ setValue }) => {
     const dateFormatted = format(date, "dd-MM-yyyy");
     setStartDate(date);
 
-    setValue("datanecessaria", dateFormatted, { shouldValidate: true });
+    setValue("RequriedDate", dateFormatted, { shouldValidate: true });
   };
 
   return (
     <StyledContainerData>
-      <span>Data necessária</span>
+      <p>Data necessária</p>
       <DatePicker
         selected={startDate}
         onChange={handleDateChange}

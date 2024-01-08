@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { IAppContext, IAppProviderProps, ILoading } from "./@types";
 import { TLoginForm } from "../../pages/SAPLogin/components/LoginForm/schema";
 import { AxiosError } from "axios";
@@ -19,15 +19,11 @@ export const AppContext = createContext({} as IAppContext);
 export const AppProvider = ({ children }: IAppProviderProps) => {
   const [loading, setLoading] = useState<ILoading | boolean>(false);
   const [group, setGroup] = useState<string>("");
-  const [newPurchaseNumber, setNewPurchaseNumber] = useState<number>();
+  const [, setNewPurchaseNumber] = useState<number>();
   const [user, setUser] = useState<AccountInfo | null>(null);
-  const [items, setItems] = useState<IItem[]>([]);
-  const [salesPerson, setSalesPerson] = useState<ISalesPerson>(
-    {} as ISalesPerson
-  );
+  const [items] = useState<IItem[]>([]);
+  const [salesPerson] = useState<ISalesPerson>({} as ISalesPerson);
   const { accounts } = useMsal();
-  // projetos /b1s/v1/Projects?$filter=Active eq 'tYES'
-  // Gerenciais /b1s/v1/ProjectManagements?$filter=Active eq 'tYES'
   // Depósitos /b1s/v1/Deposits
   const navigate = useNavigate();
 
@@ -118,11 +114,9 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
 
   const getActiveUserSAP = async (email: string) => {
     try {
-      const result = await apiSAP.get(`/EmployeesInfo`);
       const response = await apiSAP.get(
         `/EmployeesInfo?$filter= eMail eq '${email}'`
       );
-      console.log(response);
     } catch (error) {
       console.error("Erro ao consultar empregado:", error);
     }
@@ -135,6 +129,33 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
     const data = localStorage.getItem(key);
     if (!data) {
       await fetchDataFunc();
+    }
+  };
+
+  const getProjectManagements = async () => {
+    try {
+      const response = await apiSAP.get(
+        `/DistributionRules?$select= FactorCode, InWhichDimension, FactorDescription`
+      );
+      const projectManagements = response.data.value;
+      localStorage.setItem(
+        "@projectmanagements",
+        JSON.stringify(projectManagements)
+      );
+    } catch (error: AxiosError | any) {
+      console.error(error);
+    }
+  };
+
+  const getDeposits = async () => {
+    try {
+      const response = await apiSAP.get(
+        `/Deposits?$select=DepositCode, DepositName&$filter=Active eq 'tYES'`
+      );
+      const deposits = response.data.value;
+      localStorage.setItem("@deposits", JSON.stringify(deposits));
+    } catch (error: AxiosError | any) {
+      console.error(error);
     }
   };
 
@@ -174,6 +195,21 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
           }
         );
 
+        await toast.promise(
+          checkAndFetchData("@projectmanagements", getProjectManagements),
+          {
+            pending: "Carregando gerenciais...",
+            success: "Gerenciais carregados com sucesso!",
+            error: "Erro ao carregar gerenciais.",
+          }
+        );
+
+        await toast.promise(checkAndFetchData("@deposits", getDeposits), {
+          pending: "Carregando depósitos...",
+          success: "Depósitos carregados com sucesso!",
+          error: "Erro ao carregar depósitos.",
+        });
+
         await getLastPurchaseRequest();
       }
     } catch (error: AxiosError | any) {
@@ -187,6 +223,7 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
       navigate("/dashboard");
     }
   };
+
 
   return (
     <AppContext.Provider

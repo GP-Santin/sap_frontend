@@ -12,7 +12,8 @@ export type widthsizeType =
   | "med"
   | "med2"
   | "large1"
-  | "large2";
+  | "large2"
+  | "large3";
 
 interface IButtonStylesProps {
   color: ColorType;

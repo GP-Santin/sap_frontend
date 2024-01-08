@@ -1,5 +1,5 @@
-import { TLoginForm } from "../../pages/SAPLogin/components/LoginForm/schema";
 import { AccountInfo } from "@azure/msal-browser";
+import { TLoginForm } from "../../pages/SAPLogin/components/LoginForm/schema";
 
 export interface IAppProviderProps {
   children: React.ReactNode;
