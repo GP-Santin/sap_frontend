@@ -5,13 +5,11 @@ export const purchaseFormSchema = z.object({
   U_SNT_Requester: z.string(),
   ItemCode: z.string({ required_error: "Insira o item" }),
   ItemDescription: z.string({ required_error: "Selecione um item" }),
-  Quantity: z.string({
-    required_error: "Insira a quantidade",
-    invalid_type_error: "Insira um número",
-  }),
-  CostingCode2: z.string({ required_error: "Insira a Gerencial" }),
-  CostingCode: z.string({ required_error: "Insira o Custo" }),
-  ProjectCode: z.string({ required_error: "Insira o Projeto" }),
+  Quantity: z.string().min(1, "Insira a quantidade"),
+  CostingCode2: z.string().min(1, "Selecione uma gerencial"),
+  CostingCode: z.string().min(1, "Selecione uma corporativo"),
+  ProjectCode: z.string().min(1, "Selecione um projeto"),
+  Comments: z.string(),
 });
 
-export type TPurchase = z.infer<typeof purchaseFormSchema>;
+export interface TPurchase extends z.infer<typeof purchaseFormSchema> {}
