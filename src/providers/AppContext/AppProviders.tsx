@@ -105,6 +105,16 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
     }
   };
 
+  const getProjects = async () => {
+    try {
+      const response = await apiSAP.get(`/Projects?$filter=Active eq 'tYES'`);
+      const projects = response.data.value;
+      localStorage.setItem("@projects", JSON.stringify(projects));
+    } catch (error: AxiosError | any) {
+      console.error(error);
+    }
+  };
+
   const setActiveUser = () => {
     const activeUser = accounts[0];
     if (activeUser) {
@@ -195,21 +205,6 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
           }
         );
 
-        await toast.promise(
-          checkAndFetchData("@projectmanagements", getProjectManagements),
-          {
-            pending: "Carregando gerenciais...",
-            success: "Gerenciais carregados com sucesso!",
-            error: "Erro ao carregar gerenciais.",
-          }
-        );
-
-        await toast.promise(checkAndFetchData("@deposits", getDeposits), {
-          pending: "Carregando depósitos...",
-          success: "Depósitos carregados com sucesso!",
-          error: "Erro ao carregar depósitos.",
-        });
-
         await getLastPurchaseRequest();
       }
     } catch (error: AxiosError | any) {
@@ -219,7 +214,6 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
         toast.error("Usuário ou senha inválidos.");
       }
     } finally {
-      toast.success("Login feito com sucesso");
       navigate("/dashboard");
     }
   };
