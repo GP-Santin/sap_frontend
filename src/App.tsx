@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { ToastContainer } from "react-toastify";
 import RoutesMain from "./routes/RoutesMain";
 import { GlobalStyles } from "./styles/globalStyles";
 import { ResetStyles } from "./styles/resetStyles";
-import { AppContext, AppProvider } from "./providers/AppContext/AppProviders";
+import { AppProvider } from "./providers/AppContext/AppProviders";
 import { UserProvider } from "./providers/UserContext/UserContext";
 import { darkTheme } from "./styles/themes/dark";
 import { lightTheme } from "./styles/themes/light";

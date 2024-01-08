@@ -26,7 +26,9 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
     {} as ISalesPerson
   );
   const { accounts } = useMsal();
-
+  // projetos /b1s/v1/Projects?$filter=Active eq 'tYES'
+  // Gerenciais /b1s/v1/ProjectManagements?$filter=Active eq 'tYES'
+  // Depósitos /b1s/v1/Deposits
   const navigate = useNavigate();
 
   const setSessionCookie = (sessionId: string) => {
@@ -135,8 +137,6 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
       await fetchDataFunc();
     }
   };
-
-  // ... (seu código existente)
 
   const appLogin = async (formData: TLoginForm) => {
     try {
