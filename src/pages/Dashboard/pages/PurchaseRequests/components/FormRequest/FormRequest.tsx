@@ -13,9 +13,11 @@ import DatePickerComponent from "../../../../../../components/DatePicker/DatePic
 import { useState } from "react";
 import { IItem } from "../../../../../../providers/AppContext/@types";
 import Item from "../../../../../../components/Item/Item";
+import Projects from "../../../../../../components/Projects/Projects";
 
 function FormRequest() {
   const {
+    reset,
     register,
     handleSubmit,
     setValue,
@@ -26,30 +28,9 @@ function FormRequest() {
 
   const [filteredItems, setFilteredItems] = useState<IItem[]>([]);
 
-  const submit: SubmitHandler<TPurchase> = async (formData: TPurchase) => {
-    const { U_SNT_Requester, Quantity } = formData;
-
-    const documentLines = [
-      {
-        U_SNT_Requester: U_SNT_Requester,
-        ItemCode: formData.ItemCode,
-        ItemDescription: formData.ItemDescription,
-        Quantity: Quantity,
-        U_SNT_Finalidade: "1",
-        CostingCode2: formData.CostingCode2,
-        CostingCode: formData.CostingCode,
-        ProjectCode: formData.ProjectCode,
-      },
-    ];
-
-    const formattedData = {
-      RequriedDate: formData.RequriedDate,
-      DocumentLines: documentLines,
-      U_SNT_Suprimento: "SIM",
-      U_SNT_SC_Manut: "S",
-    };
-
-    console.log(formattedData);
+  const submit: SubmitHandler<TPurchase> = (formData) => {
+    console.log(formData);
+    reset();
   };
   return (
     <StyledForm onSubmit={handleSubmit(submit)}>
@@ -63,7 +44,6 @@ function FormRequest() {
           value="DTI006"
           label="Solicitante"
           disabled={true}
-          {...register("U_SNT_Requester")}
         />
       </StyledContainerPurchaseFields>
       <StyledContainerLineItems>
@@ -101,23 +81,7 @@ function FormRequest() {
             <span>{errors.CostingCode.message}</span>
           ) : null}
         </StyledErrorContainer>
-        <StyledErrorContainer>
-          <Input
-            label="Projeto"
-            widthsize="small2"
-            {...register("ProjectCode")}
-          />
-          {errors.ProjectCode ? (
-            <span>{errors.ProjectCode.message}</span>
-          ) : null}
-        </StyledErrorContainer>
-        <Button
-          widthsize="med2"
-          color="outline-black"
-          name="Adicionar item"
-          type="submit"
-          style={{ marginTop: "1rem" }}
-        />
+        <Projects register={register} errors={errors} />
       </StyledContainerLineItems>
       <div>
         <StyledErrorContainer>
@@ -128,9 +92,18 @@ function FormRequest() {
               height: "10rem",
               resize: "none",
             }}
+            {...register("Comments")}
           />
         </StyledErrorContainer>
       </div>
+      <Button
+        widthsize="med2"
+        color="outline-black"
+        name="Adicionar solicitação"
+        type="submit"
+        style={{ marginTop: "1rem" }}
+        onClick={() => console.log("submit")}
+      />
     </StyledForm>
   );
 }

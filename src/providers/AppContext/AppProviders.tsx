@@ -24,7 +24,7 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
   const [items] = useState<IItem[]>([]);
   const [salesPerson] = useState<ISalesPerson>({} as ISalesPerson);
   const { accounts } = useMsal();
-  // Depósitos /b1s/v1/Deposits
+
   const navigate = useNavigate();
 
   const setSessionCookie = (sessionId: string) => {
@@ -205,6 +205,27 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
           }
         );
 
+        await toast.promise(
+          checkAndFetchData("@projectmanagements", getProjectManagements),
+          {
+            pending: "Carregando gerenciais...",
+            success: "Gerenciais carregados com sucesso!",
+            error: "Erro ao carregar gerenciais.",
+          }
+        );
+
+        await toast.promise(checkAndFetchData("@deposits", getDeposits), {
+          pending: "Carregando depósitos...",
+          success: "Depósitos carregados com sucesso!",
+          error: "Erro ao carregar depósitos.",
+        });
+
+        await toast.promise(checkAndFetchData("@projects", getProjects), {
+          pending: "Carregando projetos...",
+          success: "Projetos carregados com sucesso!",
+          error: "Erro ao carregar projetos.",
+        });
+
         await getLastPurchaseRequest();
       }
     } catch (error: AxiosError | any) {
@@ -218,6 +239,9 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
     }
   };
 
+  useEffect(() => {
+    getProjects()
+  })
 
   return (
     <AppContext.Provider

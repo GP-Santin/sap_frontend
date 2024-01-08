@@ -22,6 +22,7 @@ export const StyledErrorContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  position: relative;
 
   span {
     color: var(--color-alert);
