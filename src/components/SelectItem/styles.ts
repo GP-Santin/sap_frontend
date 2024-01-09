@@ -4,6 +4,7 @@ export const StyledItemContainer = styled.div`
   display: flex;
   position: relative;
   gap: 1rem;
+  flex-wrap: wrap;
 
   @media (min-width: 768px) {
     #itemDescription {
