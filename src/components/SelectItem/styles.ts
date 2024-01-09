@@ -28,7 +28,7 @@ export const StyledDropdown = styled.div`
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: ${(props) => props.theme.colors.primary};
+    background-color: ${(props) => props.theme.colors.text};
   }
 
   &::-webkit-scrollbar-track {

@@ -1,24 +1,20 @@
-import { useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { UseFormSetValue } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import ptBr from "date-fns/locale/pt-BR";
+import DatePicker from "react-datepicker";
 import { Input } from "../Input/Input";
 import { StyledContainerData } from "./styles";
 import { format } from "date-fns";
+import { useState } from "react";
+import "react-datepicker/dist/react-datepicker.css";
 
-interface DatePickerProps {
-  setValue: UseFormSetValue<any>;
-}
-
-function DatePickerComponent({ setValue }: DatePickerProps) {
-  const [startDate, setStartDate] = useState(new Date());
+function DatePickerComponent() {
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const { register } = useFormContext();
 
   const handleDateChange = (date: Date) => {
-    const dateFormatted = format(date, "dd-MM-yyyy");
+    const dateFormatted = format(date, "yyyy-MM-dd");
     setStartDate(date);
-
-    setValue("RequriedDate", dateFormatted, { shouldValidate: true });
+    register("RequriedDate", { value: dateFormatted });
   };
 
   return (

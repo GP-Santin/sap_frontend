@@ -1,4 +1,5 @@
 import NavBar from "../../../../components/NavBar/NavBar";
+import Form from "./components/Form/Form";
 import FormRequest from "./components/FormRequest/FormRequest";
 import { PurchaseContainer, ContentContainer } from "./styles";
 
@@ -7,7 +8,8 @@ function PurchaseRequests() {
     <PurchaseContainer>
       <NavBar />
       <ContentContainer>
-        <FormRequest />
+        {/* <FormRequest /> */}
+        <Form />
       </ContentContainer>
     </PurchaseContainer>
   );

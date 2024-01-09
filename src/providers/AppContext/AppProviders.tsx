@@ -157,17 +157,17 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
     }
   };
 
-  const getDeposits = async () => {
-    try {
-      const response = await apiSAP.get(
-        `/Deposits?$select=DepositCode, DepositName&$filter=Active eq 'tYES'`
-      );
-      const deposits = response.data.value;
-      localStorage.setItem("@deposits", JSON.stringify(deposits));
-    } catch (error: AxiosError | any) {
-      console.error(error);
-    }
-  };
+  // const getDeposits = async () => {
+  //   try {
+  //     const response = await apiSAP.get(
+  //       `/Deposits?$select=DepositCode, DepositName&$filter=Active eq 'tYES'`
+  //     );
+  //     const deposits = response.data.value;
+  //     localStorage.setItem("@deposits", JSON.stringify(deposits));
+  //   } catch (error: AxiosError | any) {
+  //     console.error(error);
+  //   }
+  // };
 
   const appLogin = async (formData: TLoginForm) => {
     try {
@@ -214,11 +214,11 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
           }
         );
 
-        await toast.promise(checkAndFetchData("@deposits", getDeposits), {
-          pending: "Carregando depósitos...",
-          success: "Depósitos carregados com sucesso!",
-          error: "Erro ao carregar depósitos.",
-        });
+        // await toast.promise(checkAndFetchData("@deposits", getDeposits), {
+        //   pending: "Carregando depósitos...",
+        //   success: "Depósitos carregados com sucesso!",
+        //   error: "Erro ao carregar depósitos.",
+        // });
 
         await toast.promise(checkAndFetchData("@projects", getProjects), {
           pending: "Carregando projetos...",
@@ -238,10 +238,6 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
       navigate("/dashboard");
     }
   };
-
-  useEffect(() => {
-    getProjects()
-  })
 
   return (
     <AppContext.Provider

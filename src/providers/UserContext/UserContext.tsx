@@ -1,22 +1,28 @@
 import { createContext } from "react";
 import { IUserContext, IUserProviderProps } from "./@types";
+import { IPurchaseRequest } from "../../pages/Dashboard/pages/PurchaseRequests/components/FormRequest/schema";
 import { AxiosError } from "axios";
-import { apiSantin } from "../../services/api";
+import { apiSAP } from "../../services/api";
+import { toast } from "react-toastify";
 
 export const UserContext = createContext({} as IUserContext);
 
 export const UserProvider = ({ children }: IUserProviderProps) => {
-  const apiLogin = async () => {
+  const createPurchaseRequest = async (formData: IPurchaseRequest) => {
     try {
-      const response = await apiSantin.post("/auth", {
-        user: import.meta.env.VITE_API_LOGIN,
-        password: import.meta.env.VITE_API_PASSWORD,
-      });
-      localStorage.setItem("@santinAPI", response.data.token);
+      const { data } = await apiSAP.post("/PurchaseRequests", formData);
+
+      toast.success(
+        `Solicitação criada com sucesso!, Nº da solicitação: ${data.DocEntry}`
+      );
     } catch (error: AxiosError | any) {
-      console.error("Erro ao fazer login:", error);
+      toast.error(error.response.data.message);
     }
   };
 
-  return <UserContext.Provider value={{}}>{children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider value={{ createPurchaseRequest }}>
+      {children}
+    </UserContext.Provider>
+  );
 };

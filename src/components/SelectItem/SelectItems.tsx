@@ -1,19 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { StyledErrorContainer } from "../../pages/Dashboard/pages/PurchaseRequests/components/FormRequest/style";
 import { Input } from "../Input/Input";
 import { IItem } from "../../providers/AppContext/@types";
-import { IItemProps } from "./@types";
 import { StyledDropdown, StyledItemContainer } from "./styles";
+import { FieldErrors, useFormContext } from "react-hook-form";
+import { IPurchaseRequest } from "../../pages/Dashboard/pages/PurchaseRequests/components/FormRequest/schema";
 
-function Item({
-  setValue,
-  filteredItems,
-  setFilteredItems,
-  errors,
-}: IItemProps & { errors: any }) {
-  const items = JSON.parse(localStorage.getItem("@items") || "[]");
+interface ISelectItemProps {
+  setItems: React.Dispatch<
+    React.SetStateAction<
+      {
+        ItemCode: string;
+        ItemDescription: string;
+      }[]
+    >
+  >;
+}
+
+const SelectItem: React.FC<ISelectItemProps> = ({ setItems }) => {
   const [itemNumber, setItemNumber] = useState("");
   const [item, setItem] = useState("");
+  const [filteredItems, setFilteredItems] = useState<IItem[]>([]);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [openDropdown, setOpenDropdown] = useState(false);
+
+  const {
+    setValue,
+    formState: { errors },
+  } = useFormContext();
+
+  const items: IItem[] = JSON.parse(localStorage.getItem("@items") || "[]");
 
   const handleItemNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -29,7 +45,7 @@ function Item({
     setFilteredItems(filtered);
   };
 
-  const filterItems = (inputValue: string) => {
+  const filterItems = (inputValue: string): IItem[] => {
     return items.filter(
       (item: IItem) =>
         item.ItemCode?.toLowerCase().includes(inputValue.toLowerCase()) ||
@@ -39,12 +55,37 @@ function Item({
   };
 
   const handleItemClick = (selectedItem: IItem) => {
-    setValue("ItemDescription", selectedItem.ItemName);
+    const newItem = {
+      ItemCode: selectedItem.ItemCode,
+      ItemDescription: selectedItem.ItemName,
+    };
+
     setValue("ItemCode", selectedItem.ItemCode);
-    setItem(selectedItem.ItemName);
+    setValue("ItemDescription", selectedItem.ItemName);
+
+    setItems((prevItems: { ItemCode: string; ItemDescription: string }[]) => [
+      ...prevItems,
+      newItem,
+    ]);
     setItemNumber(selectedItem.ItemCode);
+    setItem(selectedItem.ItemName);
     setFilteredItems([]);
   };
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setOpenDropdown(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <StyledItemContainer>
@@ -56,7 +97,6 @@ function Item({
           onChange={handleItemNumberChange}
           type="text"
         />
-        {errors.ItemCode ? <span>{errors.ItemCode.message}</span> : null}
       </StyledErrorContainer>
       <StyledErrorContainer>
         <Input
@@ -67,12 +107,9 @@ function Item({
           type="text"
           id="itemDescription"
         />
-        {errors.ItemDescription ? (
-          <span>{errors.ItemDescription.message}</span>
-        ) : null}
       </StyledErrorContainer>
       {filteredItems.length > 0 && (
-        <StyledDropdown>
+        <StyledDropdown ref={dropdownRef}>
           <ul>
             {filteredItems.map((filteredItem) => (
               <li
@@ -87,6 +124,6 @@ function Item({
       )}
     </StyledItemContainer>
   );
-}
+};
 
-export default Item;
+export default SelectItem;
