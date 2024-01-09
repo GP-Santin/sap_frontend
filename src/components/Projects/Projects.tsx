@@ -1,20 +1,12 @@
-import { StyledErrorContainer } from "../../pages/Dashboard/pages/PurchaseRequests/components/FormRequest/style";
 import { Input } from "../Input/Input";
-import { FieldErrors, UseFormSetValue, useForm } from "react-hook-form";
-import { IPurchaseRequest } from "../../pages/Dashboard/pages/PurchaseRequests/components/FormRequest/schema";
+import { UseFormReturn, useForm } from "react-hook-form";
 import { StyledDropdown } from "../SelectItem/styles";
-import { useEffect, useRef, useState } from "react";
-import { IProject } from "./@types";
+import { useRef, useState } from "react";
+import { IProject, IProjectProps } from "./@types";
+import { StyledErrorContainer } from "../../pages/Dashboard/pages/PurchaseRequests/components/Form/styles";
 
-export interface IProjectsProps {
-  errors: FieldErrors<IPurchaseRequest>;
-  project: string;
-  setProject: React.Dispatch<React.SetStateAction<string>>;
-  setValue: UseFormSetValue<IPurchaseRequest>;
-}
-
-function Projects({ errors, project, setProject, setValue }: IProjectsProps) {
-  const { getValues } = useForm();
+function Projects({ setProject, project }: IProjectProps) {
+  const { getValues }: UseFormReturn = useForm();
   const ref = useRef<HTMLDivElement>(null);
   const [openDropdown, setOpenDropdown] = useState(false);
   const projectsList = JSON.parse(localStorage.getItem("@projects") || "[]");
@@ -23,27 +15,11 @@ function Projects({ errors, project, setProject, setValue }: IProjectsProps) {
     setOpenDropdown(!openDropdown);
   };
 
-  const handleProjectClick = (selectedProjectCode: string, index: number) => {
+  const handleProjectClick = (selectedProjectCode: string) => {
     setProject(selectedProjectCode);
-    const updatedDocumentLines = [...getValues("DocumentLines")];
-    updatedDocumentLines[index] = {
-      ...updatedDocumentLines[index],
-      ProjectCode: selectedProjectCode,
-    };
-    setValue("DocumentLines", updatedDocumentLines);
-  };
 
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        setOpenDropdown(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  });
+    setOpenDropdown(false);
+  };
 
   return (
     <StyledErrorContainer>
@@ -54,17 +30,11 @@ function Projects({ errors, project, setProject, setValue }: IProjectsProps) {
         value={project}
         style={{ cursor: "pointer" }}
       />
-      {errors.DocumentLines && errors.DocumentLines![0]?.ProjectCode ? (
-        <span>{errors.DocumentLines![0]?.ProjectCode.message}</span>
-      ) : null}
       {openDropdown && (
         <StyledDropdown ref={ref} style={{ width: "30rem" }}>
           <ul>
             {projectsList.map((project: IProject, index: number) => (
-              <li
-                key={index}
-                onClick={() => handleProjectClick(project.Code, index)}
-              >
+              <li key={index} onClick={() => handleProjectClick(project.Code)}>
                 {project.Code} | {project.Name}
               </li>
             ))}
