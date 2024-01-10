@@ -1,6 +1,6 @@
 import { Input } from "../Input/Input";
 import { UseFormReturn, useForm } from "react-hook-form";
-import { StyledDropdown } from "../SelectItem/styles";
+import { StyledDropdown } from "../SelectItems/styles";
 import { useRef, useState } from "react";
 import { IProject, IProjectProps } from "./@types";
 import { StyledErrorContainer } from "../../pages/Dashboard/pages/PurchaseRequests/components/Form/styles";

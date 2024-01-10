@@ -2,7 +2,7 @@ import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import DatePickerComponent from "../../../../../../components/DatePicker/DatePicker";
 import { useContext, useEffect, useState } from "react";
 import { IItemRequest, IPurchaseRequest } from "./@types";
-import SelectItems from "../../../../../../components/SelectItem/SelectItems";
+import SelectItems from "../../../../../../components/SelectItems/SelectItems";
 import {
   StyledContainerFields,
   StyledForm,
@@ -21,7 +21,7 @@ import { FaPlus, FaMinus } from "react-icons/fa";
 function Form() {
   const methods = useForm<IPurchaseRequest>();
 
-  const [items, setItems] = useState<IItemRequest[]>([]);
+  const [, setItems] = useState<IItemRequest[]>([]);
   const [listItems, setListItems] = useState<IItemRequest[]>([]);
   const [project, setProject] = useState<string>("");
   const [management, setManagement] = useState<string>("");
@@ -29,7 +29,6 @@ function Form() {
   const [maintence, setMaintence] = useState<string>("");
   const [comments, setComments] = useState<string>("");
   const { createPurchaseRequest } = useContext(UserContext);
-  const savedItems = JSON.parse(localStorage.getItem("@savedItems") || "[]");
 
   const onSubmit: SubmitHandler<IPurchaseRequest> = (formData) => {
     const baseRequest: IPurchaseRequest = {
@@ -123,7 +122,7 @@ function Form() {
                 </tr>
               </thead>
               <tbody>
-                {listItems.map((item, index) => (
+                {listItems.map((item: IItemRequest, index: number) => (
                   <tr key={index}>
                     <td>{item.ItemCode}</td>
                     <td>{item.ItemDescription}</td>

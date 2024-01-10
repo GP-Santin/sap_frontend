@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Input } from "../Input/Input";
-import { StyledDropdown } from "../SelectItem/styles";
+import { StyledDropdown } from "../SelectItems/styles";
 import { IManagement, IManagementProps } from "./@types";
 import { StyledErrorContainer } from "../../pages/Dashboard/pages/PurchaseRequests/components/Form/styles";
 
