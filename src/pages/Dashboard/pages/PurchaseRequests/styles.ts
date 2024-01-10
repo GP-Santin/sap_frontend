@@ -16,5 +16,5 @@ export const ContentContainer = styled.div`
   height: calc(100vh - 3em);
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 2rem 2rem;
+  padding: 2rem 5rem;
 `;

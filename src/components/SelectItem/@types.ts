@@ -6,4 +6,6 @@ export interface ISelectItemProps {
   listItems: any[];
   setProject: React.Dispatch<React.SetStateAction<string>>;
   project: string;
+  management: string;
+  setManagement: React.Dispatch<React.SetStateAction<string>>;
 }

@@ -1,4 +1,4 @@
-import { IPurchaseRequest } from "../../pages/Dashboard/pages/PurchaseRequests/components/FormRequest/schema";
+import { IPurchaseRequest } from "../../pages/Dashboard/pages/PurchaseRequests/components/Form/@types";
 
 export interface IUserProviderProps {
   children: React.ReactNode;

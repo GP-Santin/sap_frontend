@@ -1,28 +1,43 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 import { IUserContext, IUserProviderProps } from "./@types";
-import { IPurchaseRequest } from "../../pages/Dashboard/pages/PurchaseRequests/components/FormRequest/schema";
 import { AxiosError } from "axios";
-import { apiSAP } from "../../services/api";
 import { toast } from "react-toastify";
+import { IPurchaseRequest } from "../../pages/Dashboard/pages/PurchaseRequests/components/Form/@types";
+import ModalComponent from "../../components/Modal/Modal";
+import apiSAP from "../../middleware/handleRequest.middleware";
 
 export const UserContext = createContext({} as IUserContext);
 
 export const UserProvider = ({ children }: IUserProviderProps) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState("");
+
   const createPurchaseRequest = async (formData: IPurchaseRequest) => {
     try {
       const { data } = await apiSAP.post("/PurchaseRequests", formData);
-
-      toast.success(
-        `Solicitação criada com sucesso!, Nº da solicitação: ${data.DocEntry}`
+      localStorage.setItem("@savedItems", JSON.stringify([]));
+      setModalContent(
+        `Solicitação criada com sucesso!, Nº da solicitação: ${data.DocNum}`
       );
+      setIsModalOpen(true);
+      toast.success(modalContent);
     } catch (error: AxiosError | any) {
-      toast.error(error.response.data.message);
+      console.error(error);
     }
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
     <UserContext.Provider value={{ createPurchaseRequest }}>
       {children}
+      <ModalComponent
+        isOpen={isModalOpen}
+        closeModal={closeModal}
+        content={modalContent}
+      />
     </UserContext.Provider>
   );
 };

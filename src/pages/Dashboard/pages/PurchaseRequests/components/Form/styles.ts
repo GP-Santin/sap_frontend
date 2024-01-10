@@ -1,8 +1,11 @@
 import styled from "styled-components";
+import { IconType } from "react-icons";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 1rem;
   height: 100%;
   width: 100%;
@@ -24,18 +27,30 @@ export const StyledTableContainer = styled.div`
 `;
 
 export const StyledTable = styled.table`
-  width: 80%;
+  width: 100%;
   border-collapse: collapse;
+  overflow: hidden;
 
-  tr {
-    text-align: start;
-    border: 1px solid var(--color-primary);
-    border-bottom: 1px solid var(--primary-color);
+  thead {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  th {
+    padding-right: 1.5rem;
+    padding: 0.5rem;
   }
 
   td {
-    border: 1px solid var(--color-primary);
     padding: 0.5rem;
+    text-align: center;
+  }
+
+  .quantity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
   }
 `;
 
@@ -54,5 +69,22 @@ export const StyledItemsContainer = styled.div`
   display: flex;
   gap: 1rem;
   flex-direction: column;
-  
+`;
+
+export const StyledRadioContainer = styled.div`
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+`;
+
+export const StyledTrashIcon = styled(FaRegTrashAlt)`
+  cursor: pointer;
+  color: ${(props) => props.theme.colors.text};
+  width: 20px;
+  height: 20px;
+
+  &:hover {
+    color: ${(props) => props.theme.colors.primary};
+    transition: all 0.25s;
+  }
 `;

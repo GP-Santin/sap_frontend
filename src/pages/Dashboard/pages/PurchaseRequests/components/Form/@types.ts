@@ -1,19 +1,19 @@
 export interface IItemRequest {
   ItemCode: string;
   ItemDescription: string;
-  Quantity: string
-  // U_SNT_Finalidade: string
-  // CostingCode2: string
+  Quantity: number;
+  CostingCode2: string;
   // CostingCode: string
-  ProjectCode: string
+  ProjectCode: string;
+  U_SNT_Finalidade: string;
 }
 
 export interface IPurchaseRequest {
   RequriedDate: string;
   DocumentLines: IItemRequest[];
-  // U_SNT_Suprimento: string
-  // U_SNT_SC_Manut: string
-  // Comments: string
+  U_SNT_Suprimento: string
+  U_SNT_SC_Manut: string
+  Comments: string
 }
 
 export interface IProjectManagement {

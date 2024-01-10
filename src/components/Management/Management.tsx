@@ -1,18 +1,10 @@
-import { FieldErrors, UseFormSetValue } from "react-hook-form";
-import { IPurchaseRequest } from "../../pages/Dashboard/pages/PurchaseRequests/components/FormRequest/schema";
 import { useEffect, useRef, useState } from "react";
-import { StyledErrorContainer } from "../../pages/Dashboard/pages/PurchaseRequests/components/FormRequest/style";
 import { Input } from "../Input/Input";
 import { StyledDropdown } from "../SelectItem/styles";
-import { IManagement } from "./@types";
+import { IManagement, IManagementProps } from "./@types";
+import { StyledErrorContainer } from "../../pages/Dashboard/pages/PurchaseRequests/components/Form/styles";
 
-export interface IManagementProps {
-  errors: FieldErrors<IPurchaseRequest>;
-  management: string;
-  setManagement: React.Dispatch<React.SetStateAction<string>>;
-  setValue: UseFormSetValue<IPurchaseRequest>;
-}
-function Management({ errors, management, setManagement }: IManagementProps) {
+function Management({ setManagement, management }: IManagementProps) {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [managementList, setManagementList] = useState(() => {
     const storedList = localStorage.getItem("@projectmanagements");
@@ -53,9 +45,7 @@ function Management({ errors, management, setManagement }: IManagementProps) {
         value={management}
         style={{ cursor: "pointer" }}
       />
-      {errors.DocumentLines && errors.DocumentLines![0]?.CostingCode2 ? (
-        <span>{errors.DocumentLines![0]?.CostingCode2.message}</span>
-      ) : null}
+
       {openDropdown && (
         <StyledDropdown ref={dropdownRef}>
           <ul>
