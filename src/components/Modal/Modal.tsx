@@ -14,7 +14,10 @@ const ModalComponent: React.FC<ModalProps> = ({
 }) => {
   return (
     <StyledModal isOpen={isOpen} onRequestClose={closeModal}>
-      <div>{content}</div>
+      <div>
+        <h3>Solicitação realizada com sucesso !</h3>
+        {content}
+      </div>
     </StyledModal>
   );
 };

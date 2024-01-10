@@ -9,6 +9,9 @@ import { UserProvider } from "./providers/UserContext/UserContext";
 import { darkTheme } from "./styles/themes/dark";
 import { lightTheme } from "./styles/themes/light";
 import "react-toastify/dist/ReactToastify.css";
+import Modal from "react-modal";
+
+Modal.setAppElement("#root");
 function App() {
   const [theme, setTheme] = useState(() => {
     const savedTheme = localStorage.getItem("theme");

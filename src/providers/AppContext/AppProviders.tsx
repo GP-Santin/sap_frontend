@@ -2,7 +2,6 @@ import { createContext, useEffect, useState } from "react";
 import { IAppContext, IAppProviderProps, ILoading } from "./@types";
 import { TLoginForm } from "../../pages/SAPLogin/components/LoginForm/schema";
 import { AxiosError } from "axios";
-import { apiSAP } from "../../services/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useMsal } from "@azure/msal-react";
@@ -13,6 +12,7 @@ import {
   fetchItems,
   fetchSalesPersons,
 } from "./fetchDatas";
+import apiSAP from "../../middleware/handleRequest.middleware";
 
 export const AppContext = createContext({} as IAppContext);
 

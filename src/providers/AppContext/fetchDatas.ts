@@ -1,4 +1,4 @@
-import { apiSAP } from "../../services/api";
+import apiSAP from "../../middleware/handleRequest.middleware";
 import { IItemsResponse, IBusinessResponse, ISalesPersonResponse } from "./@types";
 
 export const fetchItems = async (link: string): Promise<IItemsResponse> => {
