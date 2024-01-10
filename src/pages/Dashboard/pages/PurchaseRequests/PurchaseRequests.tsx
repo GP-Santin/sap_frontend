@@ -3,6 +3,7 @@ import Form from "./components/Form/Form";
 import { PurchaseContainer, ContentContainer } from "./styles";
 
 function PurchaseRequests() {
+
   return (
     <PurchaseContainer>
       <NavBar />

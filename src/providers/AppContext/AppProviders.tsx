@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { IAppContext, IAppProviderProps, ILoading } from "./@types";
 import { TLoginForm } from "../../pages/SAPLogin/components/LoginForm/schema";
 import { AxiosError } from "axios";
@@ -122,16 +122,6 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
     }
   };
 
-  const getActiveUserSAP = async (email: string) => {
-    try {
-      const response = await apiSAP.get(
-        `/EmployeesInfo?$filter= eMail eq '${email}'`
-      );
-    } catch (error) {
-      console.error("Erro ao consultar empregado:", error);
-    }
-  };
-
   const checkAndFetchData = async (
     key: string,
     fetchDataFunc: () => Promise<void>
@@ -157,17 +147,6 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
     }
   };
 
-  // const getDeposits = async () => {
-  //   try {
-  //     const response = await apiSAP.get(
-  //       `/Deposits?$select=DepositCode, DepositName&$filter=Active eq 'tYES'`
-  //     );
-  //     const deposits = response.data.value;
-  //     localStorage.setItem("@deposits", JSON.stringify(deposits));
-  //   } catch (error: AxiosError | any) {
-  //     console.error(error);
-  //   }
-  // };
 
   const appLogin = async (formData: TLoginForm) => {
     try {
@@ -214,12 +193,6 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
           }
         );
 
-        // await toast.promise(checkAndFetchData("@deposits", getDeposits), {
-        //   pending: "Carregando depósitos...",
-        //   success: "Depósitos carregados com sucesso!",
-        //   error: "Erro ao carregar depósitos.",
-        // });
-
         await toast.promise(checkAndFetchData("@projects", getProjects), {
           pending: "Carregando projetos...",
           success: "Projetos carregados com sucesso!",
@@ -251,7 +224,6 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
         setUser,
         salesPerson,
         appLogin,
-        getActiveUserSAP,
       }}
     >
       {children}

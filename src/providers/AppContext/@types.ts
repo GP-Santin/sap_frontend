@@ -64,5 +64,4 @@ export interface IAppContext {
   items: IItem[];
   salesPerson: ISalesPerson;
   appLogin: (formData: TLoginForm) => Promise<void>;
-  getActiveUserSAP: (email: string) => Promise<void>;
 }

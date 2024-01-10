@@ -7,18 +7,26 @@ import {
   StyledContainerFields,
   StyledForm,
   StyledItemsContainer,
+  StyledMinus,
+  StyledPlus,
   StyledRadioContainer,
   StyledTable,
   StyledTrashIcon,
 } from "./styles";
 import { Button } from "../../../../../../components/Button/Button";
-import { UserContext } from "../../../../../../providers/UserContext/UserContext";
 import RadioSupplier from "../../../../../../components/RadioSupplier/RadioSupplier";
 import RadioMan from "../../../../../../components/RadioMan/RadioMan";
 import { Input } from "../../../../../../components/Input/Input";
-import { FaPlus, FaMinus } from "react-icons/fa";
+import { UserContext } from "../../../../../../providers/UserContext/UserContext";
 
 function Form() {
+  const owner = localStorage.getItem("@owner");
+  const { getActiveUserSAP } = useContext(UserContext);
+  const userConnected = "filipe.parisi@gruposantin.com.br";
+
+  useEffect(() => {
+    getActiveUserSAP(userConnected);
+  }, []);
   const methods = useForm<IPurchaseRequest>();
 
   const [, setItems] = useState<IItemRequest[]>([]);
@@ -37,6 +45,7 @@ function Form() {
       U_SNT_SC_Manut: maintence,
       Comments: comments,
       DocumentLines: [],
+      DocumentsOwner: Number(owner),
     };
 
     if (listItems.length > 0) {
@@ -44,8 +53,6 @@ function Form() {
         ...baseRequest,
         DocumentLines: listItems,
       };
-
-      console.log(requestWithItems);
       createPurchaseRequest(requestWithItems);
     } else {
       console.log(baseRequest);
@@ -83,9 +90,13 @@ function Form() {
     }
   }, []);
 
+  const onSubmitError = (errors: any) => {
+    console.error(errors);
+  };
+
   return (
     <FormProvider {...methods}>
-      <StyledForm onSubmit={methods.handleSubmit(onSubmit)}>
+      <StyledForm onSubmit={methods.handleSubmit(onSubmit, onSubmitError)}>
         <StyledContainerFields>
           <DatePickerComponent />
           <SelectItems
@@ -127,9 +138,13 @@ function Form() {
                     <td>{item.ItemCode}</td>
                     <td>{item.ItemDescription}</td>
                     <td className="quantity">
-                      <FaPlus onClick={() => handleIncreaseQuantity(index)} />
+                      <StyledPlus
+                        onClick={() => handleIncreaseQuantity(index)}
+                      />
                       {item.Quantity}
-                      <FaMinus onClick={() => handleDecreaseQuantity(index)} />
+                      <StyledMinus
+                        onClick={() => handleDecreaseQuantity(index)}
+                      />
                     </td>
                     <td>{item.ProjectCode}</td>
                     <td>{item.CostingCode2}</td>

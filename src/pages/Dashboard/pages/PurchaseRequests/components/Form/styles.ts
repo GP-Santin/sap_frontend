@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { IconType } from "react-icons";
-import { FaRegTrashAlt } from "react-icons/fa";
+import { FaMinus, FaPlus, FaRegTrashAlt } from "react-icons/fa";
 
 export const StyledForm = styled.form`
   display: flex;
@@ -82,6 +82,24 @@ export const StyledTrashIcon = styled(FaRegTrashAlt)`
   color: ${(props) => props.theme.colors.text};
   width: 20px;
   height: 20px;
+
+  &:hover {
+    color: ${(props) => props.theme.colors.primary};
+    transition: all 0.25s;
+  }
+`;
+
+export const StyledMinus: IconType = styled(FaMinus)`
+  cursor: pointer;
+
+  &:hover {
+    color: ${(props) => props.theme.colors.primary};
+    transition: all 0.25s;
+  }
+`;
+
+export const StyledPlus: IconType = styled(FaPlus)`
+  cursor: pointer;
 
   &:hover {
     color: ${(props) => props.theme.colors.primary};

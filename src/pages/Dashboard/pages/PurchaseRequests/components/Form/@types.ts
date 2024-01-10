@@ -11,9 +11,10 @@ export interface IItemRequest {
 export interface IPurchaseRequest {
   RequriedDate: string;
   DocumentLines: IItemRequest[];
-  U_SNT_Suprimento: string
-  U_SNT_SC_Manut: string
-  Comments: string
+  U_SNT_Suprimento: string;
+  U_SNT_SC_Manut: string;
+  Comments: string;
+  DocumentsOwner: number;
 }
 
 export interface IProjectManagement {

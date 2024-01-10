@@ -5,4 +5,5 @@ export interface IUserProviderProps {
 }
 export interface IUserContext {
   createPurchaseRequest: (formData: IPurchaseRequest) => void;
+  getActiveUserSAP: (email: string) => Promise<void>;
 }

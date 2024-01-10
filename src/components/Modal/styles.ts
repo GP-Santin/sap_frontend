@@ -19,34 +19,21 @@ export const StyledModal = styled(Modal)`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 2rem;
 
+  div {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 5rem;
+  }
+
   div.modal-content {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 5rem;
 
     h3 {
       font-size: 1.5rem;
       margin-bottom: 0.5rem;
-    }
-
-    p {
-      font-size: 1rem;
-      line-height: 1.5;
-      text-align: center;
-    }
-
-    button {
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      border: none;
-      background-color: ${(props) => props.theme.colors.primary};
-      color: ${(props) => props.theme.colors.text};
-      cursor: pointer;
-      transition: background-color 0.3s;
-
-      &:hover {
-        background-color: ${(props) => props.theme.colors.background};
-      }
     }
   }
 `;
