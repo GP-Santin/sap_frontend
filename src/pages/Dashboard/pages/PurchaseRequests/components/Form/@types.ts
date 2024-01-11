@@ -3,9 +3,19 @@ export interface IItemRequest {
   ItemDescription: string;
   Quantity: number;
   CostingCode2: string;
-  // CostingCode: string
   ProjectCode: string;
   U_SNT_Finalidade: string;
+}
+
+export interface IItemOrder {
+  ItemCode: string;
+  ItemDescription: string;
+  Quantity: number;
+  ProjectCode: string;
+  CostingCode2: string;
+  U_SNT_Finalidade: string;
+  UnitPrice: number;
+  LineTotal: number;
 }
 
 export interface IPurchaseRequest {

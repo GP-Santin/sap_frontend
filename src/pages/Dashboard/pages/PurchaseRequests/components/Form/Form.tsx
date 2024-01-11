@@ -7,28 +7,21 @@ import {
   StyledContainerFields,
   StyledForm,
   StyledItemsContainer,
-  StyledMinus,
-  StyledPlus,
   StyledRadioContainer,
-  StyledTable,
-  StyledTrashIcon,
+  StyledTextArea,
 } from "./styles";
 import { Button } from "../../../../../../components/Button/Button";
 import RadioSupplier from "../../../../../../components/RadioSupplier/RadioSupplier";
 import RadioMan from "../../../../../../components/RadioMan/RadioMan";
-import { Input } from "../../../../../../components/Input/Input";
 import { UserContext } from "../../../../../../providers/UserContext/UserContext";
+import Table from "./Table";
 
 function Form() {
   const owner = localStorage.getItem("@owner");
   const { getActiveUserSAP } = useContext(UserContext);
   const userConnected = "filipe.parisi@gruposantin.com.br";
 
-  useEffect(() => {
-    getActiveUserSAP(userConnected);
-  }, []);
   const methods = useForm<IPurchaseRequest>();
-
   const [, setItems] = useState<IItemRequest[]>([]);
   const [listItems, setListItems] = useState<IItemRequest[]>([]);
   const [project, setProject] = useState<string>("");
@@ -55,31 +48,7 @@ function Form() {
       };
       createPurchaseRequest(requestWithItems);
     } else {
-      console.log(baseRequest);
       createPurchaseRequest(baseRequest);
-    }
-  };
-
-  const handleDeleteItem = (index: number) => {
-    const updatedItems = [...listItems];
-    updatedItems.splice(index, 1);
-    setListItems(updatedItems);
-    localStorage.setItem("@savedItems", JSON.stringify(updatedItems));
-  };
-
-  const handleIncreaseQuantity = (index: number) => {
-    const updatedItems = [...listItems];
-    updatedItems[index].Quantity += 1;
-    setListItems(updatedItems);
-    localStorage.setItem("@savedItems", JSON.stringify(updatedItems));
-  };
-
-  const handleDecreaseQuantity = (index: number) => {
-    const updatedItems = [...listItems];
-    if (updatedItems[index].Quantity > 0) {
-      updatedItems[index].Quantity -= 1;
-      setListItems(updatedItems);
-      localStorage.setItem("@savedItems", JSON.stringify(updatedItems));
     }
   };
 
@@ -88,6 +57,7 @@ function Form() {
     if (savedItems) {
       setListItems(savedItems);
     }
+    getActiveUserSAP(userConnected);
   }, []);
 
   const onSubmitError = (errors: any) => {
@@ -112,53 +82,18 @@ function Form() {
             <RadioSupplier setSupplier={setSupplier} />
             <RadioMan setMaintence={setMaintence} />
           </StyledRadioContainer>
-          <Input
-            $widthsize="large3"
-            label="Observação"
-            onChange={(e) => setComments(e.target.value)}
-            style={{ height: "10rem" }}
-          />
         </StyledContainerFields>
         {listItems.length > 0 && (
           <StyledItemsContainer>
             <h3>Itens</h3>
-            <StyledTable>
-              <thead>
-                <tr>
-                  <th>Código do item</th>
-                  <th>Descrição</th>
-                  <th>Quantidade</th>
-                  <th>Projeto</th>
-                  <th>Gerencial</th>
-                </tr>
-              </thead>
-              <tbody>
-                {listItems.map((item: IItemRequest, index: number) => (
-                  <tr key={index}>
-                    <td>{item.ItemCode}</td>
-                    <td>{item.ItemDescription}</td>
-                    <td className="quantity">
-                      <StyledPlus
-                        onClick={() => handleIncreaseQuantity(index)}
-                      />
-                      {item.Quantity}
-                      <StyledMinus
-                        onClick={() => handleDecreaseQuantity(index)}
-                      />
-                    </td>
-                    <td>{item.ProjectCode}</td>
-                    <td>{item.CostingCode2}</td>
-                    <td>
-                      <StyledTrashIcon
-                        onClick={() => handleDeleteItem(index)}
-                      />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </StyledTable>
+            <Table setListItems={setListItems} listItems={listItems} />
           </StyledItemsContainer>
         )}
+        <label>Observações</label>
+        <StyledTextArea
+          maxLength={1500}
+          onChange={(e) => setComments(e.target.value)}
+        />
         <Button
           type="submit"
           name="Solicitar"

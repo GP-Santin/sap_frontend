@@ -7,6 +7,7 @@ export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   $widthsize: widthsizeType;
   label?: string;
   error?: FieldError;
+  span?: string;
 }
 
 export const InputStyled = styled.input<IInputProps>`
@@ -78,8 +79,17 @@ export const ContainerInputSyled = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  position: relative;
 
   label {
     width: auto;
   }
+
+  span {
+    position: absolute;
+    top: 55%;
+    padding-left: 0.5rem;
+  }
 `;
+
+export const StyledCurrency = styled.span``;
