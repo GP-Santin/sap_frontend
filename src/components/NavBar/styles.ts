@@ -36,6 +36,7 @@ export const StyledMenu = styled.div`
   width: 30%;
   z-index: 1000;
   margin-top: 2.5rem;
+  height: 100vh;
 
   @media screen and (max-width: 768px) {
     width: 100%;
@@ -66,10 +67,8 @@ export const StyledListTitle = styled.div`
     transition: all 0.25s;
   }
 
-  @media screen  {
-    
+  @media screen {
   }
-  
 `;
 
 export const Icon = styled.img`

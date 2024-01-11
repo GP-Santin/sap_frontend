@@ -1,8 +1,16 @@
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import DatePickerComponent from "../../../../../../components/DatePicker/DatePicker";
 import { useContext, useEffect, useState } from "react";
-import { IItemRequest, IPurchaseRequest } from "./@types";
 import SelectItems from "../../../../../../components/SelectItems/SelectItems";
+import { Button } from "../../../../../../components/Button/Button";
+import RadioSupplier from "../../../../../../components/RadioSupplier/RadioSupplier";
+import RadioMan from "../../../../../../components/RadioMan/RadioMan";
+import { Input } from "../../../../../../components/Input/Input";
+import { UserContext } from "../../../../../../providers/UserContext/UserContext";
+import {
+  IItemRequest,
+  IPurchaseRequest,
+} from "../../../PurchaseRequests/components/Form/@types";
 import {
   StyledContainerFields,
   StyledForm,
@@ -12,12 +20,7 @@ import {
   StyledRadioContainer,
   StyledTable,
   StyledTrashIcon,
-} from "./styles";
-import { Button } from "../../../../../../components/Button/Button";
-import RadioSupplier from "../../../../../../components/RadioSupplier/RadioSupplier";
-import RadioMan from "../../../../../../components/RadioMan/RadioMan";
-import { Input } from "../../../../../../components/Input/Input";
-import { UserContext } from "../../../../../../providers/UserContext/UserContext";
+} from "../../../PurchaseRequests/components/Form/styles";
 
 function Form() {
   const owner = localStorage.getItem("@owner");
@@ -36,7 +39,6 @@ function Form() {
   const [supplier, setSupplier] = useState<string>("");
   const [maintence, setMaintence] = useState<string>("");
   const [comments, setComments] = useState<string>("");
-  const { createPurchaseRequest } = useContext(UserContext);
 
   const onSubmit: SubmitHandler<IPurchaseRequest> = (formData) => {
     const baseRequest: IPurchaseRequest = {
@@ -53,10 +55,9 @@ function Form() {
         ...baseRequest,
         DocumentLines: listItems,
       };
-      createPurchaseRequest(requestWithItems);
+      // (requestWithItems);
     } else {
-      console.log(baseRequest);
-      createPurchaseRequest(baseRequest);
+      // createPurchaseRequest(baseRequest);
     }
   };
 
@@ -159,11 +160,13 @@ function Form() {
             </StyledTable>
           </StyledItemsContainer>
         )}
+
         <Button
           type="submit"
           name="Solicitar"
           widthsize="med2"
           color="outline-black"
+          style={{ marginTop: "5rem" }}
         />
       </StyledForm>
     </FormProvider>

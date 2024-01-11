@@ -1,9 +1,9 @@
 import styled from "styled-components";
+import { Input } from "../../components/Input/Input";
 
 export const StyledItemContainer = styled.div`
   display: flex;
   flex-direction: column;
-  position: relative;
   gap: 1rem;
   flex-wrap: wrap;
 
@@ -18,29 +18,38 @@ export const StyledLineItems = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+  position: relative;
 `;
 
 export const StyledDropdown = styled.div`
-  width: 100%;
+  width: 40%;
   height: 10rem;
   overflow-y: scroll;
   cursor: pointer;
   position: absolute;
-  background-color: ${(props) => props.theme.colors.background};
+  background-color: ${(props) => props.theme.colors.buttonBackground};
   color: ${(props) => props.theme.colors.text};
-  top: 100%;
   z-index: 999;
+  top: 100%;
+  padding: 0.25rem;
+  overflow-x: hidden;
+  border-bottom-left-radius: 8px;
 
   &::-webkit-scrollbar {
     width: 5px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: ${(props) => props.theme.colors.text};
+    background-color: ${(props) => props.theme.colors.primary};
   }
 
   &::-webkit-scrollbar-track {
     background: transparent;
+  }
+
+  @media (max-width: 1300px) {
+    width: 50vw;
+    top: 14%;
   }
 `;
 

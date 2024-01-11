@@ -7,9 +7,7 @@ import {
   StyledItemContainer,
   StyledLineItems,
 } from "./styles";
-import { useFormContext } from "react-hook-form";
 import { ISelectItemProps } from "./@types";
-import { StyledErrorContainer } from "../../pages/Dashboard/pages/PurchaseRequests/components/Form/styles";
 import Projects from "../Projects/Projects";
 import Management from "../Management/Management";
 import { useOutsideClick } from "../../hooks/outsideClick";
@@ -29,10 +27,6 @@ const SelectItems: React.FC<ISelectItemProps> = ({
   const [filteredItems, setFilteredItems] = useState<IItem[]>([]);
   const [openDropdown, setOpenDropdown] = useState(false);
   const [managementCode, setmanagementCode] = useState<string>("");
-
-  const {
-    formState: { errors },
-  } = useFormContext();
 
   const items: IItem[] = JSON.parse(localStorage.getItem("@items") || "[]");
 
@@ -118,37 +112,27 @@ const SelectItems: React.FC<ISelectItemProps> = ({
   return (
     <StyledItemContainer>
       <StyledLineItems>
-        <StyledErrorContainer>
-          <Input
-            $widthsize="med2"
-            label="Nº do item"
-            value={itemCode}
-            onChange={handleItemCodeChange}
-            type="text"
-          />
-          {errors && errors.DocumentLines?.message && (
-            <span>{String(errors.DocumentLines.message)}</span>
-          )}
-        </StyledErrorContainer>
-        <StyledErrorContainer>
-          <Input
-            $widthsize="large3"
-            label="Item"
-            defaultValue={itemDescription}
-            onChange={handleItemChange}
-            type="text"
-            id="itemDescription"
-          />
-        </StyledErrorContainer>
-        <StyledErrorContainer>
-          <Input
-            $widthsize="med2"
-            label="Quantidade"
-            defaultValue={quantity}
-            onChange={handleQuantityChange}
-            type="text"
-          />
-        </StyledErrorContainer>
+        <Input
+          $widthsize="large3"
+          label="Nº do item"
+          value={itemCode}
+          onChange={handleItemCodeChange}
+        />
+        <Input
+          $widthsize="large3"
+          label="Item"
+          defaultValue={itemDescription}
+          onChange={handleItemChange}
+          type="text"
+          id="itemDescription"
+        />
+        <Input
+          $widthsize="small2"
+          label="Quantidade"
+          defaultValue={quantity}
+          onChange={handleQuantityChange}
+          type="text"
+        />
         {filteredItems.length > 0 && openDropdown && (
           <StyledDropdown ref={dropdownRef}>
             <ul>

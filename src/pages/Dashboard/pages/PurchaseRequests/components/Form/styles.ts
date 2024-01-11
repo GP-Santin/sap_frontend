@@ -7,7 +7,6 @@ export const StyledForm = styled.form`
   flex-direction: column;
   justify-content: space-between;
   gap: 1rem;
-  height: 100%;
   width: 100%;
 
   button {

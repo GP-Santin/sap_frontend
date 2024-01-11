@@ -1,9 +1,8 @@
 import { Input } from "../Input/Input";
-import { StyledDropdown } from "../SelectItems/styles";
 import { useEffect, useState } from "react";
 import { IProject, IProjectProps } from "./@types";
-import { StyledErrorContainer } from "../../pages/Dashboard/pages/PurchaseRequests/components/Form/styles";
 import { useOutsideClick } from "../../hooks/outsideClick";
+import { StyledProjectDropdown, StyledProjectsContainer } from "./styles";
 
 function Projects({ setProject, project, managementCode }: IProjectProps) {
   const [openDropdown, setOpenDropdown] = useState(false);
@@ -24,27 +23,26 @@ function Projects({ setProject, project, managementCode }: IProjectProps) {
   };
   const dropdownRef = useOutsideClick({ callback: closeDropdown });
 
-const filterProjects = () => {
-  const projectsList = JSON.parse(localStorage.getItem("@projects") || "[]");
+  const filterProjects = () => {
+    const projectsList = JSON.parse(localStorage.getItem("@projects") || "[]");
 
+    const filteredProjects = projectsList.filter((project: IProject) => {
+      const projectManagementCodePrefix = project.Code.substring(0, 2);
+      return (
+        projectManagementCodePrefix === managementCode ||
+        projectManagementCodePrefix === "99"
+      );
+    });
 
-  const filteredProjects = projectsList.filter((project: IProject) => {
-    const projectManagementCodePrefix = project.Code.substring(0, 2);
-    return (
-      projectManagementCodePrefix === managementCode ||
-      projectManagementCodePrefix === "99"
-    );
-  });
+    setFilteredProjects(filteredProjects);
+  };
 
-  setFilteredProjects(filteredProjects);
-};
-
-useEffect(() => {
-  filterProjects();
-}, [managementCode]);
+  useEffect(() => {
+    filterProjects();
+  }, [managementCode]);
 
   return (
-    <StyledErrorContainer>
+    <StyledProjectsContainer>
       <Input
         label="Projeto"
         $widthsize="small2"
@@ -53,7 +51,7 @@ useEffect(() => {
         style={{ cursor: "pointer" }}
       />
       {openDropdown && (
-        <StyledDropdown ref={dropdownRef} style={{ width: "30rem" }}>
+        <StyledProjectDropdown ref={dropdownRef}>
           <ul>
             {filteredProjects.map((project: IProject, index: number) => (
               <li key={index} onClick={() => handleProjectClick(project.Code)}>
@@ -61,9 +59,9 @@ useEffect(() => {
               </li>
             ))}
           </ul>
-        </StyledDropdown>
+        </StyledProjectDropdown>
       )}
-    </StyledErrorContainer>
+    </StyledProjectsContainer>
   );
 }
 

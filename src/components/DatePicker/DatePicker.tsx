@@ -28,7 +28,9 @@ function DatePickerComponent() {
         onChange={handleDateChange}
         dateFormat="dd/MM/yyyy"
         locale={ptBr}
-        customInput={<Input $widthsize="med2" />}
+        customInput={
+          <Input $widthsize="large3" style={{ maxWidth: "12rem" }} />
+        }
       />
       {errors && errors.RequriedDate && (
         <span>{String(errors.RequriedDate.message)}</span>

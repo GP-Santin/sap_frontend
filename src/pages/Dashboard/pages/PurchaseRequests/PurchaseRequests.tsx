@@ -8,7 +8,7 @@ function PurchaseRequests() {
     <PurchaseContainer>
       <NavBar />
       <ContentContainer>
-        <h2>Solicitação de Compra</h2>
+        <h2>Solicitação de Compras</h2>
         <Form />
       </ContentContainer>
     </PurchaseContainer>

@@ -83,7 +83,7 @@ function NavBar({ toggleTheme, theme }: any) {
                   </a>
                 </li>
                 <li>
-                  <a href="#">Regularização</a>
+                  <a href="/dashboard/regularization">Regularização</a>
                 </li>
               </ul>
             )}

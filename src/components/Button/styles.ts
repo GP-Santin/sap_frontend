@@ -96,5 +96,5 @@ export const StyledButton = styled.button<IButtonStylesProps>`
   &:hover {
     background-color: var(--color-primary);
     transition: 0.15s;
-  }
+  }  
 `;

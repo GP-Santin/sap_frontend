@@ -64,6 +64,7 @@ export const InputStyled = styled.input<IInputProps>`
         return css`
           width: 100%;
           max-width: 1024px;
+          height: 3rem;
         `;
       default:
         return css`

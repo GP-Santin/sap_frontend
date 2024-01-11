@@ -29,7 +29,15 @@ function RadioSupplier({ setSupplier }: IRadioSupplierProps) {
         name="radio-buttons-group"
         onChange={handleChange}
       >
-        <FormLabel id="demo-radio-buttons-group-label" sx={{ color: "white" }}>
+        <FormLabel
+          id="demo-radio-buttons-group-label"
+          sx={{
+            color: "white",
+            "&, &.Mui-focused": {
+              color: "white",
+            },
+          }}
+        >
           Suprimento
         </FormLabel>
         <div>
