@@ -10,6 +10,7 @@ import { darkTheme } from "./styles/themes/dark";
 import { lightTheme } from "./styles/themes/light";
 import "react-toastify/dist/ReactToastify.css";
 import Modal from "react-modal";
+import SessionTimer from "./sessionManagement/SessionTimer";
 
 Modal.setAppElement("#root");
 function App() {
@@ -48,6 +49,7 @@ function App() {
         pauseOnHover
         theme="colored"
       />
+      <SessionTimer />
     </ThemeProvider>
   );
 }

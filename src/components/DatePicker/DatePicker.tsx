@@ -22,13 +22,13 @@ function DatePickerComponent() {
 
   return (
     <StyledErrorContainer>
-      <p>Data necessária</p>
+      <p>Data da necessidade</p>
       <StyledDatePicker
         selected={startDate}
         onChange={handleDateChange}
         dateFormat="dd/MM/yyyy"
         locale={ptBr}
-        customInput={<Input widthsize="med2" />}
+        customInput={<Input $widthsize="med2" />}
       />
       {errors && errors.RequriedDate && (
         <span>{String(errors.RequriedDate.message)}</span>

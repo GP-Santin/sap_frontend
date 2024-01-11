@@ -7,4 +7,5 @@ export interface IProject {
 export interface IProjectProps {
   setProject: React.Dispatch<React.SetStateAction<string>>;
   project: string;
+  managementCode: string;
 }

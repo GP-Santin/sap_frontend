@@ -135,7 +135,7 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
   const getProjectManagements = async () => {
     try {
       const response = await apiSAP.get(
-        `/DistributionRules?$select= FactorCode, InWhichDimension, FactorDescription`
+        `ProfitCenters?$select= CenterCode, CenterName, U_SNT_IdGerencial&$filter= U_SNT_IdGerencial ne null`
       );
       const projectManagements = response.data.value;
       localStorage.setItem(
@@ -146,7 +146,6 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
       console.error(error);
     }
   };
-
 
   const appLogin = async (formData: TLoginForm) => {
     try {

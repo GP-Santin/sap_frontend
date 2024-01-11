@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Input } from "../Input/Input";
 import { IItem } from "../../providers/AppContext/@types";
 import {
@@ -12,6 +12,7 @@ import { ISelectItemProps } from "./@types";
 import { StyledErrorContainer } from "../../pages/Dashboard/pages/PurchaseRequests/components/Form/styles";
 import Projects from "../Projects/Projects";
 import Management from "../Management/Management";
+import { useOutsideClick } from "../../hooks/outsideClick";
 
 const SelectItems: React.FC<ISelectItemProps> = ({
   setItems,
@@ -26,7 +27,8 @@ const SelectItems: React.FC<ISelectItemProps> = ({
   const [itemDescription, setItemDescription] = useState("");
   const [quantity, setQuantity] = useState(0);
   const [filteredItems, setFilteredItems] = useState<IItem[]>([]);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [openDropdown, setOpenDropdown] = useState(false);
+  const [managementCode, setmanagementCode] = useState<string>("");
 
   const {
     formState: { errors },
@@ -37,13 +39,7 @@ const SelectItems: React.FC<ISelectItemProps> = ({
   const handleItemCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setItemCode(value);
-    const filtered = filterItems(value);
-    setFilteredItems(filtered);
-  };
-
-  const handleItemChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setItemDescription(value);
+    setOpenDropdown(true);
     const filtered = filterItems(value);
     setFilteredItems(filtered);
   };
@@ -55,6 +51,13 @@ const SelectItems: React.FC<ISelectItemProps> = ({
         (item.ItemName &&
           item.ItemName.toLowerCase().includes(inputValue.toLowerCase()))
     );
+  };
+  const handleItemChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setItemDescription(value);
+    setOpenDropdown(true);
+    const filtered = filterItems(value);
+    setFilteredItems(filtered);
   };
 
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -107,12 +110,17 @@ const SelectItems: React.FC<ISelectItemProps> = ({
     }
   };
 
+  const closeDropdown = () => {
+    setOpenDropdown(false);
+  };
+  const dropdownRef = useOutsideClick({ callback: closeDropdown });
+
   return (
     <StyledItemContainer>
       <StyledLineItems>
         <StyledErrorContainer>
           <Input
-            widthsize="med2"
+            $widthsize="med2"
             label="Nº do item"
             value={itemCode}
             onChange={handleItemCodeChange}
@@ -124,9 +132,9 @@ const SelectItems: React.FC<ISelectItemProps> = ({
         </StyledErrorContainer>
         <StyledErrorContainer>
           <Input
-            widthsize="large3"
+            $widthsize="large3"
             label="Item"
-            value={itemDescription}
+            defaultValue={itemDescription}
             onChange={handleItemChange}
             type="text"
             id="itemDescription"
@@ -134,14 +142,14 @@ const SelectItems: React.FC<ISelectItemProps> = ({
         </StyledErrorContainer>
         <StyledErrorContainer>
           <Input
-            widthsize="med2"
+            $widthsize="med2"
             label="Quantidade"
-            value={quantity}
+            defaultValue={quantity}
             onChange={handleQuantityChange}
             type="text"
           />
         </StyledErrorContainer>
-        {filteredItems.length > 0 && (
+        {filteredItems.length > 0 && openDropdown && (
           <StyledDropdown ref={dropdownRef}>
             <ul>
               {filteredItems.map((filteredItem) => (
@@ -155,8 +163,16 @@ const SelectItems: React.FC<ISelectItemProps> = ({
             </ul>
           </StyledDropdown>
         )}
-        <Projects setProject={setProject} project={project} />
-        <Management setManagement={setManagement} management={management} />
+        <Management
+          setManagement={setManagement}
+          management={management}
+          setmanagementCode={setmanagementCode}
+        />
+        <Projects
+          setProject={setProject}
+          project={project}
+          managementCode={managementCode}
+        />
         <StyledButton onClick={() => handleAddItemToList()}>
           Adicionar item
         </StyledButton>

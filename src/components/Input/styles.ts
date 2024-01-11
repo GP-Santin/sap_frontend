@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 import { widthsizeType } from "../Button/styles";
 
 export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
-  widthsize: widthsizeType;
+  $widthsize: widthsizeType;
   label?: string;
   error?: FieldError;
 }
@@ -26,8 +26,8 @@ export const InputStyled = styled.input<IInputProps>`
 
   color: ${(props) => props.theme.colors.text};
 
-  ${({ widthsize }) => {
-    switch (widthsize) {
+  ${({ $widthsize }) => {
+    switch ($widthsize) {
       case "small":
         return css`
           width: 5.3125rem;
@@ -47,6 +47,7 @@ export const InputStyled = styled.input<IInputProps>`
         return css`
           width: 11.5625rem;
           height: 3rem;
+          min-width: 11.5625rem;
         `;
       case "large1":
         return css`

@@ -18,6 +18,7 @@ import RadioSupplier from "../../../../../../components/RadioSupplier/RadioSuppl
 import RadioMan from "../../../../../../components/RadioMan/RadioMan";
 import { Input } from "../../../../../../components/Input/Input";
 import { UserContext } from "../../../../../../providers/UserContext/UserContext";
+import { IProject } from "../../../../../../components/Projects/@types";
 
 function Form() {
   const owner = localStorage.getItem("@owner");
@@ -36,6 +37,7 @@ function Form() {
   const [supplier, setSupplier] = useState<string>("");
   const [maintence, setMaintence] = useState<string>("");
   const [comments, setComments] = useState<string>("");
+  const [filterProject, setFilterProject] = useState<IProject[]>([]);
   const { createPurchaseRequest } = useContext(UserContext);
 
   const onSubmit: SubmitHandler<IPurchaseRequest> = (formData) => {
@@ -113,7 +115,7 @@ function Form() {
             <RadioMan setMaintence={setMaintence} />
           </StyledRadioContainer>
           <Input
-            widthsize="large3"
+            $widthsize="large3"
             label="Comentários"
             onChange={(e) => setComments(e.target.value)}
             style={{ height: "10rem" }}

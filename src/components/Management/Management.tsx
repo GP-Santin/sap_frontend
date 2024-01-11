@@ -1,12 +1,16 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Input } from "../Input/Input";
 import { StyledDropdown } from "../SelectItems/styles";
 import { IManagement, IManagementProps } from "./@types";
 import { StyledErrorContainer } from "../../pages/Dashboard/pages/PurchaseRequests/components/Form/styles";
+import { useOutsideClick } from "../../hooks/outsideClick";
 
-function Management({ setManagement, management }: IManagementProps) {
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const [managementList, setManagementList] = useState(() => {
+function Management({
+  setManagement,
+  management,
+  setmanagementCode,
+}: IManagementProps) {
+  const [managementList] = useState(() => {
     const storedList = localStorage.getItem("@projectmanagements");
     return storedList ? JSON.parse(storedList) : [];
   });
@@ -16,31 +20,22 @@ function Management({ setManagement, management }: IManagementProps) {
     setOpenDropdown((prevOpenDropdown) => !prevOpenDropdown);
   };
 
-  const handleManagementClick = (selectedManagement: string) => {
-    setManagement(selectedManagement);
+  const handleManagementClick = (selectedManagement: IManagement) => {
+    setManagement(selectedManagement.CenterCode);
     setOpenDropdown(false);
+    setmanagementCode(selectedManagement.U_SNT_IdGerencial);
   };
 
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setOpenDropdown(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  const closeDropdown = () => {
+    setOpenDropdown(!openDropdown);
+  };
+  const dropdownRef = useOutsideClick({ callback: closeDropdown });
 
   return (
     <StyledErrorContainer>
       <Input
         label="Gerencial"
-        widthsize="small2"
+        $widthsize="small2"
         onClick={handleOpenDropdown}
         value={management}
         style={{ cursor: "pointer" }}
@@ -50,11 +45,8 @@ function Management({ setManagement, management }: IManagementProps) {
         <StyledDropdown ref={dropdownRef}>
           <ul>
             {managementList.map((management: IManagement, index: number) => (
-              <li
-                key={index}
-                onClick={() => handleManagementClick(management.FactorCode)}
-              >
-                {management.FactorDescription} | {management.FactorCode}
+              <li key={index} onClick={() => handleManagementClick(management)}>
+                {management.CenterCode} | {management.CenterName}
               </li>
             ))}
           </ul>
