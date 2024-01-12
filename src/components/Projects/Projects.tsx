@@ -7,14 +7,24 @@ import { StyledProjectDropdown, StyledProjectsContainer } from "./styles";
 function Projects({ setProject, project, managementCode }: IProjectProps) {
   const [openDropdown, setOpenDropdown] = useState(false);
   const [filteredProjects, setFilteredProjects] = useState<IProject[]>([]);
+  const [handleFiltered, setHandleFiltered] = useState<string>("");
+  const [inputValue, setInputValue] = useState<string>("");
 
   const handleOpenDropdown = () => {
     setOpenDropdown(!openDropdown);
   };
 
+  const handleFilterProjects = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setHandleFiltered(value);
+    setInputValue(value);
+    const filtered = filterProjects(value);
+    setFilteredProjects(filtered);
+  };
+
   const handleProjectClick = (selectedProjectCode: string) => {
     setProject(selectedProjectCode);
-
+    setInputValue(selectedProjectCode);
     setOpenDropdown(false);
   };
 
@@ -23,7 +33,7 @@ function Projects({ setProject, project, managementCode }: IProjectProps) {
   };
   const dropdownRef = useOutsideClick({ callback: closeDropdown });
 
-  const filterProjects = () => {
+  const filterProjects = (inputValue: string): IProject[] => {
     const projectsList = JSON.parse(localStorage.getItem("@projects") || "[]");
 
     const filteredProjects = projectsList.filter((project: IProject) => {
@@ -34,12 +44,19 @@ function Projects({ setProject, project, managementCode }: IProjectProps) {
       );
     });
 
-    setFilteredProjects(filteredProjects);
+    const filtered = filteredProjects.filter((project: IProject) => {
+      return (
+        project.Code.toLowerCase().includes(inputValue.toLowerCase()) ||
+        project.Name.toLowerCase().includes(inputValue.toLowerCase())
+      );
+    });
+    return filtered;
   };
 
   useEffect(() => {
-    filterProjects();
-  }, [managementCode]);
+    const filtered = filterProjects(handleFiltered);
+    setFilteredProjects(filtered);
+  }, [managementCode, handleFiltered]);
 
   return (
     <StyledProjectsContainer>
@@ -47,15 +64,16 @@ function Projects({ setProject, project, managementCode }: IProjectProps) {
         label="Projeto"
         $widthsize="small2"
         onClick={handleOpenDropdown}
-        defaultValue={project}
+        value={inputValue}
         style={{ cursor: "pointer" }}
+        onChange={handleFilterProjects}
       />
       {openDropdown && (
         <StyledProjectDropdown ref={dropdownRef}>
           <ul>
             {filteredProjects.map((project: IProject, index: number) => (
               <li key={index} onClick={() => handleProjectClick(project.Code)}>
-                {project.Code} | {project.Name}
+                {project.Code} - {project.Name}
               </li>
             ))}
           </ul>

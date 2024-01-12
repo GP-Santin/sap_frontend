@@ -22,8 +22,8 @@ function Form() {
   const { accounts } = useMsal();
   const activeUser = accounts[0].username;
   const { createPurchaseRequest, getActiveUserSAP } = useContext(UserContext);
-  const methods = useForm<IPurchaseRequest>();
 
+  const methods = useForm<IPurchaseRequest>();
   const [, setItems] = useState<IItemRequest[]>([]);
   const [listItems, setListItems] = useState<IItemRequest[]>([]);
   const [project, setProject] = useState<string>("");
