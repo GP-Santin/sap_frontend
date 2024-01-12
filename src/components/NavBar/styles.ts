@@ -36,7 +36,7 @@ export const StyledMenu = styled.div`
   top: 5%;
   width: 20%;
   z-index: 1000;
-  height: calc(100vh - 7%);
+  height: calc(100vh - 2.7em);
 
   border-right: 2px solid ${(props) => props.theme.colors.buttonBackground};
 
@@ -66,7 +66,7 @@ export const StyledListTitle = styled.div`
 
   &:hover {
     color: var(--color-primary);
-    transition: all 0.25s;
+    transition: all 0.5s;
   }
 
   @media screen {

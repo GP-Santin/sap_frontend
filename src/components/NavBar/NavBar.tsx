@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./styles.css";
 import {
   BurguerStyled,
@@ -65,13 +65,13 @@ function NavBar({ toggleTheme, theme }: any) {
         </StyledIconContainer>
       </StyledNav>
       <StyledMenu className={`menu ${menuClass}`}>
-        <ul>
+        <ul id="sections">
           <StyledList onClick={toggleDropdown}>
             <StyledListTitle onClick={toggleSection} className={activeSection}>
               Compras{" "}
               <FaAngleDown
                 style={{
-                  transform: isDropdownOpen ? "rotate(180deg)" : "rotate(0deg)",
+                  transform: isDropdownOpen ? "rotate(0deg)" : "rotate(180deg)",
                   transition: "ease-out 0.4s",
                 }}
               />

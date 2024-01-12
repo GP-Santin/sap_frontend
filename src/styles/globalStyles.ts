@@ -12,6 +12,7 @@ export const GlobalStyles = createGlobalStyle`
     --color-white: #FFFFFF;
     --color-light-gray: #F5F5F5;
 		--color-gray: #E5E5E5;
+		--color-hover: #333333;
 
 		--color-alert: #FF0000;
 
