@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useEffect, useState } from "react";
 import "./styles.css";
 import {
   BurguerStyled,
@@ -12,7 +12,7 @@ import { FaAngleDown } from "react-icons/fa";
 import sunIcon from "../../icons/sun.svg";
 import moonIcon from "../../icons/moon.svg";
 import { Icon } from "./styles";
-import { AppContext } from "../../providers/AppContext/AppProviders";
+import { useMsal } from "@azure/msal-react";
 
 function NavBar({ toggleTheme, theme }: any) {
   const [burguerClass, setBurguerClass] = useState("burguer-bar unclicked");
@@ -20,7 +20,8 @@ function NavBar({ toggleTheme, theme }: any) {
   const [isMenuClicked, setIsMenuClicked] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("section deactivated");
-  const { user } = useContext(AppContext);
+  const { instance } = useMsal();
+  const activeUser = instance.getAllAccounts()[0];
 
   const updateMenu = () => {
     if (!isMenuClicked) {
@@ -54,7 +55,7 @@ function NavBar({ toggleTheme, theme }: any) {
           <BurguerStyled className={burguerClass}></BurguerStyled>
         </div>
         <StyledIconContainer>
-          <h3>{user?.name}</h3>
+          <h3>{activeUser?.name}</h3>
           <Icon
             src={theme === "light" ? moonIcon : sunIcon}
             alt=""

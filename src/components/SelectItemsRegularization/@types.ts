@@ -1,4 +1,4 @@
-import { IItemOrder } from "../../pages/Dashboard/pages/PurchaseRequests/components/Form/@types";
+import { IItemOrder } from "../../pages/Dashboard/pages/Regularization/components/Form/@types";
 
 export interface ISelectItemProps {
   setItems: React.Dispatch<React.SetStateAction<IItemOrder[]>>;
@@ -10,4 +10,9 @@ export interface ISelectItemProps {
   setManagement: React.Dispatch<React.SetStateAction<string>>;
   unitPrice: string;
   setUnitPrice: React.Dispatch<React.SetStateAction<string>>;
+  docTotal: string;
+  setDocTotal: React.Dispatch<React.SetStateAction<string>>;
+  setLineTotal: React.Dispatch<React.SetStateAction<string>>;
+  lineTotal: string;
+  handleDocTotalChange: (list: IItemOrder[]) => void;
 }

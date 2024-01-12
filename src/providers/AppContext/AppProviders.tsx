@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { IAppContext, IAppProviderProps, ILoading } from "./@types";
 import { TLoginForm } from "../../pages/SAPLogin/components/LoginForm/schema";
 import { AxiosError } from "axios";
@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useMsal } from "@azure/msal-react";
 import { IBusinessPartner, IItem, ISalesPerson } from "../AppContext/@types";
-import { AccountInfo } from "@azure/msal-browser";
 import {
   fetchBusinessPartners,
   fetchItems,
@@ -20,7 +19,6 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
   const [loading, setLoading] = useState<ILoading | boolean>(false);
   const [group, setGroup] = useState<string>("");
   const [, setNewPurchaseNumber] = useState<number>();
-  const [user, setUser] = useState<AccountInfo | null>(null);
   const [items] = useState<IItem[]>([]);
   const [salesPerson] = useState<ISalesPerson>({} as ISalesPerson);
   const { accounts } = useMsal();
@@ -115,12 +113,6 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
     }
   };
 
-  const setActiveUser = () => {
-    const activeUser = accounts[0];
-    if (activeUser) {
-      setUser(activeUser);
-    }
-  };
 
   const checkAndFetchData = async (
     key: string,
@@ -157,7 +149,6 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
       setSessionCookie(sessionId);
 
       if (sessionId && accounts && accounts.length > 0) {
-        setActiveUser();
 
         await toast.promise(checkAndFetchData("@items", getItems), {
           pending: "Carregando itens...",
@@ -211,6 +202,9 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
     }
   };
 
+    
+
+
   return (
     <AppContext.Provider
       value={{
@@ -219,8 +213,6 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
         group,
         setGroup,
         items,
-        user,
-        setUser,
         salesPerson,
         appLogin,
       }}

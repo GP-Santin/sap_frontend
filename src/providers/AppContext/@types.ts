@@ -59,8 +59,6 @@ export interface IAppContext {
   setLoading: React.Dispatch<React.SetStateAction<boolean | ILoading>>;
   group: string;
   setGroup: React.Dispatch<React.SetStateAction<string>>;
-  user: AccountInfo | null;
-  setUser: React.Dispatch<React.SetStateAction<AccountInfo | null>>;
   items: IItem[];
   salesPerson: ISalesPerson;
   appLogin: (formData: TLoginForm) => Promise<void>;

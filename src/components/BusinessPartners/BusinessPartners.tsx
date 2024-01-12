@@ -5,9 +5,9 @@ import {
   StyledBusinessPartnersContainer,
   StyledBusinessPartnersDropdown,
 } from "./styles";
+import { BusinessPartnerProps } from "./@types";
 
-function BusinessPartners() {
-  const [businessPartner, setBusinessPartner] = React.useState<string>("");
+function BusinessPartners({ setBusinessPartner, businessPartner }: BusinessPartnerProps) {
   const [businessPartnersFiltered, setBusinessPartnersFiltered] = useState<
     IBusinessPartner[]
   >([]);

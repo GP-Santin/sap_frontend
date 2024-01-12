@@ -1,5 +1,5 @@
-import React from "react";
-import { IItemOrder } from "../../../PurchaseRequests/components/Form/@types";
+import React, { useEffect } from "react";
+import { IItemOrder } from "../../../Regularization/components/Form/@types";
 import {
   StyledTable,
   StyledPlus,
@@ -10,13 +10,26 @@ import {
 interface TableProps {
   listItems: IItemOrder[];
   setListItems: React.Dispatch<React.SetStateAction<IItemOrder[]>>;
+  handleDocTotalChange: (list: IItemOrder[]) => void;
+  setDocTotal: React.Dispatch<React.SetStateAction<string>>;
+  setLineTotal: React.Dispatch<React.SetStateAction<string>>;
+  lineTotal: string;
+  setDocProject: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function Table({ listItems, setListItems }: TableProps) {
+function Table({
+  listItems,
+  setListItems,
+  handleDocTotalChange,
+  setDocProject,
+}: TableProps) {
   const handleIncreaseQuantity = (index: number) => {
     const updatedItems = [...listItems];
     updatedItems[index].Quantity += 1;
     setListItems(updatedItems);
+    updatedItems[index].LineTotal =
+      updatedItems[index].UnitPrice * updatedItems[index].Quantity;
+
     localStorage.setItem("@savedItems", JSON.stringify(updatedItems));
   };
 
@@ -25,7 +38,11 @@ function Table({ listItems, setListItems }: TableProps) {
     if (updatedItems[index].Quantity > 0) {
       updatedItems[index].Quantity -= 1;
       setListItems(updatedItems);
+      listItems[index].LineTotal =
+        listItems[index].UnitPrice * listItems[index].Quantity;
       localStorage.setItem("@savedItems", JSON.stringify(updatedItems));
+
+      handleDocTotalChange(updatedItems);
     }
   };
 
@@ -34,7 +51,19 @@ function Table({ listItems, setListItems }: TableProps) {
     updatedItems.splice(index, 1);
     setListItems(updatedItems);
     localStorage.setItem("@savedItems", JSON.stringify(updatedItems));
+    handleDocTotalChange(updatedItems);
   };
+
+  const setProjetDoc = () => {
+    if (listItems.length > 0) {
+      const project = listItems[0].ProjectCode;
+      setDocProject(project);
+    }
+  };
+
+  useEffect(() => {
+    setProjetDoc();
+  });
 
   return (
     <StyledTable>
@@ -43,6 +72,7 @@ function Table({ listItems, setListItems }: TableProps) {
           <th>Código do item</th>
           <th>Descrição</th>
           <th>Quantidade</th>
+          <th>Valor unitário</th>
           <th>Valor total </th>
           <th>Gerencial</th>
           <th>Projeto</th>
@@ -58,9 +88,10 @@ function Table({ listItems, setListItems }: TableProps) {
               {item.Quantity}
               <StyledMinus onClick={() => handleDecreaseQuantity(index)} />
             </td>
+            <td>R$ {item.UnitPrice}</td>
             <td>R$ {item.LineTotal}</td>
-            <td>{item.ProjectCode}</td>
             <td>{item.CostingCode2}</td>
+            <td>{item.ProjectCode}</td>
             <td>
               <StyledTrashIcon onClick={() => handleDeleteItem(index)} />
             </td>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "../Input/Input";
 import { IItem } from "../../providers/AppContext/@types";
 import {
@@ -12,6 +12,7 @@ import Projects from "../Projects/Projects";
 import Management from "../Management/Management";
 import { useOutsideClick } from "../../hooks/outsideClick";
 import { toast } from "react-toastify";
+import { IItemOrder } from "../../pages/Dashboard/pages/Regularization/components/Form/@types";
 
 const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
   setItems,
@@ -23,6 +24,9 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
   setManagement,
   unitPrice,
   setUnitPrice,
+  setDocTotal,
+  lineTotal,
+  setLineTotal,
 }) => {
   const [itemCode, setItemCode] = useState("");
   const [itemDescription, setItemDescription] = useState("");
@@ -55,10 +59,12 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
     const filtered = filterItems(value);
     setFilteredItems(filtered);
   };
+
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Number(e.target.value);
-    setQuantity(value.toString());
+    const value = e.target.value;
+    setQuantity(value);
   };
+
   const addItemToInput = (selectedItem: IItem) => {
     setItemCode(selectedItem.ItemCode);
     setItemDescription(selectedItem.ItemName);
@@ -67,8 +73,26 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
 
   const handleUnitPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setUnitPrice(value);
+    const formattedValue = value.replace(",", ".");
+    setUnitPrice(formattedValue);
+
+    const quantityFloat = parseFloat(quantity);
+
+    const totalNumber = parseFloat(value) * quantityFloat;
+    setLineTotal(totalNumber.toString());
   };
+
+  const handleDocTotalChange = (list: IItemOrder[]) => {
+    const total = list.reduce((acc, item) => {
+      return acc + item.LineTotal;
+    }, 0);
+    setDocTotal(total.toString());
+  };
+
+  useEffect(() => {
+    handleDocTotalChange(listItems);
+  }, [listItems]);
+
   const handleAddItemToList = () => {
     if (
       itemCode &&
@@ -76,7 +100,7 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
       quantity &&
       project &&
       management &&
-      unitPrice
+      unitPrice 
     ) {
       const newItem = {
         LineNum: listItems.indexOf(listItems[0]) + 1,
@@ -87,7 +111,7 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
         U_SNT_Finalidade: "1",
         Quantity: parseFloat(quantity),
         UnitPrice: parseFloat(unitPrice),
-        LineTotal: parseFloat(quantity) * parseFloat(unitPrice),
+        LineTotal: parseFloat(lineTotal),
       };
       setItems(
         (
@@ -162,11 +186,8 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
         {filteredItems.length > 0 && openDropdown && (
           <StyledDropdown ref={dropdownRef}>
             <ul>
-              {filteredItems.map((filteredItem) => (
-                <li
-                  key={filteredItem.ItemCode}
-                  onClick={() => addItemToInput(filteredItem)}
-                >
+              {filteredItems.map((filteredItem, index) => (
+                <li key={index} onClick={() => addItemToInput(filteredItem)}>
                   {filteredItem.ItemCode} - {filteredItem.ItemName}
                 </li>
               ))}

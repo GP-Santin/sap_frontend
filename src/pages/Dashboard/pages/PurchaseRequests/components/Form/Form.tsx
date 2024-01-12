@@ -15,13 +15,15 @@ import RadioSupplier from "../../../../../../components/RadioSupplier/RadioSuppl
 import RadioMan from "../../../../../../components/RadioMan/RadioMan";
 import { UserContext } from "../../../../../../providers/UserContext/UserContext";
 import Table from "./Table";
+import { useMsal } from "@azure/msal-react";
 
 function Form() {
   const owner = localStorage.getItem("@owner");
-  const { getActiveUserSAP } = useContext(UserContext);
-  const userConnected = "filipe.parisi@gruposantin.com.br";
-
+  const { accounts } = useMsal();
+  const activeUser = accounts[0].username;
+  const { createPurchaseRequest, getActiveUserSAP } = useContext(UserContext);
   const methods = useForm<IPurchaseRequest>();
+
   const [, setItems] = useState<IItemRequest[]>([]);
   const [listItems, setListItems] = useState<IItemRequest[]>([]);
   const [project, setProject] = useState<string>("");
@@ -29,7 +31,6 @@ function Form() {
   const [supplier, setSupplier] = useState<string>("");
   const [maintence, setMaintence] = useState<string>("");
   const [comments, setComments] = useState<string>("");
-  const { createPurchaseRequest } = useContext(UserContext);
 
   const onSubmit: SubmitHandler<IPurchaseRequest> = (formData) => {
     const baseRequest: IPurchaseRequest = {
@@ -57,7 +58,7 @@ function Form() {
     if (savedItems) {
       setListItems(savedItems);
     }
-    getActiveUserSAP(userConnected);
+    getActiveUserSAP(activeUser);
   }, []);
 
   const onSubmitError = (errors: any) => {

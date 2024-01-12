@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  IItemOrder,
-  IItemRequest,
-} from "../../../PurchaseRequests/components/Form/@types";
+import { IItemRequest } from "../../../PurchaseRequests/components/Form/@types";
 import {
   StyledTable,
   StyledPlus,
