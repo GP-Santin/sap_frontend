@@ -35,13 +35,14 @@ export const ButtonStyles = css<IButtonStylesProps>`
         `;
       case "outline-black":
         return css`
-          background-color: var(--color-black);
+          background-color: ${(props) => props.theme.colors.background};
+          color: ${(props) => props.theme.colors.text};
           border: 0.0761rem solid var(--color-primary);
         `;
       case "outline-white":
         return css`
-          background-color: var(--color-white);
-          color: var(--color-primary);
+          background-color: ${(props) => props.theme.colors.background};
+          color: ${(props) => props.theme.colors.text};
           border: 0.0761rem solid var(--color-primary);
         `;
     }
@@ -95,6 +96,7 @@ export const StyledButton = styled.button<IButtonStylesProps>`
 
   &:hover {
     background-color: var(--color-primary);
+    color: ${(props) => props.theme.colors.text};
     transition: 0.15s;
   }
 `;

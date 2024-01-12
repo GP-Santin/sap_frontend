@@ -4,6 +4,8 @@ import { AxiosError } from "axios";
 import { IPurchaseRequest } from "../../pages/Dashboard/pages/PurchaseRequests/components/Form/@types";
 import ModalComponent from "../../components/Modal/Modal";
 import apiSAP from "../../middleware/handleRequest.middleware";
+import { IOrderRequest } from "../../pages/Dashboard/pages/Regularization/components/Form/@types";
+import { ISalesPerson } from "../AppContext/@types";
 
 export const UserContext = createContext({} as IUserContext);
 
@@ -24,12 +26,27 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     }
   };
 
+  const createPurchaseQuotations = async (formData: IOrderRequest) => {
+    try {
+      const { data } = await apiSAP.post("/PurchaseQuotations", formData);
+      setModalContent(`Nº da solicitação: ${data.DocNum}`);
+      setIsModalOpen(true);
+      console.log(data);
+    } catch (error: AxiosError | any) {
+      console.error(error);
+    }
+  };
+
   const getActiveUserSAP = async (email: string) => {
     try {
       const { data } = await apiSAP.get(
         `/EmployeesInfo?$filter = eMail eq '${email}'`
       );
       localStorage.setItem("@owner", JSON.stringify(data.value[0].EmployeeID));
+      localStorage.setItem(
+        "@salesPersonCode",
+        JSON.stringify(data.value[0].SalesPersonCode)
+      );
     } catch (error) {
       console.error("Erro ao consultar empregado:", error);
     }
@@ -48,7 +65,11 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
 
   return (
     <UserContext.Provider
-      value={{ createPurchaseRequest, getActiveUserSAP }}
+      value={{
+        createPurchaseRequest,
+        getActiveUserSAP,
+        createPurchaseQuotations,
+      }}
     >
       {children}
       <ModalComponent

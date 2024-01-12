@@ -1,7 +1,7 @@
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormLabel from "@mui/material/FormLabel";
-import { FormControl, Radio } from "@mui/material";
+import { FormControl, Theme } from "@mui/material";
 import { StyledRadio } from "../RadioSupplier/RadioSupplier";
 
 interface IRadioManProps {
@@ -12,6 +12,7 @@ function RadioMan({ setMaintence }: IRadioManProps) {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setMaintence(event.target.value);
   };
+
   return (
     <FormControl>
       <RadioGroup
@@ -20,7 +21,15 @@ function RadioMan({ setMaintence }: IRadioManProps) {
         name="radio-buttons-group"
         onChange={handleChange}
       >
-        <FormLabel id="demo-radio-buttons-group-label" sx={{ color: "white" }}>
+        <FormLabel
+          id="demo-radio-buttons-group-label"
+          sx={{
+            color: "white",
+            "&, &.Mui-focused": {
+              color: "white",
+            },
+          }}
+        >
           S.C Manutenção
         </FormLabel>
         <div>

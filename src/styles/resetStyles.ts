@@ -41,4 +41,22 @@ export const ResetStyles = createGlobalStyle`
   img {
     max-width: 100%;
   }
+
+   &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${(props) => props.theme.colors.primary};
+    border-radius: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  @media (max-width: 1300px) {
+    width: 50vw;
+    top: 14%;
+  }
 `;

@@ -5,6 +5,7 @@ import LoginPage from "../pages/Login/LoginPage";
 import HomePage from "../pages/SAPLogin/SAPLogin";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import PurchaseRequests from "../pages/Dashboard/pages/PurchaseRequests/PurchaseRequests";
+import Regularization from "../pages/Dashboard/pages/Regularization/Regularization";
 function RoutesMain({ toggleTheme, theme }: any) {
   return (
     <Routes>
@@ -17,6 +18,10 @@ function RoutesMain({ toggleTheme, theme }: any) {
           path="/dashboard/purchase-requests"
           element={<PurchaseRequests />}
         />
+        <Route
+          path="/dashboard/regularization"
+          element={<Regularization />}
+        ></Route>
       </Route>
       <Route
         path="/dashboard"

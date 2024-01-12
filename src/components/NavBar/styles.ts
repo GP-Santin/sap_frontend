@@ -9,6 +9,8 @@ export const StyledNav = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-bottom: 1px solid ${(props) => props.theme.colors.buttonBackground};
+  position: relative;
 
   @media (max-width: 768px) {
     h3 {
@@ -30,12 +32,13 @@ export const StyledIconContainer = styled.div`
 export const StyledMenu = styled.div`
   color: ${(props) => props.theme.colors.text};
   background-color: ${(props) => props.theme.colors.background};
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 30%;
+  position: absolute;
+  top: 5%;
+  width: 20%;
   z-index: 1000;
-  margin-top: 2.5rem;
+  height: calc(100vh - 7%);
+
+  border-right: 2px solid ${(props) => props.theme.colors.buttonBackground};
 
   @media screen and (max-width: 768px) {
     width: 100%;
@@ -66,10 +69,8 @@ export const StyledListTitle = styled.div`
     transition: all 0.25s;
   }
 
-  @media screen  {
-    
+  @media screen {
   }
-  
 `;
 
 export const Icon = styled.img`

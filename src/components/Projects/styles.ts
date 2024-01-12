@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
-export const StyledItemContainer = styled.div`
+export const StyledProjectsContainer = styled.div`
   display: flex;
   flex-direction: column;
+  position: relative;
   gap: 1rem;
   flex-wrap: wrap;
 
@@ -13,23 +14,22 @@ export const StyledItemContainer = styled.div`
   }
 `;
 
-export const StyledLineItems = styled.div`
+export const StyledLineProjects = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  position: relative;
 `;
 
-export const StyledDropdown = styled.div`
-  width: 40%;
+export const StyledProjectDropdown = styled.div`
+  width: 100%;
   height: 10rem;
   overflow-y: scroll;
   cursor: pointer;
   position: absolute;
   background-color: ${(props) => props.theme.colors.buttonBackground};
   color: ${(props) => props.theme.colors.text};
-  z-index: 999;
   top: 100%;
+  z-index: 999;
   padding: 0.25rem;
   overflow-x: hidden;
   border-bottom-left-radius: 8px;
@@ -46,29 +46,7 @@ export const StyledDropdown = styled.div`
     background: transparent;
   }
 
-  @media (max-width: 1300px) {
+  @media (max-width: 768px) {
     width: 50vw;
-    top: 14%;
-  }
-`;
-
-export const StyledButton = styled.span`
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  color: ${(props) => props.theme.colors.text};
-  font-weight: 700;
-  font-size: 1rem;
-  padding: 1rem;
-  background-color: ${(props) => props.theme.colors.background};
-  border: 1px solid var(--color-primary);
-  border-radius: 8rem;
-  height: 3rem;
-  margin-top: 1.3rem;
-
-  &:hover {
-    background-color: ${(props) => props.theme.colors.primary};
-    color: ${(props) => props.theme.colors.text};
-    transition: all 0.25s;
   }
 `;

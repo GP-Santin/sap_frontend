@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Input } from "../Input/Input";
-import { StyledDropdown } from "../SelectItems/styles";
 import { IManagement, IManagementProps } from "./@types";
-import { StyledErrorContainer } from "../../pages/Dashboard/pages/PurchaseRequests/components/Form/styles";
 import { useOutsideClick } from "../../hooks/outsideClick";
+import {
+  StyledProjectDropdown,
+  StyledProjectsContainer,
+} from "../Projects/styles";
 
 function Management({
   setManagement,
@@ -32,7 +34,7 @@ function Management({
   const dropdownRef = useOutsideClick({ callback: closeDropdown });
 
   return (
-    <StyledErrorContainer>
+    <StyledProjectsContainer>
       <Input
         label="Gerencial"
         $widthsize="small2"
@@ -42,7 +44,7 @@ function Management({
       />
 
       {openDropdown && (
-        <StyledDropdown ref={dropdownRef}>
+        <StyledProjectDropdown ref={dropdownRef}>
           <ul>
             {managementList.map((management: IManagement, index: number) => (
               <li key={index} onClick={() => handleManagementClick(management)}>
@@ -50,9 +52,9 @@ function Management({
               </li>
             ))}
           </ul>
-        </StyledDropdown>
+        </StyledProjectDropdown>
       )}
-    </StyledErrorContainer>
+    </StyledProjectsContainer>
   );
 }
 

@@ -7,7 +7,6 @@ export const StyledForm = styled.form`
   flex-direction: column;
   justify-content: space-between;
   gap: 1rem;
-  height: 100%;
   width: 100%;
 
   button {
@@ -57,7 +56,7 @@ export const StyledTable = styled.table`
 export const StyledErrorContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.5rem;
   position: relative;
 
   span {
@@ -104,5 +103,43 @@ export const StyledPlus: IconType = styled(FaPlus)`
   &:hover {
     color: ${(props) => props.theme.colors.primary};
     transition: all 0.25s;
+  }
+`;
+
+export const StyledTextArea = styled.textarea`
+  max-width: 64rem;
+  min-height: 3rem;
+
+  border: 1px solid var(--color-primary);
+  border-radius: 0.5rem;
+
+  padding: 1rem;
+
+  outline: none;
+
+  font-family: var(--font-family-secondary);
+  font-weight: var(--font-weight-1);
+  font-size: var(--font-size-1);
+
+  overflow-wrap: break-word;
+
+  color: ${(props) => props.theme.colors.text};
+  background-color: ${(props) => props.theme.colors.background};
+
+  height: 10rem;
+
+  resize: none;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${(props) => props.theme.colors.text};
+    cursor: pointer;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
   }
 `;

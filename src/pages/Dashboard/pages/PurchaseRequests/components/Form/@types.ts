@@ -3,7 +3,6 @@ export interface IItemRequest {
   ItemDescription: string;
   Quantity: number;
   CostingCode2: string;
-  // CostingCode: string
   ProjectCode: string;
   U_SNT_Finalidade: string;
 }
