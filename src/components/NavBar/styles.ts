@@ -32,13 +32,11 @@ export const StyledIconContainer = styled.div`
 export const StyledMenu = styled.div`
   color: ${(props) => props.theme.colors.text};
   background-color: ${(props) => props.theme.colors.background};
-  position: absolute;
   top: 5%;
   width: 20%;
-  z-index: 1000;
-  height: calc(100vh - 2.7em);
+  height: auto;
 
-  border-right: 2px solid ${(props) => props.theme.colors.buttonBackground};
+  border-right: 1px solid ${(props) => props.theme.colors.buttonBackground};
 
   @media screen and (max-width: 768px) {
     width: 100%;
@@ -57,6 +55,8 @@ export const StyledList = styled.li`
   @media screen and (max-width: 768px) {
     justify-content: center;
   }
+
+  transition: all 0.2s cubic-bezier(0.7, 0, 0.3, 1);
 `;
 
 export const StyledListTitle = styled.div`
@@ -68,18 +68,10 @@ export const StyledListTitle = styled.div`
     color: var(--color-primary);
     transition: all 0.5s;
   }
-
-  @media screen {
-  }
 `;
 
 export const Icon = styled.img`
   cursor: pointer;
   top: 0.75rem;
   right: 1rem;
-`;
-
-export const StyledLogout = styled.a`
-  position: absolute;
-  bottom: 2%;
 `;

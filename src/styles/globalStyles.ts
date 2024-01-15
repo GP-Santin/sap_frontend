@@ -13,6 +13,7 @@ export const GlobalStyles = createGlobalStyle`
     --color-light-gray: #F5F5F5;
 		--color-gray: #E5E5E5;
 		--color-hover: #333333;
+		--color-border: #EBEBED;
 
 		--color-alert: #FF0000;
 

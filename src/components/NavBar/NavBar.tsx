@@ -5,7 +5,6 @@ import {
   StyledIconContainer,
   StyledList,
   StyledListTitle,
-  StyledLogout,
   StyledMenu,
   StyledNav,
 } from "./styles";
@@ -20,8 +19,9 @@ function NavBar({ toggleTheme, theme }: any) {
   const [burguerClass, setBurguerClass] = useState("burguer-bar unclicked");
   const [menuClass, setMenuClass] = useState("menu hidden");
   const [isMenuClicked, setIsMenuClicked] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(true);
   const [activeSection, setActiveSection] = useState("section deactivated");
+  const [listActive, setListActive] = useState("list-unclicked");
   const { instance } = useMsal();
   const activeUser = instance.getAllAccounts()[0];
   const { logoutSAP } = useContext(UserContext);
@@ -46,6 +46,9 @@ function NavBar({ toggleTheme, theme }: any) {
       activeSection === "section deactivated"
         ? "section active"
         : "section deactivated"
+    );
+    setListActive(
+      listActive === "list-unclicked" ? "list-clicked" : "list-unclicked"
     );
   };
 
@@ -75,24 +78,22 @@ function NavBar({ toggleTheme, theme }: any) {
               <FaAngleDown
                 style={{
                   transform: isDropdownOpen ? "rotate(0deg)" : "rotate(180deg)",
-                  transition: "ease-out 0.4s",
+                  transition: "all ease-out 0.4s",
                 }}
               />
             </StyledListTitle>
-            {isDropdownOpen && (
-              <ul>
-                <li>
-                  <a href="/dashboard/purchase-requests">
-                    Solicitação de Compras
-                  </a>
-                </li>
-                <li>
-                  <a href="/dashboard/regularization">Regularização</a>
-                </li>
-              </ul>
-            )}
+            <ul className={listActive}>
+              <li>
+                <a href="/dashboard/purchase-requests">
+                  Solicitação de Compras
+                </a>
+              </li>
+              <li>
+                <a href="/dashboard/regularization">Regularização</a>
+              </li>
+            </ul>
           </StyledList>
-          <StyledLogout onClick={() => logoutSAP()}>Logout</StyledLogout>
+          <a onClick={() => logoutSAP()}>Logout</a>
         </ul>
       </StyledMenu>
     </>

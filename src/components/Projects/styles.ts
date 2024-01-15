@@ -23,14 +23,12 @@ export const StyledLineProjects = styled.div`
 export const StyledProjectDropdown = styled.div`
   width: 100%;
   height: 10rem;
-  overflow-y: scroll;
   cursor: pointer;
   position: absolute;
   background-color: ${(props) => props.theme.colors.buttonBackground};
   color: ${(props) => props.theme.colors.text};
   top: 100%;
   z-index: 999;
-  padding: 0.25rem;
   overflow-x: hidden;
   border-bottom-left-radius: 8px;
 
@@ -48,5 +46,13 @@ export const StyledProjectDropdown = styled.div`
 
   @media (max-width: 768px) {
     width: 50vw;
+  }
+
+  li {
+    padding: 0.25rem;
+  }
+
+  li:hover {
+    background-color: var(--color-border);
   }
 `;
