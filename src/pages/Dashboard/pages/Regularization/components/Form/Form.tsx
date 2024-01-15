@@ -52,8 +52,8 @@ function Form() {
   const onSubmit: SubmitHandler<IOrderRequest> = (formData) => {
     const baseRequest: IOrderRequest = {
       RequriedDate: formData.RequriedDate,
-      // TaxDate: formData.TaxDate,
-      // DocDueDate: formData.DocDueDate,
+      TaxDate: formData.TaxDate,
+      DocDueDate: formData.DocDueDate,
       U_SNT_Suprimento: supplier,
       U_SNT_SC_Manut: maintence,
       Comments: comments,
@@ -63,10 +63,12 @@ function Form() {
       DocTotal: docTotal ? parseFloat(docTotal) : 0,
       Project: docProject,
       SalesPersonCode: Number(salesPerson),
-      // U_SNT_Consumo: consumption,
-      // TransportationCode: transportationCode,
-      // U_SNT_MetodoPagto: paymentMethod,
+      U_SNT_Consumo: consumption,
+      TransportationCode: transportationCode,
+      U_SNT_MetodoPagto: paymentMethod,
     };
+
+    getActiveUserSAP(activeUser);
 
     if (listItems.length > 0) {
       const requestWithItems: IOrderRequest = {
@@ -95,7 +97,6 @@ function Form() {
     if (savedItems) {
       setListItems(savedItems);
     }
-    getActiveUserSAP(activeUser);
   }, [lineTotal, docTotal]);
 
   return (
@@ -107,21 +108,21 @@ function Form() {
               label="Data necessária"
               setRegister="RequriedDate"
             />
-            {/* <DatePickerComponent
+            <DatePickerComponent
               label="Data do documento"
               setRegister="TaxDate"
             />
             <DatePickerComponent
               label="Data do vencimento"
               setRegister="DocDueDate"
-            /> */}
+            />
             <BusinessPartners
               businessPartner={businessPartner}
               setBusinessPartner={setBusinessPartner}
             />
-            {/* <SelectConsumption setConsumption={setConsumption} />
+            <SelectConsumption setConsumption={setConsumption} />
             <SelectShipping setTransportationCode={setTransportationCode} />
-            <SelectPaymentMethod setPaymentMethod={setPaymentMethod} /> */}
+            <SelectPaymentMethod setPaymentMethod={setPaymentMethod} />
           </StyledLineItems>
           <div>
             <RadioSupplier setSupplier={setSupplier} />

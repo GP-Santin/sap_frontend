@@ -5,7 +5,6 @@ import { IPurchaseRequest } from "../../pages/Dashboard/pages/PurchaseRequests/c
 import ModalComponent from "../../components/Modal/Modal";
 import apiSAP from "../../middleware/handleRequest.middleware";
 import { IOrderRequest } from "../../pages/Dashboard/pages/Regularization/components/Form/@types";
-import { ISalesPerson } from "../AppContext/@types";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
