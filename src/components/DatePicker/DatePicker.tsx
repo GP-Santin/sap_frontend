@@ -7,7 +7,12 @@ import "react-datepicker/dist/react-datepicker.css";
 import { StyledErrorContainer } from "../../pages/Dashboard/pages/PurchaseRequests/components/Form/styles";
 import { StyledDatePicker } from "./styles";
 
-function DatePickerComponent() {
+interface IDatePickerProps {
+  setRegister: string;
+  label: string;
+}
+
+function DatePickerComponent({ setRegister, label }: IDatePickerProps) {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const { register } = useFormContext();
   const {
@@ -17,12 +22,12 @@ function DatePickerComponent() {
   const handleDateChange = (date: Date) => {
     const dateFormatted = format(date, "yyyy-MM-dd");
     setStartDate(date);
-    register("RequriedDate", { value: dateFormatted });
+    register(setRegister, { value: dateFormatted });
   };
 
   return (
     <StyledErrorContainer>
-      <p>Data da necessidade</p>
+      <p>{label}</p>
       <StyledDatePicker
         selected={startDate}
         onChange={handleDateChange}

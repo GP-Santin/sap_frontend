@@ -69,7 +69,10 @@ function Form() {
     <FormProvider {...methods}>
       <StyledForm onSubmit={methods.handleSubmit(onSubmit, onSubmitError)}>
         <StyledContainerFields>
-          <DatePickerComponent />
+          <DatePickerComponent
+            label="Data de Requisição"
+            setRegister="RequriedDate"
+          />
           <SelectItems
             setItems={setItems}
             listItems={listItems}

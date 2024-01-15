@@ -23,6 +23,7 @@ import { Button } from "../../../../../../components/Button/Button";
 import { useMsal } from "@azure/msal-react";
 import SelectConsumption from "../SelectConsumption/SelectConsumption";
 import SelectShipping from "../SelectShipping/SelectShipping";
+import SelectPaymentMethod from "../SelectPaymentMethod/SelectPaymentMethod";
 
 function Form() {
   const owner = localStorage.getItem("@owner");
@@ -47,10 +48,13 @@ function Form() {
   const [lineTotal, setLineTotal] = useState<string>("");
   const [consumption, setConsumption] = useState<string>("");
   const [transportationCode, setTransportationCode] = useState<number>(-1);
+  const [paymentMethod, setPaymentMethod] = useState<string>("");
 
   const onSubmit: SubmitHandler<IOrderRequest> = (formData) => {
     const baseRequest: IOrderRequest = {
       RequriedDate: formData.RequriedDate,
+      TaxDate: formData.TaxDate,
+      DocDueDate: formData.DocDueDate,
       U_SNT_Suprimento: supplier,
       U_SNT_SC_Manut: maintence,
       Comments: comments,
@@ -62,6 +66,7 @@ function Form() {
       SalesPersonCode: Number(salesPerson),
       U_SNT_Consumo: consumption,
       TransportationCode: transportationCode,
+      U_SNT_MetodoPagto: paymentMethod,
     };
 
     if (listItems.length > 0) {
@@ -92,6 +97,7 @@ function Form() {
       setListItems(savedItems);
     }
     getActiveUserSAP(activeUser);
+    console.log(paymentMethod, transportationCode);
   }, [lineTotal, docTotal]);
 
   return (
@@ -99,7 +105,18 @@ function Form() {
       <StyledForm onSubmit={methods.handleSubmit(onSubmit, onSubmitError)}>
         <StyledContainerFields>
           <StyledLineItems>
-            <DatePickerComponent />
+            <DatePickerComponent
+              label="Data necessária"
+              setRegister="RequriedDate"
+            />
+            <DatePickerComponent
+              label="Data do documento"
+              setRegister="TaxDate"
+            />
+            <DatePickerComponent
+              label="Data do vencimento"
+              setRegister="DocDueDate"
+            />
             <BusinessPartners
               businessPartner={businessPartner}
               setBusinessPartner={setBusinessPartner}
@@ -134,6 +151,7 @@ function Form() {
             >
               <SelectConsumption setConsumption={setConsumption} />
               <SelectShipping setTransportationCode={setTransportationCode} />
+              <SelectPaymentMethod setPaymentMethod={setPaymentMethod} />
             </div>
           </div>
         </StyledContainerFields>

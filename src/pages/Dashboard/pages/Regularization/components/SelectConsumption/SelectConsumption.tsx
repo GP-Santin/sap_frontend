@@ -11,17 +11,17 @@ interface ISelectConsumptionProps {
 }
 
 function SelectConsumption({ setConsumption }: ISelectConsumptionProps) {
-  const [openDropdown, setOpenDropdown] = useState(false);
+  const [openDropdown, setOpendDropDown] = useState(false);
   const [value, setValue] = useState<string>("");
 
   const closeDropdown = () => {
-    setOpenDropdown(!openDropdown);
+    setOpendDropDown(!openDropdown);
   };
 
   const handleClick = (value: string) => {
     setConsumption(value);
     setValue(value);
-    setOpenDropdown(!openDropdown);
+    setOpendDropDown(!openDropdown);
   };
 
   const dropdownRef = useOutsideClick({ callback: closeDropdown });
@@ -32,7 +32,7 @@ function SelectConsumption({ setConsumption }: ISelectConsumptionProps) {
         label="Consumo"
         $widthsize="med2"
         style={{ cursor: "pointer" }}
-        onClick={() => setOpenDropdown(!openDropdown)}
+        onClick={() => setOpendDropDown(!openDropdown)}
         defaultValue={value}
       />
       {openDropdown && (

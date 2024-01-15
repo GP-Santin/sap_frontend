@@ -18,9 +18,9 @@ function SelectShipping({ setTransportationCode }: ISelectShippingProps) {
     setOpenDropdown(!openDropdown);
   };
 
-  const handleClick = (value: string) => {
-    setTransportationCode(Number(value));
-    setValue(value);
+  const handleClick = (value: { label: string; value: string }) => {
+    setTransportationCode(Number(value.value));
+    setValue(value.label);
     setOpenDropdown(!openDropdown);
   };
 
@@ -48,7 +48,7 @@ function SelectShipping({ setTransportationCode }: ISelectShippingProps) {
         <StyledConsumptionDropdown ref={dropdownRef}>
           <ul>
             {options.map((option, index) => (
-              <li key={index} onClick={() => handleClick(option.label)}>
+              <li key={index} onClick={() => handleClick(option)}>
                 {option.label}
               </li>
             ))}
