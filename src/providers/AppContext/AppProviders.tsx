@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { IAppContext, IAppProviderProps, ILoading } from "./@types";
 import { TLoginForm } from "../../pages/SAPLogin/components/LoginForm/schema";
 import { AxiosError } from "axios";
@@ -113,7 +113,6 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
     }
   };
 
-
   const checkAndFetchData = async (
     key: string,
     fetchDataFunc: () => Promise<void>
@@ -149,7 +148,6 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
       setSessionCookie(sessionId);
 
       if (sessionId && accounts && accounts.length > 0) {
-
         await toast.promise(checkAndFetchData("@items", getItems), {
           pending: "Carregando itens...",
           success: "Itens carregados com sucesso!",
@@ -191,19 +189,18 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
 
         await getLastPurchaseRequest();
       }
+      navigate("/dashboard");
     } catch (error: AxiosError | any) {
       if (error.response?.status === 401) {
         toast.error("Usuário sem acesso à base solicitada.");
       } else {
+        console.error(error);
         toast.error("Usuário ou senha inválidos.");
       }
     } finally {
-      navigate("/dashboard");
+      setLoading(false);
     }
   };
-
-    
-
 
   return (
     <AppContext.Provider
