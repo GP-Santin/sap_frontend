@@ -36,7 +36,7 @@ function SelectPaymentMethod({ setPaymentMethod }: ISelectPaymentMethodProps) {
     <StyledConsumptionContainer>
       <Input
         label="Forma de pagamento"
-        $widthsize="med2"
+        $widthsize="large3"
         style={{ cursor: "pointer" }}
         onClick={() => setOpenDropdown(!openDropdown)}
         defaultValue={value}

@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./styles.css";
 import {
   BurguerStyled,
   StyledIconContainer,
   StyledList,
   StyledListTitle,
+  StyledLogout,
   StyledMenu,
   StyledNav,
 } from "./styles";
@@ -13,6 +14,7 @@ import sunIcon from "../../icons/sun.svg";
 import moonIcon from "../../icons/moon.svg";
 import { Icon } from "./styles";
 import { useMsal } from "@azure/msal-react";
+import { UserContext } from "../../providers/UserContext/UserContext";
 
 function NavBar({ toggleTheme, theme }: any) {
   const [burguerClass, setBurguerClass] = useState("burguer-bar unclicked");
@@ -22,6 +24,7 @@ function NavBar({ toggleTheme, theme }: any) {
   const [activeSection, setActiveSection] = useState("section deactivated");
   const { instance } = useMsal();
   const activeUser = instance.getAllAccounts()[0];
+  const { logoutSAP } = useContext(UserContext);
 
   const updateMenu = () => {
     if (!isMenuClicked) {
@@ -89,6 +92,7 @@ function NavBar({ toggleTheme, theme }: any) {
               </ul>
             )}
           </StyledList>
+          <StyledLogout onClick={() => logoutSAP()}>Logout</StyledLogout>
         </ul>
       </StyledMenu>
     </>

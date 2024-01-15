@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const StyledLineItems = styled.div`
   display: flex;
+  flex-wrap: wrap;
   align-items: end;
   gap: 1rem;
 `;

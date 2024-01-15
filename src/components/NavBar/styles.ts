@@ -78,3 +78,8 @@ export const Icon = styled.img`
   top: 0.75rem;
   right: 1rem;
 `;
+
+export const StyledLogout = styled.a`
+  position: absolute;
+  bottom: 2%;
+`;

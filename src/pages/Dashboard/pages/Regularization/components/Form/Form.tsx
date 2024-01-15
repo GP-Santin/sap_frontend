@@ -12,7 +12,6 @@ import {
   StyledContainerFields,
   StyledForm,
   StyledItemsContainer,
-  StyledRadioContainer,
   StyledTextArea,
 } from "../../../PurchaseRequests/components/Form/styles";
 import Table from "./Table";
@@ -53,8 +52,8 @@ function Form() {
   const onSubmit: SubmitHandler<IOrderRequest> = (formData) => {
     const baseRequest: IOrderRequest = {
       RequriedDate: formData.RequriedDate,
-      TaxDate: formData.TaxDate,
-      DocDueDate: formData.DocDueDate,
+      // TaxDate: formData.TaxDate,
+      // DocDueDate: formData.DocDueDate,
       U_SNT_Suprimento: supplier,
       U_SNT_SC_Manut: maintence,
       Comments: comments,
@@ -64,9 +63,9 @@ function Form() {
       DocTotal: docTotal ? parseFloat(docTotal) : 0,
       Project: docProject,
       SalesPersonCode: Number(salesPerson),
-      U_SNT_Consumo: consumption,
-      TransportationCode: transportationCode,
-      U_SNT_MetodoPagto: paymentMethod,
+      // U_SNT_Consumo: consumption,
+      // TransportationCode: transportationCode,
+      // U_SNT_MetodoPagto: paymentMethod,
     };
 
     if (listItems.length > 0) {
@@ -97,7 +96,6 @@ function Form() {
       setListItems(savedItems);
     }
     getActiveUserSAP(activeUser);
-    console.log(paymentMethod, transportationCode);
   }, [lineTotal, docTotal]);
 
   return (
@@ -109,19 +107,27 @@ function Form() {
               label="Data necessária"
               setRegister="RequriedDate"
             />
-            <DatePickerComponent
+            {/* <DatePickerComponent
               label="Data do documento"
               setRegister="TaxDate"
             />
             <DatePickerComponent
               label="Data do vencimento"
               setRegister="DocDueDate"
-            />
+            /> */}
             <BusinessPartners
               businessPartner={businessPartner}
               setBusinessPartner={setBusinessPartner}
             />
+            {/* <SelectConsumption setConsumption={setConsumption} />
+            <SelectShipping setTransportationCode={setTransportationCode} />
+            <SelectPaymentMethod setPaymentMethod={setPaymentMethod} /> */}
           </StyledLineItems>
+          <div>
+            <RadioSupplier setSupplier={setSupplier} />
+            <RadioMan setMaintence={setMaintence} />
+          </div>
+          <h3>Adicionar Linhas do documento</h3>
           <SelectItemsRegularization
             setItems={setItems}
             listItems={listItems}
@@ -138,22 +144,6 @@ function Form() {
             setLineTotal={setLineTotal}
             lineTotal={lineTotal}
           />
-          <div style={{ display: "flex", gap: "1rem" }}>
-            <StyledRadioContainer>
-              <RadioSupplier setSupplier={setSupplier} />
-              <RadioMan setMaintence={setMaintence} />
-            </StyledRadioContainer>
-            <div
-              style={{
-                display: "flex",
-                gap: "1rem",
-              }}
-            >
-              <SelectConsumption setConsumption={setConsumption} />
-              <SelectShipping setTransportationCode={setTransportationCode} />
-              <SelectPaymentMethod setPaymentMethod={setPaymentMethod} />
-            </div>
-          </div>
         </StyledContainerFields>
         {listItems.length > 0 && (
           <StyledItemsContainer>

@@ -38,7 +38,7 @@ function SelectShipping({ setTransportationCode }: ISelectShippingProps) {
   return (
     <StyledConsumptionContainer>
       <Input
-        $widthsize="large1"
+        $widthsize="large3"
         label="Forma de envio"
         onClick={() => setOpenDropdown(!openDropdown)}
         defaultValue={value}

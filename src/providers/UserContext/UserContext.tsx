@@ -6,6 +6,8 @@ import ModalComponent from "../../components/Modal/Modal";
 import apiSAP from "../../middleware/handleRequest.middleware";
 import { IOrderRequest } from "../../pages/Dashboard/pages/Regularization/components/Form/@types";
 import { ISalesPerson } from "../AppContext/@types";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export const UserContext = createContext({} as IUserContext);
 
@@ -13,6 +15,8 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState("");
   const [shouldReload, setShouldReload] = useState(false);
+
+  const navigate = useNavigate();
 
   const createPurchaseRequest = async (formData: IPurchaseRequest) => {
     try {
@@ -52,6 +56,16 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     }
   };
 
+  const logoutSAP = async () => {
+    try {
+      await apiSAP.post("/Logout");
+      toast.success("Logout efetuado com sucesso");
+      navigate("/login");
+    } catch (error: AxiosError | any) {
+      console.error(error);
+    }
+  };
+
   const closeModal = () => {
     setIsModalOpen(false);
     setShouldReload(true);
@@ -69,6 +83,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         createPurchaseRequest,
         getActiveUserSAP,
         createPurchaseQuotations,
+        logoutSAP,
       }}
     >
       {children}

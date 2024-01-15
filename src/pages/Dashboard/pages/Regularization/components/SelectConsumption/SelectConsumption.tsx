@@ -30,7 +30,7 @@ function SelectConsumption({ setConsumption }: ISelectConsumptionProps) {
     <StyledConsumptionContainer>
       <Input
         label="Consumo"
-        $widthsize="med2"
+        $widthsize="large3"
         style={{ cursor: "pointer" }}
         onClick={() => setOpendDropDown(!openDropdown)}
         defaultValue={value}
