@@ -20,4 +20,6 @@ export interface IOrderRequest {
   DocTotal: number;
   Project: string;
   SalesPersonCode: number;
+  U_SNT_Consumo: string;
+  TransportationCode: number;
 }

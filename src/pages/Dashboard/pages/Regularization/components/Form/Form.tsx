@@ -21,6 +21,8 @@ import BusinessPartners from "../../../../../../components/BusinessPartners/Busi
 import SelectItemsRegularization from "../../../../../../components/SelectItemsRegularization/SelectItemsRegularization";
 import { Button } from "../../../../../../components/Button/Button";
 import { useMsal } from "@azure/msal-react";
+import SelectConsumption from "../SelectConsumption/SelectConsumption";
+import SelectShipping from "../SelectShipping/SelectShipping";
 
 function Form() {
   const owner = localStorage.getItem("@owner");
@@ -43,6 +45,8 @@ function Form() {
   const [businessPartner, setBusinessPartner] = useState<string>("");
   const [docTotal, setDocTotal] = useState<string>("");
   const [lineTotal, setLineTotal] = useState<string>("");
+  const [consumption, setConsumption] = useState<string>("");
+  const [transportationCode, setTransportationCode] = useState<number>(-1);
 
   const onSubmit: SubmitHandler<IOrderRequest> = (formData) => {
     const baseRequest: IOrderRequest = {
@@ -56,6 +60,8 @@ function Form() {
       DocTotal: docTotal ? parseFloat(docTotal) : 0,
       Project: docProject,
       SalesPersonCode: Number(salesPerson),
+      U_SNT_Consumo: consumption,
+      TransportationCode: transportationCode,
     };
 
     if (listItems.length > 0) {
@@ -86,7 +92,6 @@ function Form() {
       setListItems(savedItems);
     }
     getActiveUserSAP(activeUser);
-    console.log(owner);
   }, [lineTotal, docTotal]);
 
   return (
@@ -116,10 +121,21 @@ function Form() {
             setLineTotal={setLineTotal}
             lineTotal={lineTotal}
           />
-          <StyledRadioContainer>
-            <RadioSupplier setSupplier={setSupplier} />
-            <RadioMan setMaintence={setMaintence} />
-          </StyledRadioContainer>
+          <div style={{ display: "flex", gap: "1rem" }}>
+            <StyledRadioContainer>
+              <RadioSupplier setSupplier={setSupplier} />
+              <RadioMan setMaintence={setMaintence} />
+            </StyledRadioContainer>
+            <div
+              style={{
+                display: "flex",
+                gap: "1rem",
+              }}
+            >
+              <SelectConsumption setConsumption={setConsumption} />
+              <SelectShipping setTransportationCode={setTransportationCode} />
+            </div>
+          </div>
         </StyledContainerFields>
         {listItems.length > 0 && (
           <StyledItemsContainer>
