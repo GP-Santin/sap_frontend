@@ -163,13 +163,13 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
     <StyledItemContainer>
       <StyledLineItems>
         <Input
-          $widthsize="large3"
+          widthsize="large3"
           label="Nº do item"
           value={itemCode}
           onChange={handleItemCodeChange}
         />
         <Input
-          $widthsize="large3"
+          widthsize="large3"
           label="Item"
           defaultValue={itemDescription}
           onChange={handleItemChange}
@@ -177,14 +177,14 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
           id="itemDescription"
         />
         <Input
-          $widthsize="small2"
+          widthsize="small2"
           label="Quantidade"
           onChange={handleQuantityChange}
           type="text"
           value={quantity}
         />
         <Input
-          $widthsize="small2"
+          widthsize="small2"
           label="Preço unitário"
           type="text"
           placeholder="0.00"

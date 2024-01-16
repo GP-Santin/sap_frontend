@@ -6,7 +6,7 @@ import HomePage from "../pages/SAPLogin/SAPLogin";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import PurchaseRequests from "../pages/Dashboard/pages/PurchaseRequests/PurchaseRequests";
 import Regularization from "../pages/Dashboard/pages/Regularization/Regularization";
-function RoutesMain({ toggleTheme, theme }: any) {
+function RoutesMain({ toggleTheme, theme }: INavProps) {
   return (
     <Routes>
       <Route element={<PublicRoutes />}>
@@ -16,11 +16,11 @@ function RoutesMain({ toggleTheme, theme }: any) {
         <Route path="/login" element={<HomePage />} />
         <Route
           path="/dashboard/purchase-requests"
-          element={<PurchaseRequests />}
+          element={<PurchaseRequests toggleTheme={toggleTheme} theme={theme} />}
         />
         <Route
           path="/dashboard/regularization"
-          element={<Regularization />}
+          element={<Regularization toggleTheme={toggleTheme} theme={theme} />}
         ></Route>
       </Route>
       <Route

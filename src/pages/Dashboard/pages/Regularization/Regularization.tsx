@@ -3,10 +3,10 @@ import { ContentContainer } from "../PurchaseRequests/styles";
 import Form from "./components/Form/Form";
 import { RegularizationContainer } from "./styles";
 
-function Regularization() {
+function Regularization({ theme, toggleTheme }: INavProps) {
   return (
     <RegularizationContainer>
-      <NavBar />
+      <NavBar toggleTheme={toggleTheme} theme={theme} />
       <ContentContainer>
         <h2>Regularização</h2>
         <Form />

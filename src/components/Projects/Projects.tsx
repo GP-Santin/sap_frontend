@@ -62,7 +62,7 @@ function Projects({ setProject, managementCode }: IProjectProps) {
     <StyledProjectsContainer>
       <Input
         label="Projeto"
-        $widthsize="small2"
+        widthsize="small2"
         onClick={handleOpenDropdown}
         value={inputValue}
         style={{ cursor: "pointer" }}

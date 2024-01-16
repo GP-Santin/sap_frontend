@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IBusinessPartner } from "../../providers/AppContext/@types";
 import { Input } from "../Input/Input";
 import {
@@ -7,7 +7,10 @@ import {
 } from "./styles";
 import { BusinessPartnerProps } from "./@types";
 
-function BusinessPartners({ setBusinessPartner, businessPartner }: BusinessPartnerProps) {
+function BusinessPartners({
+  setBusinessPartner,
+  businessPartner,
+}: BusinessPartnerProps) {
   const [businessPartnersFiltered, setBusinessPartnersFiltered] = useState<
     IBusinessPartner[]
   >([]);
@@ -15,6 +18,10 @@ function BusinessPartners({ setBusinessPartner, businessPartner }: BusinessPartn
   const businessPartners: IBusinessPartner[] = JSON.parse(
     localStorage.getItem("@businesspartners") || "[]"
   );
+
+  useEffect(()=> {
+    
+  })
 
   const handleFilterBusinessPartners = (
     inputValue: string
@@ -47,9 +54,9 @@ function BusinessPartners({ setBusinessPartner, businessPartner }: BusinessPartn
   return (
     <StyledBusinessPartnersContainer>
       <Input
-        $widthsize="large3"
+        widthsize="large3"
         label="Fornecedor"
-        style={{ maxWidth: "12rem" }}
+        style={{ width: "8rem", maxWidth: "12rem" }}
         onChange={handleBusinessPartnerChange}
         value={businessPartner}
       />
@@ -64,7 +71,7 @@ function BusinessPartners({ setBusinessPartner, businessPartner }: BusinessPartn
                   setBusinessDropdown(false);
                 }}
               >
-                {filteredPartner.CardCode} - {filteredPartner.CardName}
+                {filteredPartner.CardCode} - {filteredPartner.CardName} -
               </li>
             ))}
           </ul>

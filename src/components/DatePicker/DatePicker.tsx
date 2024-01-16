@@ -31,7 +31,7 @@ function DatePickerComponent({ setRegister, label }: IDatePickerProps) {
         dateFormat="dd/MM/yyyy"
         locale={ptBr}
         customInput={
-          <Input $widthsize="large3" style={{ maxWidth: "12rem" }} />
+          <Input widthsize="large3" style={{ maxWidth: "12rem" }} />
         }
       />
     </StyledErrorContainer>

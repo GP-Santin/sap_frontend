@@ -37,7 +37,7 @@ function MainUsage({ setUsage }: IMainUsageProps) {
     <StyledProjectsContainer>
       <Input
         label="Uso principal"
-        $widthsize="large3"
+        widthsize="large3"
         onClick={handleOpenDropdown}
         defaultValue={inputValue}
         style={{ cursor: "pointer" }}

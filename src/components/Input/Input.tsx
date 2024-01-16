@@ -3,7 +3,7 @@ import { ContainerInputSyled, IInputProps, InputStyled, StyledCurrency } from ".
 
 export const Input = forwardRef(
   (
-    { span, $widthsize, label, error, ...rest }: IInputProps,
+    { span, widthsize, label, error, ...rest }: IInputProps,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     return (
@@ -11,7 +11,7 @@ export const Input = forwardRef(
         {label ? <label htmlFor={rest.name}>{label}</label> : null}
         <InputStyled
           id={rest.name}
-          $widthsize={$widthsize}
+          widthsize={widthsize}
           name={rest.name}
           ref={ref}
           type="text"

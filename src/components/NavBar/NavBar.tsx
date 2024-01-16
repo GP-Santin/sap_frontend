@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./styles.css";
 import {
   BurguerStyled,
@@ -16,7 +16,7 @@ import { Icon } from "./styles";
 import { useMsal } from "@azure/msal-react";
 import { UserContext } from "../../providers/UserContext/UserContext";
 
-function NavBar({ toggleTheme, theme }: any) {
+function NavBar({ toggleTheme, theme }: INavProps) {
   const [burguerClass, setBurguerClass] = useState("burguer-bar unclicked");
   const [menuClass, setMenuClass] = useState("menu hidden");
   const [isMenuClicked, setIsMenuClicked] = useState(false);
@@ -64,7 +64,7 @@ function NavBar({ toggleTheme, theme }: any) {
         <StyledIconContainer>
           <h3>{activeUser?.name}</h3>
           <Icon
-            src={theme === "light" ? moonIcon : sunIcon}
+            src={theme == "light" ? moonIcon : sunIcon}
             alt=""
             width={25}
             onClick={toggleTheme}

@@ -110,13 +110,13 @@ const SelectItems: React.FC<ISelectItemProps> = ({
     <StyledItemContainer>
       <StyledLineItems>
         <Input
-          $widthsize="large3"
+          widthsize="large3"
           label="Nº do item"
           value={itemCode}
           onChange={handleItemCodeChange}
         />
         <Input
-          $widthsize="large3"
+          widthsize="large3"
           label="Item"
           defaultValue={itemDescription}
           onChange={handleItemChange}
@@ -124,7 +124,7 @@ const SelectItems: React.FC<ISelectItemProps> = ({
           id="itemDescription"
         />
         <Input
-          $widthsize="small2"
+          widthsize="small2"
           label="Quantidade"
           defaultValue={quantity}
           onChange={handleQuantityChange}

@@ -68,7 +68,7 @@ function Management({
     <StyledProjectsContainer>
       <Input
         label="Gerencial"
-        $widthsize="small2"
+        widthsize="small2"
         style={{ cursor: "pointer" }}
         onClick={showAllItems}
         onChange={handleFilterManagement}

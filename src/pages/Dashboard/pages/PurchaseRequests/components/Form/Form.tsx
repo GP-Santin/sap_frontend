@@ -47,7 +47,6 @@ function Form() {
         ...baseRequest,
         DocumentLines: listItems,
       };
-      console.log(requestWithItems);
       createPurchaseRequest(requestWithItems);
     } else {
       createPurchaseRequest(baseRequest);
