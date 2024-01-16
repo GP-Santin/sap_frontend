@@ -1,4 +1,3 @@
-import { AccountInfo } from "@azure/msal-browser";
 import { TLoginForm } from "../../pages/SAPLogin/components/LoginForm/schema";
 
 export interface IAppProviderProps {
@@ -62,4 +61,14 @@ export interface IAppContext {
   items: IItem[];
   salesPerson: ISalesPerson;
   appLogin: (formData: TLoginForm) => Promise<void>;
+}
+
+export interface IUsage {
+  ID: number;
+  Usage: string;
+}
+
+export interface IUsageResponse {
+  value: IUsage[];
+  "odata.nextLink": string;
 }
