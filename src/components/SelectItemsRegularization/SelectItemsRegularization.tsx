@@ -112,6 +112,7 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
         Quantity: parseFloat(quantity),
         UnitPrice: parseFloat(unitPrice),
         LineTotal: parseFloat(lineTotal),
+        WarehouseCode: "GUI900"
       };
       setItems(
         (
@@ -124,6 +125,7 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
             UnitPrice: number;
             U_SNT_Finalidade: string;
             LineTotal: number;
+            WarehouseCode: string;
           }[]
         ) => [...prevItems, newItem]
       );

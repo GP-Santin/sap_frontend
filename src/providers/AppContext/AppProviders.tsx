@@ -1,5 +1,5 @@
-import { createContext, useState } from "react";
-import { IAppContext, IAppProviderProps, ILoading } from "./@types";
+import { createContext, useEffect, useState } from "react";
+import { IAppContext, IAppProviderProps, ILoading, IUsage } from "./@types";
 import { TLoginForm } from "../../pages/SAPLogin/components/LoginForm/schema";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
@@ -9,6 +9,7 @@ import { IBusinessPartner, IItem, ISalesPerson } from "../AppContext/@types";
 import {
   fetchBusinessPartners,
   fetchItems,
+  fetchMainUsage,
   fetchSalesPersons,
 } from "./fetchDatas";
 import apiSAP from "../../middleware/handleRequest.middleware";
@@ -91,6 +92,23 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
     }
   };
 
+  const getUsage = async () => {
+    const allUsages: IUsage[] = [];
+    let nextLink: string | undefined =
+      "NotaFiscalUsage?$select= ID, Usage&$orderby=ID asc";
+    try {
+      while (nextLink) {
+        const response = await fetchMainUsage(nextLink);
+        const { value } = response;
+        nextLink = response["odata.nextLink"];
+        allUsages.push(...value);
+      }
+      localStorage.setItem("@usage", JSON.stringify(allUsages));
+    } catch (error: AxiosError | any) {
+      console.error(error);
+    }
+  };
+
   const getLastPurchaseRequest = async () => {
     try {
       const response = await apiSAP.get(
@@ -146,7 +164,7 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
       const sessionId = response.data.SessionId;
       localStorage.setItem("@session", sessionId);
       setSessionCookie(sessionId);
-
+      localStorage.setItem("@base", formData.CompanyDB.substring(7, 10));
       if (sessionId && accounts && accounts.length > 0) {
         await toast.promise(checkAndFetchData("@items", getItems), {
           pending: "Carregando itens...",
@@ -185,6 +203,12 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
           pending: "Carregando projetos...",
           success: "Projetos carregados com sucesso!",
           error: "Erro ao carregar projetos.",
+        });
+
+        await toast.promise(checkAndFetchData("@usage", getUsage), {
+          pending: "Carregando usos...",
+          success: "Usos carregados com sucesso!",
+          error: "Erro ao carregar usos.",
         });
 
         await getLastPurchaseRequest();

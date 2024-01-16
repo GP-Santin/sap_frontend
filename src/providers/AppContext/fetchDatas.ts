@@ -1,5 +1,10 @@
 import apiSAP from "../../middleware/handleRequest.middleware";
-import { IItemsResponse, IBusinessResponse, ISalesPersonResponse } from "./@types";
+import {
+  IItemsResponse,
+  IBusinessResponse,
+  ISalesPersonResponse,
+  IUsageResponse,
+} from "./@types";
 
 export const fetchItems = async (link: string): Promise<IItemsResponse> => {
   const response = await apiSAP.get<IItemsResponse>(link);
@@ -17,5 +22,10 @@ export const fetchSalesPersons = async (
   link: string
 ): Promise<ISalesPersonResponse> => {
   const response = await apiSAP.get<ISalesPersonResponse>(link);
+  return response.data;
+};
+
+export const fetchMainUsage = async (link: string): Promise<IUsageResponse> => {
+  const response = await apiSAP.get<IUsageResponse>(link);
   return response.data;
 };

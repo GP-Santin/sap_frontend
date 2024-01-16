@@ -7,6 +7,7 @@ export interface IItemOrder {
   U_SNT_Finalidade: string;
   UnitPrice: number;
   LineTotal: number;
+  WarehouseCode: string;
 }
 
 export interface IOrderRequest {

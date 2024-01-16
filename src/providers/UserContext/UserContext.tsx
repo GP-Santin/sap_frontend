@@ -34,7 +34,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       const { data } = await apiSAP.post("/PurchaseQuotations", formData);
       setModalContent(`Nº da solicitação: ${data.DocNum}`);
       setIsModalOpen(true);
-      console.log(data);
+      localStorage.setItem("@savedItems", "");
     } catch (error: AxiosError | any) {
       console.error(error);
     }
