@@ -8,6 +8,7 @@ export interface IItemOrder {
   UnitPrice: number;
   LineTotal: number;
   WarehouseCode: string;
+  Usage: number;
 }
 
 export interface IOrderRequest {

@@ -6,6 +6,7 @@ import {
   StyledMinus,
   StyledTrashIcon,
 } from "../../../PurchaseRequests/components/Form/styles";
+import { IUsage } from "../../../../../../providers/AppContext/@types";
 
 interface TableProps {
   listItems: IItemOrder[];
@@ -61,9 +62,27 @@ function Table({
     }
   };
 
+  const getUsageDescription = (item: IItemOrder): string => {
+    const localStorageUsage = JSON.parse(
+      localStorage.getItem("@usage") || "[]"
+    );
+
+    const usageId = item.Usage;
+
+    if (localStorageUsage.some((usage: IUsage) => usage.ID === usageId)) {
+      const matchedUsage = localStorageUsage.find(
+        (usage: IUsage) => usage.ID === usageId
+      );
+
+      return matchedUsage ? matchedUsage.Usage : "";
+    }
+
+    return "";
+  };
+
   useEffect(() => {
     setProjetDoc();
-  });
+  }, [listItems]);
 
   return (
     <StyledTable>
@@ -76,6 +95,7 @@ function Table({
           <th>Valor total </th>
           <th>Gerencial</th>
           <th>Projeto</th>
+          <th>Uso</th>
         </tr>
       </thead>
       <tbody>
@@ -92,6 +112,7 @@ function Table({
             <td>R$ {item.LineTotal}</td>
             <td>{item.CostingCode2}</td>
             <td>{item.ProjectCode}</td>
+            <td>{getUsageDescription(item)}</td>
             <td>
               <StyledTrashIcon onClick={() => handleDeleteItem(index)} />
             </td>

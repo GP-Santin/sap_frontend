@@ -48,6 +48,7 @@ function Form() {
   const [consumption, setConsumption] = useState<string>("");
   const [transportationCode, setTransportationCode] = useState<number>(-1);
   const [paymentMethod, setPaymentMethod] = useState<string>("");
+  const [usage, setUsage] = useState<string>("");
 
   const onSubmit: SubmitHandler<IOrderRequest> = (formData) => {
     const baseRequest: IOrderRequest = {
@@ -144,6 +145,8 @@ function Form() {
             handleDocTotalChange={handleDocTotalChange}
             setLineTotal={setLineTotal}
             lineTotal={lineTotal}
+            setUsage={setUsage}
+            usage={usage}
           />
         </StyledContainerFields>
         {listItems.length > 0 && (

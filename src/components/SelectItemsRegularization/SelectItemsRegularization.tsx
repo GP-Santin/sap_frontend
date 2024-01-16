@@ -13,6 +13,7 @@ import Management from "../Management/Management";
 import { useOutsideClick } from "../../hooks/outsideClick";
 import { toast } from "react-toastify";
 import { IItemOrder } from "../../pages/Dashboard/pages/Regularization/components/Form/@types";
+import MainUsage from "../MainUsage/MainUsage";
 
 const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
   setItems,
@@ -27,6 +28,8 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
   setDocTotal,
   lineTotal,
   setLineTotal,
+  usage,
+  setUsage,
 }) => {
   const [itemCode, setItemCode] = useState("");
   const [itemDescription, setItemDescription] = useState("");
@@ -100,7 +103,7 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
       quantity &&
       project &&
       management &&
-      unitPrice 
+      unitPrice
     ) {
       const newItem = {
         LineNum: listItems.indexOf(listItems[0]) + 1,
@@ -112,7 +115,8 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
         Quantity: parseFloat(quantity),
         UnitPrice: parseFloat(unitPrice),
         LineTotal: parseFloat(lineTotal),
-        WarehouseCode: "GUI900"
+        WarehouseCode: "GUI900",
+        Usage: parseFloat(usage),
       };
       setItems(
         (
@@ -126,6 +130,7 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
             U_SNT_Finalidade: string;
             LineTotal: number;
             WarehouseCode: string;
+            Usage: number;
           }[]
         ) => [...prevItems, newItem]
       );
@@ -140,6 +145,7 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
       setProject("");
       setUnitPrice("");
       setManagement("");
+      setUsage("");
 
       setFilteredItems([]);
     } else {
@@ -150,6 +156,8 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
     setOpenDropdown(false);
   };
   const dropdownRef = useOutsideClick({ callback: closeDropdown });
+
+  useEffect(() => {}, []);
 
   return (
     <StyledItemContainer>
@@ -206,6 +214,7 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
           project={project}
           managementCode={managementCode}
         />
+        <MainUsage setUsage={setUsage} />
         <StyledButton onClick={() => handleAddItemToList()}>
           Adicionar item
         </StyledButton>

@@ -15,4 +15,6 @@ export interface ISelectItemProps {
   setLineTotal: React.Dispatch<React.SetStateAction<string>>;
   lineTotal: string;
   handleDocTotalChange: (list: IItemOrder[]) => void;
+  usage: string;
+  setUsage: React.Dispatch<React.SetStateAction<string>>;
 }
