@@ -34,7 +34,6 @@ export const StyledMenu = styled.div`
   background-color: ${(props) => props.theme.colors.background};
   top: 5%;
   width: 20%;
-  height: auto;
 
   border-right: 1px solid ${(props) => props.theme.colors.buttonBackground};
 
@@ -74,4 +73,10 @@ export const Icon = styled.img`
   cursor: pointer;
   top: 0.75rem;
   right: 1rem;
+`;
+
+export const StyledUl = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 `;

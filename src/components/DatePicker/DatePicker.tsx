@@ -15,9 +15,6 @@ interface IDatePickerProps {
 function DatePickerComponent({ setRegister, label }: IDatePickerProps) {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const { register } = useFormContext();
-  const {
-    formState: { errors },
-  } = useFormContext();
 
   const handleDateChange = (date: Date) => {
     const dateFormatted = format(date, "yyyy-MM-dd");
@@ -37,9 +34,6 @@ function DatePickerComponent({ setRegister, label }: IDatePickerProps) {
           <Input $widthsize="large3" style={{ maxWidth: "12rem" }} />
         }
       />
-      {errors && errors.RequriedDate && (
-        <span>{String(errors.RequriedDate.message)}</span>
-      )}
     </StyledErrorContainer>
   );
 }

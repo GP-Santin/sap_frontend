@@ -7,16 +7,16 @@ export const StyledBusinessPartnersContainer = styled.div`
 export const StyledBusinessPartnersDropdown = styled.div`
   width: 100%;
   height: 10rem;
-  overflow-y: scroll;
+  overflow-y: auto;
   cursor: pointer;
   position: absolute;
   background-color: ${(props) => props.theme.colors.buttonBackground};
   color: ${(props) => props.theme.colors.text};
   z-index: 999;
   top: 100%;
-  padding: 0.25rem;
   overflow-x: hidden;
   border-bottom-left-radius: 8px;
+
 
   &::-webkit-scrollbar {
     width: 5px;
@@ -33,5 +33,13 @@ export const StyledBusinessPartnersDropdown = styled.div`
   @media (max-width: 1300px) {
     width: 50vw;
     top: 14%;
+  }
+
+  li {
+    padding-left: 0.25rem;
+  }
+
+  li:hover {
+    background-color: var(--color-black-2);
   }
 `;

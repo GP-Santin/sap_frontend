@@ -3,7 +3,7 @@ import { Input } from "../Input/Input";
 import { IItem } from "../../providers/AppContext/@types";
 import {
   StyledButton,
-  StyledDropdown,
+  StyledItemDropdown,
   StyledItemContainer,
   StyledLineItems,
 } from "./styles";
@@ -24,7 +24,7 @@ const SelectItems: React.FC<ISelectItemProps> = ({
 }) => {
   const [itemCode, setItemCode] = useState("");
   const [itemDescription, setItemDescription] = useState("");
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState("");
   const [filteredItems, setFilteredItems] = useState<IItem[]>([]);
   const [openDropdown, setOpenDropdown] = useState(false);
   const [managementCode, setmanagementCode] = useState<string>("");
@@ -53,7 +53,7 @@ const SelectItems: React.FC<ISelectItemProps> = ({
     setFilteredItems(filtered);
   };
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Number(e.target.value);
+    const value = e.target.value;
     setQuantity(value);
   };
   const addItemToInput = (selectedItem: IItem) => {
@@ -67,7 +67,7 @@ const SelectItems: React.FC<ISelectItemProps> = ({
         LineNum: listItems.indexOf(listItems[0]) + 1,
         ItemCode: itemCode,
         ItemDescription: itemDescription,
-        Quantity: quantity,
+        Quantity: Number(quantity),
         ProjectCode: project,
         CostingCode2: management,
         U_SNT_Finalidade: "1",
@@ -92,7 +92,7 @@ const SelectItems: React.FC<ISelectItemProps> = ({
       localStorage.setItem("@savedItems", JSON.stringify(updatedItems));
       setItemCode("");
       setItemDescription("");
-      setQuantity(0);
+      setQuantity("");
       setProject("");
       setManagement("");
 
@@ -131,7 +131,7 @@ const SelectItems: React.FC<ISelectItemProps> = ({
           type="text"
         />
         {filteredItems.length > 0 && openDropdown && (
-          <StyledDropdown ref={dropdownRef}>
+          <StyledItemDropdown ref={dropdownRef}>
             <ul>
               {filteredItems.map((filteredItem) => (
                 <li
@@ -142,7 +142,7 @@ const SelectItems: React.FC<ISelectItemProps> = ({
                 </li>
               ))}
             </ul>
-          </StyledDropdown>
+          </StyledItemDropdown>
         )}
         <Management
           setManagement={setManagement}

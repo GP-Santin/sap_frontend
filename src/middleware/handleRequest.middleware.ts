@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export const apiSAP = axios.create({
@@ -16,11 +17,10 @@ apiSAP.interceptors.response.use(
       window.location.href = "/login";
     } else {
       const { status, data } = error.response;
-
       if (status === 400) {
         switch (data.error.message.value) {
           case "540000009 - Specify the required date [OINV.ReqDate]":
-            toast.error("Preencha a data necessária", {
+            toast.error("Preencha a data da necessidade", {
               autoClose: false,
             });
             break;
@@ -30,7 +30,12 @@ apiSAP.interceptors.response.use(
             });
             break;
           case "Required date is missing (1)":
-            toast.error("Preencha a data necessária", { autoClose: false });
+            toast.error("Preencha a data da necessidade", { autoClose: false });
+            break;
+          case "Invalid session or session already timeout.":
+            toast.error("Sua sessão expirou, faca login novamente");
+            const navigate = useNavigate();
+            navigate("/login");
             break;
           default:
             toast.error(data.error.message.value, { autoClose: false });

@@ -110,7 +110,7 @@ export const StyledTextArea = styled.textarea`
   max-width: 64rem;
   min-height: 3rem;
 
-  border: 1px solid var(--color-primary);
+  border: 1px solid var(--color-hover);
   border-radius: 0.5rem;
 
   padding: 1rem;

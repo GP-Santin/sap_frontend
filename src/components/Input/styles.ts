@@ -14,7 +14,7 @@ export const InputStyled = styled.input<IInputProps>`
   width: 100%;
   height: 3rem;
 
-  border: 1px solid var(--color-primary);
+  border: 1px solid var(--color-hover);
   border-radius: 0.5rem;
 
   padding: 1rem;

@@ -7,6 +7,7 @@ import {
   StyledListTitle,
   StyledMenu,
   StyledNav,
+  StyledUl,
 } from "./styles";
 import { FaAngleDown } from "react-icons/fa";
 import sunIcon from "../../icons/sun.svg";
@@ -82,7 +83,7 @@ function NavBar({ toggleTheme, theme }: any) {
                 }}
               />
             </StyledListTitle>
-            <ul className={listActive}>
+            <StyledUl className={listActive}>
               <li>
                 <a href="/dashboard/purchase-requests">
                   Solicitação de Compras
@@ -91,7 +92,7 @@ function NavBar({ toggleTheme, theme }: any) {
               <li>
                 <a href="/dashboard/regularization">Regularização</a>
               </li>
-            </ul>
+            </StyledUl>
           </StyledList>
           <a onClick={() => logoutSAP()}>Logout</a>
         </ul>

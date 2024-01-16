@@ -45,4 +45,8 @@ export const StyledConsumptionDropdown = styled.div`
   li {
     padding: 0.2rem 0.5rem;
   }
+
+  li:hover {
+    background-color: var(--color-black-2);
+  }
 `;

@@ -53,6 +53,6 @@ export const StyledProjectDropdown = styled.div`
   }
 
   li:hover {
-    background-color: var(--color-border);
+    background-color: var(--color-black-2);
   }
 `;
