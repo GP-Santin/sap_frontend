@@ -15,6 +15,17 @@ import moonIcon from "../../icons/moon.svg";
 import { Icon } from "./styles";
 import { useMsal } from "@azure/msal-react";
 import { UserContext } from "../../providers/UserContext/UserContext";
+import { useOutsideClick } from "../../hooks/outsideClick";
+import { MdRequestQuote } from "react-icons/md";
+import { MdRequestPage } from "react-icons/md";
+import { FaShoppingCart } from "react-icons/fa";
+import { Backdrop } from "@mui/material";
+import { styled } from "@mui/system";
+
+const StyledBackdrop = styled(Backdrop)(({ theme }: any) => ({
+  zIndex: theme.zIndex.drawer + 1,
+  color: "#fff",
+}));
 
 function NavBar({ toggleTheme, theme }: INavProps) {
   const [burguerClass, setBurguerClass] = useState("burguer-bar unclicked");
@@ -23,6 +34,7 @@ function NavBar({ toggleTheme, theme }: INavProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(true);
   const [activeSection, setActiveSection] = useState("section deactivated");
   const [listActive, setListActive] = useState("list-unclicked");
+  const [isBackdropVisible, setIsBackdropVisible] = useState(false);
   const { instance } = useMsal();
   const activeUser = instance.getAllAccounts()[0];
   const { logoutSAP } = useContext(UserContext);
@@ -31,11 +43,18 @@ function NavBar({ toggleTheme, theme }: INavProps) {
     if (!isMenuClicked) {
       setBurguerClass("burguer-bar clicked");
       setMenuClass("menu visible");
+      setIsBackdropVisible(true);
     } else {
       setBurguerClass("burguer-bar unclicked");
       setMenuClass("menu hidden");
+      setIsBackdropVisible(false);
     }
     setIsMenuClicked(!isMenuClicked);
+  };
+
+  const closeMenu = () => {
+    setBurguerClass("burguer-bar unclicked");
+    setMenuClass("menu hidden");
   };
 
   const toggleDropdown = () => {
@@ -52,6 +71,8 @@ function NavBar({ toggleTheme, theme }: INavProps) {
       listActive === "list-unclicked" ? "list-clicked" : "list-unclicked"
     );
   };
+
+  const dropdownRef = useOutsideClick({ callback: closeMenu });
 
   return (
     <>
@@ -71,10 +92,11 @@ function NavBar({ toggleTheme, theme }: INavProps) {
           />
         </StyledIconContainer>
       </StyledNav>
-      <StyledMenu className={`menu ${menuClass}`}>
+      <StyledMenu className={`menu ${menuClass}`} ref={dropdownRef}>
         <ul id="sections">
           <StyledList onClick={toggleDropdown}>
             <StyledListTitle onClick={toggleSection} className={activeSection}>
+              <FaShoppingCart />
               Compras{" "}
               <FaAngleDown
                 style={{
@@ -85,11 +107,13 @@ function NavBar({ toggleTheme, theme }: INavProps) {
             </StyledListTitle>
             <StyledUl className={listActive}>
               <li>
+                <MdRequestQuote />
                 <a href="/dashboard/purchase-requests">
                   Solicitação de Compras
                 </a>
               </li>
               <li>
+                <MdRequestPage />
                 <a href="/dashboard/regularization">Regularização</a>
               </li>
             </StyledUl>
@@ -97,6 +121,7 @@ function NavBar({ toggleTheme, theme }: INavProps) {
           <a onClick={() => logoutSAP()}>Alterar base</a>
         </ul>
       </StyledMenu>
+      {/* <StyledBackdrop open={isBackdropVisible} onClick={updateMenu} /> */}
     </>
   );
 }

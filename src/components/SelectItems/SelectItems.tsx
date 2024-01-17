@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import { Input } from "../Input/Input";
 import { IItem } from "../../providers/AppContext/@types";
-import {
-  StyledButton,
-  StyledItemDropdown,
-  StyledItemContainer,
-  StyledLineItems,
-} from "./styles";
+import { StyledButton, StyledItemContainer, StyledLineItems } from "./styles";
 import { ISelectItemProps } from "./@types";
 import Projects from "../Projects/Projects";
 import Management from "../Management/Management";
@@ -131,7 +126,7 @@ const SelectItems: React.FC<ISelectItemProps> = ({
           type="text"
         />
         {filteredItems.length > 0 && openDropdown && (
-          <StyledItemDropdown ref={dropdownRef}>
+          <div ref={dropdownRef}>
             <ul>
               {filteredItems.map((filteredItem) => (
                 <li
@@ -142,7 +137,7 @@ const SelectItems: React.FC<ISelectItemProps> = ({
                 </li>
               ))}
             </ul>
-          </StyledItemDropdown>
+          </div>
         )}
         <Management
           setManagement={setManagement}

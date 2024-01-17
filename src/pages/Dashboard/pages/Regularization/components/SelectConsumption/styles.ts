@@ -47,6 +47,7 @@ export const StyledConsumptionDropdown = styled.div`
   }
 
   li:hover {
-    background-color: ${(props) => props.theme.colors.primarysoft};
+    color: ${(props) => props.theme.colors.primarysoft};
+    background-color: ${(props) => props.theme.colors.primarytint};
   }
 `;

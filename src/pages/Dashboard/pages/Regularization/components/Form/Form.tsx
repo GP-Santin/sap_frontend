@@ -24,7 +24,7 @@ import SelectConsumption from "../SelectConsumption/SelectConsumption";
 import SelectShipping from "../SelectShipping/SelectShipping";
 import SelectPaymentMethod from "../SelectPaymentMethod/SelectPaymentMethod";
 
-function Form({ theme, toggleTheme }: INavProps) {
+function Form({ theme }: INavProps) {
   const owner = localStorage.getItem("@owner");
   const salesPerson = localStorage.getItem("@salesPersonCode");
   const { accounts } = useMsal();

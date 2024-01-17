@@ -46,11 +46,6 @@ export const StyledMenu = styled.div`
     width: 100%;
     justify-content: center;
   }
-
-  a:hover {
-    color: var(--color-denim);
-    transition: all 0.5s;
-  }
 `;
 
 export const StyledList = styled.li`
@@ -88,4 +83,17 @@ export const StyledUl = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
+  li {
+    margin-left: 1rem;
+  }
+
+  li:hover {
+    color: var(--color-denim);
+    transition: all 0.25s;
+  }
+
+  a {
+    margin-left: 0.5rem;
+  }
 `;

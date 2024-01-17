@@ -22,6 +22,10 @@ export const StyledContainerFields = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+
+  h3 {
+    color: ${(props) => props.theme.colors.primarytint};
+  }
 `;
 
 export const StyledTableContainer = styled.div`
@@ -40,11 +44,13 @@ export const StyledTable = styled.table`
   }
 
   th {
+    color: ${(props) => props.theme.colors.primarytint};
     padding-right: 1.5rem;
     padding: 0.5rem;
   }
 
   td {
+    color: ${(props) => props.theme.colors.primarytint};
     padding: 0.5rem;
     text-align: center;
   }
@@ -72,6 +78,10 @@ export const StyledItemsContainer = styled.div`
   display: flex;
   gap: 1rem;
   flex-direction: column;
+
+  h3 {
+    color: ${(props) => props.theme.colors.primarytint};
+  }
 `;
 
 export const StyledRadioContainer = styled.div`
@@ -84,8 +94,12 @@ export const StyledTrashIcon = styled(FaRegTrashAlt)`
   cursor: pointer;
   width: 20px;
   height: 20px;
+  transform: translateY(0%);
+  transition: all 0.25s;
 
   &:hover {
+    transform: translateY(-10%);
+    color: var(--color-denim);
     transition: all 0.25s;
   }
 `;
@@ -94,6 +108,7 @@ export const StyledMinus: IconType = styled(FaMinus)`
   cursor: pointer;
 
   &:hover {
+    color: var(--color-denim);
     transition: all 0.25s;
   }
 `;
@@ -102,6 +117,7 @@ export const StyledPlus: IconType = styled(FaPlus)`
   cursor: pointer;
 
   &:hover {
+    color: var(--color-denim);
     transition: all 0.25s;
   }
 `;
@@ -109,8 +125,9 @@ export const StyledPlus: IconType = styled(FaPlus)`
 export const StyledTextArea = styled.textarea`
   max-width: 64rem;
   min-height: 3rem;
+  margin-top: -1rem;
 
-  border: 1px solid ${(props) => props.theme.colors.primarysoft};
+  border: 2px solid var(--color-primary);
   background-color: ${(props) => props.theme.colors.background};
   border-radius: 0.5rem;
 

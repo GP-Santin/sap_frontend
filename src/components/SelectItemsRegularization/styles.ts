@@ -32,11 +32,15 @@ export const StyledDropdown = styled.div`
   border: 1px solid var(--color-gray);
   border-radius: 0.5rem;
 
+  background-color: ${(props) => props.theme.colors.primarysoft};
+  color: ${(props) => props.theme.colors.primarytint};
+
   &::-webkit-scrollbar {
     width: 4px;
   }
 
   &::-webkit-scrollbar-thumb {
+    background-color: ${(props) => props.theme.colors.primarytint};
   }
 
   &::-webkit-scrollbar-track {
@@ -54,7 +58,8 @@ export const StyledDropdown = styled.div`
   }
 
   li:hover {
-    color: var(--color-gray);
+    color: ${(props) => props.theme.colors.primarysoft};
+    background-color: ${(props) => props.theme.colors.primarytint};
   }
 `;
 
@@ -72,7 +77,7 @@ export const StyledButton = styled.span`
   color: ${(props) => props.theme.colors.primarytint};
 
   &:hover {
-    transition: all 0.15s;
+    transition: all 0.25s;
     color: var(--color-white);
     background-color: var(--color-primary);
   }

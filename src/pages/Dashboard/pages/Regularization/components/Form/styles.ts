@@ -17,6 +17,13 @@ export const StyledTotalContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+
+    h3 {
+      color: ${(props) => props.theme.colors.primarytint};
+    }
+
+    p {
+      color: ${(props) => props.theme.colors.primarytint};
+    }
   }
 `;
-

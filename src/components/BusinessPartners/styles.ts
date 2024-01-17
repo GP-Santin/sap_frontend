@@ -9,13 +9,15 @@ export const StyledBusinessPartnersDropdown = styled.div`
   overflow-y: auto;
   cursor: pointer;
   position: absolute;
-  
+
   z-index: 999;
   top: 105%;
   overflow-x: hidden;
   border: 1px solid var(--color-gray);
   border-radius: 0.5rem;
   width: 30rem;
+  background-color: ${(props) => props.theme.colors.primarysoft};
+  color: ${(props) => props.theme.colors.primarytint};
 
   &::-webkit-scrollbar {
     width: 4px;
@@ -23,6 +25,10 @@ export const StyledBusinessPartnersDropdown = styled.div`
 
   &::-webkit-scrollbar-track {
     background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${(props) => props.theme.colors.primarytint};
   }
 
   @media (max-width: 1300px) {
@@ -36,6 +42,7 @@ export const StyledBusinessPartnersDropdown = styled.div`
   }
 
   li:hover {
-    color: var(--color-gray);
+    color: ${(props) => props.theme.colors.primarysoft};
+    background-color: ${(props) => props.theme.colors.primarytint};
   }
 `;
