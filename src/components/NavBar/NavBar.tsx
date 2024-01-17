@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import "./styles.css";
 import {
   BurguerStyled,
+  StyledBackdrop,
   StyledIconContainer,
   StyledList,
   StyledListTitle,
@@ -36,9 +37,11 @@ function NavBar({ toggleTheme, theme }: INavProps) {
     if (!isMenuClicked) {
       setBurguerClass("burguer-bar clicked");
       setMenuClass("menu visible");
+      setBackdrop(true);
     } else {
       setBurguerClass("burguer-bar unclicked");
       setMenuClass("menu hidden");
+      setBackdrop(false);
     }
     setIsMenuClicked(!isMenuClicked);
   };
@@ -46,6 +49,7 @@ function NavBar({ toggleTheme, theme }: INavProps) {
   const closeMenu = () => {
     setBurguerClass("burguer-bar unclicked");
     setMenuClass("menu hidden");
+    setBackdrop(false);
   };
 
   const toggleDropdown = () => {
@@ -112,6 +116,7 @@ function NavBar({ toggleTheme, theme }: INavProps) {
           <a onClick={() => logoutSAP()}>Alterar base</a>
         </ul>
       </StyledMenu>
+      {backdrop && <StyledBackdrop></StyledBackdrop>}
     </>
   );
 }

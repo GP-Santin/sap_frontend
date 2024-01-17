@@ -73,6 +73,16 @@ export const StyledListTitle = styled.div`
   }
 `;
 
+export const StyledBackdrop = styled.div`
+  width: 100%;
+  height: 94%;
+  margin-top: 3rem;
+  position: absolute;
+  z-index: 99;
+
+  background-color: rgba(0, 0, 0, 0.3);
+`;
+
 export const Icon = styled.img`
   cursor: pointer;
   top: 0.75rem;
