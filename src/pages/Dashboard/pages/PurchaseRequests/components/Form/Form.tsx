@@ -6,7 +6,6 @@ import SelectItems from "../../../../../../components/SelectItems/SelectItems";
 import {
   StyledContainerFields,
   StyledForm,
-  StyledItemsContainer,
   StyledRadioContainer,
   StyledTextArea,
 } from "./styles";
@@ -88,10 +87,10 @@ function Form({ theme }: INavProps) {
           </StyledRadioContainer>
         </StyledContainerFields>
         {listItems.length > 0 && (
-          <StyledItemsContainer>
+          <div>
             <h3>Itens</h3>
             <Table setListItems={setListItems} listItems={listItems} />
-          </StyledItemsContainer>
+          </div>
         )}
         <label>Observações</label>
         <StyledTextArea

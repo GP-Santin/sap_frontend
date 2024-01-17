@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 export const StyledLogin = styled.div`
-  {(props) => props.theme.colors.background};
-  => props.theme.colors.text};
+  background-color: ${(props) => props.theme.colors.background};
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -20,8 +19,6 @@ export const StyledLogin = styled.div`
 `;
 
 export const Button = styled.button`
-  
-  => props.theme.colors.buttonText};
   border: none;
   border-radius: 8px;
   padding: 0.5rem 1rem;

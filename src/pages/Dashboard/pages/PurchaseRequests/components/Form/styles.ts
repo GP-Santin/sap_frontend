@@ -29,11 +29,61 @@ export const StyledContainerFields = styled.div`
 `;
 
 export const StyledTableContainer = styled.div`
-  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  border-collapse: collapse;
   overflow: hidden;
+  width: 100%;
+
+  .quantity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
 `;
 
-export const StyledTable = styled.table`
+export const StyledItemsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const StyledItemContainer = styled.div`
+  display: flex;
+  background-color: ${(props) => props.theme.colors.background};
+  color: ${(props) => props.theme.colors.primarytint};
+  width: 100%;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
+
+export const StyledItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  height: 5rem;
+  width: 100%;
+
+  h4 {
+    width: 100%;
+    background-color: var(--color-primary);
+    padding: 1rem;
+    text-align: center;
+  }
+
+  p {
+    font-size: x-small;
+  }
+`;
+
+export const StyledTable = styled.div`
   width: 100%;
   border-collapse: collapse;
   overflow: hidden;
@@ -74,20 +124,23 @@ export const StyledErrorContainer = styled.div`
   }
 `;
 
-export const StyledItemsContainer = styled.div`
-  display: flex;
-  gap: 1rem;
-  flex-direction: column;
-
-  h3 {
-    color: ${(props) => props.theme.colors.primarytint};
-  }
-`;
-
 export const StyledRadioContainer = styled.div`
   display: flex;
   align-items: flex-end;
   gap: 1rem;
+`;
+
+export const StyledTrashContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  height: 6rem;
+  border-radius: 50%;
+
+  @media (min-width: 768px) {
+    background-color: transparent;
+  }
 `;
 
 export const StyledTrashIcon = styled(FaRegTrashAlt)`
@@ -96,11 +149,16 @@ export const StyledTrashIcon = styled(FaRegTrashAlt)`
   height: 20px;
   transform: translateY(0%);
   transition: all 0.25s;
+  border-radius: 50%;
+  border: 1px solid var(--color-primary);
 
   &:hover {
     transform: translateY(-10%);
     color: var(--color-denim);
     transition: all 0.25s;
+  }
+
+  @media (min-width: 768px) {
   }
 `;
 
