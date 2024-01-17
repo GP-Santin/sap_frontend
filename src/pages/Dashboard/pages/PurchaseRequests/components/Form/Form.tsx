@@ -1,4 +1,9 @@
-import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
+import {
+  useForm,
+  FormProvider,
+  SubmitHandler,
+  FieldErrors,
+} from "react-hook-form";
 import DatePickerComponent from "../../../../../../components/DatePicker/DatePicker";
 import { useContext, useEffect, useState } from "react";
 import { IItemRequest, IPurchaseRequest } from "./@types";
@@ -6,7 +11,6 @@ import SelectItems from "../../../../../../components/SelectItems/SelectItems";
 import {
   StyledContainerFields,
   StyledForm,
-  StyledItemsContainer,
   StyledRadioContainer,
   StyledTextArea,
 } from "./styles";
@@ -61,7 +65,7 @@ function Form({ theme }: INavProps) {
     getActiveUserSAP(activeUser);
   }, []);
 
-  const onSubmitError = (errors: any) => {
+  const onSubmitError = (errors: FieldErrors) => {
     console.error(errors);
   };
 
@@ -88,10 +92,10 @@ function Form({ theme }: INavProps) {
           </StyledRadioContainer>
         </StyledContainerFields>
         {listItems.length > 0 && (
-          <StyledItemsContainer>
+          <div>
             <h3>Itens</h3>
             <Table setListItems={setListItems} listItems={listItems} />
-          </StyledItemsContainer>
+          </div>
         )}
         <label>Observações</label>
         <StyledTextArea
