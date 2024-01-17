@@ -78,7 +78,7 @@ function NavBar({ toggleTheme, theme }: INavProps) {
               Compras{" "}
               <FaAngleDown
                 style={{
-                  transform: isDropdownOpen ? "rotate(0deg)" : "rotate(180deg)",
+                  transform: isDropdownOpen ? "rotate(180deg)" : "rotate(0deg)",
                   transition: "all ease-out 0.4s",
                 }}
               />

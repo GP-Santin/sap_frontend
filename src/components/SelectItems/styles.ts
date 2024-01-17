@@ -26,8 +26,7 @@ export const StyledDropdown = styled.div`
   overflow-y: scroll;
   cursor: pointer;
   position: absolute;
-  background-color: ${(props) => props.theme.colors.buttonBackground};
-  color: ${(props) => props.theme.colors.text};
+
   z-index: 999;
   top: 100%;
   padding: 0.25rem;
@@ -35,11 +34,10 @@ export const StyledDropdown = styled.div`
   border-bottom-left-radius: 8px;
 
   &::-webkit-scrollbar {
-    width: 5px;
+    width: 4px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: ${(props) => props.theme.colors.primary};
   }
 
   &::-webkit-scrollbar-track {
@@ -58,8 +56,7 @@ export const StyledItemDropdown = styled.div`
   overflow-y: scroll;
   cursor: pointer;
   position: absolute;
-  background-color: ${(props) => props.theme.colors.buttonBackground};
-  color: ${(props) => props.theme.colors.text};
+
   z-index: 999;
   top: 100%;
   padding: 0.25rem;
@@ -67,11 +64,10 @@ export const StyledItemDropdown = styled.div`
   border-bottom-left-radius: 8px;
 
   &::-webkit-scrollbar {
-    width: 5px;
+    width: 4px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: ${(props) => props.theme.colors.primary};
   }
 
   &::-webkit-scrollbar-track {
@@ -93,19 +89,18 @@ export const StyledButton = styled.span`
   display: flex;
   align-items: center;
   cursor: pointer;
-  color: ${(props) => props.theme.colors.text};
   font-weight: 700;
   font-size: 1rem;
   padding: 1rem;
-  background-color: ${(props) => props.theme.colors.background};
   border: 1px solid var(--color-primary);
   border-radius: 8rem;
   height: 3rem;
   margin-top: 1.3rem;
+  color: ${(props) => props.theme.colors.primarytint};
 
   &:hover {
-    background-color: ${(props) => props.theme.colors.primary};
-    color: ${(props) => props.theme.colors.text};
-    transition: all 0.25s;
+    transition: all 0.15s;
+    color: var(--color-white);
+    background-color: var(--color-primary);
   }
 `;

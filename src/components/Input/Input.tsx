@@ -3,7 +3,7 @@ import { ContainerInputSyled, IInputProps, InputStyled } from "../Input/styles";
 
 export const Input = forwardRef(
   (
-    { icon, widthsize, label, error, ...rest }: IInputProps,
+    { span, icon, widthsize, label, error, ...rest }: IInputProps,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     return (
@@ -17,7 +17,8 @@ export const Input = forwardRef(
           type="text"
           {...rest}
           icon={icon}
-        />
+          span={span}
+          />
       </ContainerInputSyled>
     );
   }

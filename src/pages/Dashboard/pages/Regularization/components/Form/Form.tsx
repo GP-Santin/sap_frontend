@@ -24,7 +24,7 @@ import SelectConsumption from "../SelectConsumption/SelectConsumption";
 import SelectShipping from "../SelectShipping/SelectShipping";
 import SelectPaymentMethod from "../SelectPaymentMethod/SelectPaymentMethod";
 
-function Form() {
+function Form({ theme, toggleTheme }: INavProps) {
   const owner = localStorage.getItem("@owner");
   const salesPerson = localStorage.getItem("@salesPersonCode");
   const { accounts } = useMsal();
@@ -126,8 +126,8 @@ function Form() {
             <SelectPaymentMethod setPaymentMethod={setPaymentMethod} />
           </StyledLineItems>
           <div>
-            <RadioSupplier setSupplier={setSupplier} />
-            <RadioMan setMaintence={setMaintence} />
+            <RadioSupplier theme={theme} setSupplier={setSupplier} />
+            <RadioMan theme={theme} setMaintence={setMaintence} />
           </div>
           <h3>Adicionar Linhas do documento</h3>
           <SelectItemsRegularization

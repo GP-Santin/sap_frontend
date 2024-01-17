@@ -15,7 +15,8 @@ export const InputStyled = styled.input<IInputProps>`
   width: 100%;
   height: 3rem;
 
-  border: 1px solid var(--color-hover);
+  color: ${(props) => props.theme.colors.primarytint};
+  border: 1px solid ${(props) => props.theme.colors.primarysoft};
   border-radius: 0.5rem;
 
   padding: 1rem;
@@ -25,8 +26,6 @@ export const InputStyled = styled.input<IInputProps>`
   font-family: var(--font-family-secondary);
   font-weight: var(--font-weight-1);
   font-size: var(--font-size-1);
-
-  color: ${(props) => props.theme.colors.text};
 
   ${({ widthsize }) => {
     switch (widthsize) {
@@ -83,6 +82,7 @@ export const ContainerInputSyled = styled.div`
   position: relative;
 
   label {
+    color: ${(props) => props.theme.colors.primarytint};
     width: auto;
   }
 
@@ -97,5 +97,3 @@ export const ContainerInputSyled = styled.div`
     right: 5%;
   }
 `;
-
-export const StyledCurrency = styled.span``;

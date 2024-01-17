@@ -4,10 +4,9 @@ declare module "styled-components" {
     title: string;
     colors: {
       background: string;
-      text: string;
-      buttonBackground: string;
-      buttonText: string;
-      primary: string;
+      primarytint: string;
+      primarysoft: string;
+      secondary: string;
     };
   }
 }

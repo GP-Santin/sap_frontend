@@ -10,6 +10,5 @@ export const StyledBurguer = styled.div`
   div {
     width: 2rem;
     height: 0.25rem;
-    background-color: ${(props) => props.theme.primary};
   }
 `;

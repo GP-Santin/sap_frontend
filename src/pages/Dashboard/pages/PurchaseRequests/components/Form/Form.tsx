@@ -17,7 +17,7 @@ import { UserContext } from "../../../../../../providers/UserContext/UserContext
 import Table from "./Table";
 import { useMsal } from "@azure/msal-react";
 
-function Form() {
+function Form({ theme }: INavProps) {
   const owner = localStorage.getItem("@owner");
   const { accounts } = useMsal();
   const activeUser = accounts[0].username;
@@ -83,8 +83,8 @@ function Form() {
             management={management}
           />
           <StyledRadioContainer>
-            <RadioSupplier setSupplier={setSupplier} />
-            <RadioMan setMaintence={setMaintence} />
+            <RadioSupplier theme={theme} setSupplier={setSupplier} />
+            <RadioMan theme={theme} setMaintence={setMaintence} />
           </StyledRadioContainer>
         </StyledContainerFields>
         {listItems.length > 0 && (

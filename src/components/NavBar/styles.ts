@@ -1,16 +1,19 @@
 import styled from "styled-components";
 
 export const BurguerStyled = styled.div`
-  background-color: ${(props) => props.theme.colors.text};
+  background-color: ${(props) => props.theme.colors.primarytint};
 `;
 
 export const StyledNav = styled.nav`
-  background-color: ${(props) => props.theme.colors.background};
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid ${(props) => props.theme.colors.buttonBackground};
+  border-bottom: 1px solid ${(props) => props.theme.colors.primarysoft};
   position: relative;
+
+  h3 {
+    color: ${(props) => props.theme.colors.primarytint};
+  }
 
   @media (max-width: 768px) {
     h3 {
@@ -30,21 +33,27 @@ export const StyledIconContainer = styled.div`
 `;
 
 export const StyledMenu = styled.div`
-  color: ${(props) => props.theme.colors.text};
-  background-color: ${(props) => props.theme.colors.background};
   top: 5%;
   width: 20%;
 
-  border-right: 1px solid ${(props) => props.theme.colors.buttonBackground};
+  background-color: ${(props) => props.theme.colors.secondary};
+  color: ${(props) => props.theme.colors.primarytint};
+
+  border: 1px solid ${(props) => props.theme.colors.primarysoft};
+  border-radius: 0.5rem;
 
   @media screen and (max-width: 768px) {
     width: 100%;
     justify-content: center;
   }
+
+  a:hover {
+    color: var(--color-denim);
+    transition: all 0.5s;
+  }
 `;
 
 export const StyledList = styled.li`
-  color: ${(props) => props.theme.colors.text};
   cursor: pointer;
 
   display: flex;
@@ -64,7 +73,7 @@ export const StyledListTitle = styled.div`
   gap: 0.75rem;
 
   &:hover {
-    color: var(--color-primary);
+    color: var(--color-denim);
     transition: all 0.5s;
   }
 `;

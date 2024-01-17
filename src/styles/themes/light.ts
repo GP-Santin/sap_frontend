@@ -2,11 +2,8 @@ export const lightTheme = {
   title: "light",
   colors: {
     background: "#FFFFFF",
-    text: "#101119",
-    buttonBackground: "#EFEFEF",
-    buttonText: "#333333",
-    primary: "#00B9F2",
+    primarytint: "#214966",
+    primarysoft: "#ECECEC",
+    secondary: "#FAF9F6",
   },
 };
-
-

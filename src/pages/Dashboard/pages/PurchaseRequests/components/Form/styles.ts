@@ -12,6 +12,10 @@ export const StyledForm = styled.form`
   button {
     padding: 1rem;
   }
+
+  label {
+    color: ${(props) => props.theme.colors.primarytint};
+  }
 `;
 
 export const StyledContainerFields = styled.div`
@@ -31,7 +35,7 @@ export const StyledTable = styled.table`
   overflow: hidden;
 
   thead {
-    background-color: var(--color-primary);
+    color: var(--color-primary);
     color: var(--color-white);
   }
 
@@ -59,8 +63,8 @@ export const StyledErrorContainer = styled.div`
   gap: 0.5rem;
   position: relative;
 
-  span {
-    color: var(--color-alert);
+  p {
+    color: ${(props) => props.theme.colors.primarytint};
   }
 `;
 
@@ -78,12 +82,10 @@ export const StyledRadioContainer = styled.div`
 
 export const StyledTrashIcon = styled(FaRegTrashAlt)`
   cursor: pointer;
-  color: ${(props) => props.theme.colors.text};
   width: 20px;
   height: 20px;
 
   &:hover {
-    color: ${(props) => props.theme.colors.primary};
     transition: all 0.25s;
   }
 `;
@@ -92,7 +94,6 @@ export const StyledMinus: IconType = styled(FaMinus)`
   cursor: pointer;
 
   &:hover {
-    color: ${(props) => props.theme.colors.primary};
     transition: all 0.25s;
   }
 `;
@@ -101,7 +102,6 @@ export const StyledPlus: IconType = styled(FaPlus)`
   cursor: pointer;
 
   &:hover {
-    color: ${(props) => props.theme.colors.primary};
     transition: all 0.25s;
   }
 `;
@@ -110,7 +110,8 @@ export const StyledTextArea = styled.textarea`
   max-width: 64rem;
   min-height: 3rem;
 
-  border: 1px solid var(--color-hover);
+  border: 1px solid ${(props) => props.theme.colors.primarysoft};
+  background-color: ${(props) => props.theme.colors.background};
   border-radius: 0.5rem;
 
   padding: 1rem;
@@ -123,19 +124,15 @@ export const StyledTextArea = styled.textarea`
 
   overflow-wrap: break-word;
 
-  color: ${(props) => props.theme.colors.text};
-  background-color: ${(props) => props.theme.colors.background};
-
   height: 10rem;
 
   resize: none;
 
   &::-webkit-scrollbar {
-    width: 5px;
+    width: 4px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: ${(props) => props.theme.colors.text};
     cursor: pointer;
   }
 

@@ -25,24 +25,22 @@ export const ButtonStyles = css<IButtonStylesProps>`
     switch (color) {
       case "solid-green":
         return css`
-          background-color: var(--color-primary);
+          color: var(--color-gray);
           border: 0.0761rem solid var(--color-primary);
         `;
       case "solid-black":
         return css`
-          background-color: var(--color-black);
-          border: 0.0761rem solid var(--color-black);
+          color: var(--color-black);
+          border: 0.0761rem solid var(--color-primary);
         `;
       case "outline-black":
         return css`
-          background-color: ${(props) => props.theme.colors.background};
-          color: ${(props) => props.theme.colors.text};
+          background-color: {(props) => props.theme.colors.background};
           border: 0.0761rem solid var(--color-primary);
         `;
       case "outline-white":
         return css`
-          background-color: ${(props) => props.theme.colors.background};
-          color: ${(props) => props.theme.colors.text};
+          background-color: {(props) => props.theme.colors.background};
           border: 0.0761rem solid var(--color-primary);
         `;
     }
@@ -90,13 +88,14 @@ export const StyledButton = styled.button<IButtonStylesProps>`
 
   font-family: var(--font-family-primary);
   font-weight: var(--font-weight-2);
-  color: var(--color-white);
+  color: ${(props) => props.theme.colors.primarytint};
 
   ${ButtonStyles};
 
   &:hover {
+    transform: translateY(10);
     background-color: var(--color-primary);
-    color: ${(props) => props.theme.colors.text};
+    color: #ffffff;
     transition: 0.15s;
   }
 `;

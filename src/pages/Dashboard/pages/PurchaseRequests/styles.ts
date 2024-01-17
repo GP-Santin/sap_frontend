@@ -1,11 +1,10 @@
 import styled from "styled-components";
 
 export const PurchaseContainer = styled.div`
-  background-color: ${(props) => props.theme.colors.background};
-  color: ${(props) => props.theme.colors.text};
   display: flex;
   flex-direction: column;
   height: 100vh;
+  background-color: ${(props) => props.theme.colors.background};
 `;
 
 export const ContentContainer = styled.div`
@@ -20,5 +19,9 @@ export const ContentContainer = styled.div`
 
   @media (max-width: 768px) {
     padding: 2rem;
+  }
+
+  h2 {
+    color: ${(props) => props.theme.colors.primarytint};
   }
 `;

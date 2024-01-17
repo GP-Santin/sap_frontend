@@ -46,6 +46,7 @@ export const StyledSelect = styled.select`
   font-weight: var(--font-weight-1);
   font-size: var(--font-size-1);
 
+  background-color: ${(props) => props.theme.colors.secondary};
   color: var(--color-text);
-  background-color: var(--background-color);
+  color: var(--color);
 `;

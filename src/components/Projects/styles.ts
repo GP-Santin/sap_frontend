@@ -25,19 +25,19 @@ export const StyledProjectDropdown = styled.div`
   height: 10rem;
   cursor: pointer;
   position: absolute;
-  background-color: ${(props) => props.theme.colors.buttonBackground};
-  color: ${(props) => props.theme.colors.text};
-  top: 100%;
+
+  top: 105%;
   z-index: 999;
   overflow-x: hidden;
-  border-bottom-left-radius: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--color-gray);
 
   &::-webkit-scrollbar {
-    width: 5px;
+    width: 4px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: ${(props) => props.theme.colors.primary};
+    ${(props) => props.theme.colors.primarytint}
   }
 
   &::-webkit-scrollbar-track {
@@ -53,6 +53,5 @@ export const StyledProjectDropdown = styled.div`
   }
 
   li:hover {
-    background-color: var(--color-black-2);
   }
 `;

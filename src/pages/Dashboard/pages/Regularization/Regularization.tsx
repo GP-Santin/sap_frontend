@@ -11,7 +11,7 @@ function Regularization({ theme, toggleTheme }: INavProps) {
       <NavBar toggleTheme={toggleTheme} theme={theme} />
       <ContentContainer>
         <h2>Regularização</h2>
-        <Form />
+        <Form toggleTheme={toggleTheme} theme={theme} />
         <Input
           widthsize="large3"
           style={{ height: "1rem", cursor: "pointer" }}

@@ -8,7 +8,7 @@ function PurchaseRequests({ theme, toggleTheme }: INavProps) {
       <NavBar toggleTheme={toggleTheme} theme={theme} />
       <ContentContainer>
         <h2>Solicitação de Compras</h2>
-        <Form />
+        <Form toggleTheme={toggleTheme} theme={theme} />
       </ContentContainer>
     </PurchaseContainer>
   );

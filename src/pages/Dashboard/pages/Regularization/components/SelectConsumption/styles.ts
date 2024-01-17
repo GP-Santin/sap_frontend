@@ -18,20 +18,20 @@ export const StyledConsumptionDropdown = styled.div`
   width: 100%;
   cursor: pointer;
   position: absolute;
-  overflow-y: scroll;
-  background-color: ${(props) => props.theme.colors.buttonBackground};
-  color: ${(props) => props.theme.colors.text};
-  top: 100%;
+  background-color: ${(props) => props.theme.colors.primarysoft};
+  color: ${(props) => props.theme.colors.primarytint};
+  top: 105%;
   z-index: 999;
   overflow-x: hidden;
-  border-bottom-left-radius: 8px;
+  border: 1px solid var(--color-gray);
+  border-radius: 8px;
 
   &::-webkit-scrollbar {
-    width: 5px;
+    width: 4px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: ${(props) => props.theme.colors.primary};
+    background-color: ${(props) => props.theme.colors.primarysoft};
   }
 
   &::-webkit-scrollbar-track {
@@ -47,6 +47,6 @@ export const StyledConsumptionDropdown = styled.div`
   }
 
   li:hover {
-    background-color: var(--color-black-2);
+    background-color: ${(props) => props.theme.colors.primarysoft};
   }
 `;

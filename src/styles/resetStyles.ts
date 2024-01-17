@@ -43,11 +43,10 @@ export const ResetStyles = createGlobalStyle`
   }
 
    &::-webkit-scrollbar {
-    width: 5px;
+    width: 4px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: ${(props) => props.theme.colors.primary};
     border-radius: 8px;
   }
 

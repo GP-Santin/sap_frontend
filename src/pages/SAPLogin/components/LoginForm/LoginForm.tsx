@@ -26,7 +26,7 @@ export const LoginForm = () => {
         <StyledSelect {...register("CompanyDB")}>
           <option
             style={{
-              background: theme === "light" ? "#FFFFFF" : "#101119",
+              background: theme === "light" ? "#FFFFFF" : "#161616",
             }}
             value="SBOPRODCAL"
           >
@@ -34,7 +34,7 @@ export const LoginForm = () => {
           </option>
           <option
             style={{
-              background: theme === "light" ? "#FFFFFF" : "#101119",
+              background: theme === "light" ? "#FFFFFF" : "#161616",
             }}
             value="SBOPRODPIR"
           >
@@ -42,7 +42,7 @@ export const LoginForm = () => {
           </option>
           <option
             style={{
-              background: theme === "light" ? "#FFFFFF" : "#101119",
+              background: theme === "light" ? "#FFFFFF" : "#161616",
             }}
             value="SBOPRODSCR"
           >
@@ -50,7 +50,7 @@ export const LoginForm = () => {
           </option>
           <option
             style={{
-              background: theme === "light" ? "#FFFFFF" : "#101119",
+              background: theme === "light" ? "#FFFFFF" : "#161616",
             }}
             value="SBOPRODGUI"
           >
@@ -58,7 +58,7 @@ export const LoginForm = () => {
           </option>
           <option
             style={{
-              background: theme === "light" ? "#FFFFFF" : "#101119",
+              background: theme === "light" ? "#FFFFFF" : "#161616",
             }}
             value="SBOPRODTRA"
           >
@@ -66,7 +66,7 @@ export const LoginForm = () => {
           </option>
           <option
             style={{
-              background: theme === "light" ? "#FFFFFF" : "#101119",
+              background: theme === "light" ? "#FFFFFF" : "#161616",
             }}
             value="SBOPRODTRE"
           >

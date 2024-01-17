@@ -9,8 +9,6 @@ export const StyledModal = styled(Modal)`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: ${(props) => props.theme.colors.background};
-  color: ${(props) => props.theme.colors.text};
   width: 80%;
   max-width: 600px;
   height: 60%;
