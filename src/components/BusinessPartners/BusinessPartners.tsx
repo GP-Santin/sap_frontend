@@ -6,6 +6,7 @@ import {
   StyledBusinessPartnersDropdown,
 } from "./styles";
 import { BusinessPartnerProps } from "./@types";
+import { useOutsideClick } from "../../hooks/outsideClick";
 
 function BusinessPartners({
   setBusinessPartner,
@@ -14,14 +15,13 @@ function BusinessPartners({
   const [businessPartnersFiltered, setBusinessPartnersFiltered] = useState<
     IBusinessPartner[]
   >([]);
-  const [businessDropdown, setBusinessDropdown] = useState<boolean>(false);
+  const [openDropdown, setOpenDropdown] = useState(false);
+
   const businessPartners: IBusinessPartner[] = JSON.parse(
     localStorage.getItem("@businesspartners") || "[]"
   );
 
-  useEffect(()=> {
-    
-  })
+  useEffect(() => {});
 
   const handleFilterBusinessPartners = (
     inputValue: string
@@ -33,13 +33,16 @@ function BusinessPartners({
         ) ||
         businessPartner.CardName.toLowerCase().includes(
           inputValue.toLowerCase()
+        ) ||
+        businessPartner.FederalTaxID.toLocaleLowerCase().includes(
+          inputValue.toLocaleLowerCase()
         )
     );
   };
 
   const addBusinessPartnerToInput = (businessPartner: IBusinessPartner) => {
     setBusinessPartner(businessPartner.CardCode);
-    setBusinessDropdown(false);
+    setOpenDropdown(false);
   };
 
   const handleBusinessPartnerChange = (
@@ -47,31 +50,35 @@ function BusinessPartners({
   ) => {
     const value = e.target.value;
     setBusinessPartner(value);
-    setBusinessDropdown(true);
+    setOpenDropdown(true);
     const filtered = handleFilterBusinessPartners(value);
     setBusinessPartnersFiltered(filtered);
   };
+
+  const closeDropdown = () => {
+    setOpenDropdown(false);
+  };
+
+  const dropdownRef = useOutsideClick({ callback: closeDropdown });
+
   return (
     <StyledBusinessPartnersContainer>
       <Input
         widthsize="large3"
         label="Fornecedor"
-        style={{ width: "8rem", maxWidth: "12rem" }}
         onChange={handleBusinessPartnerChange}
         value={businessPartner}
       />
-      {businessPartnersFiltered.length > 0 && businessDropdown && (
-        <StyledBusinessPartnersDropdown>
+      {openDropdown && businessPartnersFiltered.length > 0 && (
+        <StyledBusinessPartnersDropdown ref={dropdownRef}>
           <ul>
             {businessPartnersFiltered.map((filteredPartner) => (
               <li
                 key={filteredPartner.CardCode}
-                onClick={() => {
-                  addBusinessPartnerToInput(filteredPartner);
-                  setBusinessDropdown(false);
-                }}
+                onClick={() => addBusinessPartnerToInput(filteredPartner)}
               >
-                {filteredPartner.CardCode} - {filteredPartner.CardName} -
+                {filteredPartner.CardCode} - {filteredPartner.CardName} -{" "}
+                {filteredPartner.FederalTaxID}
               </li>
             ))}
           </ul>

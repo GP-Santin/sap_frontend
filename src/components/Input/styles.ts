@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from "react";
+import { InputHTMLAttributes, ReactElement } from "react";
 import { FieldError } from "react-hook-form";
 import styled, { css } from "styled-components";
 import { widthsizeType } from "../Button/styles";
@@ -8,6 +8,7 @@ export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: FieldError;
   span?: string;
+  icon?: ReactElement<any, any>;
 }
 
 export const InputStyled = styled.input<IInputProps>`
@@ -89,6 +90,11 @@ export const ContainerInputSyled = styled.div`
     position: absolute;
     top: 55%;
     padding-left: 0.5rem;
+  }
+
+  icon {
+    position: absolute;
+    right: 5%;
   }
 `;
 

@@ -58,6 +58,17 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   const logoutSAP = async () => {
     try {
       await apiSAP.post("/Logout");
+      localStorage.removeItem("@salespersons");
+      localStorage.removeItem("@businesspartners");
+      localStorage.removeItem("@session");
+      localStorage.removeItem("@owner");
+      localStorage.removeItem("@salesPersonCode");
+      localStorage.removeItem("@projectmanagements");
+      localStorage.removeItem("@base");
+      localStorage.removeItem("@savedItems");
+      localStorage.removeItem("@usage");
+      localStorage.removeItem("@projects");
+      localStorage.removeItem("@items");
       toast.success("Logout efetuado com sucesso");
       navigate("/login");
     } catch (error: AxiosError | any) {

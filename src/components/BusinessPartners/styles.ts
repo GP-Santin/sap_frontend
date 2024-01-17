@@ -5,8 +5,7 @@ export const StyledBusinessPartnersContainer = styled.div`
 `;
 
 export const StyledBusinessPartnersDropdown = styled.div`
-  width: 100%;
-  height: 10rem;
+  height: 15rem;
   overflow-y: auto;
   cursor: pointer;
   position: absolute;
@@ -16,7 +15,7 @@ export const StyledBusinessPartnersDropdown = styled.div`
   top: 100%;
   overflow-x: hidden;
   border-bottom-left-radius: 8px;
-
+  width: 25rem;
 
   &::-webkit-scrollbar {
     width: 5px;
@@ -37,6 +36,7 @@ export const StyledBusinessPartnersDropdown = styled.div`
 
   li {
     padding-left: 0.25rem;
+    height: 3.5rem;
   }
 
   li:hover {

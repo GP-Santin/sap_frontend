@@ -54,7 +54,7 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
   const getBusinessPartner = async () => {
     const allBusinessPartners: IBusinessPartner[] = [];
     let nextLink: string | undefined =
-      "BusinessPartners?$select=CardCode, CardName, FederalTaxID&$filter= Valid eq 'tYES'";
+      "BusinessPartners?$select=CardCode,CardName,FederalTaxID&$filter=Valid eq 'tYES' and not substringof('C',CardCode)";
     try {
       while (nextLink) {
         const response = await fetchBusinessPartners(nextLink);
@@ -156,6 +156,18 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
     }
   };
 
+  const getBranches = async () => {
+    try {
+      const response = await apiSAP.get(
+        "/BusinessPlaces?$select = BPLID, BPLName"
+      );
+      const branches = response.data.value;
+      localStorage.setItem("@branches", JSON.stringify(branches));
+    } catch (error: AxiosError | any) {
+      console.error(error);
+    }
+  };
+
   const appLogin = async (formData: TLoginForm) => {
     try {
       setLoading(true);
@@ -168,7 +180,6 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
       if (sessionId && accounts && accounts.length > 0) {
         await toast.promise(checkAndFetchData("@items", getItems), {
           pending: "Carregando itens...",
-          success: "Itens carregados com sucesso!",
           error: "Erro ao carregar itens.",
         });
 
@@ -176,7 +187,6 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
           checkAndFetchData("@businesspartners", getBusinessPartner),
           {
             pending: "Carregando parceiros de negócios...",
-            success: "Parceiros de negócios carregados com sucesso!",
             error: "Erro ao carregar parceiros de negócios.",
           }
         );
@@ -185,7 +195,6 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
           checkAndFetchData("@salespersons", getSalesPersons),
           {
             pending: "Carregando vendedores...",
-            success: "Vendedores carregados com sucesso!",
             error: "Erro ao carregar vendedores.",
           }
         );
@@ -194,24 +203,24 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
           checkAndFetchData("@projectmanagements", getProjectManagements),
           {
             pending: "Carregando gerenciais...",
-            success: "Gerenciais carregados com sucesso!",
             error: "Erro ao carregar gerenciais.",
           }
         );
 
         await toast.promise(checkAndFetchData("@projects", getProjects), {
           pending: "Carregando projetos...",
-          success: "Projetos carregados com sucesso!",
           error: "Erro ao carregar projetos.",
         });
 
         await toast.promise(checkAndFetchData("@usage", getUsage), {
           pending: "Carregando usos...",
-          success: "Usos carregados com sucesso!",
           error: "Erro ao carregar usos.",
         });
 
+        toast.success("Dados carregados com sucesso");
+
         await getLastPurchaseRequest();
+        await getBranches();
       }
       navigate("/dashboard");
     } catch (error: AxiosError | any) {

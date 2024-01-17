@@ -1,9 +1,9 @@
 import { ForwardedRef, forwardRef } from "react";
-import { ContainerInputSyled, IInputProps, InputStyled, StyledCurrency } from "../Input/styles";
+import { ContainerInputSyled, IInputProps, InputStyled } from "../Input/styles";
 
 export const Input = forwardRef(
   (
-    { span, widthsize, label, error, ...rest }: IInputProps,
+    { icon, widthsize, label, error, ...rest }: IInputProps,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     return (
@@ -16,9 +16,8 @@ export const Input = forwardRef(
           ref={ref}
           type="text"
           {...rest}
+          icon={icon}
         />
-        {span ? <StyledCurrency>{span}</StyledCurrency> : null}
-        {error ? <p>{error.message}</p> : null}
       </ContainerInputSyled>
     );
   }

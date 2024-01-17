@@ -28,6 +28,7 @@ export interface IBusinessPartner {
   "odata.etag": string;
   CardCode: string;
   CardName: string;
+  FederalTaxID: string;
 }
 
 export interface IBusinessResponse {

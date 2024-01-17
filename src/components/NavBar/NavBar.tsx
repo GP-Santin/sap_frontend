@@ -94,7 +94,7 @@ function NavBar({ toggleTheme, theme }: INavProps) {
               </li>
             </StyledUl>
           </StyledList>
-          <a onClick={() => logoutSAP()}>Logout</a>
+          <a onClick={() => logoutSAP()}>Alterar base</a>
         </ul>
       </StyledMenu>
     </>
