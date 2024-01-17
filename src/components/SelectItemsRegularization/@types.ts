@@ -2,8 +2,8 @@ import { IItemOrder } from "../../pages/Dashboard/pages/Regularization/component
 
 export interface ISelectItemProps {
   setItems: React.Dispatch<React.SetStateAction<IItemOrder[]>>;
-  setListItems: React.Dispatch<React.SetStateAction<any[]>>;
-  listItems: any[];
+  setListItems: React.Dispatch<React.SetStateAction<IItemOrder[]>>;
+  listItems: IItemOrder[];
   setProject: React.Dispatch<React.SetStateAction<string>>;
   project: string;
   management: string;

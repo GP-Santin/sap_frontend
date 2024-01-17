@@ -19,13 +19,6 @@ import { useOutsideClick } from "../../hooks/outsideClick";
 import { MdRequestQuote } from "react-icons/md";
 import { MdRequestPage } from "react-icons/md";
 import { FaShoppingCart } from "react-icons/fa";
-import { Backdrop } from "@mui/material";
-import { styled } from "@mui/system";
-
-const StyledBackdrop = styled(Backdrop)(({ theme }: any) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  color: "#fff",
-}));
 
 function NavBar({ toggleTheme, theme }: INavProps) {
   const [burguerClass, setBurguerClass] = useState("burguer-bar unclicked");
@@ -34,7 +27,7 @@ function NavBar({ toggleTheme, theme }: INavProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(true);
   const [activeSection, setActiveSection] = useState("section deactivated");
   const [listActive, setListActive] = useState("list-unclicked");
-  const [isBackdropVisible, setIsBackdropVisible] = useState(false);
+  const [backdrop, setBackdrop] = useState(false);
   const { instance } = useMsal();
   const activeUser = instance.getAllAccounts()[0];
   const { logoutSAP } = useContext(UserContext);
@@ -43,11 +36,9 @@ function NavBar({ toggleTheme, theme }: INavProps) {
     if (!isMenuClicked) {
       setBurguerClass("burguer-bar clicked");
       setMenuClass("menu visible");
-      setIsBackdropVisible(true);
     } else {
       setBurguerClass("burguer-bar unclicked");
       setMenuClass("menu hidden");
-      setIsBackdropVisible(false);
     }
     setIsMenuClicked(!isMenuClicked);
   };
@@ -114,14 +105,13 @@ function NavBar({ toggleTheme, theme }: INavProps) {
               </li>
               <li>
                 <MdRequestPage />
-                <a href="/dashboard/regularization">Regularização</a>
+                <a href="/dashboard/regularization">Regularização de NFe</a>
               </li>
             </StyledUl>
           </StyledList>
           <a onClick={() => logoutSAP()}>Alterar base</a>
         </ul>
       </StyledMenu>
-      {/* <StyledBackdrop open={isBackdropVisible} onClick={updateMenu} /> */}
     </>
   );
 }

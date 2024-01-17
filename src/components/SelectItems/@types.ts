@@ -2,8 +2,8 @@ import { IItemRequest } from "../../pages/Dashboard/pages/PurchaseRequests/compo
 
 export interface ISelectItemProps {
   setItems: React.Dispatch<React.SetStateAction<IItemRequest[]>>;
-  setListItems: React.Dispatch<React.SetStateAction<any[]>>;
-  listItems: any[];
+  setListItems: React.Dispatch<React.SetStateAction<IItemRequest[]>>;
+  listItems: IItemRequest[];
   setProject: React.Dispatch<React.SetStateAction<string>>;
   project: string;
   management: string;

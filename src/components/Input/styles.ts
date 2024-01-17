@@ -8,7 +8,7 @@ export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: FieldError;
   span?: string;
-  icon?: ReactElement<any, any>;
+  icon?: ReactElement;
 }
 
 export const InputStyled = styled.input<IInputProps>`

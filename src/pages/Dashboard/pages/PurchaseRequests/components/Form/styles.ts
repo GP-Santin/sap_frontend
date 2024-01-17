@@ -187,6 +187,7 @@ export const StyledTextArea = styled.textarea`
 
   border: 2px solid var(--color-primary);
   background-color: ${(props) => props.theme.colors.background};
+  color: ${(props) => props.theme.colors.primarytint};
   border-radius: 0.5rem;
 
   padding: 1rem;

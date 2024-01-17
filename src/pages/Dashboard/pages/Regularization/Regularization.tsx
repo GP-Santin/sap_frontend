@@ -10,7 +10,7 @@ function Regularization({ theme, toggleTheme }: INavProps) {
     <RegularizationContainer>
       <NavBar toggleTheme={toggleTheme} theme={theme} />
       <ContentContainer>
-        <h2>Regularização</h2>
+        <h2>Regularização de Nota Fiscal de Entrada</h2>
         <Form toggleTheme={toggleTheme} theme={theme} />
         <Input
           widthsize="large3"

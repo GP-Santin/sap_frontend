@@ -169,6 +169,7 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
   };
 
   const appLogin = async (formData: TLoginForm) => {
+    console.log(formData);
     try {
       setLoading(true);
 
@@ -224,12 +225,8 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
       }
       navigate("/dashboard");
     } catch (error: AxiosError | any) {
-      if (error.response?.status === 401) {
-        toast.error("Usuário sem acesso à base solicitada.");
-      } else {
-        console.error(error);
-        toast.error("Usuário ou senha inválidos.");
-      }
+      toast.error("Erro ao fazer login");
+      console.error(error);
     } finally {
       setLoading(false);
     }
