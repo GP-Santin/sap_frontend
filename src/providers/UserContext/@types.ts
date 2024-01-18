@@ -9,4 +9,5 @@ export interface IUserContext {
   getActiveUserSAP: (email: string) => Promise<void>;
   createPurchaseQuotations: (formdData: IOrderRequest) => void;
   logoutSAP: () => Promise<void>;
+  getWarehouseCode: () => void
 }

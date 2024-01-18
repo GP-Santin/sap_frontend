@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Input } from "../Input/Input";
 import { IItem } from "../../providers/AppContext/@types";
 import { StyledButton, StyledItemContainer, StyledLineItems } from "./styles";
@@ -7,6 +7,8 @@ import Projects from "../Projects/Projects";
 import Management from "../Management/Management";
 import { useOutsideClick } from "../../hooks/outsideClick";
 import { toast } from "react-toastify";
+import { StyledDropdown } from "../SelectItemsRegularization/styles";
+import { UserContext } from "../../providers/UserContext/UserContext";
 
 const SelectItems: React.FC<ISelectItemProps> = ({
   setItems,
@@ -24,6 +26,12 @@ const SelectItems: React.FC<ISelectItemProps> = ({
   const [openDropdown, setOpenDropdown] = useState(false);
   const [managementCode, setmanagementCode] = useState<string>("");
   const items: IItem[] = JSON.parse(localStorage.getItem("@items") || "[]");
+  const warehouseCode = localStorage.getItem("@warehouseCode");
+  const { getWarehouseCode } = useContext(UserContext);
+
+  getWarehouseCode();
+
+  const wareHouseCode = JSON.parse(localStorage.getItem("@warehouseCode")!);
 
   const filterItems = (inputValue: string): IItem[] => {
     return items.filter(
@@ -66,6 +74,7 @@ const SelectItems: React.FC<ISelectItemProps> = ({
         ProjectCode: project,
         CostingCode2: management,
         U_SNT_Finalidade: "1",
+        WarehouseCode: warehouseCode!,
       };
 
       setItems(
@@ -77,10 +86,13 @@ const SelectItems: React.FC<ISelectItemProps> = ({
             ProjectCode: string;
             CostingCode2: string;
             U_SNT_Finalidade: string;
+            WarehouseCode: string;
           }[]
         ) => [...prevItems, newItem]
       );
       const updatedItems = [...listItems, newItem];
+
+      console.log(warehouseCode);
 
       setListItems(updatedItems);
 
@@ -121,12 +133,12 @@ const SelectItems: React.FC<ISelectItemProps> = ({
         <Input
           widthsize="small2"
           label="Quantidade"
-          defaultValue={quantity}
+          value={quantity}
           onChange={handleQuantityChange}
           type="text"
         />
         {filteredItems.length > 0 && openDropdown && (
-          <div ref={dropdownRef}>
+          <StyledDropdown ref={dropdownRef}>
             <ul>
               {filteredItems.map((filteredItem) => (
                 <li
@@ -137,7 +149,7 @@ const SelectItems: React.FC<ISelectItemProps> = ({
                 </li>
               ))}
             </ul>
-          </div>
+          </StyledDropdown>
         )}
         <Management
           setManagement={setManagement}

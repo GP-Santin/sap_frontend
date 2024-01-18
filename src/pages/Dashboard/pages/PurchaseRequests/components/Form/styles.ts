@@ -49,6 +49,10 @@ export const StyledTableContainer = styled.div`
 export const StyledItemsContainer = styled.div`
   display: flex;
   flex-direction: column;
+
+  h3 {
+    color: ${(props) => props.theme.colors.primarytint};
+  }
 `;
 
 export const StyledItemContainer = styled.div`
@@ -56,9 +60,11 @@ export const StyledItemContainer = styled.div`
   background-color: ${(props) => props.theme.colors.background};
   color: ${(props) => props.theme.colors.primarytint};
   width: 100%;
+  flex-direction: column;
 
-  @media (max-width: 768px) {
-    flex-direction: column;
+  @media (min-width: 768px) {
+    align-items: flex-start;
+    flex-direction: row;
   }
 `;
 
@@ -68,7 +74,7 @@ export const StyledItem = styled.div`
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  height: 5rem;
+  height: auto;
   width: 100%;
 
   h4 {
@@ -81,29 +87,18 @@ export const StyledItem = styled.div`
   p {
     font-size: x-small;
   }
+
+  @media (min-width: 768px) {
+    p {
+      font-size: medium;
+    }
+  }
 `;
 
 export const StyledTable = styled.div`
   width: 100%;
   border-collapse: collapse;
   overflow: hidden;
-
-  thead {
-    color: var(--color-primary);
-    color: var(--color-white);
-  }
-
-  th {
-    color: ${(props) => props.theme.colors.primarytint};
-    padding-right: 1.5rem;
-    padding: 0.5rem;
-  }
-
-  td {
-    color: ${(props) => props.theme.colors.primarytint};
-    padding: 0.5rem;
-    text-align: center;
-  }
 
   .quantity {
     display: flex;
@@ -132,33 +127,24 @@ export const StyledRadioContainer = styled.div`
 
 export const StyledTrashContainer = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin-top: 1rem;
-  height: 6rem;
-  border-radius: 50%;
+  justify-content: center;
+  margin-top: 2rem;
 
-  @media (min-width: 768px) {
-    background-color: transparent;
-  }
-`;
-
-export const StyledTrashIcon = styled(FaRegTrashAlt)`
-  cursor: pointer;
-  width: 20px;
-  height: 20px;
-  transform: translateY(0%);
-  transition: all 0.25s;
-  border-radius: 50%;
-  border: 1px solid var(--color-primary);
-
-  &:hover {
-    transform: translateY(-10%);
-    color: var(--color-denim);
+  .icon {
+    cursor: pointer;
+    transform: translateY(0%);
     transition: all 0.25s;
+
+    &:hover {
+      transform: translateY(-10%);
+      color: var(--color-denim);
+      transition: all 0.25s;
+    }
   }
 
   @media (min-width: 768px) {
+    margin-left: 1rem;
   }
 `;
 
@@ -214,5 +200,15 @@ export const StyledTextArea = styled.textarea`
 
   &::-webkit-scrollbar-track {
     background: transparent;
+  }
+`;
+
+export const StyledTitleContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+
+  h3 {
+    color: ${(props) => props.theme.colors.primarytint};
   }
 `;

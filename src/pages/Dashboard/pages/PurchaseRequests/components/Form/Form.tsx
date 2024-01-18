@@ -13,6 +13,7 @@ import {
   StyledForm,
   StyledRadioContainer,
   StyledTextArea,
+  StyledTitleContainer,
 } from "./styles";
 import { Button } from "../../../../../../components/Button/Button";
 import RadioSupplier from "../../../../../../components/RadioSupplier/RadioSupplier";
@@ -20,6 +21,8 @@ import RadioMan from "../../../../../../components/RadioMan/RadioMan";
 import { UserContext } from "../../../../../../providers/UserContext/UserContext";
 import Table from "./Table";
 import { useMsal } from "@azure/msal-react";
+import { StyledTotalContainer } from "../../../Regularization/components/Form/styles";
+import SelectSmall from "../../../Regularization/components/Select/Select";
 
 function Form({ theme }: INavProps) {
   const owner = localStorage.getItem("@owner");
@@ -30,11 +33,13 @@ function Form({ theme }: INavProps) {
   const methods = useForm<IPurchaseRequest>();
   const [, setItems] = useState<IItemRequest[]>([]);
   const [listItems, setListItems] = useState<IItemRequest[]>([]);
-  const [project, setProject] = useState<string>("");
-  const [management, setManagement] = useState<string>("");
-  const [supplier, setSupplier] = useState<string>("");
-  const [maintence, setMaintence] = useState<string>("");
-  const [comments, setComments] = useState<string>("");
+  const [project, setProject] = useState("");
+  const [management, setManagement] = useState("");
+  const [supplier, setSupplier] = useState("");
+  const [maintence, setMaintence] = useState("");
+  const [comments, setComments] = useState("");
+  const [branch, setBranch] = useState("");
+  const [warehouseCode, setWarehouseCode] = useState("");
 
   const onSubmit: SubmitHandler<IPurchaseRequest> = (formData) => {
     const baseRequest: IPurchaseRequest = {
@@ -44,6 +49,8 @@ function Form({ theme }: INavProps) {
       Comments: comments,
       DocumentLines: [],
       DocumentsOwner: Number(owner),
+      BPL_IDAssignedToInvoice: Number(branch),
+      WarehouseCode: warehouseCode,
     };
 
     if (listItems.length > 0) {
@@ -72,6 +79,10 @@ function Form({ theme }: INavProps) {
   return (
     <FormProvider {...methods}>
       <StyledForm onSubmit={methods.handleSubmit(onSubmit, onSubmitError)}>
+        <SelectSmall
+          setWarehouseCode={setWarehouseCode}
+          setBranch={setBranch}
+        />
         <StyledContainerFields>
           <DatePickerComponent
             label="Data da necessidade"
@@ -92,16 +103,18 @@ function Form({ theme }: INavProps) {
           </StyledRadioContainer>
         </StyledContainerFields>
         {listItems.length > 0 && (
-          <div>
+          <StyledTitleContainer>
             <h3>Itens</h3>
             <Table setListItems={setListItems} listItems={listItems} />
-          </div>
+          </StyledTitleContainer>
         )}
-        <label>Observações</label>
-        <StyledTextArea
-          maxLength={1500}
-          onChange={(e) => setComments(e.target.value)}
-        />
+        <StyledTotalContainer>
+          <label>Observações</label>
+          <StyledTextArea
+            maxLength={1500}
+            onChange={(e) => setComments(e.target.value)}
+          />
+        </StyledTotalContainer>
         <Button
           type="submit"
           name="Solicitar"

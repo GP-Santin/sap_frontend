@@ -5,6 +5,7 @@ export interface IItemRequest {
   CostingCode2: string;
   ProjectCode: string;
   U_SNT_Finalidade: string;
+  WarehouseCode: string;
 }
 
 export interface IPurchaseRequest {
@@ -14,6 +15,8 @@ export interface IPurchaseRequest {
   U_SNT_SC_Manut: string;
   Comments: string;
   DocumentsOwner: number;
+  BPL_IDAssignedToInvoice: number;
+  WarehouseCode: string;
 }
 
 export interface IProjectManagement {

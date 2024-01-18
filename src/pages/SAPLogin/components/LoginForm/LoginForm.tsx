@@ -12,13 +12,10 @@ export const LoginForm = () => {
 
   const submit: SubmitHandler<FieldValues> = async (formData) => {
     const loginFormData: TLoginForm = {
-      // UserName: import.meta.env.VITE_SAP_LOGIN,
-      // Password: import.meta.env.VITE_SAP_PASSWORD,
-      UserName: "DTI010",
-      Password: "Rufino15@",
+      UserName: import.meta.env.VITE_SAP_LOGIN,
+      Password: import.meta.env.VITE_SAP_PASSWORD,
       CompanyDB: formData.CompanyDB,
     };
-    console.log(loginFormData);
     appLogin(loginFormData);
   };
 
@@ -56,6 +53,7 @@ export const LoginForm = () => {
         name={loading ? "Entrando..." : "Entrar"}
         color="outline-black"
         widthsize="med2"
+        style={{ marginTop: "5rem" }}
       />
     </StyledForm>
   );

@@ -1,12 +1,15 @@
 import React, { useEffect } from "react";
 import { IItemOrder } from "../../../Regularization/components/Form/@types";
 import {
-  StyledTable,
   StyledPlus,
   StyledMinus,
-  StyledTrashIcon,
+  StyledItem,
+  StyledItemContainer,
+  StyledTableContainer,
 } from "../../../PurchaseRequests/components/Form/styles";
 import { IUsage } from "../../../../../../providers/AppContext/@types";
+import { IItemRequest } from "../../../PurchaseRequests/components/Form/@types";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 interface TableProps {
   listItems: IItemOrder[];
@@ -85,41 +88,44 @@ function Table({
   }, [listItems]);
 
   return (
-    <StyledTable>
-      <thead>
-        <tr>
-          <th>Código do item</th>
-          <th>Descrição</th>
-          <th>Quantidade</th>
-          <th>Valor unitário</th>
-          <th>Valor total </th>
-          <th>Gerencial</th>
-          <th>Projeto</th>
-          <th>Uso</th>
-        </tr>
-      </thead>
-      <tbody>
-        {listItems.map((item: IItemOrder, index: number) => (
-          <tr key={index}>
-            <td>{item.ItemCode}</td>
-            <td>{item.ItemDescription}</td>
-            <td className="quantity">
+    <StyledTableContainer>
+      {listItems.map((item: IItemRequest, index: number) => (
+        <StyledItemContainer key={index}>
+          <StyledItem>
+            <h4>Código do Item</h4>
+            <p>{item.ItemCode}</p>
+          </StyledItem>
+          <StyledItem>
+            <h4>Descrição:</h4>
+            <p>{item.ItemDescription}</p>
+          </StyledItem>
+          <StyledItem>
+            <h4>Quantidade</h4>
+            <div
+              style={{
+                display: "flex",
+                gap: ".5rem",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
               <StyledPlus onClick={() => handleIncreaseQuantity(index)} />
-              {item.Quantity}
+              <p>{item.Quantity}</p>
               <StyledMinus onClick={() => handleDecreaseQuantity(index)} />
-            </td>
-            <td>R$ {item.UnitPrice}</td>
-            <td>R$ {item.LineTotal}</td>
-            <td>{item.CostingCode2}</td>
-            <td>{item.ProjectCode}</td>
-            <td>{getUsageDescription(item)}</td>
-            <td>
-              <StyledTrashIcon onClick={() => handleDeleteItem(index)} />
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </StyledTable>
+            </div>
+          </StyledItem>
+          <StyledItem>
+            <h4>Projeto</h4>
+            <p>{item.ProjectCode}</p>
+          </StyledItem>
+          <StyledItem>
+            <h4>Gerencial:</h4>
+            <p>{item.CostingCode2}</p>
+          </StyledItem>
+          <FaRegTrashAlt onClick={() => handleDeleteItem(index)} />
+        </StyledItemContainer>
+      ))}
+    </StyledTableContainer>
   );
 }
 

@@ -4,7 +4,7 @@ import { IProject, IProjectProps } from "./@types";
 import { useOutsideClick } from "../../hooks/outsideClick";
 import { StyledProjectDropdown, StyledProjectsContainer } from "./styles";
 
-function Projects({ setProject, managementCode }: IProjectProps) {
+function Projects({ project, setProject, managementCode }: IProjectProps) {
   const [openDropdown, setOpenDropdown] = useState(false);
   const [filteredProjects, setFilteredProjects] = useState<IProject[]>([]);
   const [handleFiltered, setHandleFiltered] = useState<string>("");
@@ -64,7 +64,7 @@ function Projects({ setProject, managementCode }: IProjectProps) {
         label="Projeto"
         widthsize="small2"
         onClick={handleOpenDropdown}
-        value={inputValue}
+        value={project}
         style={{ cursor: "pointer" }}
         onChange={handleFilterProjects}
       />

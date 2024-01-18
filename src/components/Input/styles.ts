@@ -14,12 +14,13 @@ export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
 export const InputStyled = styled.input<IInputProps>`
   width: 100%;
   height: 3rem;
+  position: relative;
 
   color: ${(props) => props.theme.colors.primarytint};
   border: 2px solid var(--color-primary);
   border-radius: 0.5rem;
 
-  padding: 1rem;
+  padding: 1rem 2rem 1rem 1rem;
 
   outline: none;
 
@@ -84,16 +85,5 @@ export const ContainerInputSyled = styled.div`
   label {
     color: ${(props) => props.theme.colors.primarytint};
     width: auto;
-  }
-
-  span {
-    position: absolute;
-    top: 55%;
-    padding-left: 0.5rem;
-  }
-
-  icon {
-    position: absolute;
-    right: 5%;
   }
 `;

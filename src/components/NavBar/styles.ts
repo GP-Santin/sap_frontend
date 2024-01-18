@@ -34,7 +34,10 @@ export const StyledIconContainer = styled.div`
 
 export const StyledMenu = styled.div`
   top: 5%;
-  width: 20%;
+  width: clamp(100%, 25%, 30%);
+  gap: 1rem;
+  justify-content: center;
+  height: 95%;
 
   background-color: ${(props) => props.theme.colors.secondary};
   color: ${(props) => props.theme.colors.primarytint};
@@ -42,9 +45,9 @@ export const StyledMenu = styled.div`
   border: 1px solid ${(props) => props.theme.colors.primarysoft};
   border-radius: 0.5rem;
 
-  @media screen and (max-width: 768px) {
-    width: 100%;
-    justify-content: center;
+  @media screen and (min-width: 768px) {
+    width: 20%;
+    justify-content: flex-start;
   }
 `;
 
@@ -76,7 +79,6 @@ export const StyledListTitle = styled.div`
 export const StyledBackdrop = styled.div`
   width: 100%;
   height: 94%;
-  margin-top: 3rem;
   position: absolute;
   z-index: 99;
 

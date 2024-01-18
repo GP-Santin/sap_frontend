@@ -28,6 +28,7 @@ import { useMsal } from "@azure/msal-react";
 import SelectConsumption from "../SelectConsumption/SelectConsumption";
 import SelectShipping from "../SelectShipping/SelectShipping";
 import SelectPaymentMethod from "../SelectPaymentMethod/SelectPaymentMethod";
+import SelectSmall from "../Select/Select";
 
 function Form({ theme }: INavProps) {
   const owner = localStorage.getItem("@owner");
@@ -54,6 +55,7 @@ function Form({ theme }: INavProps) {
   const [transportationCode, setTransportationCode] = useState<number>(-1);
   const [paymentMethod, setPaymentMethod] = useState<string>("");
   const [usage, setUsage] = useState<string>("");
+  const [branch, setBranch] = useState<string>("");
 
   const onSubmit: SubmitHandler<IOrderRequest> = (formData) => {
     const baseRequest: IOrderRequest = {
@@ -108,6 +110,7 @@ function Form({ theme }: INavProps) {
   return (
     <FormProvider {...methods}>
       <StyledForm onSubmit={methods.handleSubmit(onSubmit, onSubmitError)}>
+        <SelectSmall theme={theme} branch={branch} setBranch={setBranch} />
         <StyledContainerFields>
           <StyledLineItems>
             <DatePickerComponent

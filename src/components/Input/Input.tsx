@@ -16,9 +16,8 @@ export const Input = forwardRef(
           ref={ref}
           type="text"
           {...rest}
-          icon={icon}
-          span={span}
-          />
+        />
+        <span>{icon}</span>
       </ContainerInputSyled>
     );
   }

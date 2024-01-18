@@ -14,6 +14,7 @@ import { useOutsideClick } from "../../hooks/outsideClick";
 import { toast } from "react-toastify";
 import { IItemOrder } from "../../pages/Dashboard/pages/Regularization/components/Form/@types";
 import MainUsage from "../MainUsage/MainUsage";
+import { debounce } from 'lodash';
 
 const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
   setItems,
@@ -48,19 +49,24 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
           item.ItemName.toLowerCase().includes(inputValue.toLowerCase()))
     );
   };
+
+  const debouncedFilterItems = debounce((inputValue: string) => {
+    const filtered = filterItems(inputValue);
+    setFilteredItems(filtered);
+  }, 300); 
+  
   const handleItemCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setItemCode(value);
     setOpenDropdown(true);
-    const filtered = filterItems(value);
-    setFilteredItems(filtered);
+    debouncedFilterItems(value);
   };
+  
   const handleItemChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setItemDescription(value);
     setOpenDropdown(true);
-    const filtered = filterItems(value);
-    setFilteredItems(filtered);
+    debouncedFilterItems(value);
   };
 
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {

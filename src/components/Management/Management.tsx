@@ -72,7 +72,7 @@ function Management({
         style={{ cursor: "pointer" }}
         onClick={showAllItems}
         onChange={handleFilterManagement}
-        value={inputValue}
+        value={management}
       />
 
       {openDropdown && (

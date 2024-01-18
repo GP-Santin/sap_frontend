@@ -45,6 +45,10 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       const { data } = await apiSAP.get(
         `/EmployeesInfo?$filter = eMail eq '${email}'`
       );
+      localStorage.setItem(
+        "@branches",
+        JSON.stringify(data.value[0].EmployeeBranchAssignment)
+      );
       localStorage.setItem("@owner", JSON.stringify(data.value[0].EmployeeID));
       localStorage.setItem(
         "@salesPersonCode",
@@ -52,6 +56,17 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       );
     } catch (error) {
       console.error("Erro ao consultar empregado:", error);
+    }
+  };
+
+  const getWarehouseCode = async () => {
+    try {
+      const { data } = await apiSAP.get(
+        "BusinessPlaces?$select = BPLID,DefaultWarehouseID, BPLName"
+      );
+      localStorage.setItem("@allBranches", JSON.stringify(data));
+    } catch (error: AxiosError | any) {
+      console.error(error);
     }
   };
 
@@ -94,6 +109,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         getActiveUserSAP,
         createPurchaseQuotations,
         logoutSAP,
+        getWarehouseCode,
       }}
     >
       {children}

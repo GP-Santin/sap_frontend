@@ -4,11 +4,11 @@ import {
   StyledTableContainer,
   StyledPlus,
   StyledMinus,
-  StyledTrashIcon,
   StyledItemContainer,
   StyledItem,
   StyledTrashContainer,
 } from "../../../PurchaseRequests/components/Form/styles";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 interface TableProps {
   listItems: IItemRequest[];
@@ -67,7 +67,7 @@ function Table({ listItems, setListItems }: TableProps) {
             </div>
           </StyledItem>
           <StyledItem>
-            <h4>Projeto:</h4>
+            <h4>Projeto</h4>
             <p>{item.ProjectCode}</p>
           </StyledItem>
           <StyledItem>
@@ -75,7 +75,11 @@ function Table({ listItems, setListItems }: TableProps) {
             <p>{item.CostingCode2}</p>
           </StyledItem>
           <StyledTrashContainer>
-            <StyledTrashIcon onClick={() => handleDeleteItem(index)} />
+            <FaRegTrashAlt
+              className="icon"
+              size={25}
+              onClick={() => handleDeleteItem(index)}
+            />
           </StyledTrashContainer>
         </StyledItemContainer>
       ))}
