@@ -169,7 +169,6 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
   };
 
   const appLogin = async (formData: TLoginForm) => {
-    console.log(formData);
     try {
       setLoading(true);
 

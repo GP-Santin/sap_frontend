@@ -12,11 +12,18 @@ export const LoginForm = () => {
 
   const submit: SubmitHandler<FieldValues> = async (formData) => {
     const loginFormData: TLoginForm = {
-      UserName: import.meta.env.VITE_SAP_LOGIN,
-      Password: import.meta.env.VITE_SAP_PASSWORD,
+      // UserName: import.meta.env.VITE_SAP_LOGIN,
+      // Password: import.meta.env.VITE_SAP_PASSWORD,
+      UserName: "DTI010",
+      Password: "Rufino15@",
       CompanyDB: formData.CompanyDB,
     };
+    console.log(loginFormData);
     appLogin(loginFormData);
+  };
+
+  const styleTheme: React.CSSProperties | undefined = {
+    background: theme === "light" ? "#FFFFFF" : "#161616",
   };
 
   return (
@@ -24,53 +31,23 @@ export const LoginForm = () => {
       <StyledContainerSelect>
         <label htmlFor="companyDB">Base</label>
         <StyledSelect {...register("CompanyDB")}>
-          <option
-            style={{
-              background: theme === "light" ? "#FFFFFF" : "#161616",
-            }}
-            value="SBOPRODCAL"
-          >
+          <option style={{}} value="SBOPRODCAL">
             Caldebras
           </option>
-          <option
-            style={{
-              background: theme === "light" ? "#FFFFFF" : "#161616",
-            }}
-            value="SBOPRODPIR"
-          >
+          <option style={styleTheme} value="SBOPRODPIR">
             Pirâmide
           </option>
-          <option
-            style={{
-              background: theme === "light" ? "#FFFFFF" : "#161616",
-            }}
-            value="SBOPRODSCR"
-          >
+          <option style={styleTheme} value="SBOPRODSCR">
             Santin Crane
           </option>
-          <option
-            style={{
-              background: theme === "light" ? "#FFFFFF" : "#161616",
-            }}
-            value="SBOPRODGUI"
-          >
+          <option style={styleTheme} value="SBOPRODGUI">
             Santin Equipamentos
           </option>
-          <option
-            style={{
-              background: theme === "light" ? "#FFFFFF" : "#161616",
-            }}
-            value="SBOPRODTRA"
-          >
-            SETE - Transportes{" "}
+          <option style={styleTheme} value="SBOPRODTRA">
+            SETE - Transportes
           </option>
-          <option
-            style={{
-              background: theme === "light" ? "#FFFFFF" : "#161616",
-            }}
-            value="SBOPRODTRE"
-          >
-            TRES - Transportes{" "}
+          <option style={styleTheme} value="SBOPRODTRE">
+            TRES - Transportes
           </option>
         </StyledSelect>
       </StyledContainerSelect>
