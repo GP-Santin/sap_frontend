@@ -12,9 +12,8 @@ apiSAP.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (error.response.data.error.status === 401) {
-      toast.error("Sua sessão expirou, faça login novamente");
-      window.location.href = "/login";
+    if (error.response.data.error.message.value == "Login failed") {
+      toast.error("Você não tem acesso a essa base");
     } else {
       const { status, data } = error.response;
       if (status === 400) {
