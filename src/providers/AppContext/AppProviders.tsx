@@ -173,6 +173,7 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
       setLoading(true);
 
       const response = await apiSAP.post("/Login", formData);
+      console.log(response);
       const sessionId = response.data.SessionId;
       localStorage.setItem("@session", sessionId);
       setSessionCookie(sessionId);

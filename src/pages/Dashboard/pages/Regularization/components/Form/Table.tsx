@@ -7,7 +7,6 @@ import {
   StyledItemContainer,
   StyledTableContainer,
 } from "../../../PurchaseRequests/components/Form/styles";
-import { IUsage } from "../../../../../../providers/AppContext/@types";
 import { IItemRequest } from "../../../PurchaseRequests/components/Form/@types";
 import { FaRegTrashAlt } from "react-icons/fa";
 
@@ -63,24 +62,6 @@ function Table({
       const project = listItems[0].ProjectCode;
       setDocProject(project);
     }
-  };
-
-  const getUsageDescription = (item: IItemOrder): string => {
-    const localStorageUsage = JSON.parse(
-      localStorage.getItem("@usage") || "[]"
-    );
-
-    const usageId = item.Usage;
-
-    if (localStorageUsage.some((usage: IUsage) => usage.ID === usageId)) {
-      const matchedUsage = localStorageUsage.find(
-        (usage: IUsage) => usage.ID === usageId
-      );
-
-      return matchedUsage ? matchedUsage.Usage : "";
-    }
-
-    return "";
   };
 
   useEffect(() => {
