@@ -11,7 +11,7 @@ import { lightTheme } from "./styles/themes/light";
 import "react-toastify/dist/ReactToastify.css";
 import Modal from "react-modal";
 import SessionTimer from "./sessionManagement/SessionTimer";
-import CookieConsent, { Cookies } from "react-cookie-consent";
+import CookieConsent from "react-cookie-consent";
 
 Modal.setAppElement("#root");
 function App() {
@@ -56,7 +56,11 @@ function App() {
         buttonText="Aceitar"
         cookieName="myAwesomeCookieName3"
         style={{ background: "#2B373B" }}
-        buttonStyle={{ backgroundColor: "#FFFF", color: "#2B373B", fontSize: "13px" }}
+        buttonStyle={{
+          backgroundColor: "#FFFF",
+          color: "#2B373B",
+          fontSize: "13px",
+        }}
         expires={150}
       >
         Nosso site utiliza cookies para armazenar dados essenciais para o
