@@ -7,7 +7,7 @@ import { AppContext } from "../../../../providers/AppContext/AppProviders";
 
 export const LoginForm = () => {
   const { appLogin, loading } = useContext(AppContext);
-  const theme = localStorage.getItem("theme");
+  const theme = sessionStorage.getItem("theme");
   const { register, handleSubmit } = useForm<TLoginForm>({});
 
   const submit: SubmitHandler<FieldValues> = async (formData) => {

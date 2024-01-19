@@ -15,7 +15,7 @@ import SessionTimer from "./sessionManagement/SessionTimer";
 Modal.setAppElement("#root");
 function App() {
   const [theme, setTheme] = useState(() => {
-    const savedTheme = localStorage.getItem("theme");
+    const savedTheme = sessionStorage.getItem("theme");
     return savedTheme || "dark";
   });
   const isDarkTheme = theme === "dark";
@@ -23,7 +23,7 @@ function App() {
   const toggleTheme = () => {
     const newTheme = isDarkTheme ? "light" : "dark";
     setTheme(newTheme);
-    localStorage.setItem("@theme", newTheme);
+    sessionStorage.setItem("@theme", newTheme);
   };
 
   useEffect(() => {}, [theme]);

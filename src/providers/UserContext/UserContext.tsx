@@ -20,10 +20,10 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   const createPurchaseRequest = async (formData: IPurchaseRequest) => {
     try {
       const { data } = await apiSAP.post("/PurchaseRequests", formData);
-      localStorage.setItem("@savedItems", JSON.stringify([]));
+      sessionStorage.setItem("@savedItems", JSON.stringify([]));
       setModalContent(`${data.DocNum}`);
       setIsModalOpen(true);
-      localStorage.setItem("@savedItems", "");
+      sessionStorage.setItem("@savedItems", "");
     } catch (error: AxiosError | any) {
       console.error(error);
     }
@@ -34,7 +34,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       const { data } = await apiSAP.post("/PurchaseQuotations", formData);
       setModalContent(`Nº da solicitação: ${data.DocNum}`);
       setIsModalOpen(true);
-      localStorage.setItem("@savedItems", "");
+      sessionStorage.setItem("@savedItems", "");
     } catch (error: AxiosError | any) {
       console.error(error);
     }
@@ -45,12 +45,12 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       const { data } = await apiSAP.get(
         `/EmployeesInfo?$filter = eMail eq '${email}'`
       );
-      localStorage.setItem(
+      sessionStorage.setItem(
         "@userbranches",
         JSON.stringify(data.value[0].EmployeeBranchAssignment)
       );
-      localStorage.setItem("@owner", JSON.stringify(data.value[0].EmployeeID));
-      localStorage.setItem(
+      sessionStorage.setItem("@owner", JSON.stringify(data.value[0].EmployeeID));
+      sessionStorage.setItem(
         "@salesPersonCode",
         JSON.stringify(data.value[0].SalesPersonCode)
       );
@@ -62,19 +62,19 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   const logoutSAP = async () => {
     try {
       await apiSAP.post("/Logout");
-      localStorage.removeItem("@salespersons");
-      localStorage.removeItem("@businesspartners");
-      localStorage.removeItem("@session");
-      localStorage.removeItem("@owner");
-      localStorage.removeItem("@salesPersonCode");
-      localStorage.removeItem("@projectmanagements");
-      localStorage.removeItem("@base");
-      localStorage.removeItem("@savedItems");
-      localStorage.removeItem("@usage");
-      localStorage.removeItem("@projects");
-      localStorage.removeItem("@items");
-      localStorage.removeItem("@allbranches");
-      localStorage.removeItem("@userbranches");
+      sessionStorage.removeItem("@salespersons");
+      sessionStorage.removeItem("@businesspartners");
+      sessionStorage.removeItem("@session");
+      sessionStorage.removeItem("@owner");
+      sessionStorage.removeItem("@salesPersonCode");
+      sessionStorage.removeItem("@projectmanagements");
+      sessionStorage.removeItem("@base");
+      sessionStorage.removeItem("@savedItems");
+      sessionStorage.removeItem("@usage");
+      sessionStorage.removeItem("@projects");
+      sessionStorage.removeItem("@items");
+      sessionStorage.removeItem("@allbranches");
+      sessionStorage.removeItem("@userbranches");
       toast.success("Logout efetuado com sucesso");
       navigate("/login");
     } catch (error: AxiosError | any) {

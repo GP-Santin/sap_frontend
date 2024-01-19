@@ -45,7 +45,7 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
         allItems.push(...value);
       }
 
-      localStorage.setItem("@items", JSON.stringify(allItems));
+      sessionStorage.setItem("@items", JSON.stringify(allItems));
     } catch (error: AxiosError | any) {
       console.error(error);
     }
@@ -64,7 +64,7 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
         allBusinessPartners.push(...value);
       }
 
-      localStorage.setItem(
+      sessionStorage.setItem(
         "@businesspartners",
         JSON.stringify(allBusinessPartners)
       );
@@ -86,7 +86,7 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
         allSalesPerson.push(...value);
       }
 
-      localStorage.setItem("@salespersons", JSON.stringify(allSalesPerson));
+      sessionStorage.setItem("@salespersons", JSON.stringify(allSalesPerson));
     } catch (error: AxiosError | any) {
       console.error(error);
     }
@@ -103,7 +103,7 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
         nextLink = response["odata.nextLink"];
         allUsages.push(...value);
       }
-      localStorage.setItem("@usage", JSON.stringify(allUsages));
+      sessionStorage.setItem("@usage", JSON.stringify(allUsages));
     } catch (error: AxiosError | any) {
       console.error(error);
     }
@@ -125,7 +125,7 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
     try {
       const response = await apiSAP.get(`/Projects?$filter=Active eq 'tYES'`);
       const projects = response.data.value;
-      localStorage.setItem("@projects", JSON.stringify(projects));
+      sessionStorage.setItem("@projects", JSON.stringify(projects));
     } catch (error: AxiosError | any) {
       console.error(error);
     }
@@ -135,7 +135,7 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
     key: string,
     fetchDataFunc: () => Promise<void>
   ) => {
-    const data = localStorage.getItem(key);
+    const data = sessionStorage.getItem(key);
     if (!data) {
       await fetchDataFunc();
     }
@@ -147,7 +147,7 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
         `ProfitCenters?$select= CenterCode, CenterName, U_SNT_IdGerencial&$filter= U_SNT_IdGerencial ne null`
       );
       const projectManagements = response.data.value;
-      localStorage.setItem(
+      sessionStorage.setItem(
         "@projectmanagements",
         JSON.stringify(projectManagements)
       );
@@ -162,7 +162,7 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
         "/BusinessPlaces?$select = BPLID,DefaultWarehouseID, BPLName"
       );
       const branches = response.data.value;
-      localStorage.setItem("@allbranches", JSON.stringify(branches));
+      sessionStorage.setItem("@allbranches", JSON.stringify(branches));
     } catch (error: AxiosError | any) {
       console.error(error);
     }
@@ -173,11 +173,10 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
       setLoading(true);
 
       const response = await apiSAP.post("/Login", formData);
-      console.log(response);
       const sessionId = response.data.SessionId;
-      localStorage.setItem("@session", sessionId);
+      sessionStorage.setItem("@session", sessionId);
       setSessionCookie(sessionId);
-      localStorage.setItem("@base", formData.CompanyDB.substring(7, 10));
+      sessionStorage.setItem("@base", formData.CompanyDB.substring(7, 10));
       if (sessionId && accounts && accounts.length > 0) {
         await toast.promise(checkAndFetchData("@items", getItems), {
           pending: "Carregando itens...",

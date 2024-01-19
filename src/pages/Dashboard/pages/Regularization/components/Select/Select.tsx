@@ -15,8 +15,8 @@ export default function SelectSmall({
 }: ISelectProps) {
   const [openDropdown, setOpenDropdown] = useState(false);
   const [value, setValue] = useState("");
-  const userbranches = JSON.parse(localStorage.getItem("@userbranches")!);
-  const allbranches = JSON.parse(localStorage.getItem("@allbranches")!);
+  const userbranches = JSON.parse(sessionStorage.getItem("@userbranches")!);
+  const allbranches = JSON.parse(sessionStorage.getItem("@allbranches")!);
 
   const handleOpenDropdown = () => {
     setOpenDropdown(!openDropdown);

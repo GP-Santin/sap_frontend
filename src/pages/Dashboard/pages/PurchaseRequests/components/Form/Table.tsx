@@ -20,7 +20,7 @@ function Table({ listItems, setListItems }: TableProps) {
     const updatedItems = [...listItems];
     updatedItems[index].Quantity += 1;
     setListItems(updatedItems);
-    localStorage.setItem("@savedItems", JSON.stringify(updatedItems));
+    sessionStorage.setItem("@savedItems", JSON.stringify(updatedItems));
   };
 
   const handleDecreaseQuantity = (index: number) => {
@@ -28,7 +28,7 @@ function Table({ listItems, setListItems }: TableProps) {
     if (updatedItems[index].Quantity > 0) {
       updatedItems[index].Quantity -= 1;
       setListItems(updatedItems);
-      localStorage.setItem("@savedItems", JSON.stringify(updatedItems));
+      sessionStorage.setItem("@savedItems", JSON.stringify(updatedItems));
     }
   };
 
@@ -36,7 +36,7 @@ function Table({ listItems, setListItems }: TableProps) {
     const updatedItems = [...listItems];
     updatedItems.splice(index, 1);
     setListItems(updatedItems);
-    localStorage.setItem("@savedItems", JSON.stringify(updatedItems));
+    sessionStorage.setItem("@savedItems", JSON.stringify(updatedItems));
   };
 
   return (
