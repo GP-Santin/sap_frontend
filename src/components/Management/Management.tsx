@@ -12,7 +12,7 @@ function Management({
   management,
   setmanagementCode,
 }: IManagementProps) {
-  const [inputValue, setInputValue] = useState(management);
+  const [, setInputValue] = useState(management);
   const [managementListFiltered, setManagementListFiltered] = useState<
     IManagement[]
   >([]);

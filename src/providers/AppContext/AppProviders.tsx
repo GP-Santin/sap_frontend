@@ -159,10 +159,10 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
   const getBranches = async () => {
     try {
       const response = await apiSAP.get(
-        "/BusinessPlaces?$select = BPLID, BPLName"
+        "/BusinessPlaces?$select = BPLID,DefaultWarehouseID, BPLName"
       );
       const branches = response.data.value;
-      localStorage.setItem("@branches", JSON.stringify(branches));
+      localStorage.setItem("@allbranches", JSON.stringify(branches));
     } catch (error: AxiosError | any) {
       console.error(error);
     }

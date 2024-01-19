@@ -8,4 +8,6 @@ export interface ISelectItemProps {
   project: string;
   management: string;
   setManagement: React.Dispatch<React.SetStateAction<string>>;
+  setWarehouseCode: React.Dispatch<React.SetStateAction<string>>;
+  warehouseCode: string;
 }

@@ -15,8 +15,8 @@ export interface IOrderRequest {
   RequriedDate: string;
   TaxDate: string;
   DocDueDate: string;
-  U_SNT_Suprimento: string;
-  U_SNT_SC_Manut: string;
+  // U_SNT_Suprimento: string;
+  // U_SNT_SC_Manut: string;
   Comments: string;
   DocumentLines: IItemOrder[];
   DocumentsOwner: number;

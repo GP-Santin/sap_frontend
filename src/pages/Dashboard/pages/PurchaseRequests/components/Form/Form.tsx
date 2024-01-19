@@ -50,7 +50,6 @@ function Form({ theme }: INavProps) {
       DocumentLines: [],
       DocumentsOwner: Number(owner),
       BPL_IDAssignedToInvoice: Number(branch),
-      WarehouseCode: warehouseCode,
     };
 
     if (listItems.length > 0) {
@@ -96,6 +95,8 @@ function Form({ theme }: INavProps) {
             project={project}
             setManagement={setManagement}
             management={management}
+            setWarehouseCode={setWarehouseCode}
+            warehouseCode={warehouseCode}
           />
           <StyledRadioContainer>
             <RadioSupplier theme={theme} setSupplier={setSupplier} />

@@ -28,7 +28,7 @@ function NavBar({ toggleTheme, theme }: INavProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(true);
   const [activeSection, setActiveSection] = useState("section deactivated");
   const [listActive, setListActive] = useState("list-unclicked");
-  const [backdrop, setBackdrop] = useState(false);
+  const [backdropMenu, setBackdropMenu] = useState(false);
   const { instance } = useMsal();
   const activeUser = instance.getAllAccounts()[0];
   const { logoutSAP } = useContext(UserContext);
@@ -37,11 +37,11 @@ function NavBar({ toggleTheme, theme }: INavProps) {
     if (!isMenuClicked) {
       setBurguerClass("burguer-bar clicked");
       setMenuClass("menu visible");
-      setBackdrop(true);
+      setBackdropMenu(true);
     } else {
       setBurguerClass("burguer-bar unclicked");
       setMenuClass("menu hidden");
-      setBackdrop(false);
+      setBackdropMenu(false);
     }
     setIsMenuClicked(!isMenuClicked);
   };
@@ -49,7 +49,7 @@ function NavBar({ toggleTheme, theme }: INavProps) {
   const closeMenu = () => {
     setBurguerClass("burguer-bar unclicked");
     setMenuClass("menu hidden");
-    setBackdrop(false);
+    setBackdropMenu(false);
   };
 
   const toggleDropdown = () => {
@@ -116,7 +116,7 @@ function NavBar({ toggleTheme, theme }: INavProps) {
           <a onClick={() => logoutSAP()}>Alterar base</a>
         </ul>
       </StyledMenu>
-      {backdrop && <StyledBackdrop></StyledBackdrop>}
+      {backdropMenu && <StyledBackdrop></StyledBackdrop>}
     </>
   );
 }

@@ -15,8 +15,8 @@ export default function SelectSmall({
 }: ISelectProps) {
   const [openDropdown, setOpenDropdown] = useState(false);
   const [value, setValue] = useState("");
-  const userBranches = JSON.parse(localStorage.getItem("@branches")!);
-  const allBranches = JSON.parse(localStorage.getItem("@allBranches")!);
+  const userbranches = JSON.parse(localStorage.getItem("@userbranches")!);
+  const allbranches = JSON.parse(localStorage.getItem("@allbranches")!);
 
   const handleOpenDropdown = () => {
     setOpenDropdown(!openDropdown);
@@ -27,6 +27,15 @@ export default function SelectSmall({
   };
 
   const handleChange = (branch: IBranch) => {
+    const selectedBranch = branch.BPLID;
+    const handleSetWarehouseCode = () => {
+      const branchFiltered: IBranch[] = allbranches.filter(
+        (branch: IBranch) => selectedBranch === branch.BPLID
+      );
+      const actualBranch = branchFiltered[0].DefaultWarehouseID;
+      setWarehouseCode(actualBranch);
+    };
+    handleSetWarehouseCode();
     setBranch(branch.BPLID.toString());
     setValue(branch.BPLName);
     setOpenDropdown(!openDropdown);
@@ -35,8 +44,8 @@ export default function SelectSmall({
   const dropdownRef = useOutsideClick({ callback: closeDropdown });
 
   const filterBranches = () => {
-    const filteredBranches = allBranches.filter((branch: IBranch) =>
-      userBranches.some(
+    const filteredBranches = allbranches.filter((branch: IBranch) =>
+      userbranches.some(
         (userBranch: IBranch) => branch.BPLID === userBranch.BPLID
       )
     );
@@ -45,7 +54,7 @@ export default function SelectSmall({
 
   return (
     <StyledBranchContainer>
-      <label htmlFor="branch">Filial</label>
+      <label>Filial</label>
       <Input
         widthsize="med2"
         style={{ width: 192, cursor: "pointer" }}

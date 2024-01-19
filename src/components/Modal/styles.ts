@@ -3,11 +3,13 @@ import styled from "styled-components";
 
 export const StyledModal = styled(Modal)`
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   position: absolute;
   top: 50%;
   left: 50%;
+  background-color: ${(props) => props.theme.colors.background};
+  color: ${(props) => props.theme.colors.primarytint};
   transform: translate(-50%, -50%);
   width: 80%;
   max-width: 600px;
@@ -17,11 +19,25 @@ export const StyledModal = styled(Modal)`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 2rem;
 
-  div {
+  .container {
     display: flex;
     align-items: center;
     flex-direction: column;
     gap: 5rem;
+  }
+
+  span {
+    display: flex;
+    gap: 1rem;
+    border: 1px solid var(--color-primary);
+    border-radius: 2rem;
+    padding: 1rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--color-primary);
+      transition: all 0.5s;
+    }
   }
 
   div.modal-content {

@@ -77,12 +77,12 @@ export const StyledListTitle = styled.div`
 `;
 
 export const StyledBackdrop = styled.div`
-  width: 100%;
+  /* width: 100%;
   height: 94%;
   position: absolute;
   z-index: 99;
 
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.3); */
 `;
 
 export const Icon = styled.img`

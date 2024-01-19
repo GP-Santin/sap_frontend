@@ -21,7 +21,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     try {
       const { data } = await apiSAP.post("/PurchaseRequests", formData);
       localStorage.setItem("@savedItems", JSON.stringify([]));
-      setModalContent(`Nº da solicitação: ${data.DocNum}`);
+      setModalContent(`${data.DocNum}`);
       setIsModalOpen(true);
       localStorage.setItem("@savedItems", "");
     } catch (error: AxiosError | any) {
@@ -46,7 +46,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         `/EmployeesInfo?$filter = eMail eq '${email}'`
       );
       localStorage.setItem(
-        "@branches",
+        "@userbranches",
         JSON.stringify(data.value[0].EmployeeBranchAssignment)
       );
       localStorage.setItem("@owner", JSON.stringify(data.value[0].EmployeeID));
@@ -56,17 +56,6 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       );
     } catch (error) {
       console.error("Erro ao consultar empregado:", error);
-    }
-  };
-
-  const getWarehouseCode = async () => {
-    try {
-      const { data } = await apiSAP.get(
-        "BusinessPlaces?$select = BPLID,DefaultWarehouseID, BPLName"
-      );
-      localStorage.setItem("@allBranches", JSON.stringify(data));
-    } catch (error: AxiosError | any) {
-      console.error(error);
     }
   };
 
@@ -84,6 +73,8 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       localStorage.removeItem("@usage");
       localStorage.removeItem("@projects");
       localStorage.removeItem("@items");
+      localStorage.removeItem("@allbranches");
+      localStorage.removeItem("@userbranches");
       toast.success("Logout efetuado com sucesso");
       navigate("/login");
     } catch (error: AxiosError | any) {
@@ -109,7 +100,6 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         getActiveUserSAP,
         createPurchaseQuotations,
         logoutSAP,
-        getWarehouseCode,
       }}
     >
       {children}

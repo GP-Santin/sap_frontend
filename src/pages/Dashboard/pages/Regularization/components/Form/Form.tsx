@@ -56,14 +56,15 @@ function Form({ theme }: INavProps) {
   const [paymentMethod, setPaymentMethod] = useState<string>("");
   const [usage, setUsage] = useState<string>("");
   const [branch, setBranch] = useState<string>("");
+  const [warehouseCode, setWarehouseCode] = useState("");
 
   const onSubmit: SubmitHandler<IOrderRequest> = (formData) => {
     const baseRequest: IOrderRequest = {
       RequriedDate: formData.RequriedDate,
       TaxDate: formData.TaxDate,
       DocDueDate: formData.DocDueDate,
-      U_SNT_Suprimento: supplier,
-      U_SNT_SC_Manut: maintence,
+      // U_SNT_Suprimento: supplier,
+      // U_SNT_SC_Manut: maintence,
       Comments: comments,
       DocumentLines: [],
       DocumentsOwner: Number(owner),
@@ -110,7 +111,10 @@ function Form({ theme }: INavProps) {
   return (
     <FormProvider {...methods}>
       <StyledForm onSubmit={methods.handleSubmit(onSubmit, onSubmitError)}>
-        <SelectSmall theme={theme} branch={branch} setBranch={setBranch} />
+        <SelectSmall
+          setWarehouseCode={setWarehouseCode}
+          setBranch={setBranch}
+        />
         <StyledContainerFields>
           <StyledLineItems>
             <DatePickerComponent
@@ -134,8 +138,8 @@ function Form({ theme }: INavProps) {
             <SelectPaymentMethod setPaymentMethod={setPaymentMethod} />
           </StyledLineItems>
           <div>
-            <RadioSupplier theme={theme} setSupplier={setSupplier} />
-            <RadioMan theme={theme} setMaintence={setMaintence} />
+            {/* <RadioSupplier theme={theme} setSupplier={setSupplier} /> */}
+            {/* <RadioMan theme={theme} setMaintence={setMaintence} /> */}
           </div>
           <h3>Adicionar Linhas do documento</h3>
           <SelectItemsRegularization

@@ -16,7 +16,6 @@ export interface IPurchaseRequest {
   Comments: string;
   DocumentsOwner: number;
   BPL_IDAssignedToInvoice: number;
-  WarehouseCode: string;
 }
 
 export interface IProjectManagement {

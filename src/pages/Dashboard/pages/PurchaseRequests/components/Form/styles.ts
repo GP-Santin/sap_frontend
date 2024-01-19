@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { IconType } from "react-icons";
-import { FaMinus, FaPlus, FaRegTrashAlt } from "react-icons/fa";
+import { FaMinus, FaPlus } from "react-icons/fa";
 
 export const StyledForm = styled.form`
   display: flex;
@@ -78,6 +78,7 @@ export const StyledItem = styled.div`
   width: 100%;
 
   h4 {
+    color: var(--color-white);
     width: 100%;
     background-color: var(--color-primary);
     padding: 1rem;
