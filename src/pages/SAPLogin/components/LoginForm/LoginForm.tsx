@@ -12,10 +12,8 @@ export const LoginForm = () => {
 
   const submit: SubmitHandler<FieldValues> = async (formData) => {
     const loginFormData: TLoginForm = {
-      // UserName: import.meta.env.VITE_SAP_LOGIN,
-      // Password: import.meta.env.VITE_SAP_PASSWORD
-      UserName: "PTL001",
-      Password: "Fs8989@@",
+      UserName: import.meta.env.VITE_SAP_LOGIN,
+      Password: import.meta.env.VITE_SAP_PASSWORD,
       CompanyDB: formData.CompanyDB,
     };
     appLogin(loginFormData);

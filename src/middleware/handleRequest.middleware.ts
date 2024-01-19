@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export const apiSAP = axios.create({
-  baseURL: "https://138.2.241.213:50000/b1s/v1",
+  baseURL: import.meta.env.VITE_SERVICELAYER,
   withCredentials: true,
 });
 
