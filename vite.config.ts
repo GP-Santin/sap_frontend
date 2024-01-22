@@ -6,7 +6,17 @@ import path from "path";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  build: { chunkSizeWarningLimit: 1600 },
+  build: {
+    chunkSizeWarningLimit: 1600,
+    rollupOptions: {
+      external: ["react", "react-router", "react-router-dom"],
+      output: {
+        globals: {
+          react: "React",
+        },
+      },
+    },
+  },
   server: {
     https: {
       key: fs.readFileSync(path.resolve(__dirname, "./private.key")),
