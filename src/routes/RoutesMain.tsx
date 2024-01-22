@@ -1,4 +1,4 @@
-import { HashRouter, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import PrivatesRoutes from "./PrivatesRoutes";
 import PublicRoutes from "./PublicRoutes";
 import LoginPage from "../pages/Login/LoginPage";
@@ -10,7 +10,7 @@ import SAPRoutes from "./SapRoutes";
 function RoutesMain({ toggleTheme, theme }: INavProps) {
   const sessionSAP = localStorage.getItem("@session");
   return (
-    <HashRouter>
+    <Routes>
       <Route element={<PublicRoutes />}>
         <Route path="/" element={<LoginPage />} />
       </Route>
@@ -39,7 +39,7 @@ function RoutesMain({ toggleTheme, theme }: INavProps) {
           <Route path="/login" element={<HomePage />} />
         )}
       </Route>
-    </HashRouter>
+    </Routes>
   );
 }
 
