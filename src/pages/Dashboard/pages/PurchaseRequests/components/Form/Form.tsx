@@ -25,7 +25,7 @@ import { StyledTotalContainer } from "../../../Regularization/components/Form/st
 import SelectSmall from "../../../Regularization/components/Select/Select";
 
 function Form({ theme }: INavProps) {
-  const owner = sessionStorage.getItem("@owner");
+  const owner = localStorage.getItem("@owner");
   const { accounts } = useMsal();
   const activeUser = accounts[0].username;
   const { createPurchaseRequest, getActiveUserSAP } = useContext(UserContext);
@@ -66,7 +66,7 @@ function Form({ theme }: INavProps) {
 
   useEffect(() => {
     const savedItems = JSON.parse(
-      sessionStorage.getItem("@savedItems") || "[]"
+      localStorage.getItem("@savedItems") || "[]"
     );
     if (savedItems) {
       setListItems(savedItems);

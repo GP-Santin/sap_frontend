@@ -18,7 +18,7 @@ function Management({
   >([]);
   const [openDropdown, setOpenDropdown] = useState(false);
   const managementList = JSON.parse(
-    sessionStorage.getItem("@projectmanagements") || "[]"
+    localStorage.getItem("@projectmanagements") || "[]"
   );
 
   const handleOpenDropdown = () => {

@@ -16,7 +16,7 @@ import CookieConsent from "react-cookie-consent";
 Modal.setAppElement("#root");
 function App() {
   const [theme, setTheme] = useState(() => {
-    const savedTheme = sessionStorage.getItem("theme");
+    const savedTheme = localStorage.getItem("theme");
     return savedTheme || "dark";
   });
   const isDarkTheme = theme === "dark";
@@ -24,7 +24,7 @@ function App() {
   const toggleTheme = () => {
     const newTheme = isDarkTheme ? "light" : "dark";
     setTheme(newTheme);
-    sessionStorage.setItem("@theme", newTheme);
+    localStorage.setItem("@theme", newTheme);
   };
 
   useEffect(() => {}, [theme]);

@@ -34,7 +34,7 @@ function Projects({ project, setProject, managementCode }: IProjectProps) {
   const dropdownRef = useOutsideClick({ callback: closeDropdown });
 
   const filterProjects = (inputValue: string): IProject[] => {
-    const projectsList = JSON.parse(sessionStorage.getItem("@projects") || "[]");
+    const projectsList = JSON.parse(localStorage.getItem("@projects") || "[]");
 
     const filteredProjects = projectsList.filter((project: IProject) => {
       const projectManagementCodePrefix = project.Code.substring(0, 2);

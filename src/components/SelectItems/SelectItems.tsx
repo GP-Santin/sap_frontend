@@ -26,7 +26,7 @@ const SelectItems: React.FC<ISelectItemProps> = ({
   const [filteredItems, setFilteredItems] = useState<IItem[]>([]);
   const [openDropdown, setOpenDropdown] = useState(false);
   const [managementCode, setmanagementCode] = useState<string>("");
-  const items: IItem[] = JSON.parse(sessionStorage.getItem("@items") || "[]");
+  const items: IItem[] = JSON.parse(localStorage.getItem("@items") || "[]");
 
   const filterItems = (inputValue: string): IItem[] => {
     return items.filter(
@@ -89,7 +89,7 @@ const SelectItems: React.FC<ISelectItemProps> = ({
 
       setListItems(updatedItems);
 
-      sessionStorage.setItem("@savedItems", JSON.stringify(updatedItems));
+      localStorage.setItem("@savedItems", JSON.stringify(updatedItems));
       setItemCode("");
       setItemDescription("");
       setQuantity("");

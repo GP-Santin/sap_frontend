@@ -18,7 +18,7 @@ function BusinessPartners({
   const [openDropdown, setOpenDropdown] = useState(false);
 
   const businessPartners: IBusinessPartner[] = JSON.parse(
-    sessionStorage.getItem("@businesspartners") || "[]"
+    localStorage.getItem("@businesspartners") || "[]"
   );
 
   useEffect(() => {});

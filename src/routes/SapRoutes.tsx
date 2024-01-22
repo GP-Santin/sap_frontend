@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 
 function SAPRoutes() {
-  const sapLoggedIn = sessionStorage.getItem("@session");
+  const sapLoggedIn = localStorage.getItem("@session");
   return sapLoggedIn ? <Outlet /> : <Navigate to="/login" />;
 }
 

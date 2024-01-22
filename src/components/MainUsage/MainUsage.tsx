@@ -12,7 +12,7 @@ interface IMainUsageProps {
 }
 
 function MainUsage({ setUsage }: IMainUsageProps) {
-  const listUsage = JSON.parse(sessionStorage.getItem("@usage")!);
+  const listUsage = JSON.parse(localStorage.getItem("@usage")!);
   const [openDropdown, setOpenDropdown] = useState(false);
   const [inputValue, setInputValue] = useState<string>("");
 

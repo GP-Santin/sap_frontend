@@ -31,8 +31,8 @@ import SelectPaymentMethod from "../SelectPaymentMethod/SelectPaymentMethod";
 import SelectSmall from "../Select/Select";
 
 function Form({ theme }: INavProps) {
-  const owner = sessionStorage.getItem("@owner");
-  const salesPerson = sessionStorage.getItem("@salesPersonCode");
+  const owner = localStorage.getItem("@owner");
+  const salesPerson = localStorage.getItem("@salesPersonCode");
   const { accounts } = useMsal();
   const activeUser = accounts[0].username;
   const { createPurchaseQuotations, getActiveUserSAP } =
@@ -102,7 +102,7 @@ function Form({ theme }: INavProps) {
   };
 
   useEffect(() => {
-    const savedItems = JSON.parse(sessionStorage.getItem("@savedItems") || "[]");
+    const savedItems = JSON.parse(localStorage.getItem("@savedItems") || "[]");
     if (savedItems) {
       setListItems(savedItems);
     }

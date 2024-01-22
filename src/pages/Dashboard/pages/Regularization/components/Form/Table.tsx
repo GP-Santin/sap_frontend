@@ -33,7 +33,7 @@ function Table({
     updatedItems[index].LineTotal =
       updatedItems[index].UnitPrice * updatedItems[index].Quantity;
 
-    sessionStorage.setItem("@savedItems", JSON.stringify(updatedItems));
+    localStorage.setItem("@savedItems", JSON.stringify(updatedItems));
   };
 
   const handleDecreaseQuantity = (index: number) => {
@@ -43,7 +43,7 @@ function Table({
       setListItems(updatedItems);
       listItems[index].LineTotal =
         listItems[index].UnitPrice * listItems[index].Quantity;
-      sessionStorage.setItem("@savedItems", JSON.stringify(updatedItems));
+      localStorage.setItem("@savedItems", JSON.stringify(updatedItems));
 
       handleDocTotalChange(updatedItems);
     }
@@ -53,7 +53,7 @@ function Table({
     const updatedItems = [...listItems];
     updatedItems.splice(index, 1);
     setListItems(updatedItems);
-    sessionStorage.setItem("@savedItems", JSON.stringify(updatedItems));
+    localStorage.setItem("@savedItems", JSON.stringify(updatedItems));
     handleDocTotalChange(updatedItems);
   };
 
