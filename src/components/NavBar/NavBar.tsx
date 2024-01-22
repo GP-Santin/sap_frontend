@@ -20,6 +20,7 @@ import { useOutsideClick } from "../../hooks/outsideClick";
 import { MdRequestQuote } from "react-icons/md";
 import { MdRequestPage } from "react-icons/md";
 import { FaShoppingCart } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function NavBar({ toggleTheme, theme }: INavProps) {
   const [burguerClass, setBurguerClass] = useState("burguer-bar unclicked");
@@ -103,13 +104,15 @@ function NavBar({ toggleTheme, theme }: INavProps) {
             <StyledUl className={listActive}>
               <li>
                 <MdRequestQuote />
-                <a href="/dashboard/purchase-requests">
+                <Link to="/dashboard/purchase-requests">
                   Solicitação de Compras
-                </a>
+                </Link>
               </li>
               <li>
                 <MdRequestPage />
-                <a href="/dashboard/regularization">Regularização de NFe</a>
+                <Link to="/dashboard/regularization">
+                  Regularização de NFe
+                </Link>
               </li>
             </StyledUl>
           </StyledList>
