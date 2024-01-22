@@ -8,9 +8,9 @@ export default defineConfig({
   plugins: [react()],
   build: { chunkSizeWarningLimit: 1600 },
   server: {
-    // https: {
-    //   key: fs.readFileSync(path.resolve(__dirname, "./private.key")),
-    //   cert: fs.readFileSync(path.resolve(__dirname, "./certificate.crt")),
-    // },
+    https: {
+      key: fs.readFileSync(path.resolve(__dirname, "./private.key")),
+      cert: fs.readFileSync(path.resolve(__dirname, "./certificate.crt")),
+    },
   },
 });

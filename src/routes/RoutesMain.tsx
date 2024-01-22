@@ -8,6 +8,7 @@ import PurchaseRequests from "../pages/Dashboard/pages/PurchaseRequests/Purchase
 import Regularization from "../pages/Dashboard/pages/Regularization/Regularization";
 import SAPRoutes from "./SapRoutes";
 function RoutesMain({ toggleTheme, theme }: INavProps) {
+  const sessionSAP = localStorage.getItem("@session");
   return (
     <Routes>
       <Route element={<PublicRoutes />}>
@@ -15,22 +16,28 @@ function RoutesMain({ toggleTheme, theme }: INavProps) {
       </Route>
       <Route element={<PrivatesRoutes />}>
         <Route path="/login" element={<HomePage />} />
-        <Route element={<SAPRoutes />}>
-          <Route
-            path="/dashboard/purchase-requests"
-            element={
-              <PurchaseRequests toggleTheme={toggleTheme} theme={theme} />
-            }
-          />
-          <Route
-            path="/dashboard/regularization"
-            element={<Regularization toggleTheme={toggleTheme} theme={theme} />}
-          />
-          <Route
-            path="/dashboard"
-            element={<Dashboard toggleTheme={toggleTheme} theme={theme} />}
-          />
-        </Route>
+        {sessionSAP ? (
+          <Route element={<SAPRoutes />}>
+            <Route
+              path="/dashboard/purchase-requests"
+              element={
+                <PurchaseRequests toggleTheme={toggleTheme} theme={theme} />
+              }
+            />
+            <Route
+              path="/dashboard/regularization"
+              element={
+                <Regularization toggleTheme={toggleTheme} theme={theme} />
+              }
+            />
+            <Route
+              path="/dashboard"
+              element={<Dashboard toggleTheme={toggleTheme} theme={theme} />}
+            />
+          </Route>
+        ) : (
+          <Route path="/login" element={<HomePage />} />
+        )}
       </Route>
     </Routes>
   );
