@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 export const apiSAP = axios.create({
   baseURL: import.meta.env.VITE_SAP_BASE_URL,
   withCredentials: true,
+  timeout: 8000,
 });
 
 apiSAP.interceptors.response.use(
