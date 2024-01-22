@@ -16,6 +16,7 @@ export interface IPurchaseRequest {
   Comments: string;
   DocumentsOwner: number;
   BPL_IDAssignedToInvoice: number;
+  RequesterEmail: string;
 }
 
 export interface IProjectManagement {

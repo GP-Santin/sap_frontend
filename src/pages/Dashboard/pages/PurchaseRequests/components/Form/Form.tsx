@@ -39,6 +39,7 @@ function Form({ theme }: INavProps) {
   const [comments, setComments] = useState("");
   const [branch, setBranch] = useState("");
   const [warehouseCode, setWarehouseCode] = useState("");
+  const email = accounts[0].username;
 
   const onSubmit: SubmitHandler<IPurchaseRequest> = (formData) => {
     const baseRequest: IPurchaseRequest = {
@@ -49,6 +50,7 @@ function Form({ theme }: INavProps) {
       DocumentLines: [],
       DocumentsOwner: Number(owner),
       BPL_IDAssignedToInvoice: Number(branch),
+      RequesterEmail: email,
     };
 
     if (listItems.length > 0) {
@@ -63,7 +65,9 @@ function Form({ theme }: INavProps) {
   };
 
   useEffect(() => {
-    const savedItems = JSON.parse(sessionStorage.getItem("@savedItems") || "[]");
+    const savedItems = JSON.parse(
+      sessionStorage.getItem("@savedItems") || "[]"
+    );
     if (savedItems) {
       setListItems(savedItems);
     }
