@@ -4,21 +4,11 @@ export const StyledBranchContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  position: relative;
-
-  @media (min-width: 768px) {
-    position: absolute;
-    top: 7%;
-    right: 2%;
-
-    label {
-      text-align: end;
-    }
-  }
+  position: relative;  
 `;
 
 export const StyledBranchDropdown = styled.div`
-  width: 100%;
+  width: 10%;
   height: 10rem;
   cursor: pointer;
   position: absolute;

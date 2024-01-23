@@ -119,7 +119,7 @@ const SelectItems: React.FC<ISelectItemProps> = ({
         <Input
           widthsize="large3"
           label="Item"
-          defaultValue={itemDescription}
+          value={itemDescription}
           onChange={handleItemChange}
           type="text"
           id="itemDescription"

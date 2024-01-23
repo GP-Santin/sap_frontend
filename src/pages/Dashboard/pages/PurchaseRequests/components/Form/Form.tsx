@@ -22,7 +22,7 @@ import { UserContext } from "../../../../../../providers/UserContext/UserContext
 import Table from "./Table";
 import { useMsal } from "@azure/msal-react";
 import { StyledTotalContainer } from "../../../Regularization/components/Form/styles";
-import SelectSmall from "../../../Regularization/components/Select/Select";
+import SelectBranch from "../../../Regularization/components/SelectBranch/SelectBranch";
 
 function Form({ theme }: INavProps) {
   const owner = localStorage.getItem("@owner");
@@ -65,9 +65,7 @@ function Form({ theme }: INavProps) {
   };
 
   useEffect(() => {
-    const savedItems = JSON.parse(
-      localStorage.getItem("@savedItems") || "[]"
-    );
+    const savedItems = JSON.parse(localStorage.getItem("@savedItems") || "[]");
     if (savedItems) {
       setListItems(savedItems);
     }
@@ -81,7 +79,7 @@ function Form({ theme }: INavProps) {
   return (
     <FormProvider {...methods}>
       <StyledForm onSubmit={methods.handleSubmit(onSubmit, onSubmitError)}>
-        <SelectSmall
+        <SelectBranch
           setWarehouseCode={setWarehouseCode}
           setBranch={setBranch}
         />

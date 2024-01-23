@@ -9,14 +9,18 @@ interface ISelectProps {
   setWarehouseCode: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function SelectSmall({
+export default function SelectBranch({
   setBranch,
   setWarehouseCode,
 }: ISelectProps) {
   const [openDropdown, setOpenDropdown] = useState(false);
   const [value, setValue] = useState("");
-  const userbranches = JSON.parse(localStorage.getItem("@userbranches")!);
-  const allbranches = JSON.parse(localStorage.getItem("@allbranches")!);
+  const userbranches: IBranch[] = JSON.parse(
+    localStorage.getItem("@userbranches") || "[]"
+  );
+  const allbranches: IBranch[] = JSON.parse(
+    localStorage.getItem("@allbranches") || "[]"
+  );
 
   const handleOpenDropdown = () => {
     setOpenDropdown(!openDropdown);
@@ -61,17 +65,24 @@ export default function SelectSmall({
         onClick={handleOpenDropdown}
         defaultValue={value}
       />
-      {openDropdown && (
-        <StyledBranchDropdown ref={dropdownRef}>
-          <ul>
-            {filterBranches().map((branch: IBranch, index: number) => (
-              <li key={index} onClick={() => handleChange(branch)}>
-                {branch.BPLName}
-              </li>
-            ))}
-          </ul>
-        </StyledBranchDropdown>
-      )}
+      {openDropdown &&
+        (userbranches.length > 0 ? (
+          <StyledBranchDropdown ref={dropdownRef}>
+            <ul>
+              {filterBranches().map((branch: IBranch, index: number) => (
+                <li key={index} onClick={() => handleChange(branch)}>
+                  {branch.BPLName}
+                </li>
+              ))}
+            </ul>
+          </StyledBranchDropdown>
+        ) : (
+          <StyledBranchDropdown
+            style={{ padding: "1rem 0.5rem", justifyContent: "center" }}
+          >
+            <p>Nenhuma filial atribuída ao usuário</p>
+          </StyledBranchDropdown>
+        ))}
     </StyledBranchContainer>
   );
 }

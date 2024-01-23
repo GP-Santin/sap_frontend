@@ -14,7 +14,7 @@ import { useOutsideClick } from "../../hooks/outsideClick";
 import { toast } from "react-toastify";
 import { IItemOrder } from "../../pages/Dashboard/pages/Regularization/components/Form/@types";
 import MainUsage from "../MainUsage/MainUsage";
-import { debounce } from 'lodash';
+import { debounce } from "lodash";
 
 const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
   setItems,
@@ -53,15 +53,15 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
   const debouncedFilterItems = debounce((inputValue: string) => {
     const filtered = filterItems(inputValue);
     setFilteredItems(filtered);
-  }, 300); 
-  
+  }, 300);
+
   const handleItemCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setItemCode(value);
     setOpenDropdown(true);
     debouncedFilterItems(value);
   };
-  
+
   const handleItemChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setItemDescription(value);
@@ -82,8 +82,7 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
 
   const handleUnitPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    const formattedValue = value.replace(",", ".");
-    setUnitPrice(formattedValue);
+    setUnitPrice(value);
 
     const quantityFloat = parseFloat(quantity);
 
@@ -177,7 +176,7 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
         <Input
           widthsize="large3"
           label="Item"
-          defaultValue={itemDescription}
+          value={itemDescription}
           onChange={handleItemChange}
           type="text"
           id="itemDescription"
@@ -194,8 +193,6 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
           label="Preço unitário"
           type="text"
           placeholder="0,00"
-          span="R$"
-          style={{ paddingLeft: "2rem" }}
           onChange={handleUnitPriceChange}
           value={unitPrice}
         />

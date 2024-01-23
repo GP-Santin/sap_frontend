@@ -28,14 +28,14 @@ function BusinessPartners({
   ): IBusinessPartner[] => {
     return businessPartners.filter(
       (businessPartner) =>
-        businessPartner.CardCode.toLowerCase().includes(
+        businessPartner.CardCode?.toLowerCase().includes(
           inputValue.toLowerCase()
         ) ||
-        businessPartner.CardName.toLowerCase().includes(
+        businessPartner.CardName?.toLowerCase().includes(
           inputValue.toLowerCase()
         ) ||
-        businessPartner.FederalTaxID.toLocaleLowerCase().includes(
-          inputValue.toLocaleLowerCase()
+        businessPartner.FederalTaxID?.toLowerCase().includes(
+          inputValue.toLowerCase()
         )
     );
   };

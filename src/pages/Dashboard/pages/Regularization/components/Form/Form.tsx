@@ -28,7 +28,7 @@ import { useMsal } from "@azure/msal-react";
 import SelectConsumption from "../SelectConsumption/SelectConsumption";
 import SelectShipping from "../SelectShipping/SelectShipping";
 import SelectPaymentMethod from "../SelectPaymentMethod/SelectPaymentMethod";
-import SelectSmall from "../Select/Select";
+import SelectBranch from "../SelectBranch/SelectBranch";
 
 function Form({ theme }: INavProps) {
   const owner = localStorage.getItem("@owner");
@@ -77,8 +77,6 @@ function Form({ theme }: INavProps) {
       U_SNT_MetodoPagto: paymentMethod,
     };
 
-    getActiveUserSAP(activeUser);
-
     if (listItems.length > 0) {
       const requestWithItems: IOrderRequest = {
         ...baseRequest,
@@ -106,12 +104,13 @@ function Form({ theme }: INavProps) {
     if (savedItems) {
       setListItems(savedItems);
     }
+    getActiveUserSAP(activeUser);
   }, [lineTotal, docTotal]);
 
   return (
     <FormProvider {...methods}>
       <StyledForm onSubmit={methods.handleSubmit(onSubmit, onSubmitError)}>
-        <SelectSmall
+        <SelectBranch
           setWarehouseCode={setWarehouseCode}
           setBranch={setBranch}
         />
