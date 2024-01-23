@@ -11,7 +11,6 @@ import SelectItems from "../../../../../../components/SelectItems/SelectItems";
 import {
   StyledContainerFields,
   StyledForm,
-  StyledRadioContainer,
   StyledTextArea,
   StyledTitleContainer,
 } from "./styles";
@@ -99,10 +98,10 @@ function Form({ theme }: INavProps) {
             setWarehouseCode={setWarehouseCode}
             warehouseCode={warehouseCode}
           />
-          <StyledRadioContainer>
+          <div>
             <RadioSupplier theme={theme} setSupplier={setSupplier} />
             <RadioMan theme={theme} setMaintence={setMaintence} />
-          </StyledRadioContainer>
+          </div>
         </StyledContainerFields>
         {listItems.length > 0 && (
           <StyledTitleContainer>

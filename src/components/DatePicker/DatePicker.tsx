@@ -4,8 +4,8 @@ import { Input } from "../Input/Input";
 import { format } from "date-fns";
 import { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
-import { StyledErrorContainer } from "../../pages/Dashboard/pages/PurchaseRequests/components/Form/styles";
 import { StyledDatePicker } from "./styles";
+import { StyledDatePickerContainer } from "./styles";
 
 interface IDatePickerProps {
   setRegister: string;
@@ -23,18 +23,16 @@ function DatePickerComponent({ setRegister, label }: IDatePickerProps) {
   };
 
   return (
-    <StyledErrorContainer>
+    <StyledDatePickerContainer>
       <p>{label}</p>
       <StyledDatePicker
         selected={startDate}
         onChange={handleDateChange}
         dateFormat="dd/MM/yyyy"
         locale={ptBr}
-        customInput={
-          <Input widthsize="large3" style={{ maxWidth: "12rem" }} />
-        }
+        customInput={<Input widthsize="large3" style={{ maxWidth: "12rem" }} />}
       />
-    </StyledErrorContainer>
+    </StyledDatePickerContainer>
   );
 }
 

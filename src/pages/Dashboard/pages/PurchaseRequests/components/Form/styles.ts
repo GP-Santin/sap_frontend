@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { IconType } from "react-icons";
-import { FaMinus, FaPlus } from "react-icons/fa";
+import { FaMinus, FaPlus, FaRegTrashAlt } from "react-icons/fa";
 
 export const StyledForm = styled.form`
   display: flex;
@@ -56,7 +56,6 @@ export const StyledItemsContainer = styled.div`
 `;
 
 export const StyledItemContainer = styled.div`
-  display: flex;
   background-color: ${(props) => props.theme.colors.background};
   color: ${(props) => props.theme.colors.primarytint};
   width: 100%;
@@ -96,58 +95,9 @@ export const StyledItem = styled.div`
   }
 `;
 
-export const StyledTable = styled.div`
-  width: 100%;
-  border-collapse: collapse;
-  overflow: hidden;
-
-  .quantity {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-  }
-`;
-
-export const StyledErrorContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  position: relative;
-
-  p {
-    color: ${(props) => props.theme.colors.primarytint};
-  }
-`;
-
-export const StyledRadioContainer = styled.div`
-  display: flex;
-  align-items: flex-end;
-  gap: 1rem;
-`;
-
-export const StyledTrashContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 2rem;
-
-  .icon {
-    cursor: pointer;
-    transform: translateY(0%);
-    transition: all 0.25s;
-
-    &:hover {
-      transform: translateY(-10%);
-      color: var(--color-denim);
-      transition: all 0.25s;
-    }
-  }
-
-  @media (min-width: 768px) {
-    margin-left: 1rem;
-  }
-`;
+export const StyledIcon = styled(FaRegTrashAlt) `
+  
+`
 
 export const StyledMinus: IconType = styled(FaMinus)`
   cursor: pointer;

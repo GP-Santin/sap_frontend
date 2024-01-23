@@ -9,6 +9,7 @@ import {
 } from "../../../PurchaseRequests/components/Form/styles";
 import { IItemRequest } from "../../../PurchaseRequests/components/Form/@types";
 import { FaRegTrashAlt } from "react-icons/fa";
+import { StyledIcon } from "./styles";
 
 interface TableProps {
   listItems: IItemOrder[];
@@ -70,40 +71,66 @@ function Table({
 
   return (
     <StyledTableContainer>
-      {listItems.map((item: IItemRequest, index: number) => (
+      {listItems.map((item: IItemOrder, index: number) => (
         <StyledItemContainer key={index}>
-          <StyledItem>
-            <h4>Código do Item</h4>
-            <p>{item.ItemCode}</p>
-          </StyledItem>
-          <StyledItem>
-            <h4>Descrição:</h4>
-            <p>{item.ItemDescription}</p>
-          </StyledItem>
-          <StyledItem>
-            <h4>Quantidade</h4>
-            <div
-              style={{
-                display: "flex",
-                gap: ".5rem",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <StyledPlus onClick={() => handleIncreaseQuantity(index)} />
-              <p>{item.Quantity}</p>
-              <StyledMinus onClick={() => handleDecreaseQuantity(index)} />
-            </div>
-          </StyledItem>
-          <StyledItem>
-            <h4>Projeto</h4>
-            <p>{item.ProjectCode}</p>
-          </StyledItem>
-          <StyledItem>
-            <h4>Gerencial:</h4>
-            <p>{item.CostingCode2}</p>
-          </StyledItem>
-          <FaRegTrashAlt onClick={() => handleDeleteItem(index)} />
+          <div style={{ display: "flex" }}>
+            {index === 0 && (
+              <>
+                <StyledItem>
+                  <h4>Código do Item</h4>
+                </StyledItem>
+                <StyledItem>
+                  <h4>Descrição:</h4>
+                </StyledItem>
+                <StyledItem>
+                  <h4>Quantidade</h4>
+                </StyledItem>
+                <StyledItem>
+                  <h4>Valor unitário</h4>
+                </StyledItem>
+                <StyledItem>
+                  <h4>Valor dos itens</h4>
+                </StyledItem>
+                <StyledItem>
+                  <h4>Projeto</h4>
+                </StyledItem>
+                <StyledItem>
+                  <h4>Gerencial:</h4>
+                </StyledItem>
+              </>
+            )}
+          </div>
+          <div style={{ display: "flex" }}>
+            <StyledItem>
+              <p>{item.ItemCode}</p>
+            </StyledItem>
+            <StyledItem>
+              <p>{item.ItemDescription}</p>
+            </StyledItem>
+            <StyledItem>
+              <div
+                style={{
+                  display: "flex",
+                  gap: ".5rem",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <StyledPlus onClick={() => handleIncreaseQuantity(index)} />
+                <p>{item.Quantity}</p>
+                <StyledMinus onClick={() => handleDecreaseQuantity(index)} />
+              </div>
+            </StyledItem>
+            <StyledItem>R$ {item.UnitPrice}</StyledItem>
+            <StyledItem>R$ {item.LineTotal}</StyledItem>
+            <StyledItem>
+              <p>{item.ProjectCode}</p>
+            </StyledItem>
+            <StyledItem>
+              <p>{item.CostingCode2}</p>
+            </StyledItem>
+            <StyledIcon size={100} onClick={handleDeleteItem} />
+          </div>
         </StyledItemContainer>
       ))}
     </StyledTableContainer>

@@ -3,4 +3,5 @@ import styled from "styled-components";
 
 export const StyledRadioContainer = styled(FormControl)`
   display: flex;
-`
+`;
+

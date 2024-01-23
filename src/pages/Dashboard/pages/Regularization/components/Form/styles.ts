@@ -1,3 +1,4 @@
+import { FaRegTrashAlt } from "react-icons/fa";
 import styled from "styled-components";
 
 export const StyledLineItems = styled.div`
@@ -25,5 +26,18 @@ export const StyledTotalContainer = styled.div`
     p {
       color: ${(props) => props.theme.colors.primarytint};
     }
+  }
+`;
+
+export const StyledIcon = styled(FaRegTrashAlt)`
+  cursor: pointer;
+  transform: translateY(100);
+  transition: all 0.5s;
+  &:hover {
+    color: var(--color-denim);
+
+    transition: all 0.5s;
+
+    transform: translateY(-5%);
   }
 `;
