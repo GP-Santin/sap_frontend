@@ -7,8 +7,6 @@ import {
   StyledItemContainer,
   StyledTableContainer,
 } from "../../../PurchaseRequests/components/Form/styles";
-import { IItemRequest } from "../../../PurchaseRequests/components/Form/@types";
-import { FaRegTrashAlt } from "react-icons/fa";
 import { StyledIcon } from "./styles";
 
 interface TableProps {

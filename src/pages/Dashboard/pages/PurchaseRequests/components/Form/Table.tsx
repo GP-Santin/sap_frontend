@@ -1,20 +1,34 @@
 import React from "react";
-import { IItemRequest } from "../../../PurchaseRequests/components/Form/@types";
-import {
-  StyledTableContainer,
-  StyledPlus,
-  StyledMinus,
-  StyledItemContainer,
-  StyledItem,
-} from "../../../PurchaseRequests/components/Form/styles";
-import { FaRegTrashAlt } from "react-icons/fa";
+import { IItemRequest } from "./@types";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import { ThemeProvider, createTheme } from "@mui/material";
+import { StyledIcon, StyledMinus, StyledPlus } from "./styles";
+import { FaMinus, FaPlus } from "react-icons/fa";
 
 interface TableProps {
   listItems: IItemRequest[];
   setListItems: React.Dispatch<React.SetStateAction<IItemRequest[]>>;
+  theme: string;
 }
+function TableComponent({ listItems, setListItems, theme }: TableProps) {
+  const actualTheme = createTheme({
+    palette: {
+      mode: theme === "light" ? "light" : "dark",
+      primary: {
+        main: "#214966",
+      },
+    },
+  });
 
-function Table({ listItems, setListItems }: TableProps) {
+  const commonCellStyle = {
+    color: theme === "light" ? "#214966" : "white",
+    backgroundColor: theme === "light" ? "#FFFFFF" : "#1f1f1f",
+  };
+
   const handleIncreaseQuantity = (index: number) => {
     const updatedItems = [...listItems];
     updatedItems[index].Quantity += 1;
@@ -39,62 +53,61 @@ function Table({ listItems, setListItems }: TableProps) {
   };
 
   return (
-    <StyledTableContainer>
-      {listItems.map((item: IItemRequest, index: number) => (
-        <StyledItemContainer key={index}>
-          <div style={{ display: "flex" }}>
-            {index === 0 && (
-              <>
-                <StyledItem>
-                  <h4>Código do Item</h4>
-                </StyledItem>
-                <StyledItem>
-                  <h4>Descrição:</h4>
-                </StyledItem>
-                <StyledItem>
-                  <h4>Quantidade</h4>
-                </StyledItem>
-                <StyledItem>
-                  <h4>Projeto</h4>
-                </StyledItem>
-                <StyledItem>
-                  <h4>Gerencial:</h4>
-                </StyledItem>
-              </>
-            )}
-            <div style={{ display: "flex" }}>
-              <StyledItem>
-                <p>{item.ItemCode}</p>
-              </StyledItem>
-              <StyledItem>
-                <p>{item.ItemDescription}</p>
-              </StyledItem>
+    <ThemeProvider theme={actualTheme}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell sx={commonCellStyle}>Código do Item</TableCell>
+            <TableCell sx={commonCellStyle} align="center">
+              Descrição do item
+            </TableCell>
+            <TableCell sx={commonCellStyle} align="left">
+              Quantidade
+            </TableCell>
+            <TableCell sx={commonCellStyle} align="center">
+              Gerencial
+            </TableCell>
+            <TableCell sx={commonCellStyle} align="center">
+              Projeto
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {listItems.map((item: IItemRequest, index: number) => (
+            <TableRow
+              key={index}
+              sx={{
+                "&:last-child td, &:last-child th": { border: 0 },
+                position: "relative",
+              }}
+            >
+              <TableCell component="th" scope="row">
+                {item.ItemCode}
+              </TableCell>
+              <TableCell align="center">{item.ItemDescription}</TableCell>
               <div
                 style={{
                   display: "flex",
-                  gap: ".5rem",
                   alignItems: "center",
-                  justifyContent: "center",
+                  marginLeft: "1rem",
                 }}
               >
-                <StyledPlus onClick={() => handleIncreaseQuantity(index)} />
-                <p>{item.Quantity}</p>
-                <StyledMinus onClick={() => handleDecreaseQuantity(index)} />
+                <StyledMinus onClick={() => handleDecreaseQuantity} />
+                <TableCell align="center">{item.Quantity}</TableCell>
+                <StyledPlus onClick={() => handleIncreaseQuantity} />
               </div>
-              <StyledItem>
-                <p>{item.ItemCode}</p>
-              </StyledItem>
-            </div>
-          </div>
-          <FaRegTrashAlt
-            className="icon"
-            size={25}
-            onClick={() => handleDeleteItem(index)}
-          />
-        </StyledItemContainer>
-      ))}
-    </StyledTableContainer>
+              <TableCell align="center">{item.CostingCode2}</TableCell>
+              <TableCell align="center">{item.ProjectCode}</TableCell>
+              <StyledIcon
+                style={{ color: theme === "light" ? "#000000" : "#FFFFFF" }}
+                onClick={handleDeleteItem}
+              />
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </ThemeProvider>
   );
 }
 
-export default Table;
+export default TableComponent;

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { IconType } from "react-icons";
 import { FaMinus, FaPlus, FaRegTrashAlt } from "react-icons/fa";
+import TableContainer from "@mui/material/TableContainer";
 
 export const StyledForm = styled.form`
   display: flex;
@@ -34,16 +35,7 @@ export const StyledTableContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  border-collapse: collapse;
-  overflow: hidden;
   width: 100%;
-
-  .quantity {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-  }
 `;
 
 export const StyledItemsContainer = styled.div`
@@ -55,33 +47,22 @@ export const StyledItemsContainer = styled.div`
   }
 `;
 
-export const StyledItemContainer = styled.div`
+export const StyledItemContainer = styled.tr`
   background-color: ${(props) => props.theme.colors.background};
   color: ${(props) => props.theme.colors.primarytint};
-  width: 100%;
-  flex-direction: column;
 
-  @media (min-width: 768px) {
-    align-items: flex-start;
-    flex-direction: row;
+  &:hover {
+    background-color: ${(props) => props.theme.colors.background};
   }
 `;
 
-export const StyledItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  height: auto;
-  width: 100%;
+export const StyledItem = styled.td`
+  padding: 1rem;
 
   h4 {
     color: var(--color-white);
-    width: 100%;
     background-color: var(--color-primary);
     padding: 1rem;
-    text-align: center;
   }
 
   p {
@@ -95,21 +76,30 @@ export const StyledItem = styled.div`
   }
 `;
 
-export const StyledIcon = styled(FaRegTrashAlt) `
-  
-`
+export const StyledIcon = styled(FaRegTrashAlt)`
+  cursor: pointer;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  z-index: 9999;
+  height: 2rem;
+
+  :hover {
+    color: var(--color-denim);
+    transition: all 0.2s;
+  }
+`;
 
 export const StyledMinus: IconType = styled(FaMinus)`
   cursor: pointer;
-
+  color: ${(props) => props.theme.colors.primarytint};
   &:hover {
     color: var(--color-denim);
-    transition: all 0.25s;
   }
 `;
 
 export const StyledPlus: IconType = styled(FaPlus)`
   cursor: pointer;
+  color: ${(props) => props.theme.colors.primarytint};
 
   &:hover {
     color: var(--color-denim);
@@ -162,4 +152,8 @@ export const StyledTitleContainer = styled.div`
   h3 {
     color: ${(props) => props.theme.colors.primarytint};
   }
+`;
+
+export const StyledTable = styled(TableContainer)`
+  background-color: ${(props) => props.theme.colors.background};
 `;

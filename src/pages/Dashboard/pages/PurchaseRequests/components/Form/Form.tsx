@@ -106,7 +106,11 @@ function Form({ theme }: INavProps) {
         {listItems.length > 0 && (
           <StyledTitleContainer>
             <h3>Itens</h3>
-            <Table setListItems={setListItems} listItems={listItems} />
+            <Table
+              setListItems={setListItems}
+              listItems={listItems}
+              theme={theme}
+            />
           </StyledTitleContainer>
         )}
         <StyledTotalContainer>

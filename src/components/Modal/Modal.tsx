@@ -2,6 +2,7 @@ import React from "react";
 import { StyledModal } from "./styles";
 import { MdContentCopy } from "react-icons/md";
 import { useCallback } from "react";
+import { toast } from "react-toastify";
 
 interface ModalProps {
   isOpen: boolean;
@@ -12,7 +13,7 @@ interface ModalProps {
 async function useClipboard(text: string) {
   try {
     await navigator.clipboard.writeText(text);
-    console.log("Texto copiado para a área de transferência");
+    toast.success("Nº do Pedido copiado");
   } catch (err) {
     console.log("Falha ao copiar o texto", err);
   }
