@@ -92,15 +92,15 @@ function TableComponent({ listItems, setListItems, theme }: TableProps) {
                   marginLeft: "1rem",
                 }}
               >
-                <StyledMinus onClick={() => handleDecreaseQuantity} />
+                <StyledMinus onClick={() => handleDecreaseQuantity(index)} />
                 <TableCell align="center">{item.Quantity}</TableCell>
-                <StyledPlus onClick={() => handleIncreaseQuantity} />
+                <StyledPlus onClick={() => handleIncreaseQuantity(index)} />
               </div>
               <TableCell align="center">{item.CostingCode2}</TableCell>
               <TableCell align="center">{item.ProjectCode}</TableCell>
               <StyledIcon
                 style={{ color: theme === "light" ? "#000000" : "#FFFFFF" }}
-                onClick={handleDeleteItem}
+                onClick={() => handleDeleteItem(index)}
               />
             </TableRow>
           ))}
