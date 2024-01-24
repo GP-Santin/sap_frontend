@@ -18,4 +18,7 @@ export interface ISelectItemProps {
   usage: string;
   setUsage: React.Dispatch<React.SetStateAction<string>>;
   warehouseCode: string;
+  branch: string;
 }
+
+

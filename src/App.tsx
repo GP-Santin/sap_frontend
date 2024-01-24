@@ -12,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Modal from "react-modal";
 import SessionTimer from "./sessionManagement/SessionTimer";
 import CookieConsent from "react-cookie-consent";
+import { ErrorBoundary } from "react-error-boundary";
 
 Modal.setAppElement("#root");
 function App() {
@@ -33,11 +34,13 @@ function App() {
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
       <ResetStyles />
       <GlobalStyles />
-      <AppProvider>
-        <UserProvider>
-          <RoutesMain toggleTheme={toggleTheme} theme={theme} />
-        </UserProvider>
-      </AppProvider>
+      <ErrorBoundary fallback={<div>Something went wrong</div>}>
+        <AppProvider>
+          <UserProvider>
+            <RoutesMain toggleTheme={toggleTheme} theme={theme} />
+          </UserProvider>
+        </AppProvider>
+      </ErrorBoundary>
       <ToastContainer
         position="top-right"
         autoClose={3000}

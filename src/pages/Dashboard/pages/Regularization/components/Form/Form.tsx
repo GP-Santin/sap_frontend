@@ -56,8 +56,8 @@ function Form({ theme }: INavProps) {
       RequriedDate: formData.RequriedDate,
       TaxDate: formData.TaxDate,
       DocDueDate: formData.DocDueDate,
-      U_SNT_Suprimento: supplier,
-      U_SNT_SC_Manut: maintence,
+      U_SNT_Suprimento: "NÃO",
+      U_SNT_SC_Manut: "N",
       Comments: comments,
       DocumentLines: [],
       DocumentsOwner: Number(owner),
@@ -70,6 +70,7 @@ function Form({ theme }: INavProps) {
       U_SNT_MetodoPagto: paymentMethod,
       BPL_IDAssignedToInvoice: Number(branch),
       U_SNT_Requester: import.meta.env.VITE_SAP_LOGIN,
+      U_SNT_Finalidade: "2",
     };
 
     if (listItems.length > 0) {
@@ -78,10 +79,8 @@ function Form({ theme }: INavProps) {
         DocumentLines: listItems,
       };
       createPurchaseQuotations(requestWithItems);
-      console.log(requestWithItems);
     } else {
       createPurchaseQuotations(baseRequest);
-      console.log(baseRequest);
     }
   };
 
@@ -128,10 +127,6 @@ function Form({ theme }: INavProps) {
             <SelectShipping setTransportationCode={setTransportationCode} />
             <SelectPaymentMethod setPaymentMethod={setPaymentMethod} />
           </StyledLineItems>
-          <div>
-            <RadioSupplier theme={theme} setSupplier={setSupplier} />
-            <RadioMan theme={theme} setMaintence={setMaintence} />
-          </div>
           <h3>Adicionar Linhas do documento</h3>
           <SelectItemsRegularization
             setItems={setItems}
@@ -151,6 +146,7 @@ function Form({ theme }: INavProps) {
             setUsage={setUsage}
             usage={usage}
             warehouseCode={warehouseCode}
+            branch={branch}
           />
         </StyledContainerFields>
         {listItems.length > 0 && (
