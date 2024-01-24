@@ -147,7 +147,6 @@ const SelectItems: React.FC<ISelectItemProps> = ({
         )}
         <Management
           setManagement={setManagement}
-          management={management}
           setManagementCode={setManagementCode}
         />
         <Projects
