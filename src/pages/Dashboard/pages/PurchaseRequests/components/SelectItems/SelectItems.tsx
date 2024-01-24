@@ -25,7 +25,7 @@ const SelectItems: React.FC<ISelectItemProps> = ({
   const [quantity, setQuantity] = useState("");
   const [filteredItems, setFilteredItems] = useState<IItem[]>([]);
   const [openDropdown, setOpenDropdown] = useState(false);
-  const [managementCode, setmanagementCode] = useState<string>("");
+  const [managementCode, setManagementCode] = useState<string>("");
   const items: IItem[] = JSON.parse(localStorage.getItem("@items") || "[]");
 
   const filterItems = (inputValue: string): IItem[] => {
@@ -148,7 +148,7 @@ const SelectItems: React.FC<ISelectItemProps> = ({
         <Management
           setManagement={setManagement}
           management={management}
-          setmanagementCode={setmanagementCode}
+          setManagementCode={setManagementCode}
         />
         <Projects
           setProject={setProject}

@@ -5,7 +5,6 @@ export interface IManagement {
 }
 
 export interface IManagementProps {
-  management: string;
   setManagement: React.Dispatch<React.SetStateAction<string>>;
   setManagementCode: React.Dispatch<React.SetStateAction<string>>;
 }

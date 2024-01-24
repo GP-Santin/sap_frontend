@@ -15,7 +15,6 @@ import {
   StyledTitleContainer,
 } from "./styles";
 import { Button } from "../../../../../../components/Button/Button";
-import RadioSupplier from "../../../../../../components/RadioSupplier/RadioSupplier";
 import RadioMan from "../../../../../../components/RadioMan/RadioMan";
 import { UserContext } from "../../../../../../providers/UserContext/UserContext";
 import Table from "./Table";
