@@ -1,8 +1,6 @@
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import DatePickerComponent from "../../../../../../components/DatePicker/DatePicker";
 import { useContext, useEffect, useState } from "react";
-import RadioSupplier from "../../../../../../components/RadioSupplier/RadioSupplier";
-import RadioMan from "../../../../../../components/RadioMan/RadioMan";
 import { UserContext } from "../../../../../../providers/UserContext/UserContext";
 import {
   IItemOrder,
@@ -38,8 +36,6 @@ function Form({ theme }: INavProps) {
   const [project, setProject] = useState<string>("");
   const [docProject, setDocProject] = useState<string>("");
   const [management, setManagement] = useState<string>("");
-  const [supplier, setSupplier] = useState<string>("");
-  const [maintence, setMaintence] = useState<string>("");
   const [comments, setComments] = useState<string>("");
   const [unitPrice, setUnitPrice] = useState<string>("");
   const [businessPartner, setBusinessPartner] = useState<string>("");

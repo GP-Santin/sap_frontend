@@ -1,34 +1,27 @@
 import { useState } from "react";
 import { Input } from "../Input/Input";
 import { IManagement, IManagementProps } from "./@types";
-import { useOutsideClick } from "../../hooks/outsideClick";
-import {
-  StyledProjectDropdown,
-  StyledProjectsContainer,
-} from "../Projects/styles";
+import { StyledProjectsContainer } from "../Projects/styles";
+import Dropdown from "./Dropdown";
 
-function Management({
-  setManagement,
-  management,
-  setmanagementCode,
-}: IManagementProps) {
-  const [, setInputValue] = useState(management);
+function Management({ setManagement, setManagementCode }: IManagementProps) {
+  const [openDropdown, setOpenDropdown] = useState(false);
   const [managementListFiltered, setManagementListFiltered] = useState<
     IManagement[]
   >([]);
-  const [openDropdown, setOpenDropdown] = useState(false);
+  const [filteredManagement, setFilteredManagement] = useState("");
   const managementList = JSON.parse(
     localStorage.getItem("@projectmanagements") || "[]"
   );
 
-  const handleOpenDropdown = () => {
-    setOpenDropdown(true);
+  const showAllItems = () => {
+    setOpenDropdown(!openDropdown);
+    setManagementListFiltered(managementList);
   };
 
   const handleFilterManagement = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setInputValue(value);
-    setOpenDropdown(true);
+    setFilteredManagement(value);
     const filtered = filterManagement(value);
     setManagementListFiltered(filtered);
   };
@@ -44,26 +37,6 @@ function Management({
     });
   };
 
-  const closeDropdown = () => {
-    setOpenDropdown(false);
-  };
-
-  const showAllItems = () => {
-    openDropdown ? closeDropdown() : handleOpenDropdown();
-    setManagementListFiltered(managementList);
-  };
-
-  const handleAddItemToInput = (selectedManagement: IManagement) => {
-    setManagement(selectedManagement.CenterCode);
-    setInputValue(selectedManagement.CenterCode);
-    setmanagementCode(selectedManagement.U_SNT_IdGerencial);
-
-    setOpenDropdown(false);
-    setManagementListFiltered([]);
-  };
-
-  const dropdownRef = useOutsideClick({ callback: closeDropdown });
-
   return (
     <StyledProjectsContainer>
       <Input
@@ -72,24 +45,18 @@ function Management({
         style={{ cursor: "pointer" }}
         onClick={showAllItems}
         onChange={handleFilterManagement}
-        value={management}
+        value={filteredManagement}
       />
-
       {openDropdown && (
-        <StyledProjectDropdown ref={dropdownRef}>
-          <ul>
-            {managementListFiltered.map(
-              (management: IManagement, index: number) => (
-                <li
-                  key={index}
-                  onClick={() => handleAddItemToInput(management)}
-                >
-                  {management.CenterCode} - {management.CenterName}
-                </li>
-              )
-            )}
-          </ul>
-        </StyledProjectDropdown>
+        <Dropdown
+          openDropdown={openDropdown}
+          setManagement={setManagement}
+          setOpenDropdown={setOpenDropdown}
+          setManagementCode={setManagementCode}
+          managementListFiltered={managementListFiltered}
+          setManagementListFiltered={setManagementListFiltered}
+          setFilteredManagement={setFilteredManagement}
+        />
       )}
     </StyledProjectsContainer>
   );

@@ -33,7 +33,6 @@ function Form({ theme }: INavProps) {
   const [listItems, setListItems] = useState<IItemRequest[]>([]);
   const [project, setProject] = useState("");
   const [management, setManagement] = useState("");
-  const [supplier, setSupplier] = useState("");
   const [maintence, setMaintence] = useState("");
   const [comments, setComments] = useState("");
   const [branch, setBranch] = useState("");
@@ -43,7 +42,7 @@ function Form({ theme }: INavProps) {
   const onSubmit: SubmitHandler<IPurchaseRequest> = (formData) => {
     const baseRequest: IPurchaseRequest = {
       RequriedDate: formData.RequriedDate,
-      U_SNT_Suprimento: supplier,
+      U_SNT_Suprimento: "SIM",
       U_SNT_SC_Manut: maintence,
       Comments: comments,
       DocumentLines: [],
@@ -99,7 +98,6 @@ function Form({ theme }: INavProps) {
             warehouseCode={warehouseCode}
           />
           <div>
-            <RadioSupplier theme={theme} setSupplier={setSupplier} />
             <RadioMan theme={theme} setMaintence={setMaintence} />
           </div>
         </StyledContainerFields>
