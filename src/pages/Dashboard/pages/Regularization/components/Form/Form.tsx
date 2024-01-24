@@ -19,7 +19,6 @@ import {
   StyledItemsContainer,
   StyledTextArea,
 } from "../../../PurchaseRequests/components/Form/styles";
-import Table from "./Table";
 import { StyledLineItems, StyledTotalContainer } from "./styles";
 import BusinessPartners from "../../../../../../components/BusinessPartners/BusinessPartners";
 import SelectItemsRegularization from "../../../../../../components/SelectItemsRegularization/SelectItemsRegularization";
@@ -29,6 +28,7 @@ import SelectConsumption from "../SelectConsumption/SelectConsumption";
 import SelectShipping from "../SelectShipping/SelectShipping";
 import SelectPaymentMethod from "../SelectPaymentMethod/SelectPaymentMethod";
 import SelectBranch from "../SelectBranch/SelectBranch";
+import TableComponent from "./Table";
 
 function Form({ theme }: INavProps) {
   const owner = localStorage.getItem("@owner");
@@ -163,7 +163,7 @@ function Form({ theme }: INavProps) {
         {listItems.length > 0 && (
           <StyledItemsContainer>
             <h3>Itens</h3>
-            <Table
+            <TableComponent
               listItems={listItems}
               setListItems={setListItems}
               handleDocTotalChange={handleDocTotalChange}
@@ -171,6 +171,7 @@ function Form({ theme }: INavProps) {
               setLineTotal={setLineTotal}
               lineTotal={lineTotal}
               setDocProject={setDocProject}
+              theme={theme}
             />
           </StyledItemsContainer>
         )}

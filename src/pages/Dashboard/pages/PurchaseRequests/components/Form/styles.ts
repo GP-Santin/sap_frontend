@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { IconType } from "react-icons";
-import { FaMinus, FaPlus, FaRegTrashAlt } from "react-icons/fa";
+import { FaMinus, FaPlus, FaTrashAlt } from "react-icons/fa";
 import TableContainer from "@mui/material/TableContainer";
 
 export const StyledForm = styled.form`
@@ -76,15 +76,16 @@ export const StyledItem = styled.td`
   }
 `;
 
-export const StyledIcon = styled(FaRegTrashAlt)`
+export const StyledIcon = styled(FaTrashAlt)`
   cursor: pointer;
-  margin-top: 1rem;
-  margin-left: 1rem;
-  z-index: 9999;
-  height: 2rem;
+  margin-left: 0.5rem;
+  color: ${(props) => props.theme.colors.primarytint};
+  transform: translateY(0);
+  transition: all 0.2s;
 
-  :hover {
+  &:hover {
     color: var(--color-denim);
+    transform: translateY(-10%);
     transition: all 0.2s;
   }
 `;

@@ -7,7 +7,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { StyledIcon, StyledMinus, StyledPlus } from "./styles";
-import { FaMinus, FaPlus } from "react-icons/fa";
 
 interface TableProps {
   listItems: IItemRequest[];
@@ -99,8 +98,13 @@ function TableComponent({ listItems, setListItems, theme }: TableProps) {
               <TableCell align="center">{item.CostingCode2}</TableCell>
               <TableCell align="center">{item.ProjectCode}</TableCell>
               <StyledIcon
-                style={{ color: theme === "light" ? "#000000" : "#FFFFFF" }}
+                style={{
+                  marginLeft: "1rem",
+                  color: theme === "light" ? "#000000" : "#FFFFFF",
+                  cursor: "pointer",
+                }}
                 onClick={() => handleDeleteItem(index)}
+                size={20}
               />
             </TableRow>
           ))}
