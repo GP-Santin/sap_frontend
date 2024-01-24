@@ -32,6 +32,7 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
   usage,
   setUsage,
   warehouseCode,
+  branch,
 }) => {
   const [itemCode, setItemCode] = useState("");
   const [itemDescription, setItemDescription] = useState("");
@@ -90,7 +91,6 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
     const priceFloat = parseFloat(valueFormatted);
     const totalNumber = priceFloat * quantityFloat;
     setLineTotal(totalNumber.toString());
-    console.log(totalNumber)
   };
 
   const handleDocTotalChange = (list: IItemOrder[]) => {
@@ -105,13 +105,27 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
   }, [listItems]);
 
   const handleAddItemToList = () => {
+    const errorMessages = {
+      item: "Selecione um item",
+      quantity: "Selecione a quantidade",
+      unitPrice: "Informe o preço unitário",
+      project: "Selecione o projeto",
+      management: "Selecione a gerencial",
+      branch: "Selecione a filial",
+    };
+
+    const showErrorMessage = (field: keyof typeof errorMessages) => {
+      toast.error(errorMessages[field]);
+    };
+
     if (
       itemCode &&
       itemDescription &&
       quantity &&
       project &&
       management &&
-      unitPrice
+      unitPrice &&
+      branch
     ) {
       const newItem = {
         LineNum: listItems.indexOf(listItems[0]) + 1,
@@ -157,7 +171,19 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
 
       setFilteredItems([]);
     } else {
-      toast.error("Selecione um item antes de adicionar");
+      if (!itemCode || !itemDescription) {
+        showErrorMessage("item");
+      } else if (!quantity) {
+        showErrorMessage("quantity");
+      } else if (!unitPrice) {
+        showErrorMessage("unitPrice");
+      } else if (!management) {
+        showErrorMessage("management");
+      } else if (!project) {
+        showErrorMessage("project");
+      } else if (!branch) {
+        showErrorMessage("branch");
+      }
     }
   };
   const closeDropdown = () => {

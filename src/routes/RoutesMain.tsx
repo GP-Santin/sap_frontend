@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import PrivatesRoutes from "./PrivatesRoutes";
 import PublicRoutes from "./PublicRoutes";
 import LoginPage from "../pages/Login/LoginPage";
@@ -7,6 +7,7 @@ import Dashboard from "../pages/Dashboard/Dashboard";
 import PurchaseRequests from "../pages/Dashboard/pages/PurchaseRequests/PurchaseRequests";
 import Regularization from "../pages/Dashboard/pages/Regularization/Regularization";
 import SAPRoutes from "./SapRoutes";
+import NotFound from "../pages/NotFound/NotFound";
 function RoutesMain({ toggleTheme, theme }: INavProps) {
   const sessionSAP = localStorage.getItem("@session");
   return (
@@ -38,6 +39,7 @@ function RoutesMain({ toggleTheme, theme }: INavProps) {
         ) : (
           <Route path="/login" element={<HomePage />} />
         )}
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );

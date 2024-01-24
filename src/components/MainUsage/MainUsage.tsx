@@ -39,7 +39,7 @@ function MainUsage({ setUsage }: IMainUsageProps) {
         label="Uso principal"
         widthsize="large3"
         onClick={handleOpenDropdown}
-        defaultValue={inputValue}
+        value={inputValue}
         style={{ cursor: "pointer" }}
       />
       {openDropdown && (
