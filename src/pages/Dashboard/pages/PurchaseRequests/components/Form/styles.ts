@@ -41,6 +41,7 @@ export const StyledTableContainer = styled.div`
 export const StyledItemsContainer = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 1rem;
 
   h3 {
     color: ${(props) => props.theme.colors.primarytint};

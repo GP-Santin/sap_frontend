@@ -23,6 +23,7 @@ apiSAP.interceptors.response.use(
               autoClose: false,
             });
             break;
+          // case '5400072 - 
           case '10000111 - On "Contents" tab, enter item or items':
             toast.error("Insira ao menos um item na solicitação", {
               autoClose: false,

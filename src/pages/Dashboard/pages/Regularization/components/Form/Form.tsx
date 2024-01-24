@@ -1,9 +1,4 @@
-import {
-  useForm,
-  FormProvider,
-  SubmitHandler,
-  FieldErrors,
-} from "react-hook-form";
+import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import DatePickerComponent from "../../../../../../components/DatePicker/DatePicker";
 import { useContext, useEffect, useState } from "react";
 import RadioSupplier from "../../../../../../components/RadioSupplier/RadioSupplier";
@@ -21,10 +16,9 @@ import {
 } from "../../../PurchaseRequests/components/Form/styles";
 import { StyledLineItems, StyledTotalContainer } from "./styles";
 import BusinessPartners from "../../../../../../components/BusinessPartners/BusinessPartners";
-import SelectItemsRegularization from "../../../../../../components/SelectItemsRegularization/SelectItemsRegularization";
+import SelectItemsRegularization from "../SelectItemsRegularization/SelectItemsRegularization";
 import { Button } from "../../../../../../components/Button/Button";
 import { useMsal } from "@azure/msal-react";
-import SelectConsumption from "../SelectConsumption/SelectConsumption";
 import SelectShipping from "../SelectShipping/SelectShipping";
 import SelectPaymentMethod from "../SelectPaymentMethod/SelectPaymentMethod";
 import SelectBranch from "../SelectBranch/SelectBranch";
@@ -51,12 +45,11 @@ function Form({ theme }: INavProps) {
   const [businessPartner, setBusinessPartner] = useState<string>("");
   const [docTotal, setDocTotal] = useState<string>("");
   const [lineTotal, setLineTotal] = useState<string>("");
-  const [consumption, setConsumption] = useState<string>("");
   const [transportationCode, setTransportationCode] = useState<number>(-1);
   const [paymentMethod, setPaymentMethod] = useState<string>("");
   const [usage, setUsage] = useState<string>("");
-  const [, setBranch] = useState<string>("");
-  const [, setWarehouseCode] = useState("");
+  const [branch, setBranch] = useState<string>("");
+  const [warehouseCode, setWarehouseCode] = useState("");
 
   const onSubmit: SubmitHandler<IOrderRequest> = (formData) => {
     const baseRequest: IOrderRequest = {
@@ -72,9 +65,11 @@ function Form({ theme }: INavProps) {
       DocTotal: docTotal ? parseFloat(docTotal) : 0,
       Project: docProject,
       SalesPersonCode: Number(salesPerson),
-      U_SNT_Consumo: consumption,
+      U_SNT_Consumo: "Interno",
       TransportationCode: transportationCode,
       U_SNT_MetodoPagto: paymentMethod,
+      BPL_IDAssignedToInvoice: Number(branch),
+      U_SNT_Requester: import.meta.env.VITE_SAP_LOGIN,
     };
 
     if (listItems.length > 0) {
@@ -83,13 +78,11 @@ function Form({ theme }: INavProps) {
         DocumentLines: listItems,
       };
       createPurchaseQuotations(requestWithItems);
+      console.log(requestWithItems);
     } else {
       createPurchaseQuotations(baseRequest);
+      console.log(baseRequest);
     }
-  };
-
-  const onSubmitError = (errors: FieldErrors) => {
-    console.error(errors);
   };
 
   const handleDocTotalChange = (list: IItemOrder[]) => {
@@ -109,7 +102,7 @@ function Form({ theme }: INavProps) {
 
   return (
     <FormProvider {...methods}>
-      <StyledForm onSubmit={methods.handleSubmit(onSubmit, onSubmitError)}>
+      <StyledForm onSubmit={methods.handleSubmit(onSubmit)}>
         <SelectBranch
           setWarehouseCode={setWarehouseCode}
           setBranch={setBranch}
@@ -132,7 +125,6 @@ function Form({ theme }: INavProps) {
               businessPartner={businessPartner}
               setBusinessPartner={setBusinessPartner}
             />
-            <SelectConsumption setConsumption={setConsumption} />
             <SelectShipping setTransportationCode={setTransportationCode} />
             <SelectPaymentMethod setPaymentMethod={setPaymentMethod} />
           </StyledLineItems>
@@ -158,6 +150,7 @@ function Form({ theme }: INavProps) {
             lineTotal={lineTotal}
             setUsage={setUsage}
             usage={usage}
+            warehouseCode={warehouseCode}
           />
         </StyledContainerFields>
         {listItems.length > 0 && (

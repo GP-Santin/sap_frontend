@@ -32,7 +32,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   const createPurchaseQuotations = async (formData: IOrderRequest) => {
     try {
       const { data } = await apiSAP.post("/PurchaseQuotations", formData);
-      setModalContent(`Nº da solicitação: ${data.DocNum}`);
+      setModalContent(`${data.DocNum}`);
       setIsModalOpen(true);
       localStorage.setItem("@savedItems", "");
     } catch (error: AxiosError | any) {

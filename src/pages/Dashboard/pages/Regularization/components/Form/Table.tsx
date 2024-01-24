@@ -13,7 +13,6 @@ import {
   StyledMinus,
   StyledPlus,
 } from "../../../PurchaseRequests/components/Form/styles";
-import { FaTrashAlt } from "react-icons/fa";
 import { StyledIcon } from "./styles";
 
 interface TableProps {
@@ -143,7 +142,8 @@ function TableComponent({
                 <TableCell align="center">{item.Quantity}</TableCell>
                 <StyledPlus onClick={() => handleIncreaseQuantity(index)} />
               </div>
-              <TableCell align="left">{item.UnitPrice}</TableCell>
+              <TableCell align="left">R$ {item.UnitPrice}</TableCell>
+              <TableCell align="left">R$ {item.LineTotal}</TableCell>
               <TableCell align="center">{item.CostingCode2}</TableCell>
               <TableCell align="center">{item.ProjectCode}</TableCell>
               <StyledIcon

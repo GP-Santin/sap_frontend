@@ -1,4 +1,4 @@
-import { FaRegTrashAlt, FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt } from "react-icons/fa";
 import styled from "styled-components";
 
 export const StyledLineItems = styled.div`
@@ -37,7 +37,7 @@ export const StyledIcon = styled(FaTrashAlt)`
   transition: all 0.2s;
 
   &:hover {
-    color: var(--color-denim);
+    color: aliceblue;
     transform: translateY(-10%);
     transition: all 0.2s;
   }

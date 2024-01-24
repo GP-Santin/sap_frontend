@@ -1,4 +1,4 @@
-import { IItemRequest } from "../../pages/Dashboard/pages/PurchaseRequests/components/Form/@types";
+import { IItemRequest } from "../Form/@types";
 
 export interface ISelectItemProps {
   setItems: React.Dispatch<React.SetStateAction<IItemRequest[]>>;

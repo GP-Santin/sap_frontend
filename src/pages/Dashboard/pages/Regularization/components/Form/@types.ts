@@ -27,4 +27,6 @@ export interface IOrderRequest {
   U_SNT_Consumo: string;
   TransportationCode: number;
   U_SNT_MetodoPagto: string;
+  BPL_IDAssignedToInvoice: number;
+  U_SNT_Requester: string;
 }

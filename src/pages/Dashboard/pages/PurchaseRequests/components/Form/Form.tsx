@@ -7,7 +7,7 @@ import {
 import DatePickerComponent from "../../../../../../components/DatePicker/DatePicker";
 import { useContext, useEffect, useState } from "react";
 import { IItemRequest, IPurchaseRequest } from "./@types";
-import SelectItems from "../../../../../../components/SelectItems/SelectItems";
+import SelectItems from "../SelectItems/SelectItems";
 import {
   StyledContainerFields,
   StyledForm,

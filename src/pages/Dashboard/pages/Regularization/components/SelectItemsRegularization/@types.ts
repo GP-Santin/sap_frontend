@@ -1,4 +1,4 @@
-import { IItemOrder } from "../../pages/Dashboard/pages/Regularization/components/Form/@types";
+import { IItemOrder } from "../Form/@types";
 
 export interface ISelectItemProps {
   setItems: React.Dispatch<React.SetStateAction<IItemOrder[]>>;
@@ -17,4 +17,5 @@ export interface ISelectItemProps {
   handleDocTotalChange: (list: IItemOrder[]) => void;
   usage: string;
   setUsage: React.Dispatch<React.SetStateAction<string>>;
+  warehouseCode: string;
 }
