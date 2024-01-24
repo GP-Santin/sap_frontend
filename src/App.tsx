@@ -37,7 +37,7 @@ function App() {
       <ErrorBoundary fallback={<div>Something went wrong</div>}>
         <AppProvider>
           <UserProvider>
-            <RoutesMain toggleTheme={toggleTheme} theme={theme} />
+            <RoutesMain theme={theme} toggleTheme={toggleTheme} />
           </UserProvider>
         </AppProvider>
       </ErrorBoundary>

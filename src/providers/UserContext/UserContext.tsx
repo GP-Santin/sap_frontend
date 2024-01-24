@@ -14,6 +14,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState("");
   const [shouldReload, setShouldReload] = useState(false);
+  const [pathname, setPathname] = useState("");
 
   const navigate = useNavigate();
 
@@ -88,10 +89,12 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   };
 
   useEffect(() => {
+    const page = window.location.pathname;
+    setPathname(page);
     if (shouldReload) {
-      window.location.reload();
+      navigate(pathname);
     }
-  }, [shouldReload]);
+  }, [shouldReload, pathname]);
 
   return (
     <UserContext.Provider
