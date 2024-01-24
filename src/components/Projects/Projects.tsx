@@ -1,8 +1,8 @@
 import { Input } from "../Input/Input";
 import { useEffect, useState } from "react";
 import { IProject, IProjectProps } from "./@types";
-import { useOutsideClick } from "../../hooks/outsideClick";
-import { StyledProjectDropdown, StyledProjectsContainer } from "./styles";
+import { StyledProjectsContainer } from "./styles";
+import Dropdown from "./Dropdown";
 
 function Projects({ project, setProject, managementCode }: IProjectProps) {
   const [openDropdown, setOpenDropdown] = useState(false);
@@ -21,17 +21,6 @@ function Projects({ project, setProject, managementCode }: IProjectProps) {
     const filtered = filterProjects(value);
     setFilteredProjects(filtered);
   };
-
-  const handleProjectClick = (selectedProjectCode: string) => {
-    setProject(selectedProjectCode);
-    setInputValue(selectedProjectCode);
-    setOpenDropdown(false);
-  };
-
-  const closeDropdown = () => {
-    setOpenDropdown(false);
-  };
-  const dropdownRef = useOutsideClick({ callback: closeDropdown });
 
   const filterProjects = (inputValue: string): IProject[] => {
     const projectsList = JSON.parse(localStorage.getItem("@projects") || "[]");
@@ -69,15 +58,11 @@ function Projects({ project, setProject, managementCode }: IProjectProps) {
         onChange={handleFilterProjects}
       />
       {openDropdown && (
-        <StyledProjectDropdown ref={dropdownRef}>
-          <ul>
-            {filteredProjects.map((project: IProject, index: number) => (
-              <li key={index} onClick={() => handleProjectClick(project.Code)}>
-                {project.Code} - {project.Name}
-              </li>
-            ))}
-          </ul>
-        </StyledProjectDropdown>
+        <Dropdown
+          setProject={setProject}
+          setOpenDropdown={setOpenDropdown}
+          filteredProjects={filteredProjects}
+        />
       )}
     </StyledProjectsContainer>
   );
