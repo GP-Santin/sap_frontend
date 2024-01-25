@@ -5,15 +5,15 @@ import { StyledProjectDropdown } from "../Projects/styles";
 interface IDropdownProps {
   setOpenDropdown: React.Dispatch<React.SetStateAction<boolean>>;
   setUsage: React.Dispatch<React.SetStateAction<string>>;
-  setInputValue: React.Dispatch<React.SetStateAction<string>>;
   openDropdown: boolean;
+  setUsageInput: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const Dropdown = ({
   setOpenDropdown,
   setUsage,
-  setInputValue,
   openDropdown,
+  setUsageInput,
 }: IDropdownProps) => {
   const listUsage = JSON.parse(localStorage.getItem("@usage")!);
 
@@ -22,8 +22,9 @@ const Dropdown = ({
   };
 
   const handleUsageClick = (selectedUsage: IUsage) => {
-    setInputValue(selectedUsage.Usage);
     const formattedId = selectedUsage.ID.toString();
+    setUsageInput(selectedUsage.Usage);
+    console.log(selectedUsage.Usage);
     setUsage(formattedId);
     setOpenDropdown(!openDropdown);
   };

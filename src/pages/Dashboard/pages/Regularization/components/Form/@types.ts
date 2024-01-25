@@ -9,6 +9,7 @@ export interface IItemOrder {
   LineTotal: number;
   WarehouseCode: string;
   Usage: number;
+  U_SNT_Mercadoria: number;
 }
 
 export interface IOrderRequest {

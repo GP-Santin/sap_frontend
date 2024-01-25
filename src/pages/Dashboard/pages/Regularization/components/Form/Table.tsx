@@ -24,6 +24,7 @@ interface TableProps {
   lineTotal: string;
   setDocProject: React.Dispatch<React.SetStateAction<string>>;
   theme: string;
+  usageInput: string;
 }
 
 function TableComponent({
@@ -116,6 +117,9 @@ function TableComponent({
             <TableCell sx={commonCellStyle} align="center">
               Projeto
             </TableCell>
+            <TableCell sx={commonCellStyle} align="center">
+              Utilização
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -146,6 +150,7 @@ function TableComponent({
               <TableCell align="left">R$ {item.LineTotal}</TableCell>
               <TableCell align="center">{item.CostingCode2}</TableCell>
               <TableCell align="center">{item.ProjectCode}</TableCell>
+              <TableCell align="center">{item.Usage}</TableCell>
               <StyledIcon
                 style={{ color: theme === "light" ? "#000000" : "#FFFFFF" }}
                 onClick={() => handleDeleteItem(index)}

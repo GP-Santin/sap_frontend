@@ -46,6 +46,7 @@ function Form({ theme }: INavProps) {
   const [usage, setUsage] = useState<string>("");
   const [branch, setBranch] = useState<string>("");
   const [warehouseCode, setWarehouseCode] = useState("");
+  const [usageInput, setUsageInput] = useState("");
 
   const onSubmit: SubmitHandler<IOrderRequest> = (formData) => {
     const baseRequest: IOrderRequest = {
@@ -143,6 +144,8 @@ function Form({ theme }: INavProps) {
             usage={usage}
             warehouseCode={warehouseCode}
             branch={branch}
+            setUsageInput={setUsageInput}
+            usageInput={usageInput}
           />
         </StyledContainerFields>
         {listItems.length > 0 && (
@@ -157,6 +160,7 @@ function Form({ theme }: INavProps) {
               lineTotal={lineTotal}
               setDocProject={setDocProject}
               theme={theme}
+              usageInput={usageInput}
             />
           </StyledItemsContainer>
         )}

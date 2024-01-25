@@ -76,6 +76,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       localStorage.removeItem("@items");
       localStorage.removeItem("@allbranches");
       localStorage.removeItem("@userbranches");
+      localStorage.removeItem("@adiantamento");
       toast.success("Logout efetuado com sucesso");
       navigate("/login");
     } catch (error: AxiosError | any) {

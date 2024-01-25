@@ -4,12 +4,16 @@ import { IManagement, IManagementProps } from "./@types";
 import { StyledProjectsContainer } from "../Projects/styles";
 import Dropdown from "./Dropdown";
 
-function Management({ setManagement, setManagementCode }: IManagementProps) {
+function Management({
+  setManagement,
+  setManagementCode,
+  setFilteredManagement,
+  filteredManagement,
+}: IManagementProps) {
   const [openDropdown, setOpenDropdown] = useState(false);
   const [managementListFiltered, setManagementListFiltered] = useState<
     IManagement[]
   >([]);
-  const [filteredManagement, setFilteredManagement] = useState("");
   const managementList = JSON.parse(
     localStorage.getItem("@projectmanagements") || "[]"
   );
@@ -22,6 +26,7 @@ function Management({ setManagement, setManagementCode }: IManagementProps) {
   const handleFilterManagement = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setFilteredManagement(value);
+    setOpenDropdown(!openDropdown);
     const filtered = filterManagement(value);
     setManagementListFiltered(filtered);
   };

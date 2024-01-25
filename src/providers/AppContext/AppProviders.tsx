@@ -222,10 +222,10 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
         await getLastPurchaseRequest();
         await getBranches();
       }
+      navigate("/dashboard");
     } catch (error: AxiosError | any) {
       console.error(error);
     } finally {
-      navigate("/dashboard");
       setLoading(false);
     }
   };

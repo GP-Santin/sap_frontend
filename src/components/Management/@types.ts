@@ -7,4 +7,6 @@ export interface IManagement {
 export interface IManagementProps {
   setManagement: React.Dispatch<React.SetStateAction<string>>;
   setManagementCode: React.Dispatch<React.SetStateAction<string>>;
+  setFilteredManagement: React.Dispatch<React.SetStateAction<string>>;
+  filteredManagement: string;
 }

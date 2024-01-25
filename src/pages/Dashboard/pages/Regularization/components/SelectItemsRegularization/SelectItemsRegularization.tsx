@@ -15,6 +15,7 @@ import { toast } from "react-toastify";
 import { IItemOrder } from "../Form/@types";
 import MainUsage from "../../../../../../components/MainUsage/MainUsage";
 import { debounce } from "lodash";
+import apiSAP from "../../../../../../middleware/handleRequest.middleware";
 
 const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
   setItems,
@@ -33,6 +34,8 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
   setUsage,
   warehouseCode,
   branch,
+  setUsageInput,
+  usageInput,
 }) => {
   const [itemCode, setItemCode] = useState("");
   const [itemDescription, setItemDescription] = useState("");
@@ -40,6 +43,7 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
   const [filteredItems, setFilteredItems] = useState<IItem[]>([]);
   const [openDropdown, setOpenDropdown] = useState(false);
   const [managementCode, setManagementCode] = useState<string>("");
+  const [filteredManagement, setFilteredManagement] = useState("");
 
   const items: IItem[] = JSON.parse(localStorage.getItem("@items") || "[]");
 
@@ -100,8 +104,17 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
     setDocTotal(total.toString());
   };
 
+  const getUsage = async () => {
+    const { data } = await apiSAP.get(
+      "/NotaFiscalUsage?$filter = Usage eq 'Adiantamento'"
+    );
+    const advanceValue = data.value[0].ID;
+    localStorage.setItem("@advance", advanceValue);
+  };
+
   useEffect(() => {
     handleDocTotalChange(listItems);
+    getUsage();
   }, [listItems]);
 
   const handleAddItemToList = () => {
@@ -117,72 +130,87 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
     const showErrorMessage = (field: keyof typeof errorMessages) => {
       toast.error(errorMessages[field]);
     };
+    const advanceValue = JSON.parse(localStorage.getItem("@advance")!);
 
-    if (
-      itemCode &&
-      itemDescription &&
-      quantity &&
-      project &&
-      management &&
-      unitPrice &&
-      branch
-    ) {
-      const newItem = {
-        LineNum: listItems.indexOf(listItems[0]) + 1,
-        ItemCode: itemCode,
-        ItemDescription: itemDescription,
-        ProjectCode: project,
-        CostingCode2: management,
-        U_SNT_Finalidade: "1",
-        Quantity: parseFloat(quantity),
-        UnitPrice: Number(unitPrice),
-        LineTotal: parseFloat(lineTotal),
-        WarehouseCode: warehouseCode,
-        Usage: parseFloat(usage),
-      };
-      setItems(
-        (
-          prevItems: {
-            ItemCode: string;
-            ItemDescription: string;
-            Quantity: number;
-            ProjectCode: string;
-            CostingCode2: string;
-            UnitPrice: number;
-            U_SNT_Finalidade: string;
-            LineTotal: number;
-            WarehouseCode: string;
-            Usage: number;
-          }[]
-        ) => [...prevItems, newItem]
+    if (itemCode.substring(0, 2) === "61" && Number(usage) != advanceValue) {
+      toast.error(
+        "Para itens com início 61 o uso principal deve ser Adiantamento"
       );
-      const updatedItems = [...listItems, newItem];
-
-      setListItems(updatedItems);
-
-      localStorage.setItem("@savedItems", JSON.stringify(updatedItems));
-      setItemCode("");
-      setItemDescription("");
-      setQuantity("");
-      setProject("");
-      setUnitPrice("");
-      setManagement("");
-      setUsage("");
-
-      setFilteredItems([]);
+      return;
     } else {
-      if (!itemCode || !itemDescription) {
-        showErrorMessage("item");
-      } else if (!quantity) {
-        showErrorMessage("quantity");
-      } else if (!unitPrice) {
-        showErrorMessage("unitPrice");
-      } else if (!management) {
-        showErrorMessage("management");
-      } else if (!project) {
-        showErrorMessage("project");
-      } else if (!branch) {
-        showErrorMessage("branch");
+      if (
+        itemCode &&
+        itemDescription &&
+        quantity &&
+        project &&
+        management &&
+        unitPrice &&
+        branch
+      ) {
+        const newItem = {
+          LineNum: listItems.indexOf(listItems[0]) + 1,
+          ItemCode: itemCode,
+          ItemDescription: itemDescription,
+          ProjectCode: project,
+          CostingCode2: management,
+          U_SNT_Finalidade: "2",
+          Quantity: parseFloat(quantity),
+          UnitPrice: Number(unitPrice),
+          LineTotal: parseFloat(lineTotal),
+          WarehouseCode: warehouseCode,
+          Usage: parseFloat(usage),
+          U_SNT_Mercadoria: 9,
+        };
+        setItems(
+          (
+            prevItems: {
+              ItemCode: string;
+              ItemDescription: string;
+              Quantity: number;
+              ProjectCode: string;
+              CostingCode2: string;
+              UnitPrice: number;
+              U_SNT_Finalidade: string;
+              LineTotal: number;
+              WarehouseCode: string;
+              Usage: number;
+              U_SNT_Mercadoria: number;
+            }[]
+          ) => [...prevItems, newItem]
+        );
+        if (itemCode.substring(0, 2) === "61") {
+          newItem.U_SNT_Finalidade = "5";
+        }
+        const updatedItems = [...listItems, newItem];
+
+        setListItems(updatedItems);
+
+        localStorage.setItem("@savedItems", JSON.stringify(updatedItems));
+        setItemCode("");
+        setItemDescription("");
+        setQuantity("");
+        setProject("");
+        setUnitPrice("");
+        setManagement("");
+        setUsage("");
+        setFilteredManagement("");
+        setUsage("");
+        setUsageInput("");
+        setFilteredItems([]);
+      } else {
+        if (!itemCode || !itemDescription) {
+          showErrorMessage("item");
+        } else if (!quantity) {
+          showErrorMessage("quantity");
+        } else if (!unitPrice) {
+          showErrorMessage("unitPrice");
+        } else if (!management) {
+          showErrorMessage("management");
+        } else if (!project) {
+          showErrorMessage("project");
+        } else if (!branch) {
+          showErrorMessage("branch");
+        }
       }
     }
   };
@@ -239,13 +267,19 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
         <Management
           setManagement={setManagement}
           setManagementCode={setManagementCode}
+          setFilteredManagement={setFilteredManagement}
+          filteredManagement={filteredManagement}
         />
         <Projects
           setProject={setProject}
           project={project}
           managementCode={managementCode}
         />
-        <MainUsage setUsage={setUsage} />
+        <MainUsage
+          setUsage={setUsage}
+          setUsageInput={setUsageInput}
+          usageInput={usageInput}
+        />
         <StyledButton onClick={() => handleAddItemToList()}>
           Adicionar item
         </StyledButton>

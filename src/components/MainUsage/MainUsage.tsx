@@ -5,11 +5,12 @@ import Dropdown from "./Dropdown";
 
 interface IMainUsageProps {
   setUsage: React.Dispatch<React.SetStateAction<string>>;
+  setUsageInput: React.Dispatch<React.SetStateAction<string>>;
+  usageInput: string;
 }
 
-function MainUsage({ setUsage }: IMainUsageProps) {
+function MainUsage({ setUsage, setUsageInput, usageInput }: IMainUsageProps) {
   const [openDropdown, setOpenDropdown] = useState(false);
-  const [inputValue, setInputValue] = useState<string>("");
 
   const handleOpenDropdown = () => {
     setOpenDropdown(!openDropdown);
@@ -21,15 +22,15 @@ function MainUsage({ setUsage }: IMainUsageProps) {
         label="Uso principal"
         widthsize="large3"
         onClick={handleOpenDropdown}
-        value={inputValue}
+        value={usageInput}
         style={{ cursor: "pointer" }}
       />
       {openDropdown && (
         <Dropdown
           setOpenDropdown={setOpenDropdown}
           setUsage={setUsage}
-          setInputValue={setInputValue}
           openDropdown={openDropdown}
+          setUsageInput={setUsageInput}
         />
       )}
     </StyledProjectsContainer>

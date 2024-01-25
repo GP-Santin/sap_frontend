@@ -23,6 +23,7 @@ function Dropdown({
   managementListFiltered,
   setFilteredManagement,
 }: IDropdownProps) {
+
   const handleAddItemToInput = (selectedManagement: IManagement) => {
     setManagement(selectedManagement.CenterCode);
     setManagementCode(selectedManagement.U_SNT_IdGerencial);
