@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { IUserContext, IUserProviderProps } from "./@types";
 import { AxiosError } from "axios";
 import { IPurchaseRequest } from "../../pages/Dashboard/pages/PurchaseRequests/components/Form/@types";
@@ -13,8 +13,6 @@ export const UserContext = createContext({} as IUserContext);
 export const UserProvider = ({ children }: IUserProviderProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState("");
-  const [shouldReload, setShouldReload] = useState(false);
-  const [pathname, setPathname] = useState("");
 
   const navigate = useNavigate();
 
@@ -86,16 +84,8 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setShouldReload(true);
+    window.location.reload();
   };
-
-  useEffect(() => {
-    const page = window.location.pathname;
-    setPathname(page);
-    if (shouldReload) {
-      navigate(pathname);
-    }
-  }, [shouldReload, pathname]);
 
   return (
     <UserContext.Provider

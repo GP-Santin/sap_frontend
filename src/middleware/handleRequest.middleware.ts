@@ -23,7 +23,7 @@ apiSAP.interceptors.response.use(
               autoClose: false,
             });
             break;
-          // case '5400072 - 
+          // case '5400072 -
           case '10000111 - On "Contents" tab, enter item or items':
             toast.error("Insira ao menos um item na solicitação", {
               autoClose: false,
@@ -35,7 +35,9 @@ apiSAP.interceptors.response.use(
             });
             break;
           case "Invalid session or session already timeout.":
-            toast.error("Sua sessão expirou, faca login novamente");
+            toast.error("Sua sessão expirou, faca login novamente", {
+              autoClose: false,
+            });
             const navigate = useNavigate();
             navigate("/login");
             break;

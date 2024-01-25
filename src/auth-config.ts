@@ -5,7 +5,8 @@ const msalConfig = {
     clientId: import.meta.env.VITE_CLIENT,
     authority: import.meta.env.VITE_AUTHORITY,
     // redirectUri: "https://ti-gruposantin.com.br/",
-    redirectUri: "https://localhost:5173/",
+    // redirectUri: "https://localhost:5173/",
+    redirectUri: "https://localhost:8080/",
   },
   cache: {
     cacheLocation: "localStorage",

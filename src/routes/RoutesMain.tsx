@@ -12,7 +12,7 @@ function RoutesMain({ toggleTheme, theme }: INavProps) {
   return (
     <Routes>
       <Route element={<PublicRoutes />}>
-        <Route path="/" element={<LoginPage />} />
+        <Route index path="/" element={<LoginPage />} />
       </Route>
       <Route element={<PrivatesRoutes />}>
         <Route path="/login" element={<HomePage />} />
