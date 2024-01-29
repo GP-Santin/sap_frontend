@@ -165,4 +165,4 @@ const SelectItems: React.FC<ISelectItemProps> = ({
   );
 };
 
-export default SelectItems;
+export default React.memo(SelectItems);

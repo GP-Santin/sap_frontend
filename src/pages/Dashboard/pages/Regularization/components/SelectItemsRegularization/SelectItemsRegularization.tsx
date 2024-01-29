@@ -288,4 +288,5 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
   );
 };
 
-export default SelectItemsRegularization;
+export default React.memo(SelectItemsRegularization);
+ 
