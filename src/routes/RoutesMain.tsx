@@ -7,6 +7,9 @@ import Dashboard from "../pages/Dashboard/Dashboard";
 import PurchaseRequests from "../pages/Dashboard/pages/PurchaseRequests/PurchaseRequests";
 import Regularization from "../pages/Dashboard/pages/Regularization/Regularization";
 import SAPRoutes from "./SapRoutes";
+import ManagerRoutes from "./ManagerRoutes";
+import ApprovalRequests from "../pages/Dashboard/pages/ApprovalRequests/ApprovalRequests";
+
 function RoutesMain({ toggleTheme, theme }: INavProps) {
   const sessionSAP = localStorage.getItem("@session");
   return (
@@ -38,6 +41,12 @@ function RoutesMain({ toggleTheme, theme }: INavProps) {
         ) : (
           <Route path="/login" element={<HomePage />} />
         )}
+      </Route>
+      <Route element={<ManagerRoutes />}>
+        <Route
+          path="/dashboard/manager-approve"
+          element={<ApprovalRequests />}
+        />
       </Route>
     </Routes>
   );

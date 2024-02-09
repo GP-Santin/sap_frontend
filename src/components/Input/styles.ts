@@ -17,7 +17,7 @@ export const InputStyled = styled.input<IInputProps>`
   position: relative;
 
   color: ${(props) => props.theme.colors.primarytint};
-  border: 2px solid var(--color-primary);
+  border: 1px solid var(--color-primary);
   border-radius: 0.5rem;
 
   padding: 1rem 2rem 1rem 1rem;

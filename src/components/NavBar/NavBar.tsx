@@ -21,6 +21,7 @@ import { MdRequestQuote } from "react-icons/md";
 import { MdRequestPage } from "react-icons/md";
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useManagerContext } from "../../providers/ManagerContext/ManagerProvider";
 
 function NavBar({ toggleTheme, theme }: INavProps) {
   const [burguerClass, setBurguerClass] = useState("burguer-bar unclicked");
@@ -31,8 +32,9 @@ function NavBar({ toggleTheme, theme }: INavProps) {
   const [listActive, setListActive] = useState("list-unclicked");
   const [backdropMenu, setBackdropMenu] = useState(false);
   const { instance } = useMsal();
-  const activeUser = instance.getAllAccounts()[0];
   const { logoutSAP } = useContext(UserContext);
+  const activeUser = instance.getAllAccounts()[0];
+  const { manager } = useManagerContext();
 
   const updateMenu = () => {
     if (!isMenuClicked) {
@@ -89,6 +91,11 @@ function NavBar({ toggleTheme, theme }: INavProps) {
         </StyledIconContainer>
       </StyledNav>
       <StyledMenu className={`menu ${menuClass}`} ref={dropdownRef}>
+        {manager && (
+          <StyledList>
+            <Link to="/dashboard/manager-approve">Aprovação</Link>
+          </StyledList>
+        )}
         <ul id="sections">
           <StyledList onClick={toggleDropdown}>
             <StyledListTitle onClick={toggleSection} className={activeSection}>
@@ -110,9 +117,7 @@ function NavBar({ toggleTheme, theme }: INavProps) {
               </li>
               <li>
                 <MdRequestPage />
-                <Link to="/dashboard/regularization">
-                  Regularização de NFe
-                </Link>
+                <Link to="/dashboard/regularization">Regularização de NFe</Link>
               </li>
             </StyledUl>
           </StyledList>

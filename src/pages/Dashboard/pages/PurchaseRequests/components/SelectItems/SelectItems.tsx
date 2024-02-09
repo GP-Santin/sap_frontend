@@ -103,6 +103,7 @@ const SelectItems: React.FC<ISelectItemProps> = ({
       toast.error("Selecione um item antes de adicionar");
     }
   };
+  
   const closeDropdown = () => {
     setOpenDropdown(false);
   };

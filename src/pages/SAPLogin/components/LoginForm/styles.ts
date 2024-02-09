@@ -38,7 +38,7 @@ export const StyledSelect = styled.select`
   border: 1px solid var(--color-primary);
   border-radius: 0.5rem;
 
-  padding: 1rem;
+  padding: 0 1rem;
 
   outline: none;
 

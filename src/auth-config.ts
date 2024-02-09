@@ -13,4 +13,12 @@ const msalConfig = {
   },
 };
 
+export const loginRequest = {
+  scopes: ["User.Read"],
+};
+
+export const graphConfig = {
+  graphMeEndpoint: "https://graph.microsoft.com/v1.0/me",
+};
+
 export const msalInstance = new PublicClientApplication(msalConfig);
