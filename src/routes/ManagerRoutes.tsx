@@ -44,7 +44,7 @@ function ManagerRoutes() {
     checkUserGroupMembership();
   }, [instance, accounts, inProgress]);
 
-  return isUserInGroup ? <Outlet /> : <Navigate to="/dashboard" />;
+  return isUserInGroup ? <Outlet /> : <Outlet />;
 }
 
 export default ManagerRoutes;

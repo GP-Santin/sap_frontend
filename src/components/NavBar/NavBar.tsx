@@ -4,6 +4,7 @@ import {
   BurguerStyled,
   StyledBackdrop,
   StyledIconContainer,
+  StyledLink,
   StyledList,
   StyledListTitle,
   StyledMenu,
@@ -17,9 +18,6 @@ import { Icon } from "./styles";
 import { useMsal } from "@azure/msal-react";
 import { UserContext } from "../../providers/UserContext/UserContext";
 import { useOutsideClick } from "../../hooks/outsideClick";
-import { MdRequestQuote } from "react-icons/md";
-import { MdRequestPage } from "react-icons/md";
-import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useManagerContext } from "../../providers/ManagerContext/ManagerProvider";
 
@@ -99,7 +97,6 @@ function NavBar({ toggleTheme, theme }: INavProps) {
         <ul id="sections">
           <StyledList onClick={toggleDropdown}>
             <StyledListTitle onClick={toggleSection} className={activeSection}>
-              <FaShoppingCart />
               Compras{" "}
               <FaAngleDown
                 style={{
@@ -110,14 +107,14 @@ function NavBar({ toggleTheme, theme }: INavProps) {
             </StyledListTitle>
             <StyledUl className={listActive}>
               <li>
-                <MdRequestQuote />
-                <Link to="/dashboard/purchase-requests">
+                <StyledLink to="/dashboard/purchase-requests">
                   Solicitação de Compras
-                </Link>
+                </StyledLink>
               </li>
               <li>
-                <MdRequestPage />
-                <Link to="/dashboard/regularization">Regularização de NFe</Link>
+                <StyledLink to="/dashboard/regularization">
+                  Regularização de NFe
+                </StyledLink>
               </li>
             </StyledUl>
           </StyledList>

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const BurguerStyled = styled.div`
@@ -69,6 +70,7 @@ export const StyledListTitle = styled.div`
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  font-size: 1.15rem;
 
   &:hover {
     color: var(--color-denim);
@@ -77,12 +79,16 @@ export const StyledListTitle = styled.div`
 `;
 
 export const StyledBackdrop = styled.div`
-  /* width: 100%;
+  width: 100%;
   height: 94%;
   position: absolute;
   z-index: 99;
 
-  background-color: rgba(0, 0, 0, 0.3); */
+  background-color: rgba(0, 0, 0, 0.3);
+`;
+
+export const StyledLink = styled(Link)`
+  font-size: 1rem;
 `;
 
 export const Icon = styled.img`
