@@ -44,7 +44,7 @@ function RoutesMain({ toggleTheme, theme }: INavProps) {
       </Route>
       <Route element={<ManagerRoutes />}>
         <Route
-          path="/dashboard/manager-approve"
+          path="/dashboard/manager-approves"
           element={<ApprovalRequests />}
         />
       </Route>
