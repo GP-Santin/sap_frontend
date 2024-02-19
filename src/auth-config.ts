@@ -4,8 +4,7 @@ export const msalConfig = {
   auth: {
     clientId: import.meta.env.VITE_CLIENT,
     authority: import.meta.env.VITE_AUTHORITY,
-    // redirectUri: "https://ti-gruposantin.com.br/",
-    redirectUri: "https://localhost:5173/",
+    redirectUri: "https://ti-gruposantin.com.br/",
   },
   cache: {
     cacheLocation: "localStorage",
@@ -13,7 +12,6 @@ export const msalConfig = {
   },
   scopes: ["User.Read"],
 };
-
 
 export const graphConfig = {
   graphMeEndpoint: "https://graph.microsoft.com/v1.0/me",
