@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { IItemOrder } from "../../../Regularization/components/Form/@types";
-import Table from "@mui/material/Table";
 import {
+  Table,
   TableBody,
   TableCell,
   TableHead,

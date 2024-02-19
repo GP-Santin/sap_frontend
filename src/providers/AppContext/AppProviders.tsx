@@ -172,7 +172,6 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
     try {
       setLoading(true);
 
-      console.log('iniciando login')
       const response = await apiSAP.post("/Login", formData);
       const sessionId = response.data.SessionId;
       localStorage.setItem("@session", sessionId);
