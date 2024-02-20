@@ -57,7 +57,7 @@ function App() {
       <CookieConsent
         location="bottom"
         buttonText="Aceitar"
-        cookieName="myAwesomeCookieName3"
+        cookieName="cookieConsent"
         style={{ background: "#2B373B" }}
         buttonStyle={{
           backgroundColor: "#FFFF",

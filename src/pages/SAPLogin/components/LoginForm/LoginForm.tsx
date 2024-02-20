@@ -12,9 +12,9 @@ export const LoginForm = () => {
 
   const submit: SubmitHandler<FieldValues> = async (formData) => {
     const loginFormData: TLoginForm = {
+      CompanyDB: formData.CompanyDB,
       UserName: import.meta.env.VITE_SAP_LOGIN,
       Password: import.meta.env.VITE_SAP_PASSWORD,
-      CompanyDB: formData.CompanyDB,
     };
     appLogin(loginFormData);
   };
