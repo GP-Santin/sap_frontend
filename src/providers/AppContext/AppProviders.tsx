@@ -26,10 +26,10 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
 
   const navigate = useNavigate();
 
-  // const setSessionCookie = (sessionId: string) => {
-  //   document.cookie = `B1SESSION=${sessionId}; path=/; HttpOnly`;
-  //   document.cookie = "ROUTEID=.node0; path=/b1s";
-  // };
+  const setSessionCookie = (sessionId: string) => {
+    document.cookie = `B1SESSION=${sessionId}; path=/; HttpOnly`;
+    document.cookie = "ROUTEID=.node0; path=/b1s";
+  };
 
   const getItems = async () => {
     const allItems: IItem[] = [];
@@ -172,9 +172,12 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
     try {
       setLoading(true);
 
-      await apiSAP.post("/Login", formData);
+      const response = await apiSAP.post("/Login", formData);
+      const sessionId = response.data.SessionId;
+      setSessionCookie(sessionId)
+      localStorage.setItem("@session", sessionId);
       localStorage.setItem("@base", formData.CompanyDB.substring(7, 10));
-      if (accounts && accounts.length > 0) {
+      if (sessionId && accounts && accounts.length > 0) {
         await toast.promise(checkAndFetchData("@items", getItems), {
           pending: "Carregando itens...",
           error: "Erro ao carregar itens.",
