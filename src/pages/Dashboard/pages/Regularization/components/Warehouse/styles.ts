@@ -8,7 +8,6 @@ export const StyledWarehouseContainer = styled.div`
 `;
 
 export const StyledWarehouseDropdown = styled.div`
-  width: 10%;
   height: 10rem;
   cursor: pointer;
   position: absolute;

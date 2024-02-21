@@ -1,6 +1,5 @@
 import { Input } from "../../../../../../components/Input/Input";
 import { useState } from "react";
-import { StyledDropdown } from "../SelectItemsRegularization/styles";
 import { useOutsideClick } from "../../../../../../hooks/outsideClick";
 
 import { IWarehouse } from "./@types";
@@ -31,6 +30,11 @@ function Warehouse({
     setOpenDropdown(false);
   };
 
+  const handleAddWarehouse = (warehouse: IWarehouse) => {
+    setWarehouseCode(warehouse.WarehouseCode);
+    setOpenDropdown(false);
+  };
+
   const dropdownRef = useOutsideClick({ callback: closeDropdown });
 
   return (
@@ -48,10 +52,7 @@ function Warehouse({
         <StyledWarehouseDropdown ref={dropdownRef}>
           <ul>
             {warehouseList.map((warehouse, index: number) => (
-              <li
-                key={index}
-                onClick={() => setWarehouseCode(warehouse.WarehouseCode)}
-              >
+              <li key={index} onClick={() => handleAddWarehouse}>
                 {warehouse.WarehouseCode} - {warehouse.WarehouseName}
               </li>
             ))}
