@@ -111,21 +111,9 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
     }
   };
 
-  const getLastPurchaseRequest = async () => {
-    try {
-      const response = await apiSAP.get(
-        `/PurchaseRequests?$select=DocNum &$orderby=DocNum desc&$top=1`
-      );
-      const newPurchaseRequest = response.data.value[0].DocNum + 1;
-      setNewPurchaseNumber(newPurchaseRequest);
-    } catch (error: AxiosError | any) {
-      console.error(error);
-    }
-  };
-
   const getProjects = async () => {
     const allProjects: IProject[] = [];
-    let nextLink: string | undefined = "Projects?$filter=Active eq 'tYES'";
+    let nextLink: string | undefined = "Projects?$select=Code,Name&$filter=Active eq 'tYES'";
     try {
       while (nextLink) {
         const response = await fetchProjects(nextLink);
@@ -133,8 +121,21 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
         nextLink = response["odata.nextLink"];
 
         allProjects.push(...value);
+        console.log(allProjects);
       }
       localStorage.setItem("@projects", JSON.stringify(allProjects));
+    } catch (error: AxiosError | any) {
+      console.error(error);
+    }
+  };
+
+  const getLastPurchaseRequest = async () => {
+    try {
+      const response = await apiSAP.get(
+        `/PurchaseRequests?$select=DocNum &$orderby=DocNum desc&$top=1`
+      );
+      const newPurchaseRequest = response.data.value[0].DocNum + 1;
+      setNewPurchaseNumber(newPurchaseRequest);
     } catch (error: AxiosError | any) {
       console.error(error);
     }

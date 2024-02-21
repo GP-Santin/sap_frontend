@@ -1,3 +1,4 @@
+import { IProject } from "@/src/components/Projects/@types";
 import { TLoginForm } from "../../pages/SAPLogin/components/LoginForm/schema";
 
 export interface IAppProviderProps {
@@ -55,7 +56,7 @@ export interface ISalesPersonResponse {
 }
 
 export interface IProjectResponse {
-  value: ISalesPerson[];
+  value: IProject[];
   "odata.nextLink": string;
 }
 
