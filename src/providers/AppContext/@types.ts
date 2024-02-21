@@ -54,6 +54,11 @@ export interface ISalesPersonResponse {
   "odata.nextLink": string;
 }
 
+export interface IProjectResponse {
+  value: ISalesPerson[];
+  "odata.nextLink": string;
+}
+
 export interface IAppContext {
   loading: ILoading | boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean | ILoading>>;

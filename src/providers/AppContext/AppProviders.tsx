@@ -10,9 +10,11 @@ import {
   fetchBusinessPartners,
   fetchItems,
   fetchMainUsage,
+  fetchProjects,
   fetchSalesPersons,
 } from "./fetchDatas";
 import apiSAP from "../../middleware/handleRequest.middleware";
+import { IProject } from "@/src/components/Projects/@types";
 
 export const AppContext = createContext({} as IAppContext);
 
@@ -122,10 +124,17 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
   };
 
   const getProjects = async () => {
+    const allProjects: IProject[] = [];
+    let nextLink: string | undefined = "Projects?$filter=Active eq 'tYES'";
     try {
-      const response = await apiSAP.get(`/Projects?$filter=Active eq 'tYES'`);
-      const projects = response.data.value;
-      localStorage.setItem("@projects", JSON.stringify(projects));
+      while (nextLink) {
+        const response = await fetchProjects(nextLink);
+        const { value } = response;
+        nextLink = response["odata.nextLink"];
+
+        allProjects.push(...value);
+      }
+      localStorage.setItem("@projects", JSON.stringify(allProjects));
     } catch (error: AxiosError | any) {
       console.error(error);
     }
@@ -174,7 +183,7 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
 
       const response = await apiSAP.post("/Login", formData);
       const sessionId = response.data.SessionId;
-      setSessionCookie(sessionId)
+      setSessionCookie(sessionId);
       localStorage.setItem("@session", sessionId);
       localStorage.setItem("@base", formData.CompanyDB.substring(7, 10));
       if (sessionId && accounts && accounts.length > 0) {

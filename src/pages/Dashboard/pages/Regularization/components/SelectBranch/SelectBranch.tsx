@@ -37,7 +37,6 @@ export default function SelectBranch({
         (branch: IBranch) => selectedBranch === branch.BPLID
       );
       const actualBranch = branchFiltered[0].DefaultWarehouseID;
-      console.log(actualBranch);
       setWarehouseCode(actualBranch);
     };
     handleSetWarehouseCode();

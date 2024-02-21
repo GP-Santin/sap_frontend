@@ -207,7 +207,6 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
         setManagement("");
         setUsage("");
         setFilteredManagement("");
-        setUsage("");
         setUsageInput("");
         setFilteredItems([]);
       } else {

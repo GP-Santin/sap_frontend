@@ -32,7 +32,7 @@ function Warehouse({
 
   const handleAddWarehouse = (warehouse: IWarehouse) => {
     setWarehouseCode(warehouse.WarehouseCode);
-    setOpenDropdown(false);
+    setOpenDropdown(!openDropdown);
   };
 
   const dropdownRef = useOutsideClick({ callback: closeDropdown });
@@ -52,7 +52,7 @@ function Warehouse({
         <StyledWarehouseDropdown ref={dropdownRef}>
           <ul>
             {warehouseList.map((warehouse, index: number) => (
-              <li key={index} onClick={() => handleAddWarehouse}>
+              <li key={index} onClick={() => handleAddWarehouse(warehouse)}>
                 {warehouse.WarehouseCode} - {warehouse.WarehouseName}
               </li>
             ))}
