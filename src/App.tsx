@@ -13,7 +13,7 @@ import Modal from "react-modal";
 import SessionTimer from "./sessionManagement/SessionTimer";
 import CookieConsent from "react-cookie-consent";
 import { ErrorBoundary } from "react-error-boundary";
-import { AppStyled, LoaderWrapper } from "./styles/app";
+import { LoaderWrapper } from "./styles/app";
 import CircleLoader from "react-spinners/CircleLoader";
 
 Modal.setAppElement("#root");
@@ -35,7 +35,7 @@ function App() {
   useEffect(() => {}, [theme]);
 
   return (
-    <AppStyled>
+    <>
       {loading ? (
         <LoaderWrapper>
           <CircleLoader color={color} size={75} />
@@ -82,7 +82,7 @@ function App() {
           </CookieConsent>
         </ThemeProvider>
       )}
-    </AppStyled>
+    </>
   );
 }
 
