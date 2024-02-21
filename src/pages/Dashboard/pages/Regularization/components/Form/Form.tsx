@@ -146,6 +146,7 @@ function Form({ theme }: INavProps) {
             branch={branch}
             setUsageInput={setUsageInput}
             usageInput={usageInput}
+            setWarehouseCode={setWarehouseCode}
           />
         </StyledContainerFields>
         {listItems.length > 0 && (

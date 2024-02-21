@@ -37,6 +37,7 @@ export default function SelectBranch({
         (branch: IBranch) => selectedBranch === branch.BPLID
       );
       const actualBranch = branchFiltered[0].DefaultWarehouseID;
+      console.log(actualBranch);
       setWarehouseCode(actualBranch);
     };
     handleSetWarehouseCode();
@@ -58,12 +59,12 @@ export default function SelectBranch({
 
   return (
     <StyledBranchContainer>
-      <label>Filial</label>
       <Input
         widthsize="med2"
         style={{ width: 192, cursor: "pointer" }}
         onClick={handleOpenDropdown}
         defaultValue={value}
+        label="Filial"
       />
       {openDropdown &&
         (userbranches.length > 0 ? (

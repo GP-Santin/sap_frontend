@@ -16,6 +16,8 @@ import { IItemOrder } from "../Form/@types";
 import MainUsage from "../../../../../../components/MainUsage/MainUsage";
 import { debounce } from "lodash";
 import apiSAP from "../../../../../../middleware/handleRequest.middleware";
+import { IWarehouse } from "../Warehouse/@types";
+import Warehouse from "../Warehouse/Warehouse";
 
 const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
   setItems,
@@ -36,6 +38,7 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
   branch,
   setUsageInput,
   usageInput,
+  setWarehouseCode,
 }) => {
   const [itemCode, setItemCode] = useState("");
   const [itemDescription, setItemDescription] = useState("");
@@ -44,6 +47,7 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
   const [openDropdown, setOpenDropdown] = useState(false);
   const [managementCode, setManagementCode] = useState<string>("");
   const [filteredManagement, setFilteredManagement] = useState("");
+  const [warehouseList, setWarehouseList] = useState<IWarehouse[]>([]);
 
   const items: IItem[] = JSON.parse(localStorage.getItem("@items") || "[]");
 
@@ -112,9 +116,18 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
     localStorage.setItem("@advance", advanceValue);
   };
 
+  const getWarehouses = async () => {
+    const { data } = await apiSAP.get(
+      "/Warehouses?$select=WarehouseName,WarehouseCode&$filter=DropShip eq 'tYES'"
+    );
+    const listWarehouses: IWarehouse[] = data.value;
+    setWarehouseList(listWarehouses);
+  };
+
   useEffect(() => {
     handleDocTotalChange(listItems);
     getUsage();
+    getWarehouses();
   }, [listItems]);
 
   const handleAddItemToList = () => {
@@ -275,6 +288,13 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
           project={project}
           managementCode={managementCode}
         />
+        <Warehouse
+          setWarehouseCode={setWarehouseCode}
+          itemCode={itemCode}
+          itemDescription={itemDescription}
+          warehouseCode={warehouseCode}
+          warehouseList={warehouseList}
+        />
         <MainUsage
           setUsage={setUsage}
           setUsageInput={setUsageInput}
@@ -289,4 +309,3 @@ const SelectItemsRegularization: React.FC<ISelectItemProps> = ({
 };
 
 export default React.memo(SelectItemsRegularization);
- 
