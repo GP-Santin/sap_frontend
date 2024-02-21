@@ -8,7 +8,6 @@ function Projects({ project, setProject, managementCode }: IProjectProps) {
   const [openDropdown, setOpenDropdown] = useState(false);
   const [filteredProjects, setFilteredProjects] = useState<IProject[]>([]);
   const [handleFiltered, setHandleFiltered] = useState<string>("");
-  const [, setInputValue] = useState<string>("");
 
   const handleOpenDropdown = () => {
     setOpenDropdown(!openDropdown);
@@ -17,7 +16,7 @@ function Projects({ project, setProject, managementCode }: IProjectProps) {
   const handleFilterProjects = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setHandleFiltered(value);
-    setInputValue(value);
+    setProject(value);
     const filtered = filterProjects(value);
     setFilteredProjects(filtered);
   };

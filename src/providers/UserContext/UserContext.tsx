@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { IUserContext, IUserProviderProps } from "./@types";
 import { AxiosError } from "axios";
 import { IPurchaseRequest } from "../../pages/Dashboard/pages/PurchaseRequests/components/Form/@types";
@@ -7,17 +7,21 @@ import apiSAP from "../../middleware/handleRequest.middleware";
 import { IOrderRequest } from "../../pages/Dashboard/pages/Regularization/components/Form/@types";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../AppContext/AppProviders";
 
 export const UserContext = createContext({} as IUserContext);
 
 export const UserProvider = ({ children }: IUserProviderProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState("");
+  const { setLoading } = useContext(AppContext);
 
   const navigate = useNavigate();
 
   const createPurchaseRequest = async (formData: IPurchaseRequest) => {
     try {
+      setLoading(true);
+
       const { data } = await apiSAP.post("/PurchaseRequests", formData);
       localStorage.setItem("@savedItems", JSON.stringify([]));
       setModalContent(`${data.DocNum}`);
@@ -25,17 +29,22 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       localStorage.setItem("@savedItems", "");
     } catch (error: AxiosError | any) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   const createPurchaseQuotations = async (formData: IOrderRequest) => {
     try {
+      setLoading(true);
       const { data } = await apiSAP.post("/PurchaseQuotations", formData);
       setModalContent(`${data.DocNum}`);
       setIsModalOpen(true);
       localStorage.setItem("@savedItems", "");
     } catch (error: AxiosError | any) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
