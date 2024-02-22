@@ -12,7 +12,7 @@ import {
   StyledItemsContainer,
   StyledTextArea,
 } from "../../../PurchaseRequests/components/Form/styles";
-import { StyledLineItems, StyledTotalContainer } from "./styles";
+import { LoaderWrapper, StyledLineItems, StyledTotalContainer } from "./styles";
 import BusinessPartners from "../../../../../../components/BusinessPartners/BusinessPartners";
 import SelectItemsRegularization from "../SelectItemsRegularization/SelectItemsRegularization";
 import { Button } from "../../../../../../components/Button/Button";
@@ -21,6 +21,8 @@ import SelectShipping from "../SelectShipping/SelectShipping";
 import SelectPaymentMethod from "../SelectPaymentMethod/SelectPaymentMethod";
 import SelectBranch from "../SelectBranch/SelectBranch";
 import TableComponent from "./Table";
+import { AppContext } from "../../../../../../providers/AppContext/AppProviders";
+import ClipLoader from "react-spinners/ClipLoader";
 
 function Form({ theme }: INavProps) {
   const owner = localStorage.getItem("@owner");
@@ -30,6 +32,7 @@ function Form({ theme }: INavProps) {
   const { createPurchaseQuotations, getActiveUserSAP } =
     useContext(UserContext);
   const methods = useForm<IOrderRequest>();
+  const { loading } = useContext(AppContext);
 
   const [, setItems] = useState<IItemOrder[]>([]);
   const [listItems, setListItems] = useState<IItemOrder[]>([]);
@@ -176,9 +179,22 @@ function Form({ theme }: INavProps) {
             onChange={(e) => setComments(e.target.value)}
           />
         </StyledTotalContainer>
+        {loading && (
+          <LoaderWrapper>
+            <ClipLoader
+              color="#214966"
+              cssOverride={{
+                position: "relative",
+                zIndex: 99,
+              }}
+              size={100}
+            />
+            <p>Enviando</p>
+          </LoaderWrapper>
+        )}
         <Button
           type="submit"
-          name="Solicitar"
+          name={loading ? "Enviando..." : "Solicitar"}
           widthsize="med2"
           color="outline-black"
           style={{ marginTop: "5rem" }}

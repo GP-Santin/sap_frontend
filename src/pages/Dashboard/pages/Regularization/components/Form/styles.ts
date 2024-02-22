@@ -42,3 +42,23 @@ export const StyledIcon = styled(FaTrashAlt)`
     transition: all 0.2s;
   }
 `;
+
+export const LoaderWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5rem;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 100vw;
+
+  p {
+    color: ${(props) => props.theme.colors.primarytint};
+  }
+`;
