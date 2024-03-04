@@ -113,7 +113,8 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
 
   const getProjects = async () => {
     const allProjects: IProject[] = [];
-    let nextLink: string | undefined = "Projects?$select=Code,Name&$filter=Active eq 'tYES'";
+    let nextLink: string | undefined =
+      "Projects?$select=Code,Name&$filter=Active eq 'tYES'";
     try {
       while (nextLink) {
         const response = await fetchProjects(nextLink);
@@ -178,6 +179,18 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
     }
   };
 
+  const getFactorCode = async () => {
+    try {
+      const response = await apiSAP.get(
+        "/DistributionRules?$filter=InWhichDimension eq 1 &$select=FactorCode"
+      );
+      const managerial = response.data.value;
+      localStorage.setItem("@managerial", JSON.stringify(managerial));
+    } catch (error: AxiosError | any) {
+      console.error(error);
+    }
+  };
+
   const appLogin = async (formData: TLoginForm) => {
     try {
       setLoading(true);
@@ -231,6 +244,7 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
 
         await getLastPurchaseRequest();
         await getBranches();
+        await getFactorCode();
       }
       navigate("/dashboard");
     } catch (error: AxiosError | any) {
