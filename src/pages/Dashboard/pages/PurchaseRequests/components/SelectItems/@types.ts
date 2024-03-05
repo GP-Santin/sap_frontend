@@ -10,4 +10,6 @@ export interface ISelectItemProps {
   setManagement: React.Dispatch<React.SetStateAction<string>>;
   setWarehouseCode: React.Dispatch<React.SetStateAction<string>>;
   warehouseCode: string;
+  managerial: string;
+  setManagerial: React.Dispatch<React.SetStateAction<string>>;
 }

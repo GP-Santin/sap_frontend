@@ -6,6 +6,7 @@ export interface IItemRequest {
   ProjectCode: string;
   U_SNT_Finalidade: string;
   WarehouseCode: string;
+  CostingCode: string;
 }
 
 export interface IPurchaseRequest {

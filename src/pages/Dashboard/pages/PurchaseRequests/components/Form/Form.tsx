@@ -31,6 +31,7 @@ function Form({ theme }: INavProps) {
   const [, setItems] = useState<IItemRequest[]>([]);
   const [listItems, setListItems] = useState<IItemRequest[]>([]);
   const [project, setProject] = useState("");
+  const [managerial, setManagerial] = useState("");
   const [management, setManagement] = useState("");
   const [maintence, setMaintence] = useState("");
   const [comments, setComments] = useState("");
@@ -95,6 +96,8 @@ function Form({ theme }: INavProps) {
             management={management}
             setWarehouseCode={setWarehouseCode}
             warehouseCode={warehouseCode}
+            managerial={managerial}
+            setManagerial={setManagerial}
           />
           <div>
             <RadioMan theme={theme} setMaintence={setMaintence} />

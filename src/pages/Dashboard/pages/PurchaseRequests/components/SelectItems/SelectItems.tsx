@@ -8,6 +8,8 @@ import Management from "../../../../../../components/Management/Management";
 import { useOutsideClick } from "../../../../../../hooks/outsideClick";
 import { toast } from "react-toastify";
 import { StyledDropdown } from "../../../Regularization/components/SelectItemsRegularization/styles";
+import SelectManagerial from "../ManagerialDropdown/ManagerialDropdown";
+import { IItemRequest } from "../Form/@types";
 
 const SelectItems: React.FC<ISelectItemProps> = ({
   setItems,
@@ -19,6 +21,8 @@ const SelectItems: React.FC<ISelectItemProps> = ({
   setManagement,
   setWarehouseCode,
   warehouseCode,
+  managerial,
+  setManagerial,
 }) => {
   const [itemCode, setItemCode] = useState("");
   const [itemDescription, setItemDescription] = useState("");
@@ -71,21 +75,22 @@ const SelectItems: React.FC<ISelectItemProps> = ({
         CostingCode2: management,
         U_SNT_Finalidade: "1",
         WarehouseCode: warehouseCode,
+        CostingCode: managerial,
       };
 
-      setItems(
-        (
-          prevItems: {
-            ItemCode: string;
-            ItemDescription: string;
-            Quantity: number;
-            ProjectCode: string;
-            CostingCode2: string;
-            U_SNT_Finalidade: string;
-            WarehouseCode: string;
-          }[]
-        ) => [...prevItems, newItem]
-      );
+      setItems((prevItems: IItemRequest[]) => [
+        ...prevItems,
+        {
+          ItemCode: itemCode,
+          ItemDescription: itemDescription,
+          Quantity: Number(quantity),
+          ProjectCode: project,
+          CostingCode2: management,
+          U_SNT_Finalidade: "1",
+          WarehouseCode: warehouseCode,
+          CostingCode: managerial,
+        },
+      ]);
       const updatedItems = [...listItems, newItem];
 
       setListItems(updatedItems);
@@ -103,7 +108,7 @@ const SelectItems: React.FC<ISelectItemProps> = ({
       toast.error("Selecione um item antes de adicionar");
     }
   };
-  
+
   const closeDropdown = () => {
     setOpenDropdown(false);
   };
@@ -158,6 +163,12 @@ const SelectItems: React.FC<ISelectItemProps> = ({
           project={project}
           managementCode={managementCode}
         />
+        {project.substring(5, 7) === "99" ? (
+          <SelectManagerial
+            setManagerial={setManagerial}
+            managerial={managerial}
+          />
+        ) : null}
         <StyledButton onClick={() => handleAddItemToList()}>
           Adicionar item
         </StyledButton>
