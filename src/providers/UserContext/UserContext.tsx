@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { IUserContext, IUserProviderProps } from "./@types";
+import { IUser, IUserContext, IUserProviderProps } from "./@types";
 import { AxiosError } from "axios";
 import { IPurchaseRequest } from "../../pages/Dashboard/pages/PurchaseRequests/components/Form/@types";
 import ModalComponent from "../../components/Modal/Modal";
@@ -8,15 +8,37 @@ import { IOrderRequest } from "../../pages/Dashboard/pages/Regularization/compon
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../AppContext/AppProviders";
+import { apiSantin } from "../../services/index";
 
 export const UserContext = createContext({} as IUserContext);
 
 export const UserProvider = ({ children }: IUserProviderProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState("");
+  const [user, setUser] = useState<IUser>();
   const { setLoading } = useContext(AppContext);
 
   const navigate = useNavigate();
+
+  const isApprover = async (userMail: string) => {
+    try {
+      const authResponse = await apiSantin.post("/login", {
+        email: import.meta.env.VITE_API_LOGIN,
+        senha: import.meta.env.VITE_API_PASSWORD,
+      });
+
+      const token = authResponse.data.token;
+
+      const response = await apiSantin.get(`/users?email=${userMail}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setUser(response.data[0]);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const createPurchaseRequest = async (formData: IPurchaseRequest) => {
     try {
@@ -103,6 +125,8 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         getActiveUserSAP,
         createPurchaseQuotations,
         logoutSAP,
+        isApprover,
+        user,
       }}
     >
       {children}

@@ -1,7 +1,11 @@
+import { ApproverContainer } from "./styles";
+
 function ApprovalRequests() {
   return (
-    <div>ApprovalRequests</div>
-  )
+    <ApproverContainer>
+      <h1>Alterado</h1>
+    </ApproverContainer>
+  );
 }
 
-export default ApprovalRequests
+export default ApprovalRequests;

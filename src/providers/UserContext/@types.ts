@@ -9,4 +9,14 @@ export interface IUserContext {
   getActiveUserSAP: (email: string) => Promise<void>;
   createPurchaseQuotations: (formdData: IOrderRequest) => void;
   logoutSAP: () => Promise<void>;
+  isApprover: (userMail: string) => Promise<void>
+  user: IUser | undefined;
 }
+
+export type IUser = {
+  id: number;
+  nome: string;
+  email: string;
+  aprovador: boolean;
+  st: true;
+};

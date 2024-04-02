@@ -13,6 +13,8 @@ import SessionTimer from "./sessionManagement/SessionTimer";
 import CookieConsent from "react-cookie-consent";
 import { ErrorBoundary } from "react-error-boundary";
 import "react-toastify/dist/ReactToastify.css";
+import { ManagerProvider } from "./providers/ManagerContext/ManagerProvider";
+import { ErrorBoundary as ErrorComponent } from "./components/ErrorBoundary/ErrorBoundary";
 
 Modal.setAppElement("#root");
 function App() {
@@ -35,10 +37,12 @@ function App() {
       <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
         <ResetStyles />
         <GlobalStyles />
-        <ErrorBoundary fallback={<div>Something went wrong</div>}>
+        <ErrorBoundary fallback={<ErrorComponent />}>
           <AppProvider>
             <UserProvider>
-              <RoutesMain theme={theme} toggleTheme={toggleTheme} />
+              <ManagerProvider>
+                <RoutesMain theme={theme} toggleTheme={toggleTheme} />
+              </ManagerProvider>
             </UserProvider>
           </AppProvider>
         </ErrorBoundary>
@@ -68,7 +72,7 @@ function App() {
           expires={150}
         >
           Nosso site utiliza cookies para armazenar dados essenciais para o
-          funcionamento.{" "}
+          funcionamento.
         </CookieConsent>
       </ThemeProvider>
     </>

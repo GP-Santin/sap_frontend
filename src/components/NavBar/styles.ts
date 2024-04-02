@@ -5,7 +5,7 @@ export const BurguerStyled = styled.div`
   background-color: ${(props) => props.theme.colors.primarytint};
 `;
 
-export const StyledNav = styled.nav`
+export const StyledHeader = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -57,7 +57,7 @@ export const StyledList = styled.li`
 
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.5rem;
 
   @media screen and (max-width: 768px) {
     justify-content: center;
@@ -101,6 +101,8 @@ export const StyledUl = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  margin-top: 0.9375rem;
+  margin-bottom: 0.9375rem;
 
   li {
     margin-left: 1rem;

@@ -28,6 +28,12 @@ function RoutesMain({ toggleTheme, theme }: INavProps) {
               }
             />
             <Route
+              path="/dashboard/purchase-requests/open-items"
+              element={
+                <PurchaseRequests toggleTheme={toggleTheme} theme={theme} />
+              }
+            />
+            <Route
               path="/dashboard/regularization"
               element={
                 <Regularization toggleTheme={toggleTheme} theme={theme} />
@@ -44,7 +50,7 @@ function RoutesMain({ toggleTheme, theme }: INavProps) {
       </Route>
       <Route element={<ManagerRoutes />}>
         <Route
-          path="/dashboard/manager-approves"
+          path="/dashboard/approval-requests"
           element={<ApprovalRequests />}
         />
       </Route>
