@@ -1,3 +1,4 @@
+
 name: deploy
 
 on:
@@ -24,7 +25,7 @@ jobs:
       - name: Repo Checkout
         uses: actions/checkout@v3
       - name: Hostinger Deployment
-        uses: easingtheme/ssh-deploy@main
+        uses: easingthemes/ssh-deploy@main
         with:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_HOSTINGER_SSH_KEY }}
           ARGS: "-rlgoDzvc --delete"
@@ -45,7 +46,7 @@ jobs:
       - name: Repo Checkout
         uses: actions/checkout@v3
       - name: Hostinger Deployment
-        uses: easingtheme/ssh-deploy@main
+        uses: easingthemes/ssh-deploy@main
         with:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_HOSTINGER_SSH_KEY }}
           ARGS: "-rlgoDzvc --delete"
@@ -66,7 +67,7 @@ jobs:
       - name: Repo Checkout
         uses: actions/checkout@v3
       - name: Hostinger Deployment
-        uses: easingtheme/ssh-deploy@main
+        uses: easingthemes/ssh-deploy@main
         with:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_HOSTINGER_SSH_KEY }}
           ARGS: "-rlgoDzvc --delete"
