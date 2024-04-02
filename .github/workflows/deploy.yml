@@ -1,0 +1,77 @@
+name: deploy
+
+on:
+  push:
+    branches: [main]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build
+        run: echo "Building the app"
+
+  #deploy development
+  deploy-development:
+    runs-on: ubuntu-latest
+    environment:
+      name: development
+      url: ${{ vars.URL }}
+    needs: build
+    steps:
+      - name: Repo Checkout
+        uses: actions/checkout@v3
+      - name: Hostinger Deployment
+        uses: easingtheme/ssh-deploy@main
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_HOSTINGER_SSH_KEY }}
+          ARGS: "-rlgoDzvc --delete"
+          SOURCE: "src/"
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
+          TARGET: ${{ vars.REMOTE_PATH }}
+
+  #deploy staging
+  deploy-staging:
+    runs-on: ubuntu-latest
+    environment:
+      name: staging
+      url: ${{ vars.URL }}
+    needs: deploy-development
+    steps:
+      - name: Repo Checkout
+        uses: actions/checkout@v3
+      - name: Hostinger Deployment
+        uses: easingtheme/ssh-deploy@main
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_HOSTINGER_SSH_KEY }}
+          ARGS: "-rlgoDzvc --delete"
+          SOURCE: "src/"
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
+          TARGET: ${{ vars.REMOTE_PATH }}
+
+  #deploy production
+  deploy-production:
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: ${{ vars.URL }}
+    needs: deploy-staging
+    steps:
+      - name: Repo Checkout
+        uses: actions/checkout@v3
+      - name: Hostinger Deployment
+        uses: easingtheme/ssh-deploy@main
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_HOSTINGER_SSH_KEY }}
+          ARGS: "-rlgoDzvc --delete"
+          SOURCE: "src/"
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
+          TARGET: ${{ vars.REMOTE_PATH }}

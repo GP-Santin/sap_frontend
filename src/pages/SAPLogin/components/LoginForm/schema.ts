@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const loginFormSchema = z.object({
+const loginFormSchema = z.object({
   CompanyDB: z.string().email("O e-mail fornecido é inválido."),
   UserName: z.string(),
   Password: z

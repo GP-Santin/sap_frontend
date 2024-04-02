@@ -29,15 +29,6 @@ export const StyledContainerFields = styled.div`
   }
 `;
 
-export const StyledTableContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  width: 100%;
-`;
-
 export const StyledItemsContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -45,35 +36,6 @@ export const StyledItemsContainer = styled.div`
 
   h3 {
     color: ${(props) => props.theme.colors.primarytint};
-  }
-`;
-
-export const StyledItemContainer = styled.tr`
-  background-color: ${(props) => props.theme.colors.background};
-  color: ${(props) => props.theme.colors.primarytint};
-
-  &:hover {
-    background-color: ${(props) => props.theme.colors.background};
-  }
-`;
-
-export const StyledItem = styled.td`
-  padding: 1rem;
-
-  h4 {
-    color: var(--color-white);
-    background-color: var(--color-primary);
-    padding: 1rem;
-  }
-
-  p {
-    font-size: x-small;
-  }
-
-  @media (min-width: 768px) {
-    p {
-      font-size: medium;
-    }
   }
 `;
 
@@ -154,8 +116,4 @@ export const StyledTitleContainer = styled.div`
   h3 {
     color: ${(props) => props.theme.colors.primarytint};
   }
-`;
-
-export const StyledTable = styled(TableContainer)`
-  background-color: ${(props) => props.theme.colors.background};
 `;

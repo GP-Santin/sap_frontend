@@ -10,7 +10,7 @@ interface ISelectConsumptionProps {
   setConsumption: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function SelectConsumption({ setConsumption }: ISelectConsumptionProps) {
+const SelectConsumption = ({ setConsumption }: ISelectConsumptionProps) => {
   const [openDropdown, setOpendDropDown] = useState(false);
   const [value, setValue] = useState<string>("");
 
@@ -45,6 +45,4 @@ function SelectConsumption({ setConsumption }: ISelectConsumptionProps) {
       )}
     </StyledConsumptionContainer>
   );
-}
-
-export default SelectConsumption;
+};

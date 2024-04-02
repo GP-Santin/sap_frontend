@@ -1,6 +1,6 @@
 import { StyledBurguer } from "./styles";
 
-function Burguer() {
+const Burguer = () => {
   return (
     <StyledBurguer>
       <div />
@@ -8,6 +8,4 @@ function Burguer() {
       <div />
     </StyledBurguer>
   );
-}
-
-export default Burguer;
+};

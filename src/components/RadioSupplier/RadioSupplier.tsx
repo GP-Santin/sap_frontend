@@ -4,6 +4,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormLabel from "@mui/material/FormLabel";
 import { styled } from "@mui/material/styles";
 import FormControl from "@mui/material/FormControl";
+import { IRadioSupplierProps } from "./@types";
 
 export const StyledRadio = styled(Radio)(() => ({
   color: "#484f58",
@@ -12,12 +13,7 @@ export const StyledRadio = styled(Radio)(() => ({
   },
 }));
 
-interface IRadioSupplierProps {
-  setSupplier: React.Dispatch<React.SetStateAction<string>>;
-  theme: string;
-}
-
-function RadioSupplier({ setSupplier, theme }: IRadioSupplierProps) {
+const RadioSupplier = ({ setSupplier, theme }: IRadioSupplierProps) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSupplier(event.target.value);
   };
@@ -60,6 +56,4 @@ function RadioSupplier({ setSupplier, theme }: IRadioSupplierProps) {
       </RadioGroup>
     </FormControl>
   );
-}
-
-export default RadioSupplier;
+};

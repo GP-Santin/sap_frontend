@@ -20,50 +20,6 @@ export const StyledLineItems = styled.div`
   position: relative;
 `;
 
-export const StyledItemDropdown = styled.div`
-  width: 40%;
-  height: 10rem;
-  overflow-y: scroll;
-  cursor: pointer;
-  position: absolute;
-
-  z-index: 999;
-  top: 100%;
-  padding: 0.25rem;
-  overflow-x: hidden;
-  border-bottom-left-radius: 8px;
-
-  background-color: ${(props) => props.theme.colors.primarysoft};
-  color: ${(props) => props.theme.colors.primarytint};
-
-  &::-webkit-scrollbar {
-    width: 4px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: ${(props) => props.theme.colors.primarytint};
-  }
-
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  @media (max-width: 1300px) {
-    width: 50vw;
-    top: 14%;
-  }
-
-  ul {
-    display: flex;
-    gap: 1rem;
-  }
-
-  li:hover {
-    color: ${(props) => props.theme.colors.primarysoft};
-    background-color: ${(props) => props.theme.colors.primarytint};
-  }
-`;
-
 export const StyledButton = styled.span`
   display: flex;
   align-items: center;

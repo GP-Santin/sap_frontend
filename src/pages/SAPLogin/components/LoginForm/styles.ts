@@ -1,15 +1,5 @@
 import styled from "styled-components";
 
-export const StyledContainerFields = styled.div`
-  span {
-    color: red;
-
-    font-size: var(--font-size-1);
-    font-weight: var(--font-weight-1);
-    font-family: var(--font-family-secondary);
-  }
-`;
-
 export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;

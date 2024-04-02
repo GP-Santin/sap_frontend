@@ -58,5 +58,3 @@ export const LoginForm = () => {
     </StyledForm>
   );
 };
-
-export default LoginForm;

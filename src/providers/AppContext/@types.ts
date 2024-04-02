@@ -1,4 +1,4 @@
-import { IProject } from "@/src/components/Projects/@types";
+import { IProject } from "src/components/Projects/@types";
 import { TLoginForm } from "../../pages/SAPLogin/components/LoginForm/schema";
 
 export interface IAppProviderProps {
@@ -8,10 +8,6 @@ export interface IAppProviderProps {
 export interface ILoading {
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export interface IFormResponse {
-  UserName: string;
 }
 
 export interface IItem {
@@ -35,11 +31,6 @@ export interface IBusinessPartner {
 export interface IBusinessResponse {
   value: IBusinessPartner[];
   "odata.nextLink": string;
-}
-
-export interface IOData {
-  metadata: string;
-  nextLink?: string;
 }
 
 export interface ISalesPerson {

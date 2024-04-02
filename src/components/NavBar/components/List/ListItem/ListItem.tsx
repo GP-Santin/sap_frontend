@@ -6,7 +6,7 @@ type ListItemProps = {
   href?: string;
 };
 
-export const ListItem = ({ listActive, listItemName, href }: ListItemProps) => {
+const ListItem = ({ listActive, listItemName, href }: ListItemProps) => {
   return (
     <StyledUl className={listActive}>
       <li>

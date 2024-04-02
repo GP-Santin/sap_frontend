@@ -32,10 +32,3 @@ export const ButtonContainer = styled.div`
   flex-direction: column;
   gap: 1rem;
 `;
-
-export const Icon = styled.img`
-  cursor: pointer;
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-`;
