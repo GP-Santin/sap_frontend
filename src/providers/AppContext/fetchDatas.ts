@@ -1,4 +1,4 @@
-import apiSAP from "../../middleware/handleRequest.middleware";
+import apiSAP from "../../middlewares/handleRequest.middleware";
 import {
   IItemsResponse,
   IBusinessResponse,

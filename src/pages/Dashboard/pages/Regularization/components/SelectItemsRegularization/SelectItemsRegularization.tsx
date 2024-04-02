@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
 import { IItemOrder } from "../Form/@types";
 import MainUsage from "../../../../../../components/MainUsage/MainUsage";
 import { debounce } from "lodash";
-import apiSAP from "../../../../../../middleware/handleRequest.middleware";
+import apiSAP from "../../../../../../middlewares/handleRequest.middleware";
 import { IWarehouse } from "../Warehouse/@types";
 import Warehouse from "../Warehouse/Warehouse";
 

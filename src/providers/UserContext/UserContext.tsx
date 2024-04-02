@@ -3,7 +3,7 @@ import { IUser, IUserContext, IUserProviderProps } from "./@types";
 import { AxiosError } from "axios";
 import { IPurchaseRequest } from "../../pages/Dashboard/pages/PurchaseRequests/components/Form/@types";
 import ModalComponent from "../../components/Modal/Modal";
-import apiSAP from "../../middleware/handleRequest.middleware";
+import apiSAP from "../../middlewares/handleRequest.middleware";
 import { IOrderRequest } from "../../pages/Dashboard/pages/Regularization/components/Form/@types";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
