@@ -12,6 +12,9 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
+      - name: Build
+        run: yarn build
+
   # Deploy development
   deploy-development:
     runs-on: ubuntu-latest
@@ -32,7 +35,7 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
-          TARGET: "/path/to/development"
+          TARGET: ${{vars.REMOTE_PATH}}
 
   # Deploy staging
   deploy-staging:
@@ -40,7 +43,7 @@ jobs:
     environment:
       name: staging
       url: ${{ vars.URL }}
-    needs: deploy-development
+    needs: [build, deploy-development]
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -54,7 +57,7 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
-          TARGET: "/path/to/staging"
+          TARGET: ${{vars.REMOTE_PATH}}
 
   # Deploy production
   deploy-production:
@@ -62,7 +65,7 @@ jobs:
     environment:
       name: production
       url: ${{ vars.URL }}
-    needs: deploy-staging
+    needs: [build, deploy-staging]
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -76,4 +79,4 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
-          TARGET: "/path/to/production"
+          TARGET: ${{vars.REMOTE_PATH}}
