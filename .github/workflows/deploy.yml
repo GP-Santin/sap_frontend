@@ -17,21 +17,6 @@ jobs:
           yarn install
           yarn build
 
-      - name: Create .htaccess
-        run: |
-          cat > src/.htaccess <<EOF
-          # Configurações específicas para React
-          <IfModule mod_rewrite.c>
-            RewriteEngine On
-            RewriteBase /
-            RewriteRule ^index\.html$ - [L]
-            RewriteCond %{REQUEST_FILENAME} !-f
-            RewriteCond %{REQUEST_FILENAME} !-d
-            RewriteRule . /index.html [L]
-          </IfModule>
-          EOF
-        working-directory: ${{ github.workspace }}
-
   # Deploy development
   deploy-development:
     runs-on: ubuntu-latest
@@ -52,7 +37,7 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
-          TARGET: ${{ secrets.REMOTE_PATH }}
+          TARGET: ${{ vars.REMOTE_PATH }}
 
   # Deploy staging
   deploy-staging:
@@ -74,7 +59,7 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
-          TARGET: ${{ secrets.REMOTE_PATH }}
+          TARGET: ${{ vars.REMOTE_PATH }}
 
   # Deploy production
   deploy-production:
@@ -96,4 +81,4 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
-          TARGET: ${{ secrets.REMOTE_PATH }}
+          TARGET: ${{ vars.REMOTE_PATH }}
