@@ -12,6 +12,9 @@ jobs:
       - name: Build
         run: yarn build
 
+      - name: Print working directory
+        run: echo "Working directory is $(pwd)"
+
       - name: Checkout Repository
         uses: actions/checkout@v3
 
