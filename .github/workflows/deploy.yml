@@ -26,7 +26,7 @@ jobs:
       - name: Hostinger Deployment
         uses: easingthemes/ssh-deploy@main
         with:
-          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_HOSTINGER_SSH_KEY }}
           ARGS: "-rlgoDzvc --delete"
           SOURCE: "dist/"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
@@ -48,7 +48,7 @@ jobs:
       - name: Hostinger Deployment
         uses: easingthemes/ssh-deploy@main
         with:
-          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_HOSTINGER_SSH_KEY }}
           ARGS: "-rlgoDzvc --delete"
           SOURCE: "dist/"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
@@ -70,7 +70,7 @@ jobs:
       - name: Hostinger Deployment
         uses: easingthemes/ssh-deploy@main
         with:
-          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_HOSTINGER_SSH_KEY }}
           ARGS: "-rlgoDzvc --delete"
           SOURCE: "dist/"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
