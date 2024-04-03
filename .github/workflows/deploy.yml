@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Build
-        run: yarn build
+        run: npm run build
 
   # Deploy development
   deploy-development:
