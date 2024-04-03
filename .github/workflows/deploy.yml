@@ -46,7 +46,7 @@ jobs:
     needs: [build, deploy-development]
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v1
 
       - name: Hostinger Deployment
         uses: easingthemes/ssh-deploy@main
