@@ -12,8 +12,11 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
+      - name: Install Packages
+        run: cd sap_frontend && npm install 
+
       - name: Build
-        run: npm install && npm run build
+        run: cd sap_frontend && npm run build
 
   # Deploy development
   deploy-development:
