@@ -1,10 +1,11 @@
 import { useState } from "react";
+
+import { Input } from "../../../../../../components/Input/Input";
+import { useOutsideClick } from "../../../../../../hooks/outsideClick";
 import {
   StyledConsumptionContainer,
   StyledConsumptionDropdown,
 } from "../SelectConsumption/styles";
-import { Input } from "../../../../../../components/Input/Input";
-import { useOutsideClick } from "../../../../../../hooks/outsideClick";
 
 interface ISelectPaymentMethodProps {
   setPaymentMethod: React.Dispatch<React.SetStateAction<string>>;
