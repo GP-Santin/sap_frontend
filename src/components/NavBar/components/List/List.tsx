@@ -2,9 +2,9 @@ import { StyledList, StyledMenu } from "../../styles";
 import { useManagerContext } from "../../../../providers/ManagerContext/ManagerProvider";
 import { useContext } from "react";
 import { UserContext } from "../../../../providers/UserContext/UserContext";
-import { ListTitle } from "../Burguer/ListTitle";
 import { PurchaseList } from "./Purchase/PurchaseList";
 import { ApproverList } from "./Approver/Approver";
+import { ListTitle } from "./ListTitle/ListTitle";
 
 type ListProps = {
   menuClass: string;

@@ -14,7 +14,7 @@ import {
   fetchSalesPersons,
 } from "./fetchDatas";
 import apiSAP from "../../middlewares/handleRequest.middleware";
-import { IProject } from "@/src/components/Projects/@types";
+import { IProject } from "src/components/Projects/@types";
 
 export const AppContext = createContext({} as IAppContext);
 

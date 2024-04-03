@@ -1,8 +1,7 @@
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormLabel from "@mui/material/FormLabel";
-import { FormControl } from "@mui/material";
-import { StyledRadio } from "../RadioSupplier/RadioSupplier";
+import { FormControl, Radio } from "@mui/material";
 
 interface IRadioManProps {
   setMaintence: React.Dispatch<React.SetStateAction<string>>;
@@ -35,14 +34,32 @@ function RadioMan({ setMaintence, theme }: IRadioManProps) {
         </FormLabel>
         <div>
           <FormControlLabel
+            control={
+              <Radio
+                sx={{
+                  color: "#484f58",
+                  "&.Mui-checked": {
+                    color: "var(--color-primary)",
+                  },
+                }}
+              />
+            }
             value="S"
-            control={<StyledRadio />}
             label="Sim"
             style={{ color: theme === "light" ? "#101119" : "white" }}
           />
           <FormControlLabel
+            control={
+              <Radio
+                sx={{
+                  color: "#484f58",
+                  "&.Mui-checked": {
+                    color: "var(--color-primary)",
+                  },
+                }}
+              />
+            }
             value="N"
-            control={<StyledRadio />}
             label="Não"
             style={{ color: theme === "light" ? "#101119" : "white" }}
           />

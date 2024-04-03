@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { IconType } from "react-icons";
 import { FaMinus, FaPlus, FaTrashAlt } from "react-icons/fa";
-import TableContainer from "@mui/material/TableContainer";
 
 export const StyledForm = styled.form`
   display: flex;
