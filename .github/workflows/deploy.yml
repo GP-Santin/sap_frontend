@@ -31,11 +31,11 @@ jobs:
         with:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_HOSTINGER_SSH_KEY }}
           ARGS: "-rlgoDzvc --delete"
-          SOURCE: "dist/"
+          SOURCE: "dist/"  
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
-          TARGET: ${{vars.REMOTE_PATH}}
+          TARGET: "./domains/ti-gruposantin.com.br/public_html/dev/"  
 
   # Deploy staging
   deploy-staging:
@@ -53,11 +53,11 @@ jobs:
         with:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_HOSTINGER_SSH_KEY }}
           ARGS: "-rlgoDzvc --delete"
-          SOURCE: "dist/"
+          SOURCE: "dist/"  
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
-          TARGET: ${{vars.REMOTE_PATH}}
+          TARGET: "./domains/ti-gruposantin.com.br/public_html/stage/" 
 
   # Deploy production
   deploy-production:
@@ -75,8 +75,8 @@ jobs:
         with:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_HOSTINGER_SSH_KEY }}
           ARGS: "-rlgoDzvc --delete"
-          SOURCE: "dist/"
+          SOURCE: "dist/" 
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
-          TARGET: ${{vars.REMOTE_PATH}}
+          TARGET: "./domains/ti-gruposantin.com.br/public_html/"  
