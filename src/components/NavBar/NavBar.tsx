@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./styles.css";
 import { StyledBackdrop } from "./styles";
 import { useOutsideClick } from "../../hooks/outsideClick";
 import { Header } from "../Header/Header";
