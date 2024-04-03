@@ -29,6 +29,12 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
+      - name: Install Packages
+        run: npm install 
+
+      - name: Build
+        run: npm run build
+
       - name: Hostinger Deployment
         uses: easingthemes/ssh-deploy@main
         with:
@@ -51,6 +57,12 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v1
 
+      - name: Install Packages
+        run: npm install 
+
+      - name: Build
+        run: npm run build
+
       - name: Hostinger Deployment
         uses: easingthemes/ssh-deploy@main
         with:
@@ -72,6 +84,12 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+
+      - name: Install Packages
+        run: npm install 
+
+      - name: Build
+        run: npm run build
 
       - name: Hostinger Deployment
         uses: easingthemes/ssh-deploy@main
