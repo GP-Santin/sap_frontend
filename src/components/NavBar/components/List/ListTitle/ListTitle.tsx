@@ -1,5 +1,5 @@
 import { FaAngleDown } from "react-icons/fa";
-import { StyledListTitle } from "src/components/NavBar/styles";
+import { StyledListTitle } from "../../../styles";
 
 type ListTitleProps = {
   text: string;
