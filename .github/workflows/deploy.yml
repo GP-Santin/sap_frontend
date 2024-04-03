@@ -9,10 +9,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Install dependencies and build
-        run: |
-          yarn build
-
       - name: Checkout Repository
         uses: actions/checkout@v3
 
