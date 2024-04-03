@@ -3,6 +3,7 @@ name: deploy
 on:
   push:
     branches: [main]
+
   workflow_dispatch:
 
 jobs:
@@ -12,8 +13,14 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Install Node.js and Yarn
-        uses: borales/actions-yarn@v2
+      - name: Cache node_modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install Node.js and npm
+        uses: actions/setup-node@v2
         with:
           node-version: "14"
 
@@ -21,7 +28,7 @@ jobs:
         run: yarn install
 
       - name: Build
-        run: yarn build
+        run:  build
 
       - name: Create .htaccess
         run: |
