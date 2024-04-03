@@ -9,12 +9,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Build
-        run: yarn build
-
-      - name: Print working directory
-        run: echo "Working directory is $(pwd)"
-
       - name: Checkout Repository
         uses: actions/checkout@v3
 
@@ -38,7 +32,7 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
-          TARGET: ${{ vars.REMOTE_PATH }}
+          TARGET: "/path/to/development"
 
   # Deploy staging
   deploy-staging:
@@ -60,7 +54,7 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
-          TARGET: ${{ vars.REMOTE_PATH }}
+          TARGET: "/path/to/staging"
 
   # Deploy production
   deploy-production:
@@ -82,4 +76,4 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
-          TARGET: ${{ vars.REMOTE_PATH }}
+          TARGET: "/path/to/production"
